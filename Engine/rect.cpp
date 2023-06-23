@@ -6,8 +6,23 @@ rect::rect()
 }
 
 rect::rect(const float in_t, const float in_l, const float in_b, const float in_r)
-	: top(in_t), left(in_l), bottom(in_b), right(in_r)
 {
+	if (in_t < in_b) {
+		top = in_t;
+		bottom = in_b;
+	}
+	else {
+		top = in_b;
+		bottom = in_t;
+	}
+	if (in_l < in_r) {
+		left = in_l;
+		right = in_r;
+	}
+	else {
+		left = in_r;
+		right = in_l;
+	}
 }
 
 rect::rect(const Vec2& topLeft, const Vec2& bottomRight)
@@ -20,7 +35,8 @@ rect::rect(const Vec2& topLeft, const float width, const float height)
 {
 }
 
-rect::rect(const Vec2& topLeft, const Vec2& bottomRight)
-	: left(topLeft.x), right(bottomRight.x), top(topLeft.y), bottom(bottomRight.y)
+bool rect::isOverlapping(const rect& other) const
 {
+	return right > other.left && other.right > left
+		&& bottom > other.top && other.bottom > top;
 }
