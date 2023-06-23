@@ -31,7 +31,10 @@ void ball::update(const rect& walls, float dt)
 {
 	pos += vel * dt * speed;
 	clamp(walls);
-	collisionWalls(walls);
+	if (collisionWalls(walls)) {
+		sndRebound.StopOne();
+		sndRebound.Play();
+	}
 }
 
 void ball::clamp(const rect& walls)
@@ -46,14 +49,18 @@ void ball::clamp(const rect& walls)
 		{ pos.y = walls.bottom - (rad * 2.0f); }
 }
 
-void ball::collisionWalls(const rect& walls)
+bool ball::collisionWalls(const rect& walls)
 {
+	bool rebounded = false;
 	if (pos.x <= walls.left || pos.x + (rad * 2.0f) >= walls.right) {
 		reboundX();
+		rebounded = true;
 	}
 	if (pos.y <= walls.top || pos.y + (rad * 2.0f) >= walls.bottom) {
 		reboundY();
+		rebounded = true;
 	}
+	return rebounded;
 }
 
 void ball::draw(Graphics& gfx)

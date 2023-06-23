@@ -26,6 +26,8 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd )
 {
+	b = ball(Vec2(300, 300));
+	walls = rect(0, 0, gfx.ScreenHeight, gfx.ScreenWidth);
 }
 
 void Game::Go()
@@ -38,8 +40,11 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	dt = ft.Mark();
+	b.update(walls, dt);
 }
 
 void Game::ComposeFrame()
 {
+	b.draw(gfx);
 }

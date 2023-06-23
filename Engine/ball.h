@@ -3,6 +3,7 @@
 #include "Vec2.h"
 #include "Graphics.h"
 #include "SpriteCodex.h"
+#include "Sound.h"
 
 class ball
 {
@@ -15,7 +16,7 @@ public:
 
 private:
 	void clamp(const rect& walls);
-	void collisionWalls(const rect& walls);
+	bool collisionWalls(const rect& walls);
 	void reboundX();
 	void reboundY();
 
@@ -24,5 +25,6 @@ private:
 	float speed = 30.0f;
 	float rad = 7.0f;
 	rect hitbox;
+	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };
 
