@@ -28,6 +28,7 @@
 #include "ball.h"
 #include "Vec2.h"
 #include "rect.h"
+#include "brick.h"
 
 class Game
 {
@@ -52,4 +53,7 @@ private:
 	float dt;
 	ball b;
 	rect walls;
+	brick b1;
+	brick b2;
+	brick b3;
 };

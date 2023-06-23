@@ -17,7 +17,31 @@ brick::brick(Vec2 b_pos, const Color c)
 	col = c;
 }
 
+void brick::update(ball& b)
+{
+	if (collisionBall(b)) {
+		kill();
+		sndBrick.StopOne();
+		sndBrick.Play();
+	}
+}
+
+void brick::kill()
+{
+	live = false;
+}
+
+bool brick::collisionBall(ball& b) const
+{
+	if (!live) { return false; }
+	if (hitbox.isOverlapping(b.getHitbox())) {
+		b.reboundY();
+		return true;
+	}
+	return false;
+}
+
 void brick::draw(Graphics& gfx)
 {
-	gfx.DrawRect(hitbox, col);
+	if (live) { gfx.DrawRect(hitbox, col); }
 }
