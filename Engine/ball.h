@@ -11,14 +11,14 @@ public:
 	ball();
 	ball(Vec2 spawnPos);
 	void update(const rect& walls, float dt);
+	void reboundX();
+	void reboundY();
 	void slap(const Vec2 force);
 	void draw(Graphics& gfx);
 
 private:
 	void clamp(const rect& walls);
 	bool collisionWalls(const rect& walls);
-	void reboundX();
-	void reboundY();
 
 	Vec2 pos; //top-left
 	Vec2 vel;
