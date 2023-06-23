@@ -1,18 +1,21 @@
 #include "ball.h"
 
 ball::ball()
-	: pos(0,0), hitbox(rect(pos, rad * 2.0f, rad * 2.0f))
+	: pos(0,0)
 {
+	updateHitbox();
 }
 
 ball::ball(Vec2 spawnPos)
-	: pos(spawnPos), hitbox(rect(pos, rad * 2.0f, rad * 2.0f))
+	: pos(spawnPos)
 {
+	updateHitbox();
 }
 
 ball::ball(Vec2 spawnPos, Vec2 ballSpeed)
-	: pos(spawnPos), vel(ballSpeed), hitbox(rect(pos, rad * 2.0f, rad * 2.0f))
+	: pos(spawnPos), vel(ballSpeed)
 {
+	updateHitbox();
 }
 
 void ball::slap(const Vec2 force)
@@ -33,6 +36,7 @@ void ball::reboundY()
 void ball::update(const rect& walls, float dt)
 {
 	pos += vel * dt * speed;
+	updateHitbox();
 	clamp(walls);
 	if (collisionWalls(walls)) {
 		sndRebound.StopOne();
@@ -42,14 +46,19 @@ void ball::update(const rect& walls, float dt)
 
 void ball::clamp(const rect& walls)
 {
-	if (pos.x < walls.left) 
+	if (hitbox.left < walls.left) 
 		{ pos.x = walls.left; }
-	if (pos.x + (rad * 2.0f) > walls.right) 
+	if (hitbox.right > walls.right) 
 		{ pos.x = walls.right - (rad * 2.0f); }
-	if (pos.y < walls.top) 
+	if (hitbox.top < walls.top) 
 		{ pos.y = walls.top; }
-	if (pos.y + (rad * 2.0f) > walls.bottom) 
+	if (hitbox.bottom > walls.bottom) 
 		{ pos.y = walls.bottom - (rad * 2.0f); }
+}
+
+void ball::updateHitbox()
+{
+	hitbox = rect(pos, rad * 2.0f, rad * 2.0f);
 }
 
 bool ball::collisionWalls(const rect& walls)
