@@ -10,9 +10,9 @@ public:
 	rect(const Vec2& topLeft, const float width, const float height);
 	rect(const Vec2& topLeft, const Vec2& bottomRight);
 	
-	float left;
-	float right;
 	float top;
+	float left;
 	float bottom;
+	float right;
 };
 

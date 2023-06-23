@@ -1,12 +1,17 @@
 #include "rect.h"
 
 rect::rect()
-	: left(0), right(0), top(0), bottom(0)
+	: top(0), left(0), bottom(0), right(0)
 {
 }
 
-rect::rect(const float in_l, const float in_r, const float in_t, const float in_b)
-	: left(in_l), right(in_r), top(in_t), bottom(in_b)
+rect::rect(const float in_t, const float in_l, const float in_b, const float in_r)
+	: top(in_t), left(in_l), bottom(in_b), right(in_r)
+{
+}
+
+rect::rect(const Vec2& topLeft, const Vec2& bottomRight)
+	: top(topLeft.y), left(topLeft.x), bottom(bottomRight.y), right(bottomRight.y)
 {
 }
 
