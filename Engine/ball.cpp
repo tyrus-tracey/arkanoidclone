@@ -1,15 +1,18 @@
 #include "ball.h"
 
 ball::ball()
-	: pos(0,0), vel(10,10)
+	: pos(0,0), hitbox(rect(pos, rad * 2.0f, rad * 2.0f))
 {
-	hitbox = rect(pos, rad * 2.0f, rad * 2.0f);
 }
 
 ball::ball(Vec2 spawnPos)
-	: pos(spawnPos), vel(10,10)
+	: pos(spawnPos), hitbox(rect(pos, rad * 2.0f, rad * 2.0f))
 {
-	hitbox = rect(pos, rad * 2.0f, rad * 2.0f);
+}
+
+ball::ball(Vec2 spawnPos, Vec2 ballSpeed)
+	: pos(spawnPos), vel(ballSpeed), hitbox(rect(pos, rad * 2.0f, rad * 2.0f))
+{
 }
 
 void ball::slap(const Vec2 force)
@@ -66,4 +69,9 @@ bool ball::collisionWalls(const rect& walls)
 void ball::draw(Graphics& gfx)
 {
 	SpriteCodex::DrawBall(pos + Vec2(rad,rad), gfx);
+}
+
+rect ball::getHitbox() const
+{
+	return hitbox;
 }
