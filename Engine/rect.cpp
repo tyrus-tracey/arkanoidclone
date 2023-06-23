@@ -26,7 +26,7 @@ rect::rect(const float in_t, const float in_l, const float in_b, const float in_
 }
 
 rect::rect(const Vec2& topLeft, const Vec2& bottomRight)
-	: top(topLeft.y), left(topLeft.x), bottom(bottomRight.y), right(bottomRight.y)
+	: top(topLeft.y), left(topLeft.x), bottom(bottomRight.y), right(bottomRight.x)
 {
 }
 
