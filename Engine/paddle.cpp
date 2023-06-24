@@ -35,7 +35,9 @@ rect paddle::hitbox() const
 bool paddle::collisionBall(ball& b)
 {
 	if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {
+		Vec2 impactVec = (b.hitbox().getMidpoint() - hitbox().getMidpoint()).Normalize();
 		b.reboundY();
+		b.slap(impactVec);
 		return true;
 	}
 	return false;
@@ -50,8 +52,7 @@ void paddle::moveKbd(const Keyboard& kbd, float dt)
 		pos.x += speed * dt;
 	}
 }
-//todo: delete hitbox as a member and make gethitbox return a rect using pos as input.
-//			that way pos and hitbox are always linked.
+
 void paddle::clamp(const rect& walls)
 {
 	if (hitbox().left < walls.left)
