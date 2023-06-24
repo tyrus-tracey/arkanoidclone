@@ -34,7 +34,7 @@ rect paddle::hitbox() const
 
 bool paddle::collisionBall(ball& b)
 {
-	if (hitbox().isOverlapping(b.hitbox())) {
+	if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {
 		b.reboundY();
 		return true;
 	}
