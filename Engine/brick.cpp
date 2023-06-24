@@ -19,6 +19,15 @@ brick::brick(Vec2 b_pos, const Color c)
 
 void brick::update(ball& b)
 {
+	/*
+		could improve by comparing midpoint?
+		|====|
+		|====|
+		   o		<- midpoint of ball between brick.left and brick.right
+						reboundY
+
+						else reboundX
+	*/
 	if (collisionBall(b)) {
 		kill();
 		sndBrick.StopOne();

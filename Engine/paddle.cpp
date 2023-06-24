@@ -1,0 +1,46 @@
+#include "paddle.h"
+
+paddle::paddle()
+	: pos(300,50)
+{
+}
+
+paddle::paddle(const Graphics& gfx)
+	: pos(gfx.ScreenWidth/2 - (width/2), gfx.ScreenHeight - 50)
+{
+}
+
+void paddle::update(const Keyboard& kbd, const rect& walls, float dt)
+{
+	moveKbd(kbd, dt);
+	clamp(walls);
+}
+
+void paddle::draw(Graphics& gfx) const
+{
+	gfx.DrawRect(hitbox(), c);
+}
+
+rect paddle::hitbox() const
+{
+	return rect(pos, width, height);
+}
+
+void paddle::moveKbd(const Keyboard& kbd, float dt)
+{
+	if (kbd.KeyIsPressed(VK_LEFT)) {
+		pos.x -= speed * dt;
+	}
+	if (kbd.KeyIsPressed(VK_RIGHT)) {
+		pos.x += speed * dt;
+	}
+}
+//todo: delete hitbox as a member and make gethitbox return a rect using pos as input.
+//			that way pos and hitbox are always linked.
+void paddle::clamp(const rect& walls)
+{
+	if (hitbox().left < walls.left)
+		{ pos.x = walls.left; }
+	if (hitbox().right > walls.right)
+		{ pos.x = walls.right - width; }
+}

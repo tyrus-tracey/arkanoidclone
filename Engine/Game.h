@@ -29,6 +29,7 @@
 #include "Vec2.h"
 #include "rect.h"
 #include "brick.h"
+#include "paddle.h"
 
 class Game
 {
@@ -53,6 +54,7 @@ private:
 	float dt;
 	ball b;
 	rect walls;
+	paddle pad;
 	brick b1;
 	brick b2;
 	brick b3;
