@@ -17,11 +17,14 @@ public:
 	bool collisionBall(ball& b) const;
 	void kill();
 	void draw(Graphics& gfx);
+	static float getWidth();
+	static float getHeight();
 
 private:
 	Vec2 pos;
-	float width = 60.0f;
-	float height = 20.0f;
+	static constexpr float MARGIN = -1.0f;
+	static constexpr float WIDTH = 60.0f;
+	static constexpr float HEIGHT = 20.0f;
 	Color col = Colors::Red;
 	Sound sndBrick = Sound(L"Sounds\\arkbrick.wav");
 

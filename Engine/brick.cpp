@@ -36,7 +36,7 @@ void brick::update(ball& b)
 
 rect brick::hitbox() const
 {
-	return rect(pos, width, height);
+	return rect(pos, WIDTH, HEIGHT);
 }
 
 void brick::kill()
@@ -56,5 +56,18 @@ bool brick::collisionBall(ball& b) const
 
 void brick::draw(Graphics& gfx)
 {
-	if (live) { gfx.DrawRect(hitbox(), col); }
+	rect visualBrick = hitbox().getResizeUniform(MARGIN);
+	if (live) { 
+		gfx.DrawRect(visualBrick, col); 
+	}
+}
+
+float brick::getWidth()
+{
+	return WIDTH;
+}
+
+float brick::getHeight()
+{
+	return HEIGHT;
 }
