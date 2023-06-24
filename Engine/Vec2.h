@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 class Vec2
 {
@@ -15,6 +16,8 @@ public:
 	float GetLengthSq() const;
 	Vec2& Normalize();
 	Vec2 GetNormalized() const;
+	Vec2 GetAbsolute() const;
+	float GetDotProduct(const Vec2& other) const;
 public:
 	float x;
 	float y;

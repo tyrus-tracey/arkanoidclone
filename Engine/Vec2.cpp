@@ -62,3 +62,13 @@ Vec2 Vec2::GetNormalized() const
 	}
 	return *this;
 }
+
+Vec2 Vec2::GetAbsolute() const
+{
+	return Vec2(abs(x), abs(y));
+}
+
+float Vec2::GetDotProduct(const Vec2& other) const
+{	
+	return (x * other.x) + (y * other.y);
+}
