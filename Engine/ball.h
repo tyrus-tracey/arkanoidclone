@@ -20,7 +20,6 @@ public:
 
 private:
 	void clamp(const rect& walls);
-	void updateHitbox();
 	bool collisionWalls(const rect& walls);
 
 	Vec2 pos; //top-left

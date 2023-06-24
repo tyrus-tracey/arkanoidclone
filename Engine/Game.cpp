@@ -45,7 +45,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	dt = ft.Mark();
-	pad.update(wnd.kbd, walls, dt);
+	pad.update(wnd.kbd, walls, b, dt);
 	b1.update(b);
 	b2.update(b);
 	b3.update(b);

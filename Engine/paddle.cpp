@@ -10,10 +10,14 @@ paddle::paddle(const Graphics& gfx)
 {
 }
 
-void paddle::update(const Keyboard& kbd, const rect& walls, float dt)
+void paddle::update(const Keyboard& kbd, const rect& walls, ball& b, float dt)
 {
 	moveKbd(kbd, dt);
 	clamp(walls);
+	if (collisionBall(b)) {
+		sndPaddle.StopOne();
+		sndPaddle.Play();
+	}
 }
 
 void paddle::draw(Graphics& gfx) const
@@ -24,6 +28,15 @@ void paddle::draw(Graphics& gfx) const
 rect paddle::hitbox() const
 {
 	return rect(pos, width, height);
+}
+
+bool paddle::collisionBall(ball& b)
+{
+	if (hitbox().isOverlapping(b.hitbox())) {
+		b.reboundY();
+		return true;
+	}
+	return false;
 }
 
 void paddle::moveKbd(const Keyboard& kbd, float dt)
