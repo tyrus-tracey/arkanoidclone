@@ -30,6 +30,11 @@ rect::rect(const Vec2& topLeft, const Vec2& bottomRight)
 {
 }
 
+rect rect::getResizeUniform(const float amt) const
+{
+	return rect(top-amt, left-amt, bottom+amt, right+amt);
+}
+
 rect::rect(const Vec2& topLeft, const float width, const float height)
 	: rect(topLeft, Vec2(topLeft.x + width, topLeft.y + height))
 {
