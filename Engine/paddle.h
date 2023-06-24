@@ -24,8 +24,10 @@ private:
 	Vec2 pos; //top-left
 	float width = 75.0f;
 	float height = 20.0f;
+	float wing = 10.0f;
 	float speed = 500.0f;
-	Color c = Colors::White;
+	Color cCore = Colors::White;
+	Color cWing = Colors::Red;
 	Sound sndPaddle = Sound(L"Sounds\\arkpad.wav");
 };
 

@@ -22,7 +22,9 @@ void paddle::update(const Keyboard& kbd, const rect& walls, ball& b, float dt)
 
 void paddle::draw(Graphics& gfx) const
 {
-	gfx.DrawRect(hitbox(), c);
+	rect rectCore(hitbox().top, hitbox().left + wing, hitbox().bottom, hitbox().right - wing);
+	gfx.DrawRect(hitbox(), cWing);
+	gfx.DrawRect(rectCore, cCore);
 }
 
 rect paddle::hitbox() const
