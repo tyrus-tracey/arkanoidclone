@@ -16,7 +16,7 @@ public:
 	void reboundY();
 	void slap(const Vec2 force);
 	void draw(Graphics& gfx);
-	rect getHitbox() const;
+	rect hitbox() const;
 
 private:
 	void clamp(const rect& walls);
@@ -27,7 +27,6 @@ private:
 	Vec2 vel = Vec2(10, 10);
 	float speed = 30.0f;
 	float rad = 7.0f;
-	rect hitbox;
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };
 

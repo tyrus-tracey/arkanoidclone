@@ -1,14 +1,13 @@
 #include "brick.h"
 
 brick::brick()
-	: hitbox(rect(0, 0, 0, 0)), pos(-1, -1)
+	: pos(-1, -1)
 {
 }
 
 brick::brick(Vec2 b_pos)
 	: pos(b_pos)
 {
-	hitbox = rect(b_pos, width, height);
 }
 
 brick::brick(Vec2 b_pos, const Color c)
@@ -35,6 +34,11 @@ void brick::update(ball& b)
 	}
 }
 
+rect brick::hitbox() const
+{
+	return rect(pos, width, height);
+}
+
 void brick::kill()
 {
 	live = false;
@@ -43,7 +47,7 @@ void brick::kill()
 bool brick::collisionBall(ball& b) const
 {
 	if (!live) { return false; }
-	if (hitbox.isOverlapping(b.getHitbox())) {
+	if (hitbox().isOverlapping(b.hitbox())) {
 		b.reboundY();
 		return true;
 	}
@@ -52,5 +56,5 @@ bool brick::collisionBall(ball& b) const
 
 void brick::draw(Graphics& gfx)
 {
-	if (live) { gfx.DrawRect(hitbox, col); }
+	if (live) { gfx.DrawRect(hitbox(), col); }
 }
