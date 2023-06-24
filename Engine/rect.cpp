@@ -30,6 +30,13 @@ rect::rect(const Vec2& topLeft, const Vec2& bottomRight)
 {
 }
 
+Vec2 rect::getMidpoint() const
+{
+	float heightMid = (bottom - top)/2.0f;
+	float widthMid = (right - left)/2.0f;
+	return Vec2(left+widthMid, top+heightMid);
+}
+
 rect rect::getResizeUniform(const float amt) const
 {
 	return rect(top-amt, left-amt, bottom+amt, right+amt);
