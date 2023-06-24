@@ -17,6 +17,7 @@ public:
 	void slap(const Vec2 force);
 	void draw(Graphics& gfx);
 	rect hitbox() const;
+	Vec2 getVelocity() const;
 
 private:
 	void clamp(const rect& walls);

@@ -71,6 +71,11 @@ rect ball::hitbox() const
 	return rect(pos, rad * 2.0f, rad * 2.0f);
 }
 
+Vec2 ball::getVelocity() const
+{
+	return vel;
+}
+
 void ball::draw(Graphics& gfx)
 {
 	SpriteCodex::DrawBall(pos + Vec2(rad,rad), gfx);
