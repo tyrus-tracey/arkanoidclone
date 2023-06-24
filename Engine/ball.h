@@ -24,8 +24,8 @@ private:
 	bool collisionWalls(const rect& walls);
 
 	Vec2 pos; //top-left
-	Vec2 vel = Vec2(10, 10);
-	float speed = 30.0f;
+	Vec2 vel = Vec2(1, 1).Normalize();
+	float speed = 500.0f;
 	float rad = 7.0f;
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };

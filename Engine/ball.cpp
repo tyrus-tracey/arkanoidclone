@@ -18,6 +18,7 @@ ball::ball(Vec2 spawnPos, Vec2 ballSpeed)
 void ball::slap(const Vec2 force)
 {
 	vel += force;
+	vel.Normalize();
 }
 
 void ball::reboundX()
