@@ -18,15 +18,6 @@ brick::brick(Vec2 b_pos, const Color c)
 
 void brick::update(ball& b)
 {
-	/*
-		could improve by comparing midpoint?
-		|====|
-		|====|
-		   o		<- midpoint of ball between brick.left and brick.right
-						reboundY
-
-						else reboundX
-	*/
 	if (collisionBall(b)) {
 		kill();
 		sndBrick.StopOne();
@@ -48,7 +39,13 @@ bool brick::collisionBall(ball& b) const
 {
 	if (!live) { return false; }
 	if (hitbox().isOverlapping(b.hitbox())) {
-		b.reboundY();
+		float ballMidX = b.hitbox().getMidpoint().x;
+		if (ballMidX > hitbox().left && ballMidX < hitbox().right) {
+			b.reboundY();
+		}
+		else {
+			b.reboundX();
+		}
 		return true;
 	}
 	return false;
