@@ -29,9 +29,17 @@ Game::Game( MainWindow& wnd )
 	b = ball(Vec2(300, 300));
 	walls = rect(0, 0, gfx.ScreenHeight, gfx.ScreenWidth);
 	pad = paddle(gfx);
-	b1 = brick(Vec2(100, 100));
-	b2 = brick(Vec2(100, 200));
-	b3 = brick(Vec2(100, 300));
+
+	Vec2 start(100, 100);
+	unsigned int cols = 10;
+	for (unsigned int y = 0; y < 5; ++y) {
+		for (unsigned int x = 0; x < 10; ++x) {
+			Vec2 bib(start);
+			bib.x += x * brick::getWidth();
+			bib.y += y * brick::getHeight();
+			brekMngr.addBrick(bib);
+		}
+	}
 }
 
 void Game::Go()
@@ -46,17 +54,13 @@ void Game::UpdateModel()
 {
 	dt = ft.Mark();
 	pad.update(wnd.kbd, walls, b, dt);
-	b1.update(b);
-	b2.update(b);
-	b3.update(b);
+	brekMngr.update(b);
 	b.update(walls, dt);
 }
 
 void Game::ComposeFrame()
 {
-	b1.draw(gfx);
-	b2.draw(gfx);
-	b3.draw(gfx);
+	brekMngr.draw(gfx);
 	pad.draw(gfx);
 	b.draw(gfx);
 }

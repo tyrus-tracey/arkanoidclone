@@ -37,7 +37,7 @@ bool paddle::collisionBall(ball& b)
 	if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {
 		Vec2 impactVec = (b.hitbox().getMidpoint() - hitbox().getMidpoint()).Normalize();
 		b.reboundY();
-		b.slap(impactVec);
+		b.slap(impactVec); //consider also applying the current velocity of paddle
 		return true;
 	}
 	return false;
