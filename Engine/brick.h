@@ -1,4 +1,5 @@
 #pragma once
+#include <assert.h>
 #include "rect.h"
 #include "Vec2.h"
 #include "Colors.h"
@@ -12,11 +13,13 @@ public:
 	brick();
 	brick(Vec2 b_pos);
 	brick(Vec2 b_pos, const Color c);
-	void update(ball& b);
-	rect hitbox() const;
-	bool collisionBall(ball& b) const;
+	bool overlapCheck(ball& b) const;
+	float getDistBall(ball& b) const;
+	void collideBall(ball& b);
 	void kill();
 	void draw(Graphics& gfx);
+	bool isLive() const;
+	rect hitbox() const;
 	static float getWidth();
 	static float getHeight();
 

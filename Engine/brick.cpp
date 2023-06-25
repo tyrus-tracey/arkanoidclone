@@ -16,13 +16,32 @@ brick::brick(Vec2 b_pos, const Color c)
 	col = c;
 }
 
-void brick::update(ball& b)
+bool brick::overlapCheck(ball& b) const
 {
-	if (collisionBall(b)) {
-		kill();
-		sndBrick.StopOne();
-		sndBrick.Play();
+	return hitbox().isOverlapping(b.hitbox());
+}
+
+//NOTE: returns squared length to save calcs
+float brick::getDistBall(ball& b) const
+{
+	Vec2 impactVec = hitbox().getMidpoint() - b.hitbox().getMidpoint();
+	return impactVec.GetLengthSq();
+}
+
+void brick::collideBall(ball& b)
+{
+	assert(hitbox().isOverlapping(b.hitbox()));
+
+	float ballMidX = b.hitbox().getMidpoint().x;
+	if (ballMidX > hitbox().left && ballMidX < hitbox().right) {
+		b.reboundY();
 	}
+	else {
+		b.reboundX();
+	}
+	sndBrick.StopOne();
+	sndBrick.Play();
+	kill();
 }
 
 rect brick::hitbox() const
@@ -35,28 +54,17 @@ void brick::kill()
 	live = false;
 }
 
-bool brick::collisionBall(ball& b) const
-{
-	if (!live) { return false; }
-	if (hitbox().isOverlapping(b.hitbox())) {
-		float ballMidX = b.hitbox().getMidpoint().x;
-		if (ballMidX > hitbox().left && ballMidX < hitbox().right) {
-			b.reboundY();
-		}
-		else {
-			b.reboundX();
-		}
-		return true;
-	}
-	return false;
-}
-
 void brick::draw(Graphics& gfx)
 {
 	rect visualBrick = hitbox().getResizeUniform(MARGIN);
 	if (live) { 
 		gfx.DrawRect(visualBrick, col); 
 	}
+}
+
+bool brick::isLive() const
+{
+	return live;
 }
 
 float brick::getWidth()
