@@ -11,17 +11,19 @@ class brick
 {
 public:
 	brick();
+	brick(const brick& b);
 	brick(Vec2 b_pos);
 	brick(Vec2 b_pos, const Color c);
 	bool overlapCheck(ball& b) const;
 	float getDistBall(ball& b) const;
 	void collideBall(ball& b);
 	void kill();
-	void draw(Graphics& gfx);
+	void draw(Graphics& gfx) const;
 	bool isLive() const;
 	rect hitbox() const;
 	static float getWidth();
 	static float getHeight();
+	void operator=(const brick& b);
 
 private:
 	Vec2 pos;

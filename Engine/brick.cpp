@@ -1,7 +1,12 @@
 #include "brick.h"
 
 brick::brick()
-	: pos(-1, -1)
+	: pos(-1, -1), live(false)
+{
+}
+
+brick::brick(const brick& b)
+	: pos(b.pos), col(b.col)
 {
 }
 
@@ -54,7 +59,7 @@ void brick::kill()
 	live = false;
 }
 
-void brick::draw(Graphics& gfx)
+void brick::draw(Graphics& gfx) const
 {
 	rect visualBrick = hitbox().getResizeUniform(MARGIN);
 	if (live) { 
@@ -75,4 +80,11 @@ float brick::getWidth()
 float brick::getHeight()
 {
 	return HEIGHT;
+}
+
+void brick::operator=(const brick& b)
+{
+	pos = b.pos;
+	col = b.col;
+	live = b.live;
 }
