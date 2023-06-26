@@ -341,6 +341,38 @@ void Graphics::DrawRect(const rect& r, Color c)
 	DrawRect(int(r.left), int(r.top), int(r.right), int(r.bottom), c);
 }
 
+// Positive thickness draws borders outside rect.
+// Negative thickness draws inside rect.
+void Graphics::DrawRectBorder(const rect& r, Color c, const float thickness)
+{
+	rect outer = r;
+	rect inner = r.getResizeUniform(thickness);
+	float w = outer.right - outer.left;
+	float h = (outer.bottom - outer.top);
+
+	if (inner.top < outer.top) { // If negative thickness
+		std::swap(outer, inner);
+		w += thickness * 2.0f;
+		h += thickness * 2.0f;
+	}
+
+	rect topBorder	({ outer.left, outer.top },		w, thickness);
+	rect botBorder	({ outer.left, inner.bottom },	w, thickness);
+	rect leftBorder	({ outer.left, outer.top },		thickness, h);
+	rect rightBorder({ inner.right, outer.top},		thickness, h);
+	
+	rect gfxBounds(0, 0, ScreenHeight, ScreenWidth);
+	assert(topBorder.isWithin(gfxBounds));
+	assert(botBorder.isWithin(gfxBounds));
+	assert(leftBorder.isWithin(gfxBounds));
+	assert(rightBorder.isWithin(gfxBounds));
+
+	DrawRect(topBorder, c);
+	DrawRect(botBorder, c);
+	DrawRect(leftBorder, c);
+	DrawRect(rightBorder, c);
+}
+
 void Graphics::DrawCircle( int x,int y,int radius,Color c )
 {
 	const int rad_sq = radius * radius;
