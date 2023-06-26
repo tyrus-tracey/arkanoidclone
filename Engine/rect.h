@@ -10,8 +10,11 @@ public:
 	rect(const Vec2& topLeft, const Vec2& bottomRight);
 	Vec2 getMidpoint() const;
 	rect getResizeUniform(const float amt) const;
+	rect& resizeUniform(const float amt);
 	bool isOverlapping(const rect& other) const;
 	bool isWithin(const rect& other) const;
+	rect getFittedRect(const rect& other, const float padding) const;
+	rect& fitTo(const rect& other, const float padding);
 
 	float top;
 	float left;

@@ -37,9 +37,18 @@ Vec2 rect::getMidpoint() const
 	return Vec2(left+widthMid, top+heightMid);
 }
 
+// Returns a rect whose bounds have been uniformly added/subtracted.
+// Positive values enlarges rect, negative values shrink rect.
 rect rect::getResizeUniform(const float amt) const
 {
 	return rect(top-amt, left-amt, bottom+amt, right+amt);
+}
+
+// Uniformly adds/subtracts rect bounds.
+// Positive values enlarges rect, negative values shrink rect.
+rect& rect::resizeUniform(const float amt)
+{
+	return *this = getResizeUniform(amt);
 }
 
 rect::rect(const Vec2& topLeft, const float width, const float height)
@@ -47,12 +56,14 @@ rect::rect(const Vec2& topLeft, const float width, const float height)
 {
 }
 
+// Non-inclusive overlap check.
 bool rect::isOverlapping(const rect& other) const
 {
 	return right > other.left && other.right > left
 		&& bottom > other.top && other.bottom > top;
 }
 
+// Whether rect is within (inclusive) supplied rect.
 bool rect::isWithin(const rect& other) const
 {
 	return
@@ -60,4 +71,27 @@ bool rect::isWithin(const rect& other) const
 		right <= other.right &&
 		top >= other.top &&
 		bottom <= other.bottom;
+}
+
+// Returns a rect whose bounds do not exceed supplied rect.
+// Positive padding enlarges rect relative to supplied.
+// Negative padding shrinks rect relative to supplied.
+rect rect::getFittedRect(const rect& other, const float padding) const
+{
+	rect out = *this;
+	rect bounds = other.getResizeUniform(padding*-1.0f);
+	
+	out.left = out.left		< bounds.left	?	bounds.left	  : out.left;
+	out.top	= out.top		< bounds.top	?	bounds.top	  : out.top;
+	out.right = out.right	> bounds.right	?	bounds.right  : out.right;
+	out.bottom = out.bottom	> bounds.bottom	?	bounds.bottom : out.bottom;
+	return out;
+}
+
+// Fits rect to within (inclusive) supplied rect bounds.
+// Positive padding enlarges rect relative to supplied.
+// Negative padding shrinks rect relative to supplied.
+rect& rect::fitTo(const rect& other, const float padding)
+{
+	return *this = getFittedRect(other, padding);
 }
