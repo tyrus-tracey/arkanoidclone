@@ -14,7 +14,9 @@ void brickManager::update(ball& b)
         chooseCollidingBrick(overlappingBricks, b);
         if (collidedBrick != bricks.end()) {
             (*collidedBrick).collideBall(b);
-            bricks.erase(collidedBrick);
+            if (!(*collidedBrick).isLive()) {
+                bricks.erase(collidedBrick);
+            }
         }
     }
 }
