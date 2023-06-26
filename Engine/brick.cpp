@@ -36,14 +36,19 @@ float brick::getDistBall(ball& b) const
 void brick::collideBall(ball& b)
 {
 	assert(hitbox().isOverlapping(b.hitbox()));
+	Vec2 ballMid = b.hitbox().getMidpoint();
+	Vec2 impactVec = ballMid - hitbox().getMidpoint();
 
-	float ballMidX = b.hitbox().getMidpoint().x;
-	if (ballMidX > hitbox().left && ballMidX < hitbox().right) {
+	if (std::signbit(b.getVelocity().x) == std::signbit(impactVec.x)) {
+		b.reboundY();
+	}
+   	else if (ballMid.x > hitbox().left && ballMid.x < hitbox().right) {
 		b.reboundY();
 	}
 	else {
 		b.reboundX();
 	}
+	b.pushOut(hitbox());
 	sndBrick.StopOne();
 	sndBrick.Play();
 	kill();
