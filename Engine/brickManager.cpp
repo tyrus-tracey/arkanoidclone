@@ -28,17 +28,17 @@ void brickManager::draw(Graphics& gfx)
     }
 }
 
-void brickManager::addBrick(const brick brik)
+void brickManager::addBrick(const brick brik, const rect walls)
 {
-    if (brik.isLive()) {
+    if (brik.isLive() && brik.hitbox().isWithin(walls)) {
         bricks.push_back(brik);
     }
 }
 
-void brickManager::addBricks(const vector<brick> brikVec)
+void brickManager::addBricks(const vector<brick> brikVec, const rect walls)
 {
     for (vector<brick>::const_iterator i = brikVec.begin(); i != brikVec.end(); ++i) {
-        addBrick(*i);
+        addBrick(*i, walls);
     }
 }
 

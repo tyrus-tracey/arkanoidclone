@@ -14,8 +14,8 @@ public:
 	brickManager();
 	void update(ball& b);
 	void draw(Graphics& gfx);
-	void addBrick(const brick brik);
-	void addBricks(const std::vector<brick> brikVec);
+	void addBrick(const brick brik, const rect walls);
+	void addBricks(const std::vector<brick> brikVec, const rect walls);
 	brick getLastCollidedBrickCopy() const;
 	std::vector<brick>& getBricks();
 	unsigned int getNbricks() const;
