@@ -59,5 +59,6 @@ private:
 	brickManager brekMngr;
 	static const int N_BRICKS = 50;
 	brick bricks[N_BRICKS];
+	float speedslow = 25.0f;
 	Color cArr[5] = {Colors::Red, Colors::Cyan, Colors::Yellow, Colors::Green, Colors::Gray};
 };

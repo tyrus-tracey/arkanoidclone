@@ -26,12 +26,12 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd )
 {
-	b = ball(Vec2(300, 300));
+	b = ball(Vec2(250, 250));
 	walls = rect(0, 0, gfx.ScreenHeight, gfx.ScreenWidth);
 	pad = paddle(gfx);
 
 	Vec2 start(100, 100);
-	unsigned int cols = 10;
+	
 	for (unsigned int y = 0; y < 5; ++y) {
 		for (unsigned int x = 0; x < 10; ++x) {
 			Vec2 bib(start);
@@ -52,6 +52,12 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
+		b.speedSet(speedslow);
+	}
+	else {
+		b.speedReset();
+	}
 	dt = ft.Mark();
 	pad.update(wnd.kbd, walls, b, dt);
 	brekMngr.update(b);
