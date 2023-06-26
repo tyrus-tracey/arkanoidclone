@@ -11,7 +11,7 @@ ball::ball(Vec2 spawnPos)
 }
 
 ball::ball(Vec2 spawnPos, Vec2 ballSpeed)
-	: pos(spawnPos), vel(ballSpeed)
+	: pos(spawnPos), vel(ballSpeed.GetNormalized())
 {
 }
 
@@ -19,6 +19,26 @@ void ball::slap(const Vec2 force)
 {
 	vel += force;
 	vel.Normalize();
+}
+
+void ball::pushOut(const rect& bounds)
+{
+	if (!hitbox().isOverlapping(bounds)) {
+		return;
+	}
+	Vec2 left(bounds.left - hitbox().right, 0.0f);
+	Vec2 right(bounds.right - hitbox().left, 0.0f);
+	Vec2 up(0.0f, bounds.top - hitbox().bottom);
+	Vec2 down(0.0f, bounds.bottom - hitbox().top);
+	Vec2 minPush = left;
+	Vec2 dirs[4] = { left, right, up, down };
+
+	for (int i = 1; i < 4; i++) {
+		if (dirs[i].GetLengthSq() < minPush.GetLengthSq()) {
+			minPush = dirs[i];
+		}
+	}
+	pos += minPush;
 }
 
 void ball::reboundX()
@@ -80,4 +100,14 @@ Vec2 ball::getVelocity() const
 void ball::draw(Graphics& gfx)
 {
 	SpriteCodex::DrawBall(pos + Vec2(rad,rad), gfx);
+}
+
+void ball::speedSet(float spd)
+{
+	speed = spd;
+}
+
+void ball::speedReset()
+{
+	speed = SPEED_DEFAULT;
 }
