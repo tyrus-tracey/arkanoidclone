@@ -31,6 +31,7 @@
 #include "brick.h"
 #include "paddle.h"
 #include "brickManager.h"
+#include "wall.h"
 
 class Game
 {
@@ -55,6 +56,7 @@ private:
 	float dt;
 	ball b;
 	rect walls;
+	wall lvlWall;
 	paddle pad;
 	brickManager brekMngr;
 	static const int N_BRICKS = 50;
