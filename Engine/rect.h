@@ -11,6 +11,7 @@ public:
 	Vec2 getMidpoint() const;
 	rect getResizeUniform(const float amt) const;
 	bool isOverlapping(const rect& other) const;
+	bool isWithin(const rect& other) const;
 
 	float top;
 	float left;

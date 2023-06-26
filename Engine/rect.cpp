@@ -52,3 +52,12 @@ bool rect::isOverlapping(const rect& other) const
 	return right > other.left && other.right > left
 		&& bottom > other.top && other.bottom > top;
 }
+
+bool rect::isWithin(const rect& other) const
+{
+	return
+		left >= other.left &&
+		right <= other.right &&
+		top >= other.top &&
+		bottom <= other.bottom;
+}
