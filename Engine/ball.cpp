@@ -53,12 +53,21 @@ void ball::reboundY()
 
 void ball::update(const rect& walls, float dt)
 {
-	pos += vel * dt * speed;
+	if (!live) { return; }	
+	if (locked) { return; }
+
+	if (onLockCooldown()) { tickLockCooldown(dt); }
+	move(dt);
 	clamp(walls);
 	if (collisionWalls(walls)) {
 		sndRebound.StopOne();
 		sndRebound.Play();
 	}
+}
+
+void ball::move(const float dt)
+{
+	pos += vel * dt * speed;
 }
 
 void ball::clamp(const rect& walls)
@@ -71,6 +80,15 @@ void ball::clamp(const rect& walls)
 		{ pos.y = walls.top; }
 	if (hitbox().bottom > walls.bottom)
 		{ pos.y = walls.bottom - (rad * 2.0f); }
+}
+
+void ball::tickLockCooldown(const float dt)
+{
+	if (lockCooldown < 0.0001f) {
+		locked = false;
+		return;
+	}
+	lockCooldown -= dt;
 }
 
 bool ball::collisionWalls(const rect& walls)
@@ -97,8 +115,42 @@ Vec2 ball::getVelocity() const
 	return vel;
 }
 
+
+void ball::lock(const Vec2 lockPos)
+{
+	if (locked) { return; }
+	locked = true;
+	pos = lockPos;
+}
+
+void ball::unlock()
+{
+	if (!locked) { return; }
+	locked = false;
+	lockCooldown = LOCK_COOLDOWN_DEFAULT;
+}
+
+bool ball::onLockCooldown() const
+{
+	return lockCooldown > 0.0001f;
+}
+
+void ball::kill()
+{
+	live = false;
+}
+
+void ball::operator=(const ball& other)
+{
+	pos = other.pos;
+	vel = other.vel;
+	speed = other.speed;
+	live = other.live;
+}
+
 void ball::draw(Graphics& gfx)
 {
+	if (!live) { return; }
 	SpriteCodex::DrawBall(pos + Vec2(rad,rad), gfx);
 }
 

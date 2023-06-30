@@ -21,16 +21,28 @@ public:
 	void speedReset();
 	rect hitbox() const;
 	Vec2 getVelocity() const;
+	void lock(const Vec2 lockPos);
+	void unlock();
+	bool onLockCooldown() const;
+	void kill();
+public:
+	void operator=(const ball& other);
 
 private:
+	void move(const float dt);
 	void clamp(const rect& walls);
+	void tickLockCooldown(const float dt);
 	bool collisionWalls(const rect& walls);
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();
-	float SPEED_DEFAULT = 500.0f;
+	bool locked = false;
+	const float SPEED_DEFAULT = 500.0f;
 	float speed = 500.0f;
 	float rad = 7.0f;
+	bool live = true;
+	float lockCooldown = 0.0f;
+	const float LOCK_COOLDOWN_DEFAULT = 0.25f;
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };
 
