@@ -30,6 +30,7 @@ Game::Game(MainWindow& wnd)
 	b = ball(Vec2(250, 250));
 	walls = rect(0, 0, gfx.ScreenHeight, gfx.ScreenWidth);
 	pad = paddle(gfx);
+	core = enemyCore(Vec2(100, 100));
 
 	Vec2 start(-100, -40);
 	
@@ -59,16 +60,21 @@ void Game::UpdateModel()
 	else {
 		b.speedReset();
 	}
+	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+		core.releaseBall();
+	}
 	dt = ft.Mark();
 	pad.update(wnd.kbd, walls, b, dt);
 	brekMngr.update(b);
 	b.update(walls, dt);
+	core.update(&b);
 }
 
 void Game::ComposeFrame()
 {
 	lvlWall.draw(gfx);
 	brekMngr.draw(gfx);
+	core.draw(gfx);
 	pad.draw(gfx);
 	b.draw(gfx);
 	

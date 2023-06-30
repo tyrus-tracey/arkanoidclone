@@ -32,6 +32,7 @@
 #include "paddle.h"
 #include "brickManager.h"
 #include "wall.h"
+#include "enemyCore.h"
 
 class Game
 {
@@ -58,6 +59,8 @@ private:
 	rect walls;
 	wall lvlWall;
 	paddle pad;
+	enemyCore core;
+
 	brickManager brekMngr;
 	static const int N_BRICKS = 50;
 	brick bricks[N_BRICKS];
