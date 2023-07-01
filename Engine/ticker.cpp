@@ -18,12 +18,12 @@ void ticker::stop()
 
 void ticker::tick(float dt)
 {
-	if (isActive()) { return; }
+	if (!isActive()) { return; }
 	time -= dt;
 	if (time < 0.0001f) { stop(); }
 }
 
 bool ticker::isActive() const
 {
-	return !active;
+	return active;
 }
