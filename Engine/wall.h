@@ -8,6 +8,8 @@ class wall
 public:
 	wall(const Graphics& gfx);
 	wall(const Graphics& gfx, const rect wallBounds);
+	rect getBounds() const;
+	Vec2 getTopLeft() const;
 	void draw(Graphics& gfx) const;
 private:
 	void ensureWallsWithinGfx(const Graphics& gfx);

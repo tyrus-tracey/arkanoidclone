@@ -13,6 +13,16 @@ wall::wall(const Graphics& gfx, const rect wallBounds)
 	height = (bounds.bottom - bounds.top) + (THICKNESS * 2.0f);
 }
 
+rect wall::getBounds() const
+{
+	return bounds;
+}
+
+Vec2 wall::getTopLeft() const
+{
+	return Vec2(bounds.left, bounds.top);
+}
+
 void wall::draw(Graphics& gfx) const 
 {
 	gfx.DrawRectBorder(bounds, WALLCOLOR, THICKNESS);
