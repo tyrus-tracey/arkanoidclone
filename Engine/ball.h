@@ -20,6 +20,7 @@ public:
 	void speedSet(float spd);
 	void speedReset();
 	rect hitbox() const;
+	void setVelocity(Vec2 newVel);
 	Vec2 getVelocity() const;
 	void lock(const Vec2 lockPos);
 	void unlock();

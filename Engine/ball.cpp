@@ -110,6 +110,12 @@ rect ball::hitbox() const
 	return rect(pos, rad * 2.0f, rad * 2.0f);
 }
 
+void ball::setVelocity(Vec2 newVel)
+{
+	newVel.Normalize();
+	vel = newVel;
+}
+
 Vec2 ball::getVelocity() const
 {
 	return vel;
