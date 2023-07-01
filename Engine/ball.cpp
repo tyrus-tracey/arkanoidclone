@@ -120,7 +120,8 @@ void ball::lock(const Vec2 lockPos)
 {
 	if (locked) { return; }
 	locked = true;
-	pos = lockPos;
+	Vec2 centerOffset(lockPos.x - rad, lockPos.y - rad);
+	pos = centerOffset;
 }
 
 void ball::unlock()
