@@ -19,7 +19,12 @@ void enemyCore::update(ball* b)
 {
     if (!live) { return; }
     if (hitbox().isOverlapping(b->hitbox()) && !b->onLockCooldown()) {
-        lockBall(b);
+        if (b->fuelFull()) {
+            kill();
+        }
+        else {
+            lockBall(b);
+        }
     }
 }
 
@@ -60,6 +65,7 @@ bool enemyCore::hasBall() const
 
 void enemyCore::draw(Graphics& gfx) const
 {
+    if (!live) { return; }
     SpriteCodex::DrawCore(pos, gfx);
 }
 

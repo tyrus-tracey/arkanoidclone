@@ -149,6 +149,18 @@ void ball::kill()
 	live = false;
 }
 
+void ball::fuelAdd(unsigned int amt)
+{
+	if (!fuelFull()) {
+		fuel += amt;
+	}
+}
+
+bool ball::fuelFull() const
+{
+	return fuel > FUEL_MAX;
+}
+
 void ball::operator=(const ball& other)
 {
 	pos = other.pos;
@@ -160,7 +172,12 @@ void ball::operator=(const ball& other)
 void ball::draw(Graphics& gfx)
 {
 	if (!live) { return; }
-	SpriteCodex::DrawBall(pos + Vec2(rad,rad), gfx);
+	if (fuelFull()) {
+		SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 20);
+	}
+	else {
+		SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 0);
+	}
 }
 
 void ball::speedSet(float spd)

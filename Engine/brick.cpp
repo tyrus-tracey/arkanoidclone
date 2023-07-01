@@ -49,6 +49,7 @@ void brick::collideBall(ball& b)
 		b.reboundX();
 	}
 	b.pushOut(hitbox());
+	b.fuelAdd(10);
 	sndBrick.StopOne();
 	sndBrick.Play();
 	kill();

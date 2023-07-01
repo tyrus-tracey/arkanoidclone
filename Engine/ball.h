@@ -27,6 +27,8 @@ public:
 	void unlock();
 	bool onLockCooldown() const;
 	void kill();
+	void fuelAdd(unsigned int amt);
+	bool fuelFull() const;
 public:
 	void operator=(const ball& other);
 
@@ -43,6 +45,10 @@ private:
 	float speed = 500.0f;
 	float rad = 7.0f;
 	bool live = true;
+
+	unsigned int fuel = 0;
+	const unsigned int FUEL_MAX = 100;
+
 	float lockCooldown = 0.0f;
 	const float LOCK_COOLDOWN_DEFAULT = 0.25f;
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
