@@ -84,6 +84,9 @@
     <ClInclude Include="enemyCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ticker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -138,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="enemyCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ticker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
