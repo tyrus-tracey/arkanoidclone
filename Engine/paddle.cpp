@@ -5,15 +5,15 @@ paddle::paddle()
 {
 }
 
-paddle::paddle(const Graphics& gfx)
-	: pos(gfx.ScreenWidth/2 - (width/2), gfx.ScreenHeight - 50)
+paddle::paddle(const wall& lvlWalls)
+	: pos(lvlWalls.getBounds().right - (width / 2), lvlWalls.getBounds().bottom - 50)
 {
 }
 
-void paddle::update(const Keyboard& kbd, const rect& walls, ball& b, float dt)
+void paddle::update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt)
 {
 	moveKbd(kbd, dt);
-	clamp(walls);
+	clamp(lvlWalls);
 	if (collisionBall(b)) {
 		sndPaddle.StopOne();
 		sndPaddle.Play();
@@ -53,10 +53,10 @@ void paddle::moveKbd(const Keyboard& kbd, float dt)
 	}
 }
 
-void paddle::clamp(const rect& walls)
+void paddle::clamp(const wall& lvlWalls)
 {
-	if (hitbox().left < walls.left)
-		{ pos.x = walls.left; }
-	if (hitbox().right > walls.right)
-		{ pos.x = walls.right - width; }
+	if (hitbox().left < lvlWalls.getBounds().left)
+		{ pos.x = lvlWalls.getBounds().left; }
+	if (hitbox().right > lvlWalls.getBounds().right)
+		{ pos.x = lvlWalls.getBounds().right - width; }
 }

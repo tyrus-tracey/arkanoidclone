@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "SpriteCodex.h"
 #include "Sound.h"
+#include "wall.h"
 
 class ball
 {
@@ -11,7 +12,7 @@ public:
 	ball();
 	ball(Vec2 spawnPos);
 	ball(Vec2 spawnPos, Vec2 ballSpeed);
-	void update(const rect& walls, float dt);
+	void update(const wall& lvlWalls, float dt);
 	void reboundX();
 	void reboundY();
 	void slap(const Vec2 force);
@@ -31,9 +32,9 @@ public:
 
 private:
 	void move(const float dt);
-	void clamp(const rect& walls);
+	void clamp(const wall& lvlWalls);
 	void tickLockCooldown(const float dt);
-	bool collisionWalls(const rect& walls);
+	bool collisionWalls(const wall& lvlWalls);
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();

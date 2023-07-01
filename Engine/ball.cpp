@@ -51,15 +51,15 @@ void ball::reboundY()
 	vel.y *= -1.0f;
 }
 
-void ball::update(const rect& walls, float dt)
+void ball::update(const wall& lvlWalls, float dt)
 {
 	if (!live) { return; }	
 	if (locked) { return; }
 
 	if (onLockCooldown()) { tickLockCooldown(dt); }
 	move(dt);
-	clamp(walls);
-	if (collisionWalls(walls)) {
+	clamp(lvlWalls);
+	if (collisionWalls(lvlWalls)) {
 		sndRebound.StopOne();
 		sndRebound.Play();
 	}
@@ -70,8 +70,9 @@ void ball::move(const float dt)
 	pos += vel * dt * speed;
 }
 
-void ball::clamp(const rect& walls)
+void ball::clamp(const wall& lvlWalls)
 {
+	rect walls = lvlWalls.getBounds();
 	if (hitbox().left < walls.left)
 		{ pos.x = walls.left; }
 	if (hitbox().right > walls.right)
@@ -91,9 +92,10 @@ void ball::tickLockCooldown(const float dt)
 	lockCooldown -= dt;
 }
 
-bool ball::collisionWalls(const rect& walls)
+bool ball::collisionWalls(const wall& lvlWalls)
 {
 	bool rebounded = false;
+	rect walls = lvlWalls.getBounds();
 	if (pos.x <= walls.left || pos.x + (rad * 2.0f) >= walls.right) {
 		reboundX();
 		rebounded = true;

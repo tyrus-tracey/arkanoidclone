@@ -3,6 +3,7 @@
 #include "Graphics.h"
 #include "brick.h"
 #include "ball.h"
+#include "wall.h"
 
 	/// <summary>
 	/// Overlooks all brick collision and draw operations for a given level.
@@ -14,8 +15,8 @@ public:
 	brickManager();
 	void update(ball& b);
 	void draw(Graphics& gfx);
-	void addBrick(const brick brik, const rect walls);
-	void addBricks(const std::vector<brick> brikVec, const rect walls);
+	void addBrick(const brick brik, const wall& lvlWalls);
+	void addBricks(const std::vector<brick> brikVec, const wall& lvlWalls);
 	brick getLastCollidedBrickCopy() const;
 	std::vector<brick>& getBricks();
 	unsigned int getNbricks() const;

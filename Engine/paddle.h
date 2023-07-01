@@ -6,20 +6,21 @@
 #include "Colors.h"
 #include "rect.h"
 #include "ball.h"
+#include "wall.h"
 
 class paddle
 {
 public:
 	paddle();
-	paddle(const Graphics& gfx);
-	void update(const Keyboard& kbd, const rect& walls, ball& b, float dt);
+	paddle(const wall& lvlWalls);
+	void update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt);
 	void draw(Graphics& gfx) const;
 	rect hitbox() const;
 
 private:
 	bool collisionBall(ball& b);
 	void moveKbd(const Keyboard& kbd, float dt);
-	void clamp(const rect& walls);
+	void clamp(const wall& lvlWalls);
 
 	Vec2 pos; //top-left
 	float width = 75.0f;

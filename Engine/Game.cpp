@@ -28,18 +28,17 @@ Game::Game(MainWindow& wnd)
 	lvlWall(gfx, rect(Vec2(200, 50), Vec2(600, 750)))
 {
 	b = ball(Vec2(250, 250));
-	walls = rect(0, 0, gfx.ScreenHeight, gfx.ScreenWidth);
-	pad = paddle(gfx);
+	pad = paddle(lvlWall);
 	core = enemyCore(Vec2(400, 200));
 
-	Vec2 start(-100, -40);
+	Vec2 start(lvlWall.getTopLeft().x+50, lvlWall.getTopLeft().y + 50);
 	
-	for (unsigned int y = 0; y < 5; ++y) {
+	for (unsigned int y = 0; y < 4; ++y) {
 		for (unsigned int x = 0; x < 10; ++x) {
 			Vec2 bib(start);
 			bib.x += x * brick::getWidth();
 			bib.y += y * brick::getHeight();
-			brekMngr.addBrick(brick(bib, cArr[y]), walls);
+			brekMngr.addBrick(brick(bib, cArr[y]), lvlWall);
 		}
 	}
 }
@@ -64,9 +63,9 @@ void Game::UpdateModel()
 		core.releaseBall();
 	}
 	dt = ft.Mark();
-	pad.update(wnd.kbd, walls, b, dt);
+	pad.update(wnd.kbd, lvlWall, b, dt);
 	brekMngr.update(b);
-	b.update(walls, dt);
+	b.update(lvlWall, dt);
 	core.update(&b);
 }
 
