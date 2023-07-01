@@ -32,7 +32,9 @@ void enemyCore::lockBall(ball* b)
 void enemyCore::releaseBall()
 {
     if (!hasBall()) { return; }
+    heldBall->setVelocity(getRandDiagonal());
     heldBall->unlock();
+    heldBall = nullptr;
 }
 
 void enemyCore::eatBall()
@@ -66,4 +68,29 @@ void enemyCore::operator=(enemyCore& other)
     pos = other.pos;
     heldBall = other.heldBall;
     live = other.live;
+}
+
+
+Vec2 enemyCore::getRandDiagonal()
+{
+    /*
+       0  1
+        \/
+        /\
+       3  2
+    */
+
+    Vec2 out(0, 1);
+    int dir = dirDist(rng);
+    float posDiag = 0.7071;
+    float negDiag = -0.7071;
+
+    switch (dir) {
+    case 0: out = { negDiag, negDiag }; break;  // North
+    case 1: out = { posDiag, negDiag }; break;  // East
+    case 2: out = { posDiag, posDiag }; break;  // South
+    case 3: out = { negDiag, posDiag }; break; // West
+    default: break;
+    }
+    return out;
 }

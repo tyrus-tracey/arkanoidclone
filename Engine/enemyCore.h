@@ -3,6 +3,7 @@
 #include "Vec2.h"
 #include "ball.h"
 #include "rect.h"
+#include <random>
 
 class enemyCore
 {
@@ -19,8 +20,9 @@ public:
 	bool isLive() const;
 	bool hasBall() const;
 	void draw(Graphics& gfx) const;
-public:
 	void operator=(enemyCore& other);
+private:
+	Vec2 getRandDiagonal();
 
 private:
 	Vec2 pos;
@@ -28,5 +30,8 @@ private:
 	const float SPAN = 40.0f;
 	const float COREMARGIN = -1.0f;
 	bool live = true;
+
+	std::mt19937 rng;
+	std::uniform_int_distribution<int> dirDist = std::uniform_int_distribution<int>(0, 3);
 };
 

@@ -25,12 +25,12 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	lvlWall(gfx, rect(Vec2(-100, -100), Vec2(1000, 1000)))
+	lvlWall(gfx, rect(Vec2(200, 50), Vec2(600, 750)))
 {
 	b = ball(Vec2(250, 250));
 	walls = rect(0, 0, gfx.ScreenHeight, gfx.ScreenWidth);
 	pad = paddle(gfx);
-	core = enemyCore(Vec2(100, 100));
+	core = enemyCore(Vec2(400, 200));
 
 	Vec2 start(-100, -40);
 	
