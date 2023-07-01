@@ -60,6 +60,7 @@ void Game::UpdateModel()
 		b.speedReset();
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+		b.reset();
 	}
 	dt = ft.Mark();
 	pad.update(wnd.kbd, lvlWall, b, dt);

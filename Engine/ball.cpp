@@ -11,8 +11,8 @@ ball::ball(Vec2 spawnPos)
 }
 
 ball::ball(Vec2 spawnPos, Vec2 ballSpeed)
-	: pos(spawnPos), spawn_pos(spawnPos), vel(ballSpeed.GetNormalized()),
-		tSpawnGrace(2.0f), tBallLockCooldown(0.25f)
+	: pos(spawnPos), spawn_pos(pos), vel(ballSpeed.GetNormalized()), 
+		spawn_vel(vel), tSpawnGrace(2.0f), tBallLockCooldown(0.25f)
 {
 	tSpawnGrace.reset();
 }
@@ -74,8 +74,9 @@ void ball::update(const wall& lvlWalls, float dt)
 void ball::reset()
 {
 	pos = spawn_pos;
+	vel = spawn_vel;
 	speedReset();
-	Vec2(1, 1).Normalize();
+	locked = false;
 	live = true;
 	tSpawnGrace.reset();
 }
@@ -123,6 +124,7 @@ rect ball::hitbox() const
 
 void ball::setVelocity(Vec2 newVel)
 {
+	if (tSpawnGrace.isActive()) { return; }
 	newVel.Normalize();
 	vel = newVel;
 }
@@ -176,6 +178,7 @@ void ball::operator=(const ball& other)
 	pos = other.pos;
 	spawn_pos = other.spawn_pos;
 	vel = other.vel;
+	spawn_vel = other.spawn_vel;
 	speed = other.speed;
 	live = other.live;
 }

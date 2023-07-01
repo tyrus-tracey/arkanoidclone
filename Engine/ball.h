@@ -42,6 +42,7 @@ private:
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();
 	Vec2 spawn_pos;
+	Vec2 spawn_vel;
 	bool locked = false;
 	const float SPEED_DEFAULT = 500.0f;
 	float speed = 500.0f;
