@@ -60,13 +60,12 @@ void Game::UpdateModel()
 		b.speedReset();
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
-		core.releaseBall();
 	}
 	dt = ft.Mark();
 	pad.update(wnd.kbd, lvlWall, b, dt);
 	brekMngr.update(b);
 	b.update(lvlWall, dt);
-	core.update(&b);
+	core.update(&b, dt);
 }
 
 void Game::ComposeFrame()

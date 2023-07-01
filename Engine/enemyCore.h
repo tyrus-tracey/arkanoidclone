@@ -12,7 +12,7 @@ public:
 	enemyCore(Vec2 corePos);
 	rect hitbox() const;
 	rect hitboxCore() const;
-	void update(ball* b);
+	void update(ball* b, const float dt);
 	void lockBall(ball* b);
 	void releaseBall();
 	void eatBall();
@@ -23,12 +23,15 @@ public:
 	void operator=(enemyCore& other);
 private:
 	Vec2 getRandDiagonal();
+	void tickHoldTimeAndRelease(const float dt);
 
 private:
 	Vec2 pos;
 	ball* heldBall = nullptr;
 	const float SPAN = 40.0f;
 	const float COREMARGIN = -1.0f;
+	float ballHoldTime = 0.0f;
+	const float BALLHOLDTIME_DEFAULT = 0.75f;
 	bool live = true;
 
 	std::mt19937 rng;
