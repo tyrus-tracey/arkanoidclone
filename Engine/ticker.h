@@ -15,7 +15,7 @@ public:
 
 private:
 	bool active = false;
-	const float START_TIME;
+	float START_TIME;
 	float time = 0.0f;
 };
 
