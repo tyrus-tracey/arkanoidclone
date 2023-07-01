@@ -14,6 +14,7 @@ public:
 	ball(Vec2 spawnPos);
 	ball(Vec2 spawnPos, Vec2 ballSpeed);
 	void update(const wall& lvlWalls, float dt);
+	void reset();
 	void reboundX();
 	void reboundY();
 	void slap(const Vec2 force);
@@ -40,6 +41,7 @@ private:
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();
+	Vec2 spawn_pos;
 	bool locked = false;
 	const float SPEED_DEFAULT = 500.0f;
 	float speed = 500.0f;
@@ -49,7 +51,8 @@ private:
 	unsigned int fuel = 0;
 	const unsigned int FUEL_MAX = 3000;
 
-	ticker tBallLockCooldown = ticker(0.25f);
+	ticker tSpawnGrace;
+	ticker tBallLockCooldown;
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };
 

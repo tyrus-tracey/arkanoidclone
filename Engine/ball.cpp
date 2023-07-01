@@ -1,18 +1,20 @@
 #include "ball.h"
 
 ball::ball()
-	: pos(0,0)
+	: ball({0,0})
 {
 }
 
 ball::ball(Vec2 spawnPos)
-	: pos(spawnPos)
+	: ball(spawnPos, Vec2(1,1))
 {
 }
 
 ball::ball(Vec2 spawnPos, Vec2 ballSpeed)
-	: pos(spawnPos), vel(ballSpeed.GetNormalized())
+	: pos(spawnPos), spawn_pos(spawnPos), vel(ballSpeed.GetNormalized()),
+		tSpawnGrace(2.0f), tBallLockCooldown(0.25f)
 {
+	tSpawnGrace.reset();
 }
 
 void ball::slap(const Vec2 force)
@@ -55,6 +57,10 @@ void ball::update(const wall& lvlWalls, float dt)
 {
 	if (!live) { return; }	
 	if (locked) { return; }
+	if (tSpawnGrace.isActive()) {
+		tSpawnGrace.tick(dt);
+		return;
+	}
 
 	tBallLockCooldown.tick(dt);
 	move(dt);
@@ -63,6 +69,15 @@ void ball::update(const wall& lvlWalls, float dt)
 		sndRebound.StopOne();
 		sndRebound.Play();
 	}
+}
+
+void ball::reset()
+{
+	pos = spawn_pos;
+	speedReset();
+	Vec2(1, 1).Normalize();
+	live = true;
+	tSpawnGrace.reset();
 }
 
 void ball::move(const float dt)
@@ -79,8 +94,8 @@ void ball::clamp(const wall& lvlWalls)
 		{ pos.x = walls.right - (rad * 2.0f); }
 	if (hitbox().top < walls.top)
 		{ pos.y = walls.top; }
-	if (hitbox().bottom > walls.bottom)
-		{ pos.y = walls.bottom - (rad * 2.0f); }
+	if (hitbox().bottom > walls.bottom) 
+		{ pos.y = walls.bottom - (rad * 2.0f);}
 }
 
 bool ball::collisionWalls(const wall& lvlWalls)
@@ -91,9 +106,12 @@ bool ball::collisionWalls(const wall& lvlWalls)
 		reboundX();
 		rebounded = true;
 	}
-	if (pos.y <= walls.top || pos.y + (rad * 2.0f) >= walls.bottom) {
+	if (pos.y <= walls.top) {
 		reboundY();
 		rebounded = true;
+	}
+	if (pos.y + (rad * 2.0f) >= walls.bottom) {
+		kill();
 	}
 	return rebounded;
 }
@@ -138,6 +156,7 @@ bool ball::onLockCooldown() const
 void ball::kill()
 {
 	live = false;
+	vel = { 0,0 };
 }
 
 void ball::fuelAdd(unsigned int amt)
@@ -155,6 +174,7 @@ bool ball::fuelFull() const
 void ball::operator=(const ball& other)
 {
 	pos = other.pos;
+	spawn_pos = other.spawn_pos;
 	vel = other.vel;
 	speed = other.speed;
 	live = other.live;

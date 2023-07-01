@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	lvlWall(gfx, rect(Vec2(200, 50), Vec2(600, 750)))
 {
-	b = ball(Vec2(200, 380));
+	b = ball(Vec2(300,300));
 	pad = paddle(lvlWall);
 	core = enemyCore(Vec2(400, 200));
 
