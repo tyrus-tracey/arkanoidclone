@@ -3,6 +3,7 @@
 #include "Vec2.h"
 #include "ball.h"
 #include "rect.h"
+#include "ticker.h"
 #include <random>
 
 class enemyCore
@@ -23,15 +24,13 @@ public:
 	void operator=(enemyCore& other);
 private:
 	Vec2 getRandDiagonal();
-	void tickHoldTimeAndRelease(const float dt);
 
 private:
 	Vec2 pos;
 	ball* heldBall = nullptr;
 	const float SPAN = 40.0f;
 	const float COREMARGIN = -1.0f;
-	float ballHoldTime = 0.0f;
-	const float BALLHOLDTIME_DEFAULT = 0.75f;
+	ticker tBallHoldTime = ticker(0.75f);
 	bool live = true;
 
 	std::mt19937 rng;

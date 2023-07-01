@@ -56,7 +56,7 @@ void ball::update(const wall& lvlWalls, float dt)
 	if (!live) { return; }	
 	if (locked) { return; }
 
-	if (onLockCooldown()) { tickLockCooldown(dt); }
+	tBallLockCooldown.tick(dt);
 	move(dt);
 	clamp(lvlWalls);
 	if (collisionWalls(lvlWalls)) {
@@ -81,15 +81,6 @@ void ball::clamp(const wall& lvlWalls)
 		{ pos.y = walls.top; }
 	if (hitbox().bottom > walls.bottom)
 		{ pos.y = walls.bottom - (rad * 2.0f); }
-}
-
-void ball::tickLockCooldown(const float dt)
-{
-	if (lockCooldown < 0.0001f) {
-		locked = false;
-		return;
-	}
-	lockCooldown -= dt;
 }
 
 bool ball::collisionWalls(const wall& lvlWalls)
@@ -136,12 +127,12 @@ void ball::unlock()
 {
 	if (!locked) { return; }
 	locked = false;
-	lockCooldown = LOCK_COOLDOWN_DEFAULT;
+	tBallLockCooldown.reset();
 }
 
 bool ball::onLockCooldown() const
 {
-	return lockCooldown > 0.0001f;
+	return tBallLockCooldown.isActive();
 }
 
 void ball::kill()

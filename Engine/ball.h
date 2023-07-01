@@ -5,6 +5,7 @@
 #include "SpriteCodex.h"
 #include "Sound.h"
 #include "wall.h"
+#include "ticker.h"
 
 class ball
 {
@@ -35,7 +36,6 @@ public:
 private:
 	void move(const float dt);
 	void clamp(const wall& lvlWalls);
-	void tickLockCooldown(const float dt);
 	bool collisionWalls(const wall& lvlWalls);
 
 	Vec2 pos; //top-left
@@ -47,10 +47,9 @@ private:
 	bool live = true;
 
 	unsigned int fuel = 0;
-	const unsigned int FUEL_MAX = 100;
+	const unsigned int FUEL_MAX = 3000;
 
-	float lockCooldown = 0.0f;
-	const float LOCK_COOLDOWN_DEFAULT = 0.25f;
+	ticker tBallLockCooldown = ticker(0.25f);
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };
 

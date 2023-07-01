@@ -18,7 +18,13 @@ rect enemyCore::hitboxCore() const
 void enemyCore::update(ball* b, const float dt)
 {
     if (!live) { return; }
-    if (hasBall()) { tickHoldTimeAndRelease(dt); return; }
+    if (hasBall()) { 
+        tBallHoldTime.tick(dt);
+        if (!tBallHoldTime.isActive()) {
+            releaseBall();
+        }
+        return;
+    }
 
     if (hitbox().isOverlapping(b->hitbox()) && !b->onLockCooldown()) {
         if (b->fuelFull()) {
@@ -34,7 +40,7 @@ void enemyCore::lockBall(ball* b)
 {
     b->lock(hitbox().getMidpoint());
     heldBall = b;
-    ballHoldTime = BALLHOLDTIME_DEFAULT;
+    tBallHoldTime.reset();
 }
 
 void enemyCore::releaseBall()
@@ -102,14 +108,4 @@ Vec2 enemyCore::getRandDiagonal()
     default: break;
     }
     return out;
-}
-
-void enemyCore::tickHoldTimeAndRelease(const float dt)
-{
-    if (ballHoldTime > 0.0001f) {
-        ballHoldTime -= dt;
-    }
-    else {
-        releaseBall();
-    }
 }
