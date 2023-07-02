@@ -25,7 +25,7 @@ Vec2 wall::getTopLeft() const
 
 void wall::draw(Graphics& gfx) const 
 {
-	gfx.DrawRectBorder(bounds, WALLCOLOR, THICKNESS);
+	gfx.DrawRectBorder(bounds, WALLCOLOR, THICKNESS, true);
 }
 
 void wall::ensureWallsWithinGfx(const Graphics& gfx)

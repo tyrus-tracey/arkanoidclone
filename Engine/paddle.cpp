@@ -23,8 +23,8 @@ void paddle::update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt
 void paddle::draw(Graphics& gfx) const
 {
 	rect rectCore(hitbox().top, hitbox().left + wing, hitbox().bottom, hitbox().right - wing);
-	gfx.DrawRect(hitbox(), cWing);
-	gfx.DrawRect(rectCore, cCore);
+	gfx.DrawRect(hitbox(), cWing, true);
+	gfx.DrawRect(rectCore, cCore, true);
 }
 
 rect paddle::hitbox() const

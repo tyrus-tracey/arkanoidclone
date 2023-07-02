@@ -52,15 +52,15 @@ public:
 	Graphics& operator=( const Graphics& ) = delete;
 	void EndFrame();
 	void BeginFrame();
-	void PutPixel( int x,int y,int r,int g,int b )
+	void PutPixel( int x,int y,int r,int g,int b, bool assertOn )
 	{
-		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
+		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) }, assertOn );
 	}
-	void PutPixel( int x,int y,Color c );
-	void DrawRect( int x0,int y0,int x1,int y1,Color c );
-	void DrawRect(const rect& r, Color c);
-	void DrawRectBorder(const rect& r, Color c, const float thickness);
-	void DrawCircle( int x,int y,int radius,Color c );
+	void PutPixel( int x,int y,Color c, bool assertOn );
+	void DrawRect( int x0,int y0,int x1,int y1,Color c, bool assertOn );
+	void DrawRect(const rect& r, Color c, bool assertOn);
+	void DrawRectBorder(const rect& r, Color c, const float thickness, bool assertOn);
+	void DrawCircle( int x,int y,int radius,Color c, bool assertOn );
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

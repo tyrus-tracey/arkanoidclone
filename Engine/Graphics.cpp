@@ -307,16 +307,24 @@ void Graphics::BeginFrame()
 	memset( pSysBuffer,0u,sizeof( Color ) * Graphics::ScreenHeight * Graphics::ScreenWidth );
 }
 
-void Graphics::PutPixel( int x,int y,Color c )
+void Graphics::PutPixel( int x,int y,Color c, bool assertOn )
 {
-	assert( x >= 0 );
-	assert( x < int( Graphics::ScreenWidth ) );
-	assert( y >= 0 );
-	assert( y < int( Graphics::ScreenHeight ) );
-	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
+	if (assertOn) {
+		assert(x >= 0);
+		assert(x < int(Graphics::ScreenWidth));
+		assert(y >= 0);
+		assert(y < int(Graphics::ScreenHeight));
+	}
+	if (
+		(x >= 0) &&
+		(x < int(Graphics::ScreenWidth)) &&
+		(y >= 0) &&
+		(y < int(Graphics::ScreenHeight))) {
+		pSysBuffer[Graphics::ScreenWidth * y + x] = c;
+	}
 }
 
-void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
+void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c, bool assertOn )
 {
 	if( x0 > x1 )
 	{
@@ -331,19 +339,19 @@ void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 	{
 		for( int x = x0; x < x1; ++x )
 		{
-			PutPixel( x,y,c );
+			PutPixel( x,y,c, assertOn);
 		}
 	}
 }
 
-void Graphics::DrawRect(const rect& r, Color c)
+void Graphics::DrawRect(const rect& r, Color c, bool assertOn)
 {
-	DrawRect(int(r.left), int(r.top), int(r.right), int(r.bottom), c);
+	DrawRect(int(r.left), int(r.top), int(r.right), int(r.bottom), c, assertOn);
 }
 
 // Positive thickness draws borders outside rect.
 // Negative thickness draws inside rect.
-void Graphics::DrawRectBorder(const rect& r, Color c, const float thickness)
+void Graphics::DrawRectBorder(const rect& r, Color c, const float thickness, bool assertOn)
 {
 	rect outer = r;
 	rect inner = r.getResizeUniform(thickness);
@@ -367,13 +375,13 @@ void Graphics::DrawRectBorder(const rect& r, Color c, const float thickness)
 	assert(leftBorder.isWithin(gfxBounds));
 	assert(rightBorder.isWithin(gfxBounds));
 
-	DrawRect(topBorder, c);
-	DrawRect(botBorder, c);
-	DrawRect(leftBorder, c);
-	DrawRect(rightBorder, c);
+	DrawRect(topBorder, c, assertOn);
+	DrawRect(botBorder, c, assertOn);
+	DrawRect(leftBorder, c, assertOn);
+	DrawRect(rightBorder, c, assertOn);
 }
 
-void Graphics::DrawCircle( int x,int y,int radius,Color c )
+void Graphics::DrawCircle( int x,int y,int radius,Color c, bool assertOn)
 {
 	const int rad_sq = radius * radius;
 	for( int y_loop = y - radius + 1; y_loop < y + radius; y_loop++ )
@@ -384,7 +392,7 @@ void Graphics::DrawCircle( int x,int y,int radius,Color c )
 			const int y_diff = y - y_loop;
 			if( x_diff * x_diff + y_diff * y_diff <= rad_sq )
 			{
-				PutPixel( x_loop,y_loop,c );
+				PutPixel( x_loop,y_loop,c, assertOn );
 			}
 		}
 	}

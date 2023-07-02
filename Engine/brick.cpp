@@ -69,7 +69,7 @@ void brick::draw(Graphics& gfx) const
 {
 	rect visualBrick = hitbox().getResizeUniform(MARGIN);
 	if (live) { 
-		gfx.DrawRect(visualBrick, col); 
+		gfx.DrawRect(visualBrick, col, true); 
 	}
 }
 
