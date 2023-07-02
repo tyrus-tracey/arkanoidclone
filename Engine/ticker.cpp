@@ -20,10 +20,16 @@ void ticker::tick(float dt)
 {
 	if (!isActive()) { return; }
 	time -= dt;
-	if (time < 0.0001f) { stop(); }
+	if (time < 0.00001f) { stop(); }
 }
 
 bool ticker::isActive() const
 {
 	return active;
+}
+
+bool ticker::ended() const
+{
+	return time < 0.00001f;
+	return false;
 }

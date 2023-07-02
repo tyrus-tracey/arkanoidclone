@@ -12,6 +12,7 @@ public:
 	void stop();
 	void tick(float dt);
 	bool isActive() const;
+	bool ended() const;
 
 private:
 	bool active = false;
