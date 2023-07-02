@@ -398,6 +398,24 @@ void Graphics::DrawCircle( int x,int y,int radius,Color c, bool assertOn)
 	}
 }
 
+void Graphics::DrawRing(int x, int y, int radius, Color c, int thickness, bool assertOn)
+{
+	if (thickness < 1) { thickness = 1; }
+	if (thickness > radius) { thickness = radius; }
+	thickness--; // Intuitively, thickness of 1 means only draw exactly on the radius.
+	Vec2 midPoint = Vec2(float(x), float(y));
+	Vec2 drawPoint;
+	for (int xloop = x-radius; xloop <= x + radius; ++xloop) {
+		for (int yloop = y-radius; yloop <= y + radius; ++yloop) {
+			drawPoint = Vec2(float(xloop), float(yloop));
+			int dist = int((midPoint - drawPoint).GetLength());
+			if (dist >= radius - thickness && dist <= radius ) {
+				PutPixel(xloop, yloop, c, assertOn);
+			}
+		}
+	}
+}
+
 
 //////////////////////////////////////////////////
 //           Graphics Exception

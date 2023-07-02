@@ -61,6 +61,7 @@ public:
 	void DrawRect(const rect& r, Color c, bool assertOn);
 	void DrawRectBorder(const rect& r, Color c, const float thickness, bool assertOn);
 	void DrawCircle( int x,int y,int radius,Color c, bool assertOn );
+	void DrawRing(int x, int y, int radius, Color c, int thickness, bool assertOn);
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;
