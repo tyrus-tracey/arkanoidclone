@@ -59,13 +59,13 @@ void Game::UpdateModel()
 	else {
 		b.speedReset();
 	}
-	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+	if (wnd.kbd.KeyIsPressed(VK_TAB)) {
 		b.reset();
 	}
 	dt = ft.Mark();
 	pad.update(wnd.kbd, lvlWall, b, dt);
 	brekMngr.update(b);
-	b.update(lvlWall, dt);
+	b.update(lvlWall, wnd.kbd, dt);
 	core.update(&b, dt);
 }
 
@@ -76,5 +76,4 @@ void Game::ComposeFrame()
 	core.draw(gfx);
 	pad.draw(gfx);
 	b.draw(gfx);
-	
 }

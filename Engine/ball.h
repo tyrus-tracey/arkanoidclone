@@ -6,6 +6,7 @@
 #include "Sound.h"
 #include "wall.h"
 #include "ticker.h"
+#include "Keyboard.h"
 
 class ball
 {
@@ -13,7 +14,7 @@ public:
 	ball();
 	ball(Vec2 spawnPos);
 	ball(Vec2 spawnPos, Vec2 ballSpeed);
-	void update(const wall& lvlWalls, float dt);
+	void update(const wall& lvlWalls, const Keyboard& kbd, float dt);
 	void reset();
 	void reboundX();
 	void reboundY();
@@ -31,6 +32,7 @@ public:
 	void kill();
 	void fuelAdd(unsigned int amt);
 	bool fuelFull() const;
+	bool isExploding() const;
 public:
 	void operator=(const ball& other);
 
@@ -38,6 +40,7 @@ private:
 	void move(const float dt);
 	void clamp(const wall& lvlWalls);
 	bool collisionWalls(const wall& lvlWalls);
+	void detonate();
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();
@@ -50,10 +53,11 @@ private:
 	bool live = true;
 
 	unsigned int fuel = 0;
-	const unsigned int FUEL_MAX = 3000;
+	const unsigned int FUEL_MAX = 100;
 
 	ticker tSpawnGrace;
 	ticker tBallLockCooldown;
+	ticker tBallExplode = ticker(1.0f);
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };
 

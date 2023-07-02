@@ -53,14 +53,20 @@ void ball::reboundY()
 	vel.y *= -1.0f;
 }
 
-void ball::update(const wall& lvlWalls, float dt)
+void ball::update(const wall& lvlWalls, const Keyboard& kbd, float dt)
 {
+	tBallExplode.tick(dt);
 	if (!live) { return; }	
-	if (locked) { return; }
 	if (tSpawnGrace.isActive()) {
 		tSpawnGrace.tick(dt);
 		return;
 	}
+
+	if (fuelFull() && kbd.KeyIsPressed(VK_RETURN)) {
+		detonate();
+	}
+	
+	if (locked) { return; }
 
 	tBallLockCooldown.tick(dt);
 	move(dt);
@@ -115,6 +121,12 @@ bool ball::collisionWalls(const wall& lvlWalls)
 		kill();
 	}
 	return rebounded;
+}
+
+void ball::detonate()
+{
+	tBallExplode.reset();
+	kill();
 }
 
 rect ball::hitbox() const
@@ -173,6 +185,11 @@ bool ball::fuelFull() const
 	return fuel > FUEL_MAX;
 }
 
+bool ball::isExploding() const
+{
+	return tBallExplode.isActive();
+}
+
 void ball::operator=(const ball& other)
 {
 	pos = other.pos;
@@ -185,12 +202,16 @@ void ball::operator=(const ball& other)
 
 void ball::draw(Graphics& gfx)
 {
-	if (!live) { return; }
-	if (fuelFull()) {
-		SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 20);
+	if (tBallExplode.isActive() && locked == false) {
+		gfx.DrawRing(int(hitbox().getMidpoint().x), int(hitbox().getMidpoint().y), 20, Colors::Red, 3, false);
 	}
-	else {
-		SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 0);
+	if (live) {
+		if (fuelFull()) {
+			SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 20);
+		}
+		else {
+			SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 0);
+		}
 	}
 }
 

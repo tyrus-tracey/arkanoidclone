@@ -18,7 +18,16 @@ rect enemyCore::hitboxCore() const
 void enemyCore::update(ball* b, const float dt)
 {
     if (!live) { return; }
+    if (tDeathAnimTime.isActive()) {
+        tDeathAnimTime.tick(dt);
+        if (tDeathAnimTime.ended()) { kill(); }
+        return;
+    }
+
     if (hasBall()) { 
+        if (heldBall->isExploding()) {
+            explode();
+        }
         tBallHoldTime.tick(dt);
         if (!tBallHoldTime.isActive()) {
             releaseBall();
@@ -27,12 +36,7 @@ void enemyCore::update(ball* b, const float dt)
     }
 
     if (hitbox().isOverlapping(b->hitbox()) && !b->onLockCooldown()) {
-        if (b->fuelFull()) {
-            kill();
-        }
-        else {
-            lockBall(b);
-        }
+        lockBall(b);
     }
 }
 
@@ -55,6 +59,13 @@ void enemyCore::eatBall()
 {
     if (!hasBall()) { return; }
     heldBall->kill();
+    heldBall = nullptr;
+}
+
+void enemyCore::explode()
+{
+    tDeathAnimTime.reset();
+    eatBall();
 }
 
 void enemyCore::kill()
@@ -72,10 +83,19 @@ bool enemyCore::hasBall() const
     return heldBall != nullptr;
 }
 
-void enemyCore::draw(Graphics& gfx) const
+void enemyCore::draw(Graphics& gfx)
 {
     if (!live) { return; }
     SpriteCodex::DrawCore(pos, gfx);
+    if (tDeathAnimTime.isActive()) {
+        int left = int(hitbox().left);
+        int right = int(hitbox().right);
+        int top = int(hitbox().top);
+        int bot = int(hitbox().bottom);
+        xDist = std::uniform_int_distribution<int>(left, right);
+        yDist = std::uniform_int_distribution<int>(top, bot);
+        gfx.DrawRing(xDist(rng), yDist(rng), 10, Colors::Yellow, 3, false);
+    }
 }
 
 void enemyCore::operator=(enemyCore& other)
