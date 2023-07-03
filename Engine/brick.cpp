@@ -49,7 +49,6 @@ void brick::collideBall(ball& b)
 		b.reboundX();
 	}
 	b.pushOut(hitbox());
-	b.fuelAdd(10);
 	sndBrick.StopOne();
 	sndBrick.Play();
 	kill();
@@ -86,6 +85,11 @@ float brick::getWidth()
 float brick::getHeight()
 {
 	return HEIGHT;
+}
+
+unsigned int brick::getFuelAmt() const
+{
+	return fuelAmt;
 }
 
 void brick::operator=(const brick& b)

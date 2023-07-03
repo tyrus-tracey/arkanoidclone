@@ -62,7 +62,7 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, float dt)
 		return;
 	}
 
-	if (fuelFull() && kbd.KeyIsPressed(VK_RETURN)) {
+	if (armed && kbd.KeyIsPressed(VK_RETURN)) {
 		detonate();
 	}
 	
@@ -82,6 +82,7 @@ void ball::reset()
 	pos = spawn_pos;
 	vel = spawn_vel;
 	speedReset();
+	armed = false;
 	locked = false;
 	live = true;
 	tSpawnGrace.reset();
@@ -173,16 +174,19 @@ void ball::kill()
 	vel = { 0,0 };
 }
 
-void ball::fuelAdd(unsigned int amt)
+void ball::arm()
 {
-	if (!fuelFull()) {
-		fuel += amt;
-	}
+	armed = true;
 }
 
-bool ball::fuelFull() const
+void ball::disarm()
 {
-	return fuel > FUEL_MAX;
+	armed = false;
+}
+
+bool ball::isArmed() const
+{
+	return armed;
 }
 
 bool ball::isExploding() const
@@ -206,7 +210,7 @@ void ball::draw(Graphics& gfx)
 		gfx.DrawRing(int(hitbox().getMidpoint().x), int(hitbox().getMidpoint().y), 20, Colors::Red, 3, false);
 	}
 	if (live) {
-		if (fuelFull()) {
+		if (armed) {
 			SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 20);
 		}
 		else {

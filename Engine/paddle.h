@@ -15,6 +15,8 @@ public:
 	paddle(const wall& lvlWalls);
 	void update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt);
 	void draw(Graphics& gfx) const;
+	void addFuel(unsigned int amt);
+	bool isFuelFull() const;
 	rect hitbox() const;
 
 private:
@@ -27,7 +29,12 @@ private:
 	float height = 20.0f;
 	float wing = 10.0f;
 	float speed = 500.0f;
+
+	unsigned int fuel = 0;
+	unsigned int fuelMax = 100;
+
 	Color cCore = Colors::White;
+	Color cFuel = Colors::Yellow;
 	Color cWing = Colors::Red;
 	Sound sndPaddle = Sound(L"Sounds\\arkpad.wav");
 };

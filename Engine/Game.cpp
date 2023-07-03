@@ -64,7 +64,7 @@ void Game::UpdateModel()
 	}
 	dt = ft.Mark();
 	pad.update(wnd.kbd, lvlWall, b, dt);
-	brekMngr.update(b);
+	brekMngr.update(b, pad);
 	b.update(lvlWall, wnd.kbd, dt);
 	core.update(&b, dt);
 }

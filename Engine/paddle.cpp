@@ -22,9 +22,22 @@ void paddle::update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt
 
 void paddle::draw(Graphics& gfx) const
 {
+	Color padColor = isFuelFull() ? cFuel : cCore;
 	rect rectCore(hitbox().top, hitbox().left + wing, hitbox().bottom, hitbox().right - wing);
 	gfx.DrawRect(hitbox(), cWing, true);
-	gfx.DrawRect(rectCore, cCore, true);
+	gfx.DrawRect(rectCore, padColor, true);
+}
+
+void paddle::addFuel(unsigned int amt)
+{
+	if (!isFuelFull()) {
+		fuel += amt;
+	}
+}
+
+bool paddle::isFuelFull() const
+{
+	return fuel >= fuelMax;
 }
 
 rect paddle::hitbox() const
@@ -38,6 +51,9 @@ bool paddle::collisionBall(ball& b)
 		Vec2 impactVec = (b.hitbox().getMidpoint() - hitbox().getMidpoint()).Normalize();
 		b.reboundY();
 		b.slap(impactVec); //consider also applying the current velocity of paddle
+		if (isFuelFull()) {
+			b.arm();
+		}
 		return true;
 	}
 	return false;

@@ -30,8 +30,9 @@ public:
 	void unlock();
 	bool onLockCooldown() const;
 	void kill();
-	void fuelAdd(unsigned int amt);
-	bool fuelFull() const;
+	void arm();
+	void disarm();
+	bool isArmed() const;
 	bool isExploding() const;
 public:
 	void operator=(const ball& other);
@@ -51,9 +52,7 @@ private:
 	float speed = 500.0f;
 	float rad = 7.0f;
 	bool live = true;
-
-	unsigned int fuel = 0;
-	const unsigned int FUEL_MAX = 100;
+	bool armed = false;
 
 	ticker tSpawnGrace;
 	ticker tBallLockCooldown;

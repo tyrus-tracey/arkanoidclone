@@ -4,6 +4,7 @@
 #include "brick.h"
 #include "ball.h"
 #include "wall.h"
+#include "paddle.h"
 
 	/// <summary>
 	/// Overlooks all brick collision and draw operations for a given level.
@@ -13,7 +14,7 @@ class brickManager
 {
 public:
 	brickManager();
-	void update(ball& b);
+	void update(ball& b, paddle& p);
 	void draw(Graphics& gfx);
 	void addBrick(const brick brik, const wall& lvlWalls);
 	void addBricks(const std::vector<brick> brikVec, const wall& lvlWalls);

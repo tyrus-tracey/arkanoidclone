@@ -23,6 +23,7 @@ public:
 	rect hitbox() const;
 	static float getWidth();
 	static float getHeight();
+	unsigned int getFuelAmt() const;
 	void operator=(const brick& b);
 
 private:
@@ -30,9 +31,12 @@ private:
 	static constexpr float MARGIN = -1.0f;
 	static constexpr float WIDTH = 60.0f;
 	static constexpr float HEIGHT = 20.0f;
+	bool live = true;
+	unsigned int fuelAmt = 10;
+
+
 	Color col = Colors::Red;
 	Sound sndBrick = Sound(L"Sounds\\arkbrick.wav");
 
-	bool live = true;
 };
 
