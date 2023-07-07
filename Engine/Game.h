@@ -24,14 +24,13 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "FrameTimer.h"
-#include "brick.h"
 #include "ball.h"
 #include "Vec2.h"
 #include "rect.h"
-#include "brick.h"
 #include "paddle.h"
-#include "brickManager.h"
 #include "wall.h"
+#include "level.h"
+#include "brick.h"
 #include "enemyCore.h"
 
 class Game
@@ -56,11 +55,9 @@ private:
 	FrameTimer ft;
 	float dt;
 	ball b;
-	wall lvlWall;
 	paddle pad;
-	enemyCore core;
+	level lvl1;
 
-	brickManager brekMngr;
 	float speedslow = 25.0f;
 	Color cArr[5] = {Colors::Red, Colors::Cyan, Colors::Yellow, Colors::Green, Colors::Gray};
 };

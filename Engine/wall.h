@@ -6,6 +6,7 @@
 class wall
 {
 public:
+	wall();
 	wall(const Graphics& gfx);
 	wall(const Graphics& gfx, const rect wallBounds);
 	rect getBounds() const;
@@ -15,8 +16,8 @@ private:
 	void ensureWallsWithinGfx(const Graphics& gfx);
 
 	rect bounds;
-	float width;
-	float height;
+	float width = 0.0f;
+	float height = 0.0f;
 
 	static constexpr float THICKNESS = 10.0f;
 	static constexpr float DEF_WIDTH = 300.0f;

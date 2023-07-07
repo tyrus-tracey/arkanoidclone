@@ -1,5 +1,9 @@
 #include "wall.h"
 
+wall::wall()
+{
+}
+
 wall::wall(const Graphics& gfx)
 	: wall(gfx, rect(Vec2((gfx.ScreenWidth / 2) - (DEF_WIDTH / 2), 0), DEF_WIDTH, DEF_HEIGHT))
 {

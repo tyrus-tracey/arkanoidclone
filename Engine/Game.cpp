@@ -24,23 +24,23 @@
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
-	gfx(wnd),
-	lvlWall(gfx, rect(Vec2(200, 50), Vec2(600, 750)))
+	gfx(wnd)
 {
-	b = ball(Vec2(300,300));
-	pad = paddle(lvlWall);
-	core = enemyCore(Vec2(400, 200));
+	wall lvl1Wall(gfx, rect(Vec2(200, 50), Vec2(600, 750)));
 
-	Vec2 start(lvlWall.getTopLeft().x+50, lvlWall.getTopLeft().y + 50);
-	
+	Vec2 start(lvl1Wall.getTopLeft().x+50, lvl1Wall.getTopLeft().y + 50);
+	std::vector<brick> breks;
 	for (unsigned int y = 0; y < 4; ++y) {
 		for (unsigned int x = 0; x < 10; ++x) {
 			Vec2 bib(start);
 			bib.x += x * brick::getWidth();
 			bib.y += y * brick::getHeight();
-			brekMngr.addBrick(brick(bib, cArr[y]), lvlWall);
+			breks.push_back(brick(bib, cArr[y]));
 		}
 	}
+	lvl1 = level(lvl1Wall, breks, Vec2(100, 100), Vec2(100,100));
+	b = ball(lvl1.getBallSpawnPos());
+	pad = paddle(lvl1.getWalls());
 }
 
 void Game::Go()
@@ -63,17 +63,14 @@ void Game::UpdateModel()
 		b.reset();
 	}
 	dt = ft.Mark();
-	pad.update(wnd.kbd, lvlWall, b, dt);
-	brekMngr.update(b, pad);
-	b.update(lvlWall, wnd.kbd, dt);
-	core.update(&b, dt);
+	pad.update(wnd.kbd, lvl1.getWalls(), b, dt);
+	lvl1.update(b, pad, dt);
+	b.update(lvl1.getWalls(), wnd.kbd, dt);
 }
 
 void Game::ComposeFrame()
 {
-	lvlWall.draw(gfx);
-	brekMngr.draw(gfx);
-	core.draw(gfx);
+	lvl1.draw(gfx);
 	pad.draw(gfx);
 	b.draw(gfx);
 }

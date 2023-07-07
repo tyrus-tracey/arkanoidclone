@@ -12,6 +12,7 @@ public:
 	rect getResizeUniform(const float amt) const;
 	rect& resizeUniform(const float amt);
 	bool isOverlapping(const rect& other) const;
+	bool isOverlapping(const Vec2 other) const;
 	bool isWithin(const rect& other) const;
 	rect getFittedRect(const rect& other, const float padding) const;
 	rect& fitTo(const rect& other, const float padding);

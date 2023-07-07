@@ -56,11 +56,21 @@ rect::rect(const Vec2& topLeft, const float width, const float height)
 {
 }
 
-// Non-inclusive overlap check.
+// Non-inclusive overlap check. (should be inclusive?)
 bool rect::isOverlapping(const rect& other) const
 {
 	return right > other.left && other.right > left
 		&& bottom > other.top && other.bottom > top;
+}
+
+// Inclusive overlap check
+bool rect::isOverlapping(const Vec2 vec) const
+{
+	return
+		left	<= vec.x &&
+		right	>= vec.x &&
+		top		<= vec.y &&
+		bottom	>= vec.y;
 }
 
 // Whether rect is within (inclusive) supplied rect.
