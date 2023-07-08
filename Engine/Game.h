@@ -32,6 +32,7 @@
 #include "level.h"
 #include "brick.h"
 #include "enemyCore.h"
+#include "levelBook.h"
 
 class Game
 {
@@ -57,6 +58,7 @@ private:
 	ball b;
 	paddle pad;
 	level lvl1;
+	levelBook lvlBook;
 
 	float speedslow = 25.0f;
 	Color cArr[5] = {Colors::Red, Colors::Cyan, Colors::Yellow, Colors::Green, Colors::Gray};

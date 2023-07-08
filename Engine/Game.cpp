@@ -24,21 +24,10 @@
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
-	gfx(wnd)
+	gfx(wnd),
+	lvlBook(gfx)
 {
-	wall lvl1Wall(gfx, rect(Vec2(200, 50), Vec2(600, 750)));
-
-	Vec2 start(lvl1Wall.getTopLeft().x+50, lvl1Wall.getTopLeft().y + 50);
-	std::vector<brick> breks;
-	for (unsigned int y = 0; y < 4; ++y) {
-		for (unsigned int x = 0; x < 10; ++x) {
-			Vec2 bib(start);
-			bib.x += x * brick::getWidth();
-			bib.y += y * brick::getHeight();
-			breks.push_back(brick(bib, cArr[y]));
-		}
-	}
-	lvl1 = level(lvl1Wall, breks, Vec2(100, 100), Vec2(100,100));
+	lvl1 = lvlBook.lvl1;
 	b = ball(lvl1.getBallSpawnPos());
 	pad = paddle(lvl1.getWalls());
 }
