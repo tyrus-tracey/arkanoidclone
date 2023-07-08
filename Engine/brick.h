@@ -21,6 +21,8 @@ public:
 	void draw(Graphics& gfx) const;
 	bool isLive() const;
 	rect hitbox() const;
+	Vec2 getPos() const;
+	void setPos(const Vec2 newPos);
 	static float getWidth();
 	static float getHeight();
 	unsigned int getFuelAmt() const;

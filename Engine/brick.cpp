@@ -59,6 +59,16 @@ rect brick::hitbox() const
 	return rect(pos, WIDTH, HEIGHT);
 }
 
+Vec2 brick::getPos() const
+{
+	return pos;
+}
+
+void brick::setPos(const Vec2 newPos)
+{
+	pos = newPos;
+}
+
 void brick::kill()
 {
 	live = false;
