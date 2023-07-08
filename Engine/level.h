@@ -15,7 +15,7 @@ class level
 {
 public:
 	level();
-	level(const wall walls, const std::vector<brick> bricks, Vec2 corePos, Vec2 ballPos);
+	level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 ballPos);
 	void update(ball& b, paddle& p, const float dt);
 	void draw(Graphics& gfx);
 	Vec2 getBallSpawnPos() const;
