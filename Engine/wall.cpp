@@ -37,6 +37,16 @@ Vec2 wall::getTopLeft() const
 	return Vec2(bounds.left, bounds.top);
 }
 
+float wall::getWidth() const
+{
+	return width;
+}
+
+float wall::getHeight() const
+{
+	return height;
+}
+
 void wall::draw(Graphics& gfx) const 
 {
 	gfx.DrawRectBorder(bounds, WALLCOLOR, THICKNESS, true);

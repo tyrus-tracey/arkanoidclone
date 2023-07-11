@@ -12,6 +12,8 @@ public:
 	wall(const Graphics& gfx, int width, int height);
 	rect getBounds() const;
 	Vec2 getTopLeft() const;
+	float getWidth() const;
+	float getHeight() const;
 	void draw(Graphics& gfx) const;
 private:
 	void ensureWallsWithinGfx(const Graphics& gfx);
