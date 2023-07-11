@@ -28,7 +28,7 @@ level levelBook::genLv1()
 {
 	Vec2 coreSpawn(100, 100);
 	Vec2 ballSpawn(100, 100);
-	level lvl1(WALL_DEFAULT, coreSpawn, ballSpawn);
+	level lvl1(WALL_DEFAULT, coreSpawn);
 
 	Vec2 start = lvl1.getTopLeft() + Vec2(50,50);
 	std::vector<brick> breks;
@@ -48,7 +48,7 @@ level levelBook::genLv2()
 	Vec2 coreSpawn(100, 100);
 	Vec2 ballSpawn(100, 100);
 	wall lv2wall(gfx, 1000,600);
-	level lvl2(lv2wall, coreSpawn, ballSpawn);
+	level lvl2(lv2wall, coreSpawn);
 
 	Vec2 start(50, 50);
 	for (unsigned int y = 0; y < 3; ++y) {

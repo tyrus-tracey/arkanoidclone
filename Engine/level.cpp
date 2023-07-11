@@ -1,11 +1,12 @@
 #include "level.h"
 
 level::level()
+	: ballSpawnPos({0,0}), ballSpawnVel{0,0}
 {
 }
 
-level::level(const wall walls, Vec2 corePos, Vec2 ballPos)
-	: level(walls, std::vector<brick>(0), corePos, ballPos)
+level::level(const wall walls, Vec2 corePos)
+	: level(walls, corePos, Vec2(walls.getWidth()/2, walls.getHeight()/2), Vec2(1, 1))
 {
 }
 
