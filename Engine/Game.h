@@ -57,9 +57,8 @@ private:
 	float dt;
 	ball b;
 	paddle pad;
-	level lvl1;
 	levelBook lvlBook;
+	level lvl;
 
 	float speedslow = 25.0f;
-	Color cArr[5] = {Colors::Red, Colors::Cyan, Colors::Yellow, Colors::Green, Colors::Gray};
 };

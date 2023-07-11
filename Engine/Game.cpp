@@ -27,9 +27,9 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	lvlBook(gfx)
 {
-	lvl1 = lvlBook.lvl1;
-	b = ball(lvl1.getBallSpawnPos());
-	pad = paddle(lvl1.getWalls());
+	lvl = lvlBook.getCurrentLvl();
+	b = ball(lvl.getBallSpawnPos());
+	pad = paddle(lvl.getWalls());
 }
 
 void Game::Go()
@@ -42,6 +42,15 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (lvl.isComplete()) {
+		if (lvlBook.advanceLevel()) {
+			lvl = lvlBook.getCurrentLvl();
+		}
+		else {
+			// NO MORE LEVELS. END OF GAME
+		}	
+	}
+
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
 		b.speedSet(speedslow);
 	}
@@ -52,14 +61,14 @@ void Game::UpdateModel()
 		b.reset();
 	}
 	dt = ft.Mark();
-	pad.update(wnd.kbd, lvl1.getWalls(), b, dt);
-	lvl1.update(b, pad, dt);
-	b.update(lvl1.getWalls(), wnd.kbd, dt);
+	pad.update(wnd.kbd, lvl.getWalls(), b, dt);
+	lvl.update(b, pad, dt);
+	b.update(lvl.getWalls(), wnd.kbd, dt);
 }
 
 void Game::ComposeFrame()
 {
-	lvl1.draw(gfx);
+	lvl.draw(gfx);
 	pad.draw(gfx);
 	b.draw(gfx);
 }
