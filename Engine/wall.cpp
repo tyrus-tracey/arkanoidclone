@@ -17,6 +17,16 @@ wall::wall(const Graphics& gfx, const rect wallBounds)
 	height = (bounds.bottom - bounds.top) + (THICKNESS * 2.0f);
 }
 
+wall::wall(const Graphics& gfx, int width, int height)
+	: wall(gfx, rect(
+			Vec2(gfx.ScreenWidth/2 - width/2, gfx.ScreenHeight/2 - height/2), 
+			float(width), 
+			float(height)
+			)
+		)
+{
+}
+
 rect wall::getBounds() const
 {
 	return bounds;

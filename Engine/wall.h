@@ -9,6 +9,7 @@ public:
 	wall();
 	wall(const Graphics& gfx);
 	wall(const Graphics& gfx, const rect wallBounds);
+	wall(const Graphics& gfx, int width, int height);
 	rect getBounds() const;
 	Vec2 getTopLeft() const;
 	void draw(Graphics& gfx) const;

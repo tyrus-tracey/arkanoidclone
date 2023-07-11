@@ -1,7 +1,7 @@
 #include "levelBook.h"
 
 levelBook::levelBook(Graphics& _gfx)
-	: gfx(_gfx), WALL_DEFAULT(_gfx, rect(Vec2(200, 50), Vec2(600, 750)))
+	: gfx(_gfx), WALL_DEFAULT(_gfx, 400, 800)
 {
 	levels.push_back(genLv1());
 	levels.push_back(genLv2());
@@ -26,7 +26,6 @@ bool levelBook::advanceLevel()
 
 level levelBook::genLv1()
 {
-	//wall lvWall(gfx, rect(Vec2(200, 50), Vec2(600, 750)));
 	Vec2 coreSpawn(100, 100);
 	Vec2 ballSpawn(100, 100);
 	level lvl1(WALL_DEFAULT, coreSpawn, ballSpawn);
@@ -48,7 +47,8 @@ level levelBook::genLv2()
 {
 	Vec2 coreSpawn(100, 100);
 	Vec2 ballSpawn(100, 100);
-	level lvl2(WALL_DEFAULT, coreSpawn, ballSpawn);
+	wall lv2wall(gfx, 1000,600);
+	level lvl2(lv2wall, coreSpawn, ballSpawn);
 
 	Vec2 start(50, 50);
 	for (unsigned int y = 0; y < 3; ++y) {
