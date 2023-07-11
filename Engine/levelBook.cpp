@@ -4,7 +4,7 @@ levelBook::levelBook(Graphics& _gfx)
 	: gfx(_gfx), WALL_DEFAULT(_gfx, rect(Vec2(200, 50), Vec2(600, 750)))
 {
 	levels.push_back(genLv1());
-	//levels.push_back(genLv2());
+	levels.push_back(genLv2());
 	lvIter = levels.begin();
 }
 

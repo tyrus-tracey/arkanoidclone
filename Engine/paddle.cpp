@@ -6,8 +6,8 @@ paddle::paddle()
 }
 
 paddle::paddle(const wall& lvlWalls)
-	: pos(lvlWalls.getBounds().right - (width / 2), lvlWalls.getBounds().bottom - 50)
 {
+	resetPosition(lvlWalls);
 }
 
 void paddle::update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt)
@@ -26,6 +26,12 @@ void paddle::draw(Graphics& gfx) const
 	rect rectCore(hitbox().top, hitbox().left + wing, hitbox().bottom, hitbox().right - wing);
 	gfx.DrawRect(hitbox(), cWing, true);
 	gfx.DrawRect(rectCore, padColor, true);
+}
+
+void paddle::reset(const wall& lvlWalls)
+{
+	fuel = 0;
+	resetPosition(lvlWalls);
 }
 
 void paddle::addFuel(unsigned int amt)
@@ -57,6 +63,11 @@ bool paddle::collisionBall(ball& b)
 		return true;
 	}
 	return false;
+}
+
+void paddle::resetPosition(const wall& lvlWalls)
+{
+	pos = Vec2(lvlWalls.getBounds().getMidpoint().x - (width / 2), lvlWalls.getBounds().bottom - 50);
 }
 
 void paddle::moveKbd(const Keyboard& kbd, float dt)

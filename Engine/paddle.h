@@ -15,12 +15,14 @@ public:
 	paddle(const wall& lvlWalls);
 	void update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt);
 	void draw(Graphics& gfx) const;
+	void reset(const wall& lvlWalls);
 	void addFuel(unsigned int amt);
 	bool isFuelFull() const;
 	rect hitbox() const;
 
 private:
 	bool collisionBall(ball& b);
+	void resetPosition(const wall& lvlWalls);
 	void moveKbd(const Keyboard& kbd, float dt);
 	void clamp(const wall& lvlWalls);
 

@@ -45,6 +45,8 @@ void Game::UpdateModel()
 	if (lvl.isComplete()) {
 		if (lvlBook.advanceLevel()) {
 			lvl = lvlBook.getCurrentLvl();
+			pad.reset(lvl.getWalls());
+			b.reset();
 		}
 		else {
 			// NO MORE LEVELS. END OF GAME
