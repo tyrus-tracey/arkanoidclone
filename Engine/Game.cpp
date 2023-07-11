@@ -28,7 +28,7 @@ Game::Game(MainWindow& wnd)
 	lvlBook(gfx)
 {
 	lvl = lvlBook.getCurrentLvl();
-	b = ball(lvl.getBallSpawnPos());
+	balls.push_back(ball(lvl.getBallSpawnPos()));
 	pad = paddle(lvl.getWalls());
 }
 
@@ -46,7 +46,8 @@ void Game::UpdateModel()
 		if (lvlBook.advanceLevel()) {
 			lvl = lvlBook.getCurrentLvl();
 			pad.reset(lvl.getWalls());
-			b.reset();
+			balls.clear();
+			spawnBall(lvl);
 		}
 		else {
 			// NO MORE LEVELS. END OF GAME
@@ -54,23 +55,42 @@ void Game::UpdateModel()
 	}
 
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
-		b.speedSet(speedslow);
+		for (ball& b : balls) {
+			b.speedSet(speedslow);
+		}
 	}
 	else {
-		b.speedReset();
+		for (ball& b : balls) {
+			b.speedReset();
+		}
 	}
 	if (wnd.kbd.KeyIsPressed(VK_TAB)) {
-		b.reset();
+		spawnBall(lvl);
 	}
 	dt = ft.Mark();
-	pad.update(wnd.kbd, lvl.getWalls(), b, dt);
-	lvl.update(b, pad, dt);
-	b.update(lvl.getWalls(), wnd.kbd, dt);
+	
+	pad.update(wnd.kbd, lvl.getWalls(), balls, dt);
+	lvl.update(balls, pad, dt);
+	for (ball& b : balls) {
+		b.update(lvl.getWalls(), wnd.kbd, dt);
+	}
+}
+
+void Game::spawnBall(Vec2 spawnLoc, Vec2 velocity)
+{
+	balls.push_back(ball(spawnLoc, velocity));
+}
+
+void Game::spawnBall(const level& lvl)
+{
+	spawnBall(lvl.getBallSpawnPos(), lvl.getBallSpawnVel());
 }
 
 void Game::ComposeFrame()
 {
 	lvl.draw(gfx);
 	pad.draw(gfx);
-	b.draw(gfx);
+	for (ball& b : balls) {
+		b.draw(gfx);
+	}
 }

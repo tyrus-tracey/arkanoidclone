@@ -17,7 +17,8 @@ public:
 	level();
 	level(const wall walls, Vec2 corePos);
 	level(const wall walls, Vec2 corePos, Vec2 ballPos, Vec2 ballVel);
-	void update(ball& b, paddle& p, const float dt);
+	level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 ballPos, Vec2 ballVel);
+	void update(std::vector<ball>& balls, paddle& p, const float dt);
 	void draw(Graphics& gfx);
 	bool isComplete() const;
 	void addBrick(const brick& b);

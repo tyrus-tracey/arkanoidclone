@@ -13,7 +13,7 @@ class paddle
 public:
 	paddle();
 	paddle(const wall& lvlWalls);
-	void update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt);
+	void update(const Keyboard& kbd, const wall& lvlWalls, std::vector<ball>& balls, float dt);
 	void draw(Graphics& gfx) const;
 	void reset(const wall& lvlWalls);
 	void addFuel(unsigned int amt);
@@ -21,7 +21,7 @@ public:
 	rect hitbox() const;
 
 private:
-	bool collisionBall(ball& b);
+	bool collisionBall(std::vector<ball>& balls);
 	void resetPosition(const wall& lvlWalls);
 	void moveKbd(const Keyboard& kbd, float dt);
 	void clamp(const wall& lvlWalls);

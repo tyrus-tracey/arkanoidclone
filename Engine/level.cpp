@@ -10,9 +10,15 @@ level::level(const wall walls, Vec2 corePos)
 {
 }
 
+level::level(const wall walls, Vec2 corePos, Vec2 ballPos, Vec2 ballVel)
+	: level(walls, std::vector<brick>(0), corePos, ballPos, ballVel)
+{
+}
 
-level::level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 ballPos)
-	: lvlWalls(walls), lvlCore(walls.getTopLeft() + corePos), ballSpawnPos(walls.getTopLeft() + ballPos)
+
+level::level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 ballPos, Vec2 ballVel)
+	: lvlWalls(walls), lvlCore(walls.getTopLeft() + corePos), 
+		ballSpawnPos(walls.getTopLeft() + ballPos), ballSpawnVel(ballVel)
 {
 	// Translate local into window coords.
 	for (brick& b : bricks) {
@@ -29,10 +35,10 @@ level::level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 bal
 	}
 }
 
-void level::update(ball& b, paddle& p, const float dt)
+void level::update(std::vector<ball>& balls, paddle& p, const float dt)
 {
-	brickMngr.update(b, p);
-	lvlCore.update(&b, dt);
+	brickMngr.update(balls, p);
+	lvlCore.update(balls, dt);
 }
 
 void level::draw(Graphics& gfx)
@@ -55,6 +61,11 @@ void level::addBrick(const brick& b)
 Vec2 level::getBallSpawnPos() const
 {
 	return ballSpawnPos;
+}
+
+Vec2 level::getBallSpawnVel() const
+{
+	return ballSpawnVel;
 }
 
 wall level::getWalls() const

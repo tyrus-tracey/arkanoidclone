@@ -5,14 +5,18 @@ ball::ball()
 {
 }
 
+ball::ball(const ball& other)
+	: ball(other.pos, other.vel)
+{
+}
+
 ball::ball(Vec2 spawnPos)
 	: ball(spawnPos, Vec2(1,1))
 {
 }
 
-ball::ball(Vec2 spawnPos, Vec2 ballSpeed)
-	: pos(spawnPos), spawn_pos(pos), vel(ballSpeed.GetNormalized()), 
-		spawn_vel(vel), tSpawnGrace(2.0f), tBallLockCooldown(0.25f)
+ball::ball(Vec2 spawnPos, Vec2 velocity)
+	: pos(spawnPos), vel(velocity.GetNormalized()), tSpawnGrace(2.0f), tBallLockCooldown(0.25f)
 {
 	tSpawnGrace.reset();
 }
@@ -79,8 +83,6 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, float dt)
 
 void ball::reset()
 {
-	pos = spawn_pos;
-	vel = spawn_vel;
 	speedReset();
 	armed = false;
 	locked = false;
@@ -147,6 +149,11 @@ Vec2 ball::getVelocity() const
 	return vel;
 }
 
+Vec2 ball::getPos() const
+{
+	return pos;
+}
+
 
 void ball::lock(const Vec2 lockPos)
 {
@@ -197,9 +204,7 @@ bool ball::isExploding() const
 void ball::operator=(const ball& other)
 {
 	pos = other.pos;
-	spawn_pos = other.spawn_pos;
 	vel = other.vel;
-	spawn_vel = other.spawn_vel;
 	speed = other.speed;
 	live = other.live;
 }

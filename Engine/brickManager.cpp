@@ -7,16 +7,18 @@ brickManager::brickManager()
 
 // Checks which bricks are in contact with ball. Of those bricks, finds 
 // the closest one and initiates a collision with it.
-void brickManager::update(ball& b, paddle& p)
+void brickManager::update(std::vector<ball>& balls, paddle& p)
 {
-    vector<vector<brick>::iterator> overlappingBricks = runOverlapChecks(b);
-    if (!overlappingBricks.empty()) {
-        chooseCollidingBrick(overlappingBricks, b);
-        if (collidedBrick != bricks.end()) {
-            p.addFuel((*collidedBrick).getFuelAmt());
-            (*collidedBrick).collideBall(b);
-            if (!(*collidedBrick).isLive()) { // If brick dead from colliding
-                bricks.erase(collidedBrick);
+    for (ball& b : balls) {
+        vector<vector<brick>::iterator> overlappingBricks = runOverlapChecks(b);
+        if (!overlappingBricks.empty()) {
+            chooseCollidingBrick(overlappingBricks, b);
+            if (collidedBrick != bricks.end()) {
+                p.addFuel((*collidedBrick).getFuelAmt());
+                (*collidedBrick).collideBall(b);
+                if (!(*collidedBrick).isLive()) { // If brick dead from colliding
+                    bricks.erase(collidedBrick);
+                }
             }
         }
     }

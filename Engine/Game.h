@@ -46,6 +46,8 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void spawnBall(Vec2 spawnLoc, Vec2 velocity);
+	void spawnBall(const level& lvl);
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -55,10 +57,11 @@ private:
 	/********************************/
 	FrameTimer ft;
 	float dt;
-	ball b;
+	//ball b;
 	paddle pad;
 	levelBook lvlBook;
 	level lvl;
+	std::vector<ball> balls;
 
 	float speedslow = 25.0f;
 };

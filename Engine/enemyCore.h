@@ -13,7 +13,7 @@ public:
 	enemyCore(Vec2 corePos);
 	rect hitbox() const;
 	rect hitboxCore() const;
-	void update(ball* b, const float dt);
+	void update(std::vector<ball>& balls, const float dt);
 	void lockBall(ball* b);
 	void releaseBall();
 	void eatBall();

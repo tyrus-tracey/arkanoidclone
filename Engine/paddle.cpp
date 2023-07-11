@@ -10,11 +10,11 @@ paddle::paddle(const wall& lvlWalls)
 	resetPosition(lvlWalls);
 }
 
-void paddle::update(const Keyboard& kbd, const wall& lvlWalls, ball& b, float dt)
+void paddle::update(const Keyboard& kbd, const wall& lvlWalls, std::vector<ball>& balls, float dt)
 {
 	moveKbd(kbd, dt);
 	clamp(lvlWalls);
-	if (collisionBall(b)) {
+	if (collisionBall(balls)) {
 		sndPaddle.StopOne();
 		sndPaddle.Play();
 	}
@@ -51,16 +51,18 @@ rect paddle::hitbox() const
 	return rect(pos, width, height);
 }
 
-bool paddle::collisionBall(ball& b)
+bool paddle::collisionBall(std::vector<ball>& balls)
 {
-	if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {
-		Vec2 impactVec = (b.hitbox().getMidpoint() - hitbox().getMidpoint()).Normalize();
-		b.reboundY();
-		b.slap(impactVec); //consider also applying the current velocity of paddle
-		if (isFuelFull()) {
-			b.arm();
+	for (ball& b : balls) {
+		if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {
+			Vec2 impactVec = (b.hitbox().getMidpoint() - hitbox().getMidpoint()).Normalize();
+			b.reboundY();
+			b.slap(impactVec); //consider also applying the current velocity of paddle
+			if (isFuelFull()) {
+				b.arm();
+			}
+			return true;
 		}
-		return true;
 	}
 	return false;
 }

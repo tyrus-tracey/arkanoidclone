@@ -15,7 +15,7 @@ rect enemyCore::hitboxCore() const
     return hitbox().getResizeUniform(COREMARGIN);
 }
 
-void enemyCore::update(ball* b, const float dt)
+void enemyCore::update(std::vector<ball>& balls, const float dt)
 {
     if (!live) { return; }
     if (tDeathAnimTime.isActive()) {
@@ -34,9 +34,10 @@ void enemyCore::update(ball* b, const float dt)
         }
         return;
     }
-
-    if (hitbox().isOverlapping(b->hitbox()) && !b->onLockCooldown()) {
-        lockBall(b);
+    for (ball& b : balls) {
+        if (hitbox().isOverlapping(b.hitbox()) && !b.onLockCooldown()) {
+            lockBall(&b);
+        }
     }
 }
 

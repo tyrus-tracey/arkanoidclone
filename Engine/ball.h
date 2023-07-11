@@ -12,8 +12,9 @@ class ball
 {
 public:
 	ball();
+	ball(const ball& other);
 	ball(Vec2 spawnPos);
-	ball(Vec2 spawnPos, Vec2 ballSpeed);
+	ball(Vec2 spawnPos, Vec2 velocity);
 	void update(const wall& lvlWalls, const Keyboard& kbd, float dt);
 	void reset();
 	void reboundX();
@@ -26,6 +27,7 @@ public:
 	rect hitbox() const;
 	void setVelocity(Vec2 newVel);
 	Vec2 getVelocity() const;
+	Vec2 getPos() const;
 	void lock(const Vec2 lockPos);
 	void unlock();
 	bool onLockCooldown() const;
@@ -45,8 +47,6 @@ private:
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();
-	Vec2 spawn_pos;
-	Vec2 spawn_vel;
 	bool locked = false;
 	const float SPEED_DEFAULT = 500.0f;
 	float speed = 500.0f;
