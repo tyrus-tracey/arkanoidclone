@@ -42,6 +42,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	//if (!gamelive()) {
+	//	// GAME OVER
+	//}
+
 	if (lvl.isComplete()) {
 		if (lvlBook.advanceLevel()) {
 			lvl = lvlBook.getCurrentLvl();
@@ -80,6 +84,9 @@ void Game::UpdateModel()
 			b = balls.erase(b);
 		}
 	}
+	if (balls.empty()) {
+		respawn();
+	}
 }
 
 void Game::spawnBall(Vec2 spawnLoc, Vec2 velocity)
@@ -92,6 +99,13 @@ void Game::spawnBall(const level& lvl)
 	spawnBall(lvl.getBallSpawnPos(), lvl.getBallSpawnVel());
 }
 
+void Game::respawn()
+{
+	if ( !gamelive() ) { return; }
+	spawnBall(lvl);
+	lives--;
+}
+
 void Game::ComposeFrame()
 {
 	lvl.draw(gfx);
@@ -99,4 +113,5 @@ void Game::ComposeFrame()
 	for (ball& b : balls) {
 		b.draw(gfx);
 	}
+	scoreboard::drawLives(gfx, lives);
 }

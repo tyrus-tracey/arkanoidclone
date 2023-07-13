@@ -33,6 +33,7 @@
 #include "brick.h"
 #include "enemyCore.h"
 #include "levelBook.h"
+#include "scoreboard.h"
 #include <list>
 
 class Game
@@ -49,6 +50,8 @@ private:
 	/*  User Functions              */
 	void spawnBall(Vec2 spawnLoc, Vec2 velocity);
 	void spawnBall(const level& lvl);
+	void respawn();
+	inline bool gamelive() { return lives > 0; }
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -58,12 +61,12 @@ private:
 	/********************************/
 	FrameTimer ft;
 	float dt;
-	//ball b;
 	paddle pad;
 	levelBook lvlBook;
 	level lvl;
-	//std::vector<ball> balls;
+	int lives = 4;
 	std::list<ball> balls;
+
 
 	float speedslow = 25.0f;
 };
