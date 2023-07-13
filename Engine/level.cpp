@@ -35,7 +35,7 @@ level::level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 bal
 	}
 }
 
-void level::update(std::vector<ball>& balls, paddle& p, const float dt)
+void level::update(std::list<ball>& balls, paddle& p, const float dt)
 {
 	brickMngr.update(balls, p);
 	lvlCore.update(balls, dt);

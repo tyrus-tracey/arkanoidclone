@@ -33,6 +33,7 @@
 #include "brick.h"
 #include "enemyCore.h"
 #include "levelBook.h"
+#include <list>
 
 class Game
 {
@@ -61,7 +62,8 @@ private:
 	paddle pad;
 	levelBook lvlBook;
 	level lvl;
-	std::vector<ball> balls;
+	//std::vector<ball> balls;
+	std::list<ball> balls;
 
 	float speedslow = 25.0f;
 };

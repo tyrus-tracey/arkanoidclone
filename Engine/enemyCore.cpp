@@ -15,7 +15,7 @@ rect enemyCore::hitboxCore() const
     return hitbox().getResizeUniform(COREMARGIN);
 }
 
-void enemyCore::update(std::vector<ball>& balls, const float dt)
+void enemyCore::update(std::list<ball>& balls, const float dt)
 {
     if (!live) { return; }
     if (tDeathAnimTime.isActive()) {

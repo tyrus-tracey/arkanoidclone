@@ -10,7 +10,7 @@ paddle::paddle(const wall& lvlWalls)
 	resetPosition(lvlWalls);
 }
 
-void paddle::update(const Keyboard& kbd, const wall& lvlWalls, std::vector<ball>& balls, float dt)
+void paddle::update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, float dt)
 {
 	moveKbd(kbd, dt);
 	clamp(lvlWalls);
@@ -51,7 +51,7 @@ rect paddle::hitbox() const
 	return rect(pos, width, height);
 }
 
-bool paddle::collisionBall(std::vector<ball>& balls)
+bool paddle::collisionBall(std::list<ball>& balls)
 {
 	for (ball& b : balls) {
 		if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {

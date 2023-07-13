@@ -36,6 +36,7 @@ public:
 	void disarm();
 	bool isArmed() const;
 	bool isExploding() const;
+	bool isLive() const;
 public:
 	void operator=(const ball& other);
 

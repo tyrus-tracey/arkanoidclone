@@ -1,4 +1,5 @@
 #pragma once
+#include <list>
 #include "SpriteCodex.h"
 #include "Vec2.h"
 #include "ball.h"
@@ -13,7 +14,7 @@ public:
 	enemyCore(Vec2 corePos);
 	rect hitbox() const;
 	rect hitboxCore() const;
-	void update(std::vector<ball>& balls, const float dt);
+	void update(std::list<ball>& balls, const float dt);
 	void lockBall(ball* b);
 	void releaseBall();
 	void eatBall();

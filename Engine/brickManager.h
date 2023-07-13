@@ -14,7 +14,7 @@ class brickManager
 {
 public:
 	brickManager();
-	void update(std::vector<ball>& balls, paddle& p);
+	void update(std::list<ball>& balls, paddle& p);
 	void draw(Graphics& gfx);
 	void addBrick(const brick brik, const wall& lvlWalls);
 	void addBricks(const std::vector<brick> brikVec, const wall& lvlWalls);

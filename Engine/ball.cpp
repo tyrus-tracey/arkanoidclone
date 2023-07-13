@@ -201,6 +201,11 @@ bool ball::isExploding() const
 	return tBallExplode.isActive();
 }
 
+bool ball::isLive() const
+{
+	return live;
+}
+
 void ball::operator=(const ball& other)
 {
 	pos = other.pos;
