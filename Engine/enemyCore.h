@@ -21,6 +21,7 @@ public:
 	void explode();
 	void kill();
 	bool isLive() const;
+	bool isExploding() const;
 	bool hasBall() const;
 	void draw(Graphics& gfx);
 	void operator=(enemyCore& other);

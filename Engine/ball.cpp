@@ -59,13 +59,18 @@ void ball::reboundY()
 
 void ball::update(const wall& lvlWalls, const Keyboard& kbd, float dt)
 {
-	tBallExplode.tick(dt);
-	if (!live) { return; }	
+	if (!live) { return; }
 	if (tSpawnGrace.isActive()) {
 		tSpawnGrace.tick(dt);
 		return;
 	}
 
+	if (tBallExplode.isActive()) {
+		tBallExplode.tick(dt);
+		if (tBallExplode.ended()) { kill(); }
+		return;
+	}
+	
 	if (armed && kbd.KeyIsPressed(VK_RETURN)) {
 		detonate();
 	}
@@ -129,7 +134,6 @@ bool ball::collisionWalls(const wall& lvlWalls)
 void ball::detonate()
 {
 	tBallExplode.reset();
-	kill();
 }
 
 rect ball::hitbox() const
@@ -218,6 +222,7 @@ void ball::draw(Graphics& gfx)
 {
 	if (tBallExplode.isActive() && locked == false) {
 		gfx.DrawRing(int(hitbox().getMidpoint().x), int(hitbox().getMidpoint().y), 20, Colors::Red, 3, false);
+		return;
 	}
 	if (live) {
 		if (armed) {

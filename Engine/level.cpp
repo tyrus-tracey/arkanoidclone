@@ -6,7 +6,7 @@ level::level()
 }
 
 level::level(const wall walls, Vec2 corePos)
-	: level(walls, corePos, Vec2(walls.getWidth()/2, walls.getHeight()/2), Vec2(1, 1))
+	: level(walls, corePos, Vec2(walls.getWidth()/2, walls.getHeight()/2), Vec2(0, 1))
 {
 }
 
@@ -46,6 +46,11 @@ void level::draw(Graphics& gfx)
 	lvlWalls.draw(gfx);
 	brickMngr.draw(gfx);
 	lvlCore.draw(gfx);
+}
+
+bool level::isGoalsDone() const
+{
+	return lvlCore.isExploding();
 }
 
 bool level::isComplete() const

@@ -1,7 +1,7 @@
 #include "ticker.h"
 
 ticker::ticker(const float startTime)
-	: START_TIME(startTime)
+	: START_TIME(startTime), time(startTime)
 {
 }
 

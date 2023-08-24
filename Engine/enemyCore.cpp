@@ -79,6 +79,11 @@ bool enemyCore::isLive() const
     return live;
 }
 
+bool enemyCore::isExploding() const
+{
+    return tDeathAnimTime.isActive();
+}
+
 bool enemyCore::hasBall() const
 {
     return heldBall != nullptr;

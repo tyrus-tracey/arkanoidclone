@@ -1,7 +1,8 @@
+
 #include "levelBook.h"
 
 levelBook::levelBook(Graphics& _gfx)
-	: gfx(_gfx), WALL_DEFAULT(_gfx, 400, 800)
+	: gfx(_gfx), WALL_DEFAULT(_gfx, 600, 800)
 {
 	levels.push_back(genLv1());
 	levels.push_back(genLv2());
@@ -33,7 +34,7 @@ level levelBook::genLv1()
 	Vec2 start = lvl1.getTopLeft() + Vec2(50,50);
 	std::vector<brick> breks;
 	for (unsigned int y = 0; y < 4; ++y) {
-		for (unsigned int x = 0; x < 10; ++x) {
+		for (unsigned int x = 0; x < 8; ++x) {
 			Vec2 bib(start);
 			bib.x += x * brick::getWidth();
 			bib.y += y * brick::getHeight();

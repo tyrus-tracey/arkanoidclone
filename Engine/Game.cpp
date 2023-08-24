@@ -77,7 +77,7 @@ void Game::UpdateModel()
 	lvl.update(balls, pad, dt);
 	std::list<ball>::iterator b = balls.begin();
 	while (b != balls.end()) {
-		if ((*b).isLive()) {
+		if ((*b).isLive() ) {
 			(*b++).update(lvl.getWalls(), wnd.kbd, dt);
 		}
 		else {
