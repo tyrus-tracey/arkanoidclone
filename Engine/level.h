@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <type_traits>
 #include "Graphics.h"
 #include "Vec2.h"
 #include "brickManager.h"
@@ -7,6 +8,7 @@
 #include "enemyCore.h"
 #include "ball.h"
 #include "paddle.h"
+#include "gridLocation.h"
 
 /// <summary>
 /// Store for level-related data, to be loaded in by game.cpp and such.
@@ -22,13 +24,14 @@ public:
 	void draw(Graphics& gfx);
 	bool isGoalsDone() const;
 	bool isComplete() const;
-	void addBrick(const brick& b);
+	template <class brickType> void addBrick(const gridLocation loc);
 	Vec2 getBallSpawnPos() const;
 	Vec2 getBallSpawnVel() const;
 	wall getWalls() const;
 	Vec2 getTopLeft() const;
 
 private:
+	Vec2 loc2pos(const gridLocation loc) const;
 	enemyCore lvlCore;
 	brickManager brickMngr;
 	wall lvlWalls;

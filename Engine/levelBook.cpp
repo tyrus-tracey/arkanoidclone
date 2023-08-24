@@ -1,5 +1,5 @@
-
 #include "levelBook.h"
+
 
 levelBook::levelBook(Graphics& _gfx)
 	: gfx(_gfx), WALL_DEFAULT(_gfx, 600, 800)
@@ -31,14 +31,10 @@ level levelBook::genLv1()
 	Vec2 ballSpawn(100, 100);
 	level lvl1(WALL_DEFAULT, coreSpawn);
 
-	Vec2 start = lvl1.getTopLeft() + Vec2(50,50);
-	std::vector<brick> breks;
+	Vec2 test = lvl1.getTopLeft();
 	for (unsigned int y = 0; y < 4; ++y) {
 		for (unsigned int x = 0; x < 8; ++x) {
-			Vec2 bib(start);
-			bib.x += x * brick::getWidth();
-			bib.y += y * brick::getHeight();
-			lvl1.addBrick(brick(bib, cArr[y]));
+			lvl1.addBrick<brick>(gridLocation(x, y));
 		}
 	}
 	return lvl1;
@@ -54,10 +50,7 @@ level levelBook::genLv2()
 	Vec2 start(50, 50);
 	for (unsigned int y = 0; y < 3; ++y) {
 		for (unsigned int x = 0; x < 12; ++x) {
-			Vec2 bib(start);
-			bib.x += x * brick::getWidth();
-			bib.y += y * brick::getHeight();
-			lvl2.addBrick(brick(bib, cArr[y]));
+			lvl2.addBrick<brick>(gridLocation(x,y));
 		}
 	}
 

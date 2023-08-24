@@ -58,10 +58,17 @@ bool level::isComplete() const
 	return !lvlCore.isLive();
 }
 
-void level::addBrick(const brick& b)
+template <class brickType>
+void level::addBrick(const gridLocation loc)
 {
+	if (!std::is_base_of_v<brick, brickType>) {
+		return;
+	}
+	brickType b(loc2pos(loc));
 	brickMngr.addBrick(b, lvlWalls);
 }
+
+template void level::addBrick<brick>(const gridLocation loc);
 
 Vec2 level::getBallSpawnPos() const
 {
@@ -81,4 +88,14 @@ wall level::getWalls() const
 Vec2 level::getTopLeft() const
 {
 	return getWalls().getTopLeft();
+}
+
+// Note: Possible UB with getTopLeft()? Kept returning garbage until it stopped.
+Vec2 level::loc2pos(const gridLocation loc) const
+{
+	Vec2 out = getTopLeft();
+	out.x += (brick::getWidth() * loc.x);
+	out.y += (brick::getHeight() * loc.y);
+
+	return out;
 }
