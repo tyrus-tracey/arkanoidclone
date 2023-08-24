@@ -32,9 +32,9 @@ level levelBook::genLv1()
 	level lvl1(WALL_DEFAULT, coreSpawn);
 
 	Vec2 test = lvl1.getTopLeft();
-	for (unsigned int y = 0; y < 4; ++y) {
-		for (unsigned int x = 0; x < 8; ++x) {
-			lvl1.addBrick<brick>(gridLocation(x, y));
+	for (int y = 0; y < 4; ++y) {
+		for (int x = 0; x < 8; ++x) {
+			lvl1.addBrick<brick>({x,y});
 		}
 	}
 	return lvl1;
@@ -48,9 +48,9 @@ level levelBook::genLv2()
 	level lvl2(lv2wall, coreSpawn);
 
 	Vec2 start(50, 50);
-	for (unsigned int y = 0; y < 3; ++y) {
-		for (unsigned int x = 0; x < 12; ++x) {
-			lvl2.addBrick<brick>(gridLocation(x,y));
+	for (int y = 0; y < 3; ++y) {
+		for (int x = 0; x < 12; ++x) {
+			lvl2.addBrick<brick>({x,y});
 		}
 	}
 
