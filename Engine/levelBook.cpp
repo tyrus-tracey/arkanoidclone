@@ -34,7 +34,8 @@ level levelBook::genLv1()
 	Vec2 test = lvl1.getTopLeft();
 	for (int y = 0; y < 4; ++y) {
 		for (int x = 0; x < 8; ++x) {
-			lvl1.addBrick<brick>({x,y});
+			if (y < 2) {	lvl1.addBrick<redBrick>({ x,y }); }
+			else {			lvl1.addBrick<blueBrick>({ x,y }); }
 		}
 	}
 	return lvl1;
@@ -50,7 +51,7 @@ level levelBook::genLv2()
 	Vec2 start(50, 50);
 	for (int y = 0; y < 3; ++y) {
 		for (int x = 0; x < 12; ++x) {
-			lvl2.addBrick<brick>({x,y});
+			lvl2.addBrick<blueBrick>({x,y});
 		}
 	}
 

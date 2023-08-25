@@ -1,24 +1,18 @@
 #include "brick.h"
 
 brick::brick()
-	: pos(-1, -1), live(false)
+	: pos(-1, -1)
 {
 }
 
 brick::brick(const brick& b)
-	: pos(b.pos), col(b.col)
+	: pos(b.pos)
 {
 }
 
 brick::brick(Vec2 b_pos)
 	: pos(b_pos)
 {
-}
-
-brick::brick(Vec2 b_pos, const Color c)
-	: brick(b_pos)
-{
-	col = c;
 }
 
 bool brick::overlapCheck(ball& b) const
@@ -51,7 +45,7 @@ void brick::collideBall(ball& b)
 	b.pushOut(hitbox());
 	sndBrick.StopOne();
 	sndBrick.Play();
-	kill();
+	takeHit();
 }
 
 rect brick::hitbox() const
@@ -78,7 +72,7 @@ void brick::draw(Graphics& gfx) const
 {
 	rect visualBrick = hitbox().getResizeUniform(MARGIN);
 	if (live) { 
-		gfx.DrawRect(visualBrick, col, true); 
+		gfx.DrawRect(visualBrick, getColor(), true);
 	}
 }
 
@@ -105,6 +99,5 @@ unsigned int brick::getFuelAmt() const
 void brick::operator=(const brick& b)
 {
 	pos = b.pos;
-	col = b.col;
 	live = b.live;
 }

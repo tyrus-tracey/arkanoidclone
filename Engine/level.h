@@ -9,6 +9,7 @@
 #include "ball.h"
 #include "paddle.h"
 #include "gridLocation.h"
+#include "brick.h"
 
 /// <summary>
 /// Store for level-related data, to be loaded in by game.cpp and such.
@@ -19,7 +20,7 @@ public:
 	level();
 	level(const wall walls, Vec2 corePos);
 	level(const wall walls, Vec2 corePos, Vec2 ballPos, Vec2 ballVel);
-	level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 ballPos, Vec2 ballVel);
+	level(const wall walls, std::vector<brick *> bricks, Vec2 corePos, Vec2 ballPos, Vec2 ballVel);
 	void update(std::list<ball>& balls, paddle& p, const float dt);
 	void draw(Graphics& gfx);
 	bool isGoalsDone() const;

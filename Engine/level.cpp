@@ -11,18 +11,18 @@ level::level(const wall walls, Vec2 corePos)
 }
 
 level::level(const wall walls, Vec2 corePos, Vec2 ballPos, Vec2 ballVel)
-	: level(walls, std::vector<brick>(0), corePos, ballPos, ballVel)
+	: level(walls, std::vector<brick *>(0), corePos, ballPos, ballVel)
 {
 }
 
 
-level::level(const wall walls, std::vector<brick> bricks, Vec2 corePos, Vec2 ballPos, Vec2 ballVel)
+level::level(const wall walls, std::vector<brick *> bricks, Vec2 corePos, Vec2 ballPos, Vec2 ballVel)
 	: lvlWalls(walls), lvlCore(walls.getTopLeft() + corePos), 
 		ballSpawnPos(walls.getTopLeft() + ballPos), ballSpawnVel(ballVel)
 {
 	// Translate local into window coords.
-	for (brick& b : bricks) {
-		b.setPos(b.getPos() + walls.getTopLeft());
+	for (brick* b : bricks) {
+		b->setPos(b->getPos() + walls.getTopLeft());
 	}
 	brickMngr.addBricks(bricks, walls);
 
@@ -64,11 +64,13 @@ void level::addBrick(const gridLocation loc)
 	if (!std::is_base_of_v<brick, brickType>) {
 		return;
 	}
-	brickType b(loc2pos(loc));
+	Vec2 pos = loc2pos(loc);
+	brickType* b = new brickType;
+	b->setPos(pos);
 	brickMngr.addBrick(b, lvlWalls);
 }
-
-template void level::addBrick<brick>(const gridLocation loc);
+template void level::addBrick<redBrick>(const gridLocation loc);
+template void level::addBrick<blueBrick>(const gridLocation loc);
 
 Vec2 level::getBallSpawnPos() const
 {

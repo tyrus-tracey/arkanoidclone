@@ -19,8 +19,5 @@ private:
 	std::vector<level> levels;
 	std::vector<level>::const_iterator lvIter;
 	const wall WALL_DEFAULT;
-
-	Color cArr[5] = { Colors::Red, Colors::Cyan, Colors::Yellow, Colors::Green, Colors::Gray };
-
 };
 

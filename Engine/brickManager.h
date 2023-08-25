@@ -16,17 +16,17 @@ public:
 	brickManager();
 	void update(std::list<ball>& balls, paddle& p);
 	void draw(Graphics& gfx);
-	void addBrick(const brick brik, const wall& lvlWalls);
-	void addBricks(const std::vector<brick> brikVec, const wall& lvlWalls);
-	brick getLastCollidedBrickCopy() const;
-	std::vector<brick>& getBricks();
+	void addBrick(brick* brik, const wall& lvlWalls);
+	void addBricks(const std::vector<brick *> brikVec, const wall& lvlWalls);
+	brick* getLastCollidedBrickCopy() const;
+	std::vector<brick *>& getBricks();
 	unsigned int getNbricks() const;
 
 private:
-	std::vector<std::vector<brick>::iterator> runOverlapChecks(ball& b);
-	void chooseCollidingBrick(std::vector<std::vector<brick>::iterator> overlappingBricks, ball& b);
+	std::vector<std::vector<brick *>::iterator> runOverlapChecks(ball& b);
+	void chooseCollidingBrick(std::vector<std::vector<brick *>::iterator> overlappingBricks, ball& b);
 
-	std::vector<brick> bricks;
-	std::vector<brick>::iterator collidedBrick;
+	std::vector<brick *> bricks;
+	std::vector<brick *>::iterator collidedBrick;
 };
 
