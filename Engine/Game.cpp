@@ -42,9 +42,9 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	//if (!gamelive()) {
-	//	// GAME OVER
-	//}
+	/*if (!outOfLives()) {
+		GAME OVER
+	}*/
 
 	if (lvl.isComplete()) {
 		if (lvlBook.advanceLevel()) {
@@ -52,9 +52,9 @@ void Game::UpdateModel()
 			pad.reset(lvl.getWalls());
 			balls.clear();
 			spawnBall(lvl);
-		}
-		else {
+		} else {
 			// NO MORE LEVELS. END OF GAME
+
 		}	
 	}
 
@@ -101,7 +101,7 @@ void Game::spawnBall(const level& lvl)
 
 void Game::respawn()
 {
-	if ( !gamelive() ) { return; }
+	if ( !outOfLives() ) { return; }
 	spawnBall(lvl);
 	lives--;
 }

@@ -51,7 +51,7 @@ private:
 	void spawnBall(Vec2 spawnLoc, Vec2 velocity);
 	void spawnBall(const level& lvl);
 	void respawn();
-	inline bool gamelive() { return lives > 0; }
+	inline bool outOfLives() { return lives > 0; }
 	/********************************/
 private:
 	MainWindow& wnd;
