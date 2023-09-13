@@ -102,6 +102,9 @@
     <ClInclude Include="brick.h">
       <Filter>Header Files\bricks</Filter>
     </ClInclude>
+    <ClInclude Include="levelParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
