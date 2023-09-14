@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	lvlBook(gfx)
 {
-	lvl = new level(lvlBook.readLevelData());
+	loadLevel(lvlBook.readLevelData());
 	balls.push_back(ball(lvl.getBallSpawnPos()));
 	pad = paddle(lvl.getWalls());
 }

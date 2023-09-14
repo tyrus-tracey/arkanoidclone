@@ -14,9 +14,8 @@ levelBook::levelBook(Graphics& _gfx)
 	
 	for (int y = 0; y < 4; ++y) {
 		for (int x = 0; x < 8; ++x) {
-			brick* r;
-			gridLocation loc(x, y);
-			brickData bPair(*r, loc);
+			redBrick r = brick({ x,y });
+			
 			lvl1.bricks.push_back(bPair);
 		}
 	}

@@ -39,7 +39,7 @@ void brickManager::addBrick(T b, const wall& lvlWalls)
         bricks.push_back(b);
     }
 }
-template void brickManager::addBrick<brick>(brick b, const wall& lvlWalls);
+//template void brickManager::addBrick<brick>(brick b, const wall& lvlWalls);
 
 void brickManager::addBricks(const vector<brick>& bVec, const wall& lvlWalls)
 {

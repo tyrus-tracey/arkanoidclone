@@ -6,8 +6,8 @@ level::level(Graphics& gfx, levelParams& params)
 		lvlCore(lvlWalls.getTopLeft() + params.corePos)
 {
 	for (auto it = params.bricks.begin(); it != params.bricks.end(); it++) {
-		redBrick b({1,1});
-		brickMan.addBrick(b, lvlWalls);
+		
+		brickMan.addBrick((*it), lvlWalls);
 	}
 }
 
