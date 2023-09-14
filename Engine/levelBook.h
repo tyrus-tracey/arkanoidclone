@@ -7,17 +7,15 @@ class levelBook
 {
 public:
 	levelBook(Graphics& _gfx);
-	level getCurrentLvl() const;
+	levelParams readLevelData() const;
 	bool advanceLevel();
-
-private:
-	level genLv1();
-	level genLv2();
 
 private:
 	Graphics& gfx;
 	std::vector<level> levels;
 	std::vector<level>::const_iterator lvIter;
 	const wall WALL_DEFAULT;
+
+	levelParams lvl1;
 };
 

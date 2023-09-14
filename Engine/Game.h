@@ -48,6 +48,7 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void loadLevel(levelParams params);
 	void spawnBall(Vec2 spawnLoc, Vec2 velocity);
 	void spawnBall(const level& lvl);
 	void respawn();
@@ -59,6 +60,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	bool gameRunning = true;
 	FrameTimer ft;
 	float dt;
 	paddle pad;
@@ -66,7 +68,7 @@ private:
 	level lvl;
 	int lives = 4;
 	std::list<ball> balls;
-
+	
 
 	float speedslow = 25.0f;
 };

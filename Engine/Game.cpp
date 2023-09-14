@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	lvlBook(gfx)
 {
-	lvl = lvlBook.getCurrentLvl();
+	lvl = new level(lvlBook.readLevelData());
 	balls.push_back(ball(lvl.getBallSpawnPos()));
 	pad = paddle(lvl.getWalls());
 }
@@ -45,16 +45,18 @@ void Game::UpdateModel()
 	/*if (!outOfLives()) {
 		GAME OVER
 	}*/
+	if (!gameRunning) {
+		return;
+	}
 
 	if (lvl.isComplete()) {
 		if (lvlBook.advanceLevel()) {
-			lvl = lvlBook.getCurrentLvl();
 			pad.reset(lvl.getWalls());
 			balls.clear();
 			spawnBall(lvl);
-		} else {
-			// NO MORE LEVELS. END OF GAME
-
+		} else { // NO MORE LEVELS. END OF GAME
+			gameRunning = false;
+			return;
 		}	
 	}
 
@@ -89,6 +91,11 @@ void Game::UpdateModel()
 	}
 }
 
+void Game::loadLevel(levelParams params)
+{
+	lvl = level(gfx, params);
+}
+
 void Game::spawnBall(Vec2 spawnLoc, Vec2 velocity)
 {
 	balls.push_back(ball(spawnLoc, velocity));
@@ -108,10 +115,15 @@ void Game::respawn()
 
 void Game::ComposeFrame()
 {
-	lvl.draw(gfx);
-	pad.draw(gfx);
-	for (ball& b : balls) {
-		b.draw(gfx);
+	if (gameRunning) {
+		lvl.draw(gfx);
+		pad.draw(gfx);
+		for (ball& b : balls) {
+			b.draw(gfx);
+		}
+		scoreboard::drawLives(gfx, lives);
 	}
-	scoreboard::drawLives(gfx, lives);
+	else {
+
+	}
 }

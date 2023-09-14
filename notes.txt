@@ -1,0 +1,34 @@
+game.cpp
+	loadLvl(lvlbook.readlvldata())
+
+	loadLvl(lvlData) {
+		bricks.clear()
+		lvl.walls = lvlData.walls
+		coreloc = lvlData.coreloc
+		...
+		for b : lvlData.bricks
+			bricks.append(b)
+	}
+
+lvlbook.cpp
+	lvldatastruct readlvldata() const;
+
+lvldatastruct
+- wallsize
+- coreloc
+- ballloc and direction
+- vector<brick*> bricks
+
+
+1. lvlparams instance created in lvlbook
+2. game.cpp sets level by reading in params from lvlbook
+3. level sets wallsize/ballspawn/etc. based on params
+4. level instructs its brickMan to add bricks from params brickvector
+5. brickMan sets brickPos relative to lvlWalls, checks if its within bounds, then adds to its brickvector
+
+
+
+Obstacles:
+[issue] abstract brick means use of brick pointers and mem. management
+[issue] function templating being fussy
+[issue] encapsulation making derived brick classes annoying to handle

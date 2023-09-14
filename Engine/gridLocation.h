@@ -1,6 +1,7 @@
 #pragma once
 
 struct gridLocation {
+	gridLocation() = default;
 	gridLocation(int in_x, int in_y);
 	int x;
 	int y;

@@ -1,20 +1,34 @@
 #include "brick.h"
 
-brick::brick()
-	: pos(-1, -1)
+//brick::brick()
+//	: loc(0,0), pos(0,0)
+//{
+//}
+//
+//brick::brick(const brick& b)
+//	: loc(b.loc), pos(b.pos)
+//{
+//}
+//
+//brick::brick(gridLocation _loc)
+//	: loc(_loc)
+//{
+//}
+
+redBrick::redBrick(gridLocation _loc)
 {
+	loc = _loc;
 }
 
-brick::brick(const brick& b)
-	: pos(b.pos)
+redBrick::redBrick(const redBrick& other)
 {
+	loc = other.loc;	
 }
 
-brick::brick(Vec2 b_pos)
-	: pos(b_pos)
+blueBrick::blueBrick(gridLocation _loc) 
 {
+	loc = _loc;
 }
-
 bool brick::overlapCheck(ball& b) const
 {
 	return hitbox().isOverlapping(b.hitbox());
@@ -58,9 +72,10 @@ Vec2 brick::getPos() const
 	return pos;
 }
 
-void brick::setPos(const Vec2 newPos)
+// Calculates brick position from location value, relative to walls
+void brick::setPos(const wall& walls)
 {
-	pos = newPos;
+	pos = walls.getTopLeft() + Vec2(WIDTH * loc.x, HEIGHT * loc.y);
 }
 
 void brick::kill()

@@ -3,14 +3,12 @@
 #include "Vec2.h"
 #include "gridLocation.h"
 
-typedef std::pair<brick, gridLocation> brickData;
-
 struct levelParams {
 	int wallHeight;
 	int wallWidth;
 	Vec2 corePos;
 	Vec2 ballPos;
-	Vec2 ballVec;
+	Vec2 ballVel;
 
-	std::vector<brickData> bricks;
+	std::vector<brick> bricks;
 };

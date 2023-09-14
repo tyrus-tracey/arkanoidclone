@@ -4,14 +4,27 @@
 levelBook::levelBook(Graphics& _gfx)
 	: gfx(_gfx), WALL_DEFAULT(_gfx, 600, 800)
 {
-	levels.push_back(genLv1());
-	levels.push_back(genLv2());
 	lvIter = levels.begin();
+	lvl1.wallWidth = WALL_DEFAULT.getWidth();
+	lvl1.wallHeight = WALL_DEFAULT.getHeight();
+	lvl1.ballPos = { 100,100 };
+	lvl1.ballVel = { 1, 1 };
+	lvl1.corePos = { 100, 100 };
+	
+	
+	for (int y = 0; y < 4; ++y) {
+		for (int x = 0; x < 8; ++x) {
+			brick* r;
+			gridLocation loc(x, y);
+			brickData bPair(*r, loc);
+			lvl1.bricks.push_back(bPair);
+		}
+	}
 }
 
-level levelBook::getCurrentLvl() const
+levelParams levelBook::readLevelData() const
 {
-	return *lvIter;
+	return lvl1;
 }
 
 bool levelBook::advanceLevel()
@@ -30,6 +43,7 @@ level levelBook::genLv1()
 	Vec2 coreSpawn(100, 100);
 	Vec2 ballSpawn(100, 100);
 	level lvl1(WALL_DEFAULT, coreSpawn);
+
 
 	Vec2 test = lvl1.getTopLeft();
 	for (int y = 0; y < 4; ++y) {
