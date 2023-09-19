@@ -14,20 +14,27 @@
 class brickManager
 {
 public:
-	brickManager();
+	brickManager(const std::vector<brickInitInstruction>& _initInstructionList, const wall& lvlWalls );
+	brickManager(const brickManager& copy);
+	brickManager& operator=(brickManager other);
+	~brickManager();
+	void initializeBricks();
 	void update(std::list<ball>& balls, paddle& p);
 	void draw(Graphics& gfx);
-	template <typename T> void addBrick(T b, const wall& lvlWalls);
-	void addBricks(const std::vector<brick>& bVec, const wall& lvlWalls);
-	//brick getLastCollidedBrickCopy() const;
-	std::vector<brick>& getBricks();
+	void createBrick(brickInitInstruction initInstr);
+	brick* getLastCollidedBrickRef() const;
+	std::vector<brick*>& getBricks();
 	unsigned int getNbricks() const;
 
 private:
-	std::vector<std::vector<brick>::iterator> runOverlapChecks(ball& b);
-	void chooseCollidingBrick(std::vector<std::vector<brick>::iterator> overlappingBricks, ball& b);
+	wall wallCache;
+	void deleteBricks();
+	std::vector<brickInitInstruction> initInstructionList;
+	brick* allocateBrick(brickInitInstruction initInstr);
+	std::vector<std::vector<brick*>::iterator> runOverlapChecks(ball& b);
+	void chooseCollidingBrick(std::vector<std::vector<brick*>::iterator> overlappingBricks, ball& b);
 
-	std::vector<brick> bricks;
-	std::vector<brick>::iterator collidedBrick;
+	std::vector<brick*> bricks;
+	std::vector<brick*>::iterator collidedBrick;
 };
 

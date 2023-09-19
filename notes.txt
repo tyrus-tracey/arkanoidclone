@@ -30,5 +30,24 @@ lvldatastruct
 
 Obstacles:
 [issue] abstract brick means use of brick pointers and mem. management
-[issue] function templating being fussy
 [issue] encapsulation making derived brick classes annoying to handle
+
+//template <class brickType>
+//void level::addBrick(const gridLocation loc)
+//{
+//	if (!std::is_base_of_v<brick, brickType>) {
+//		return;
+//	}
+//	Vec2 pos = loc2pos(loc);
+//	brickType* b = new brickType;
+//	b->setPos(pos);
+//	brickMan.addBrick(b, lvlWalls);
+//}
+//template void level::addBrick<redBrick>(const gridLocation loc);
+//template void level::addBrick<blueBrick>(const gridLocation loc);
+
+
+Log:
+- just added copyconstructor/assignment op to brickMan
+- builds and runs fine, but somewhere the initList from levelParams doesn't turn into rendered bricks.
+	- fixed: level datamember order had brickman initialize before params, this was reversed.

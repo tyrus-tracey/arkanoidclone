@@ -19,27 +19,21 @@
 class level
 {
 public:
+	level(Graphics& gfx);
 	level(Graphics& gfx, levelParams& params);
-	//level(const wall walls, std::vector<brick *> bricks, Vec2 corePos, Vec2 ballPos, Vec2 ballVel);
 	void update(std::list<ball>& balls, paddle& p, const float dt);
 	void draw(Graphics& gfx);
 	bool isGoalsDone() const;
 	bool isComplete() const;
-	//template <class brickType> void addBrick(const gridLocation loc);
-	template <class brickType> void addBrick(brick b);
 	Vec2 getBallSpawnPos() const;
 	Vec2 getBallSpawnVel() const;
 	wall getWalls() const;
 	Vec2 getTopLeft() const;
 
 private:
-	//Vec2 loc2pos(const gridLocation loc) const;
-	brickManager brickMan;
+	levelParams lvlParams;
 	wall lvlWalls;
 	enemyCore lvlCore;
-	levelParams lvlParams;
-
-	//Vec2 ballSpawnPos;
-	//Vec2 ballSpawnVel;
+	brickManager brickMan;
 };
 
