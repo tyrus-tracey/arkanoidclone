@@ -28,8 +28,8 @@ Game::Game(MainWindow& wnd)
 	lvl(gfx),
 	lvlBook(gfx)
 {
-	loadLevel(lvlBook.readLevelData()); //level params copied, but not acted on
-	balls.push_back(ball(lvl.getBallSpawnPos()));
+	loadLevel(lvlBook.readLevelData());
+	balls.push_back(ball(lvl.getBallSpawnPos(), lvl.getBallSpawnVel()));
 	pad = paddle(lvl.getWalls());
 }
 
