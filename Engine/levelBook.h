@@ -11,11 +11,11 @@ public:
 	bool advanceLevel();
 
 private:
-	Graphics& gfx;
-	std::vector<level> levels;
-	std::vector<level>::const_iterator lvIter;
-	const wall WALL_DEFAULT;
+	levelParams genLv1();
+	levelParams genLv2();
 
-	levelParams lvl1;
+	Graphics& gfx;
+	std::vector<levelParams> levels;
+	std::vector<levelParams>::const_iterator lvIter;
 };
 
