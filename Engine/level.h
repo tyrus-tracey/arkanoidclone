@@ -25,6 +25,7 @@ public:
 	void draw(Graphics& gfx);
 	bool isGoalsDone() const;
 	bool isComplete() const;
+	bool isCoreExploding() const;
 	Vec2 getBallSpawnPos() const;
 	Vec2 getBallSpawnVel() const;
 	wall getWalls() const;

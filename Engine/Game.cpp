@@ -78,16 +78,17 @@ void Game::UpdateModel()
 	
 	pad.update(wnd.kbd, lvl.getWalls(), balls, dt);
 	lvl.update(balls, pad, dt);
-	std::list<ball>::iterator b = balls.begin();
-	while (b != balls.end()) {
-		if ((*b).isLive() ) {
-			(*b++).update(lvl.getWalls(), wnd.kbd, dt);
+
+	std::list<ball>::iterator bIt = balls.begin();
+	while (bIt != balls.end()) {
+		if ((*bIt).isLive() ) {
+			(*bIt++).update(lvl.getWalls(), wnd.kbd, dt);
 		}
 		else {
-			b = balls.erase(b);
+			bIt = balls.erase(bIt);
 		}
 	}
-	if (balls.empty()) {
+	if (balls.empty() && !lvl.isCoreExploding()) {
 		respawn();
 	}
 }

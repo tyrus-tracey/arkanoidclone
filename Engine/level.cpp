@@ -36,6 +36,11 @@ bool level::isComplete() const
 	return !lvlCore.isLive();
 }
 
+bool level::isCoreExploding() const
+{
+	return lvlCore.isExploding();
+}
+
 Vec2 level::getBallSpawnPos() const
 {
 	return lvlParams.ballPos;
