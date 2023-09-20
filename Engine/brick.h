@@ -12,9 +12,6 @@
 class brick
 {
 public:
-	/*brick();
-	brick(const brick& b);
-	brick(gridLocation _loc);*/
 	bool overlapCheck(ball& b) const;
 	float getDistBall(ball& b) const;
 	void collideBall(ball& b);
