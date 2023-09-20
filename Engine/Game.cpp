@@ -52,12 +52,13 @@ void Game::UpdateModel()
 
 	if (lvl.isComplete()) {
 		if (lvlBook.advanceLevel()) {
+			loadLevel(lvlBook.readLevelData());
 			pad.reset(lvl.getWalls());
 			balls.clear();
 			spawnBall(lvl);
 		} else { // NO MORE LEVELS. END OF GAME
-			gameRunning = false;
-			return;
+			//gameRunning = false;
+			//return;
 		}	
 	}
 
