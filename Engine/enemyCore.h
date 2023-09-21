@@ -25,14 +25,14 @@ public:
 	bool hasBall() const;
 	void draw(Graphics& gfx);
 	void operator=(enemyCore& other);
+	static constexpr float SPAN = 40.0f;
+	static constexpr float COREMARGIN = -1.0f;
 private:
 	Vec2 getRandDiagonal();
 
 private:
 	Vec2 pos;
 	ball* heldBall = nullptr;
-	const float SPAN = 40.0f;
-	const float COREMARGIN = -1.0f;
 	bool live = true;
 
 	ticker tBallHoldTime = ticker(0.75f);

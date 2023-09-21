@@ -8,9 +8,17 @@ level::level(Graphics& gfx)
 level::level(Graphics& gfx, levelParams& params)
 	:	lvlParams(params),
 		lvlWalls(gfx, params.wallWidth, params.wallHeight),
-		lvlCore(lvlWalls.getTopLeft() + params.corePos),
 		brickMan(lvlParams.brickInitList, lvlWalls)
 {
+	Vec2 corePos = lvlWalls.getTopLeft();
+	corePos.x += (params.coreLoc.x * brick::getWidth());
+	corePos.y += (params.coreLoc.y * brick::getHeight());
+	
+	corePos.x += (brick::getWidth()/2 - enemyCore::SPAN/2); // Centering core
+	
+	if ( rect(corePos, enemyCore::SPAN, enemyCore::SPAN).isWithin(lvlWalls.getBounds()) ) {
+		lvlCore = enemyCore(corePos);
+	}
 }
 
 void level::update(std::list<ball>& balls, paddle& p, const float dt)

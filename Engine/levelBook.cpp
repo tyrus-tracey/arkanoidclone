@@ -32,7 +32,7 @@ levelParams levelBook::genLv1()
 	out.wallHeight = 800;
 	out.ballPos = { 300, 300 };
 	out.ballVel = { 0, 1 };
-	out.corePos = { 300, 0};
+	out.coreLoc = { 5, 0};
 
 
 	for (int y = 3; y < 5; ++y) {
@@ -55,7 +55,7 @@ levelParams levelBook::genLv2()
 	out.wallHeight = 800;
 	out.ballPos = { 300, 300 };
 	out.ballVel = { 0, 1 };
-	out.corePos = { 300, 100 };
+	out.coreLoc = { 5, 3};
 
 	for (int y = 0; y < 10; ++y) {
 		for (int x = 4; x <= 6; ++x) {

@@ -21,7 +21,7 @@ struct brickInitInstruction {
 struct levelParams {
 	int wallHeight;
 	int wallWidth;
-	Vec2 corePos;
+	gridLocation coreLoc;
 	Vec2 ballPos;
 	Vec2 ballVel;
 
