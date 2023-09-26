@@ -1,5 +1,18 @@
 #include "levelBook.h"
 
+/*
+WALLSIZE TEMPLATES:
+MICRO:
+	7x13 bricks		= 420x600
+LIGHT:
+	9x20 bricks		= 540x700
+GENERAL:
+	11x25 bricks	= 660x800
+BIG:
+	15x30 bricks	= 900x900
+*/
+
+// TODO: make ballspawn relative to walls
 
 levelBook::levelBook(Graphics& _gfx)
 	: gfx(_gfx)
@@ -28,20 +41,23 @@ bool levelBook::advanceLevel()
 levelParams levelBook::genLv1()
 {
 	levelParams out;
-	out.wallWidth = 600;
-	out.wallHeight = 800;
-	out.ballPos = { 300, 300 };
+	out.wallWidth = 420;
+	out.wallHeight = 600;
+	out.ballPos = { 500, 500};
 	out.ballVel = { 0, 1 };
-	out.coreLoc = { 5, 0};
+	out.coreLoc = { 3, 1};
 
 
-	for (int y = 3; y < 5; ++y) {
-		for (int x = 1; x < 9; ++x) {
-			if (y == 3) {
-				out.brickInitList.push_back({ RED_BRICK, {x,y} });
-			}
-			else {
-				out.brickInitList.push_back({ BLUE_BRICK, {x,y} });
+	for (int y = 4; y < 13; ++y) {
+		for (int x = 0; x < 7; ++x) {
+			if (y % 4 == 0) {
+				if ((y / 2) % 2 == 0) {
+					out.brickInitList.push_back({ RED_BRICK, {x,y} });
+				}
+				else {
+					out.brickInitList.push_back({ BLUE_BRICK, {x,y} });
+				}
+				
 			}
 		}
 	}
