@@ -50,7 +50,7 @@ void Game::UpdateModel()
 		return;
 	}
 
-	if (lvl.isComplete()) {
+	if (lvl.isComplete() || wnd.kbd.KeyIsPressed(VK_DELETE)) {
 		if (lvlBook.advanceLevel()) {
 			loadLevel(lvlBook.readLevelData());
 			pad.reset(lvl.getWalls());
