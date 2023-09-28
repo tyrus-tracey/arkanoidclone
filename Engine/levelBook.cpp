@@ -47,7 +47,7 @@ levelParams levelBook::genLv1()
 	out.ballVel = { 0, 1 };
 	out.coreLoc = { 3, 1};
 
-
+	/*	
 	for (int y = 4; y < 13; ++y) {
 		for (int x = 0; x < 7; ++x) {
 			if (y % 4 == 0) {
@@ -61,6 +61,12 @@ levelParams levelBook::genLv1()
 			}
 		}
 	}
+	*/
+	initBrickHori(out.brickInitList, 1, 0, 19, RED_BRICK);
+	initBrickHori(out.brickInitList, 4, 0, 19, BLUE_BRICK);
+
+	initBrickVert(out.brickInitList, 5, 0, 30, BLUE_BRICK);
+
 	return out;
 }
 
@@ -91,3 +97,24 @@ levelParams levelBook::genLv2()
 	return out;
 }
 
+// Create initInstructions for a rectangle of bricks to a given brickInit vector.
+void levelBook::initBrickRect(std::vector<brickInitInstruction>& initVec, const gridLocation topLeft, const gridLocation botRight, const brickTypeEnum brickType)
+{
+	for (int y = topLeft.y; y <= botRight.y; y++) {
+		for (int x = topLeft.x; x <= botRight.x; x++) {
+			initVec.push_back({brickType, {x,y} });
+		}
+	}
+}
+
+// Create initInstructions for a horizontal line of bricks to a given brickInit vector.
+void levelBook::initBrickHori(std::vector<brickInitInstruction>& initVec, const int row, const int x1, const int x2, const brickTypeEnum brickType)
+{
+	initBrickRect(initVec, { x1, row }, { x2,row }, brickType);
+}
+
+// Create initInstructions for a vertical line of bricks to a given brickInit vector.
+void levelBook::initBrickVert(std::vector<brickInitInstruction>& initVec, const int col, const int y1, const int y2, const brickTypeEnum brickType)
+{
+	initBrickRect(initVec, { col, y1 }, { col, y2 }, brickType);
+}
