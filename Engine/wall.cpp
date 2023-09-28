@@ -22,8 +22,8 @@ wall::wall(const Graphics& gfx, float width, float height)
 {
 }
 
-			)
-		)
+wall::wall(const Graphics& gfx, wallSizeEnum wallSize)
+	: wall(gfx, getWallSize(wallSize).x, getWallSize(wallSize).y)
 {
 }
 
@@ -58,4 +58,21 @@ void wall::ensureWallsWithinGfx(const Graphics& gfx)
 	if (!bounds.getResizeUniform(THICKNESS).isWithin(gfxBounds)) {
 		bounds.fitTo(gfxBounds, THICKNESS);
 	}
+}
+
+Vec2 wall::getWallSize(wallSizeEnum wallSize)
+{
+	switch (wallSize) {
+		case MICRO:
+			return Vec2(420.0f, 600.0f);
+		case LIGHT:
+			return Vec2(540.0f, 700.0f);
+		case NORMAL:
+			return Vec2(660.0f, 800.0f);
+		case BIG:
+			return Vec2(900.0f, 900.0f);
+		default:
+			break;
+	}
+	return Vec2(0.0f, 0.0f);
 }

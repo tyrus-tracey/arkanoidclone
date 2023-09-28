@@ -1,6 +1,7 @@
 #pragma once
 #include "Graphics.h"
 #include "rect.h"
+#include "levelParams.h"
 
 
 class wall
@@ -10,6 +11,7 @@ public:
 	wall(const Graphics& gfx);
 	wall(const Graphics& gfx, const rect wallBounds);
 	wall(const Graphics& gfx, float width, float height);
+	wall(const Graphics& gfx, wallSizeEnum wallSize);
 	rect getBounds() const;
 	Vec2 getTopLeft() const;
 	float getWidthVisual() const;
@@ -17,6 +19,7 @@ public:
 	void draw(Graphics& gfx) const;
 private:
 	void ensureWallsWithinGfx(const Graphics& gfx);
+	Vec2 getWallSize(wallSizeEnum wallSize);
 
 	rect bounds;
 

@@ -7,7 +7,7 @@ level::level(Graphics& gfx)
 
 level::level(Graphics& gfx, levelParams& params)
 	:	lvlParams(params),
-		lvlWalls(gfx, params.wallWidth, params.wallHeight),
+		lvlWalls(gfx, params.wallSize),
 		brickMan(lvlParams.brickInitList, lvlWalls)
 {
 	Vec2 corePos = lvlWalls.getTopLeft();

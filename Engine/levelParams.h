@@ -1,5 +1,5 @@
 #pragma once
-#include "brick.h"
+#include <vector>
 #include "Vec2.h"
 #include "gridLocation.h"
 
@@ -7,6 +7,10 @@
 // Enum representing all concrete brick classes.
 enum brickTypeEnum {
 	RED_BRICK, BLUE_BRICK
+};
+
+enum wallSizeEnum {
+	MICRO, LIGHT, NORMAL, BIG
 };
 
 /*
@@ -19,8 +23,7 @@ struct brickInitInstruction {
 };
 
 struct levelParams {
-	int wallHeight;
-	int wallWidth;
+	wallSizeEnum wallSize;
 	gridLocation coreLoc;
 	Vec2 ballPos;
 	Vec2 ballVel;

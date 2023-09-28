@@ -6,13 +6,12 @@ MICRO:
 	7x13 bricks		= 420x600
 LIGHT:
 	9x20 bricks		= 540x700
-GENERAL:
+NORMAL:
 	11x25 bricks	= 660x800
 BIG:
 	15x30 bricks	= 900x900
 */
 
-// TODO: make ballspawn relative to walls
 
 levelBook::levelBook(Graphics& _gfx)
 	: gfx(_gfx)
@@ -41,16 +40,14 @@ bool levelBook::advanceLevel()
 levelParams levelBook::genLv1()
 {
 	levelParams out;
-	out.wallWidth = 420;
-	out.wallHeight = 600;
+	out.wallSize = MICRO;
 	out.ballPos = { -1, -1};
 	out.ballVel = { 0, 1 };
 	out.coreLoc = { 3, 1};
 
-	initBrickHori(out.brickInitList, 1, 0, 19, RED_BRICK);
-	initBrickHori(out.brickInitList, 4, 0, 19, BLUE_BRICK);
-
-	initBrickVert(out.brickInitList, 5, 0, 30, BLUE_BRICK);
+	initBrickHori(out.brickInitList, 4, 0, 19, RED_BRICK);
+	initBrickHori(out.brickInitList, 5, 0, 19, BLUE_BRICK);
+	initBrickHori(out.brickInitList, 6, 0, 30, RED_BRICK);
 
 	return out;
 }
@@ -58,8 +55,7 @@ levelParams levelBook::genLv1()
 levelParams levelBook::genLv2()
 {
 	levelParams out;
-	out.wallWidth = 600;
-	out.wallHeight = 800;
+	out.wallSize = NORMAL;
 	out.ballPos = { 300, 300 };
 	out.ballVel = { 0, 1 };
 	out.coreLoc = { 5, 3};
