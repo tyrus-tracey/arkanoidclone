@@ -32,6 +32,7 @@ public:
 	Vec2 getTopLeft() const;
 
 private:
+	void initBallSpawnPos();
 	levelParams lvlParams;
 	wall lvlWalls;
 	enemyCore lvlCore;

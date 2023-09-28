@@ -19,6 +19,8 @@ level::level(Graphics& gfx, levelParams& params)
 	if ( rect(corePos, enemyCore::SPAN, enemyCore::SPAN).isWithin(lvlWalls.getBounds()) ) {
 		lvlCore = enemyCore(corePos);
 	}
+
+	initBallSpawnPos();
 }
 
 void level::update(std::list<ball>& balls, paddle& p, const float dt)
@@ -67,4 +69,15 @@ wall level::getWalls() const
 Vec2 level::getTopLeft() const
 {
 	return getWalls().getTopLeft();
+}
+
+
+// Adjusts ballspawn Vec2 to be relative to lvlWalls.
+// If Vec2 not within walls, defaults to lvlWall midpoint.
+void level::initBallSpawnPos()
+{
+	lvlParams.ballPos += lvlWalls.getTopLeft(); // Set ballspawn relative to walls
+	if (!lvlWalls.getBounds().isOverlapping(lvlParams.ballPos)) { // if ball is outside walls
+		lvlParams.ballPos = lvlWalls.getBounds().getMidpoint();
+	}
 }

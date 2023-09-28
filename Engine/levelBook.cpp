@@ -43,25 +43,10 @@ levelParams levelBook::genLv1()
 	levelParams out;
 	out.wallWidth = 420;
 	out.wallHeight = 600;
-	out.ballPos = { 500, 500};
+	out.ballPos = { -1, -1};
 	out.ballVel = { 0, 1 };
 	out.coreLoc = { 3, 1};
 
-	/*	
-	for (int y = 4; y < 13; ++y) {
-		for (int x = 0; x < 7; ++x) {
-			if (y % 4 == 0) {
-				if ((y / 2) % 2 == 0) {
-					out.brickInitList.push_back({ RED_BRICK, {x,y} });
-				}
-				else {
-					out.brickInitList.push_back({ BLUE_BRICK, {x,y} });
-				}
-				
-			}
-		}
-	}
-	*/
 	initBrickHori(out.brickInitList, 1, 0, 19, RED_BRICK);
 	initBrickHori(out.brickInitList, 4, 0, 19, BLUE_BRICK);
 
