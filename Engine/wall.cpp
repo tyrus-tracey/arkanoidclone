@@ -17,11 +17,11 @@ wall::wall(const Graphics& gfx, const rect wallBounds)
 	visualHeight = (bounds.bottom - bounds.top) + (THICKNESS * 2.0f);
 }
 
-wall::wall(const Graphics& gfx, int width, int height)
-	: wall(gfx, rect(
-			Vec2(MARGIN, MARGIN), 
-			float(width), 
-			float(height)
+wall::wall(const Graphics& gfx, float width, float height)
+	: wall(gfx, rect(Vec2(MARGIN, MARGIN), width, height))
+{
+}
+
 			)
 		)
 {
