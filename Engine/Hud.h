@@ -9,6 +9,8 @@ class Hud
 public:
 	Hud(Graphics& gfx);
 	void draw(Graphics& gfx) const;
+	void update(const float _playerFuel, const float dt);
+
 
 private:
 	Vec2 getWorldVec(const Vec2 localVec) const;
@@ -23,8 +25,6 @@ private:
 
 private:
 	HudFuelGauge fuelGauge;
-
-
 
 };
 

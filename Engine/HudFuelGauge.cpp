@@ -7,6 +7,11 @@ HudFuelGauge::HudFuelGauge(Vec2 _pos, const float hudWidth)
 	rectFuelBar.centerOnto(rect(pos, WIDTH, HEIGHT));
 }
 
+void HudFuelGauge::update(const float _playerFuel)
+{
+	playerFuel = _playerFuel;
+}
+
 void HudFuelGauge::draw(Graphics& gfx) const
 {
 	gfx.DrawRectBorder(rect(pos, WIDTH, HEIGHT), cWindow, THICKNESS, true);
@@ -15,15 +20,20 @@ void HudFuelGauge::draw(Graphics& gfx) const
 
 void HudFuelGauge::drawGauge(Graphics& gfx) const
 {
-	//draw border
 	gfx.DrawRectBorder(rectFuelBar, cGauge, THICKNESS, true);
-	for (int i = 0; i < 3; i++) {
-		drawFuelUnit(gfx, i);
-	}
+	drawFuel(gfx, playerFuel);
 }
 
-void HudFuelGauge::drawFuelUnit(Graphics& gfx, unsigned int index) const
+void HudFuelGauge::drawFuel(Graphics& gfx, const float amount) const
 {
-	Vec2 drawPos = { rectFuelBar.left + (index*BAR_HEIGHT), rectFuelBar.top};
-	gfx.DrawRect(rect(drawPos, BAR_HEIGHT, BAR_HEIGHT).resizeUniform(-2.0f), cFuel, true);
+	Vec2 drawPos = { rectFuelBar.left, rectFuelBar.top };
+	float fuelPercentage = amount / FUEL_MAX;
+	if (fuelPercentage < 0.0f) {
+		fuelPercentage = 0.0f;
+	} else if (fuelPercentage > 1.0f) {
+		fuelPercentage = 1.0f;
+	}
+	int fuelWidth = int(float(BAR_WIDTH) * fuelPercentage);
+	rect fuelRect(drawPos, fuelWidth, BAR_HEIGHT);
+	gfx.DrawRect(fuelRect, cFuel, true);
 }

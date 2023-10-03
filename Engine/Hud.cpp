@@ -14,6 +14,11 @@ void Hud::draw(Graphics& gfx) const
 	fuelGauge.draw(gfx);
 }
 
+void Hud::update(const float _playerFuel, const float dt)
+{
+	fuelGauge.update(_playerFuel);
+}
+
 Vec2 Hud::getWorldVec(const Vec2 localVec) const
 {
 	return localVec + pos;

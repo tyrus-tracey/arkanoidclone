@@ -18,6 +18,7 @@ public:
 	void draw(Graphics& gfx) const;
 	void reset(const wall& lvlWalls);
 	void addFuel(unsigned int amt);
+	float getFuel() const;
 	bool isFuelFull() const;
 	rect hitbox() const;
 

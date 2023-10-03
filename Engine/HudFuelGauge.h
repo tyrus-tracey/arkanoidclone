@@ -7,7 +7,7 @@ class HudFuelGauge
 {
 public:
 	HudFuelGauge(Vec2 _pos, const float hudWidth);
-	void update(const int playerFuel) const;
+	void update(const float _playerFuel);
 	void draw(Graphics& gfx) const;
 
 	const float WIDTH;
@@ -18,10 +18,13 @@ public:
 
 private:
 	Vec2 pos;
-	const float BAR_WIDTH = 250.0f;
-	const float BAR_HEIGHT = 25.0f;
+	const int BAR_WIDTH = 250;
+	const int BAR_HEIGHT = 25;
+
+	float playerFuel = 0.0f;
+
 	void drawGauge(Graphics& gfx) const;
-	void drawFuelUnit(Graphics& gfx, unsigned int index) const;
+	void drawFuel(Graphics& gfx, const float amount) const;
 
 	rect rectFuelBar;
 	Color cWindow = Colors::Red;

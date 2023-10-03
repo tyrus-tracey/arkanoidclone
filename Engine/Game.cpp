@@ -90,6 +90,8 @@ void Game::UpdateModel()
 			bIt = balls.erase(bIt);
 		}
 	}
+
+	hud.update(pad.getFuel(), dt);
 	if (balls.empty() && !lvl.isCoreExploding()) {
 		respawn();
 	}

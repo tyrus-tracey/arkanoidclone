@@ -41,6 +41,11 @@ void paddle::addFuel(unsigned int amt)
 	}
 }
 
+float paddle::getFuel() const
+{
+	return fuel;
+}
+
 bool paddle::isFuelFull() const
 {
 	return fuel >= fuelMax;
