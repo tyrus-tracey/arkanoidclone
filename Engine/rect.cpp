@@ -51,6 +51,19 @@ rect& rect::resizeUniform(const float amt)
 	return *this = getResizeUniform(amt);
 }
 
+void rect::centerOnto(const rect& parent)
+{
+	float width = right - left;
+	float height = bottom - top;
+	float p_width = parent.right - parent.left;
+	float p_height = parent.bottom - parent.top;
+
+	top = parent.bottom - (p_height / 2.0f) - (height/2.0f);
+	bottom = top + height;
+	left = parent.right - (p_width / 2.0f) - (width / 2.0f);
+	right = left + width;
+}
+
 rect::rect(const Vec2& topLeft, const float width, const float height)
 	: rect(topLeft, Vec2(topLeft.x + width, topLeft.y + height))
 {
