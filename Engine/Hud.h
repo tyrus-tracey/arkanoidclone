@@ -2,7 +2,7 @@
 #include "Graphics.h"
 #include "rect.h"
 #include "Colors.h"
-#include "HudFuelMeter.h"
+#include "HudFuelGauge.h"
 
 class Hud
 {
@@ -18,11 +18,11 @@ private:
 	const float WIDTH = 300.0f;
 	const float HEIGHT;
 
-	const Color c = Colors::Yellow;
+	const Color c = Colors::White;
 	Vec2 pos;
 
 private:
-	HudFuelMeter fuelMeter;
+	HudFuelGauge fuelGauge;
 
 
 
