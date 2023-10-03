@@ -35,6 +35,7 @@
 #include "levelBook.h"
 #include "scoreboard.h"
 #include <list>
+#include "Hud.h"
 
 class Game
 {
@@ -57,6 +58,7 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+	Hud hud;
 	/********************************/
 	/*  User Variables              */
 	/********************************/

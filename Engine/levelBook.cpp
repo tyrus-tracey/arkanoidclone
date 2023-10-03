@@ -40,7 +40,7 @@ bool levelBook::advanceLevel()
 levelParams levelBook::genLv1()
 {
 	levelParams out;
-	out.wallSize = MICRO;
+	out.wallSize = BIG;
 	out.ballPos = { -1, -1};
 	out.ballVel = { 0, 1 };
 	out.coreLoc = { 3, 1};

@@ -23,7 +23,7 @@ private:
 
 	rect bounds;
 
-	static constexpr float MARGIN = 50.0f;
+	static constexpr float MARGIN = 30.0f;
 	static constexpr float THICKNESS = 10.0f;
 	static constexpr float DEF_WIDTH = 300.0f;
 	static constexpr float DEF_HEIGHT = 500.0f;

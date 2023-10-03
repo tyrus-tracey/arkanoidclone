@@ -148,6 +148,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="gridLocation.h" />
+    <ClInclude Include="Hud.h" />
+    <ClInclude Include="HudFuelMeter.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="levelBook.h" />
@@ -175,6 +177,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="gridLocation.cpp" />
+    <ClCompile Include="Hud.cpp" />
+    <ClCompile Include="HudFuelMeter.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="level.cpp" />
     <ClCompile Include="levelBook.cpp" />

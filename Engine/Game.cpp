@@ -25,6 +25,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
+	hud(gfx),
 	lvl(gfx),
 	lvlBook(gfx)
 {
@@ -118,15 +119,11 @@ void Game::respawn()
 
 void Game::ComposeFrame()
 {
-	if (gameRunning) {
-		lvl.draw(gfx);
-		pad.draw(gfx);
-		for (ball& b : balls) {
-			b.draw(gfx);
-		}
-		scoreboard::drawLives(gfx, lives);
+	lvl.draw(gfx);
+	pad.draw(gfx);
+	for (ball& b : balls) {
+		b.draw(gfx);
 	}
-	else {
-
-	}
+	hud.draw(gfx);
+	scoreboard::drawLives(gfx, lives);
 }
