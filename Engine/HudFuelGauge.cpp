@@ -1,21 +1,34 @@
 #include "HudFuelGauge.h"
 
 HudFuelGauge::HudFuelGauge(Vec2 _pos, const float hudWidth)
-	: WIDTH(hudWidth), pos(_pos),
-	rectFuelBar({0,0}, BAR_WIDTH, BAR_HEIGHT)
+	: WIDTH(hudWidth), pos(_pos)
 {
 	rectFuelBar.centerOnto(rect(pos, WIDTH, HEIGHT));
+	rectDetonateLight.centerOnto(rect(pos, WIDTH, HEIGHT));
+	rectDetonateLight.move({0, -100});
 }
 
-void HudFuelGauge::update(const float _playerFuel)
+void HudFuelGauge::update(const float _playerFuel, const bool armedBallLocked, const float dt)
 {
 	playerFuel = _playerFuel;
+
+	if (armedBallLocked) {
+ 		lightFlasher.wake();
+	}
+	else {
+		lightFlasher.sleep();
+		lightFlasher.resetInterval();
+	}
+	lightFlasher.tick(dt);
 }
 
 void HudFuelGauge::draw(Graphics& gfx) const
 {
 	gfx.DrawRectBorder(rect(pos, WIDTH, HEIGHT), cWindow, THICKNESS, true);
 	drawGauge(gfx);
+	if (lightFlasher.isOn()) {
+		gfx.DrawRect(rectDetonateLight, cDetonate, true);
+	}
 }
 
 void HudFuelGauge::drawGauge(Graphics& gfx) const
@@ -33,7 +46,7 @@ void HudFuelGauge::drawFuel(Graphics& gfx, const float amount) const
 	} else if (fuelPercentage > 1.0f) {
 		fuelPercentage = 1.0f;
 	}
-	int fuelWidth = int(float(BAR_WIDTH) * fuelPercentage);
-	rect fuelRect(drawPos, fuelWidth, BAR_HEIGHT);
+	int fuelWidth = int(BAR_WIDTH * fuelPercentage);
+	rect fuelRect(drawPos, float(fuelWidth), BAR_HEIGHT);
 	gfx.DrawRect(fuelRect, cFuel, true);
 }

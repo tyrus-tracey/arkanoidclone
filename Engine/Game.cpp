@@ -89,7 +89,7 @@ void Game::updateElements(const float dt)
 			bIt = balls.erase(bIt);
 		}
 	}
-	hud.update(pad.getFuel(), dt);
+	hud.update(pad.getFuel(), lvl.isCoreHoldingArmedBall(), dt);
 }
 
 void Game::loadLevel(levelParams params)

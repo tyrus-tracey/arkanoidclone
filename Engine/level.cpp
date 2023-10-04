@@ -51,6 +51,14 @@ bool level::isCoreExploding() const
 	return lvlCore.isExploding();
 }
 
+bool level::isCoreHoldingArmedBall() const
+{
+	if (lvlCore.hasBall()) {
+		return lvlCore.getBall()->isArmed();
+	} 
+	return false;
+}
+
 Vec2 level::getBallSpawnPos() const
 {
 	return lvlParams.ballPos;

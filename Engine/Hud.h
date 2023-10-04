@@ -9,7 +9,7 @@ class Hud
 public:
 	Hud(Graphics& gfx);
 	void draw(Graphics& gfx) const;
-	void update(const float _playerFuel, const float dt);
+	void update(const float _playerFuel, const bool armedBallLocked, const float dt);
 
 
 private:

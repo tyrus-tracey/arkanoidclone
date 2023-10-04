@@ -26,6 +26,7 @@ public:
 	bool isGoalsDone() const;
 	bool isComplete() const;
 	bool isCoreExploding() const;
+	bool isCoreHoldingArmedBall() const;
 	Vec2 getBallSpawnPos() const;
 	Vec2 getBallSpawnVel() const;
 	wall getWalls() const;
