@@ -63,38 +63,33 @@ void Game::UpdateModel()
 		}	
 	}
 
-	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
-		for (ball& b : balls) {
-			b.speedSet(speedslow);
-		}
-	}
-	else {
-		for (ball& b : balls) {
-			b.speedReset();
-		}
-	}
 	if (wnd.kbd.KeyIsPressed(VK_TAB)) {
 		spawnBall(lvl);
 	}
+
 	dt = ft.Mark();
-	
+	updateElements(dt);
+
+	if (balls.empty() && !lvl.isCoreExploding()) {
+		respawn();
+	}
+}
+
+void Game::updateElements(const float dt)
+{
 	pad.update(wnd.kbd, lvl.getWalls(), balls, dt);
 	lvl.update(balls, pad, dt);
 
 	std::list<ball>::iterator bIt = balls.begin();
 	while (bIt != balls.end()) {
-		if ((*bIt).isLive() ) {
+		if ((*bIt).isLive()) {
 			(*bIt++).update(lvl.getWalls(), wnd.kbd, dt);
 		}
 		else {
 			bIt = balls.erase(bIt);
 		}
 	}
-
 	hud.update(pad.getFuel(), dt);
-	if (balls.empty() && !lvl.isCoreExploding()) {
-		respawn();
-	}
 }
 
 void Game::loadLevel(levelParams params)

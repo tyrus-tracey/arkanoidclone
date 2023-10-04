@@ -49,6 +49,7 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void updateElements(const float dt);
 	void loadLevel(levelParams params);
 	void spawnBall(Vec2 spawnLoc, Vec2 velocity);
 	void spawnBall(const level& lvl);
