@@ -3,6 +3,7 @@
 enemyCore::enemyCore(Vec2 corePos)
     : pos(corePos)
 {
+    tDeathAnimTime.sleep();
 }
 
 rect enemyCore::hitbox() const
@@ -45,7 +46,7 @@ void enemyCore::lockBall(ball* b)
 {
     b->lock(hitbox().getMidpoint());
     heldBall = b;
-    tBallHoldTime.reset();
+    tBallHoldTime.restart();
 }
 
 void enemyCore::releaseBall()
@@ -65,7 +66,7 @@ void enemyCore::eatBall()
 
 void enemyCore::explode()
 {
-    tDeathAnimTime.reset();
+    tDeathAnimTime.restart();
     eatBall();
 }
 
@@ -87,6 +88,11 @@ bool enemyCore::isExploding() const
 bool enemyCore::hasBall() const
 {
     return heldBall != nullptr;
+}
+
+ball* enemyCore::getBall() const
+{
+    return heldBall;
 }
 
 void enemyCore::draw(Graphics& gfx)

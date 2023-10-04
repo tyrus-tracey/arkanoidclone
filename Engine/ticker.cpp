@@ -1,17 +1,32 @@
 #include "ticker.h"
 
+ticker::ticker()
+	: START_TIME(0.0f), time(0.0f)
+{
+}
+
 ticker::ticker(const float startTime)
 	: START_TIME(startTime), time(startTime)
 {
 }
 
-void ticker::reset()
+void ticker::restart()
+{
+	resetTime();
+	wake();
+}
+
+void ticker::resetTime()
 {
 	time = START_TIME;
+}
+
+void ticker::wake()
+{
 	active = true;
 }
 
-void ticker::stop()
+void ticker::sleep()
 {
 	active = false;
 }
@@ -20,7 +35,7 @@ void ticker::tick(float dt)
 {
 	if (!isActive()) { return; }
 	time -= dt;
-	if (time < 0.00001f) { stop(); }
+	if (time < 0.00001f) { sleep(); }
 }
 
 bool ticker::isActive() const
@@ -31,5 +46,4 @@ bool ticker::isActive() const
 bool ticker::ended() const
 {
 	return time < 0.00001f;
-	return false;
 }

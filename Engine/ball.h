@@ -55,8 +55,8 @@ private:
 	bool live = true;
 	bool armed = false;
 
-	ticker tSpawnGrace;
-	ticker tBallLockCooldown;
+	ticker tSpawnGrace = ticker(2.0f);
+	ticker tBallLockCooldown = ticker(0.25f);
 	ticker tBallExplode = ticker(1.0f);
 	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };

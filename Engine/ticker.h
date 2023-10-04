@@ -7,9 +7,12 @@
 class ticker
 {
 public:
+	ticker();
 	ticker(const float startTime);
-	void reset();
-	void stop();
+	void restart();
+	void resetTime();
+	void wake();
+	void sleep();
 	void tick(float dt);
 	bool isActive() const;
 	bool ended() const;

@@ -16,9 +16,9 @@ ball::ball(Vec2 spawnPos)
 }
 
 ball::ball(Vec2 spawnPos, Vec2 velocity)
-	: pos(spawnPos), vel(velocity.GetNormalized()), tSpawnGrace(2.0f), tBallLockCooldown(0.25f)
+	: pos(spawnPos), vel(velocity.GetNormalized())
 {
-	tSpawnGrace.reset();
+	tBallExplode.sleep();
 }
 
 void ball::slap(const Vec2 force)
@@ -60,7 +60,8 @@ void ball::reboundY()
 void ball::update(const wall& lvlWalls, const Keyboard& kbd, float dt)
 {
 	if (!live) { return; }
-	if (tSpawnGrace.isActive()) {
+	if (!tSpawnGrace.ended()) {
+		tSpawnGrace.wake();
 		tSpawnGrace.tick(dt);
 		return;
 	}
@@ -92,7 +93,7 @@ void ball::reset()
 	armed = false;
 	locked = false;
 	live = true;
-	tSpawnGrace.reset();
+	tSpawnGrace.resetTime();
 }
 
 void ball::move(const float dt)
@@ -133,7 +134,7 @@ bool ball::collisionWalls(const wall& lvlWalls)
 
 void ball::detonate()
 {
-	tBallExplode.reset();
+	tBallExplode.wake();
 }
 
 rect ball::hitbox() const
@@ -171,7 +172,7 @@ void ball::unlock()
 {
 	if (!locked) { return; }
 	locked = false;
-	tBallLockCooldown.reset();
+	tBallLockCooldown.restart();
 }
 
 bool ball::onLockCooldown() const

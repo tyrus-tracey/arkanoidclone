@@ -23,6 +23,7 @@ public:
 	bool isLive() const;
 	bool isExploding() const;
 	bool hasBall() const;
+	ball* getBall() const;
 	void draw(Graphics& gfx);
 	void operator=(enemyCore& other);
 	static constexpr float SPAN = 40.0f;
