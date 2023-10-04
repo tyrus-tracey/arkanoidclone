@@ -12,6 +12,7 @@ public:
 	rect getResizeUniform(const float amt) const;
 	rect& resizeUniform(const float amt);
 	void centerOnto(const rect& parent);
+	void move(const Vec2 vec);
 	bool isOverlapping(const rect& other) const;
 	bool isOverlapping(const Vec2 other) const;
 	bool isWithin(const rect& other) const;

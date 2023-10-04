@@ -64,6 +64,14 @@ void rect::centerOnto(const rect& parent)
 	right = left + width;
 }
 
+void rect::move(const Vec2 vec)
+{
+	top += vec.y;
+	bottom += vec.y;
+	left += vec.x;
+	right += vec.x;
+}
+
 rect::rect(const Vec2& topLeft, const float width, const float height)
 	: rect(topLeft, Vec2(topLeft.x + width, topLeft.y + height))
 {
