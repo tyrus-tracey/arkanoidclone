@@ -12,6 +12,7 @@ void Hud::draw(Graphics& gfx) const
 {
 	gfx.DrawRectBorder({ pos,WIDTH, HEIGHT }, c, THICKNESS, true);
 	fuelGauge.draw(gfx);
+	SpriteNumbers::drawNum(1616886, getWorldVec({ 0,0 }), Colors::Cyan, gfx);
 }
 
 void Hud::update(const float _playerFuel, const bool armedBallLocked, const float dt)

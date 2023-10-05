@@ -164,6 +164,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteCodex.h" />
+    <ClInclude Include="SpriteNumbers.h" />
     <ClInclude Include="ticker.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="wall.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="scoreboard.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteCodex.cpp" />
+    <ClCompile Include="SpriteNumbers.cpp" />
     <ClCompile Include="ticker.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="wall.cpp" />

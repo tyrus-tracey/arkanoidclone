@@ -3,6 +3,7 @@
 #include "rect.h"
 #include "Colors.h"
 #include "HudFuelGauge.h"
+#include "SpriteNumbers.h"
 
 class Hud
 {
