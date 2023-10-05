@@ -18,6 +18,7 @@ levelBook::levelBook(Graphics& _gfx)
 {
 	levels.push_back(genLv1());
 	levels.push_back(genLv2());
+	levels.push_back(genLv3());
 	lvIter = levels.begin();
 }
 
@@ -40,15 +41,13 @@ bool levelBook::advanceLevel()
 levelParams levelBook::genLv1()
 {
 	levelParams out;
-	out.wallSize = BIG;
-	out.ballPos = { -1, -1};
-	out.ballVel = { 0, 1 };
-	out.coreLoc = { 3, 1};
+	out.wallSize = MICRO; //7x13
+	out.ballPos = { -1,-1 };
+	out.ballVel = { 0,1 };
+	out.coreLoc = { 3, 1 };
 
-	initBrickHori(out, 4, 0, 19, RED_BRICK);
-	initBrickHori(out, 5, 0, 19, BLUE_BRICK);
-	initBrickHori(out, 6, 0, 30, RED_BRICK);
-
+	initBrickHori(out, 4, 0, 13, RED_BRICK);
+	initBrickHori(out, 5, 0, 13, BLUE_BRICK);
 	return out;
 }
 
@@ -64,6 +63,21 @@ levelParams levelBook::genLv2()
 	initBrickHori(out, 10, 3, 7, BLUE_BRICK);
 	initBrickVert(out, 3, 0, 10, BLUE_BRICK);
 	initBrickVert(out, 7, 0, 10, BLUE_BRICK);
+
+	return out;
+}
+
+levelParams levelBook::genLv3()
+{
+	levelParams out;
+	out.wallSize = BIG;
+	out.ballPos = { -1, -1 };
+	out.ballVel = { 0, 1 };
+	out.coreLoc = { 3, 1 };
+
+	initBrickHori(out, 4, 0, 19, RED_BRICK);
+	initBrickHori(out, 5, 0, 19, BLUE_BRICK);
+	initBrickHori(out, 6, 0, 30, RED_BRICK);
 
 	return out;
 }

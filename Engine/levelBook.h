@@ -13,6 +13,7 @@ public:
 private:
 	levelParams genLv1();
 	levelParams genLv2();
+	levelParams genLv3();
 
 
 	void initBrickRect(levelParams& params, const gridLocation topLeft, const gridLocation botRight, const brickTypeEnum brickType);
