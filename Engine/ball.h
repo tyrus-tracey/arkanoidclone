@@ -3,7 +3,7 @@
 #include "Vec2.h"
 #include "Graphics.h"
 #include "SpriteCodex.h"
-#include "Sound.h"
+#include "Soundbank.h"
 #include "wall.h"
 #include "ticker.h"
 #include "Keyboard.h"
@@ -15,7 +15,7 @@ public:
 	ball(const ball& other);
 	ball(Vec2 spawnPos);
 	ball(Vec2 spawnPos, Vec2 velocity);
-	void update(const wall& lvlWalls, const Keyboard& kbd, float dt);
+	void update(const wall& lvlWalls, const Keyboard& kbd, Soundbank& soundbank, float dt);
 	void reset();
 	void reboundX();
 	void reboundY();
@@ -58,6 +58,5 @@ private:
 	ticker tSpawnGrace = ticker(2.0f);
 	ticker tBallLockCooldown = ticker(0.25f);
 	ticker tBallExplode = ticker(1.0f);
-	Sound sndRebound = Sound(L"Sounds\\arkbrick.wav");
 };
 

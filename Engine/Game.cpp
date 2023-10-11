@@ -77,13 +77,13 @@ void Game::UpdateModel()
 
 void Game::updateElements(const float dt)
 {
-	pad.update(wnd.kbd, lvl.getWalls(), balls, dt);
-	lvl.update(balls, pad, dt);
+	pad.update(wnd.kbd, lvl.getWalls(), balls, soundbank, dt);
+	lvl.update(balls, pad, soundbank, dt);
 
 	std::list<ball>::iterator bIt = balls.begin();
 	while (bIt != balls.end()) {
 		if ((*bIt).isLive()) {
-			(*bIt++).update(lvl.getWalls(), wnd.kbd, dt);
+			(*bIt++).update(lvl.getWalls(), wnd.kbd, soundbank, dt);
 		}
 		else {
 			bIt = balls.erase(bIt);

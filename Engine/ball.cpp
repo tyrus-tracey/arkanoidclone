@@ -57,7 +57,7 @@ void ball::reboundY()
 	vel.y *= -1.0f;
 }
 
-void ball::update(const wall& lvlWalls, const Keyboard& kbd, float dt)
+void ball::update(const wall& lvlWalls, const Keyboard& kbd, Soundbank& soundbank, float dt)
 {
 	if (!live) { return; }
 	if (!tSpawnGrace.ended()) {
@@ -82,8 +82,7 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, float dt)
 	move(dt);
 	clamp(lvlWalls);
 	if (collisionWalls(lvlWalls)) {
-		sndRebound.StopOne();
-		sndRebound.Play();
+		soundbank.wallRebound();
 	}
 }
 

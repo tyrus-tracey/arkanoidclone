@@ -6,6 +6,7 @@
 #include "wall.h"
 #include "paddle.h"
 #include "levelParams.h"
+#include "Soundbank.h"
 
 	/// <summary>
 	/// Overlooks all brick collision and draw operations for a given level.
@@ -19,7 +20,7 @@ public:
 	brickManager& operator=(brickManager other);
 	~brickManager();
 	void initializeBricks();
-	void update(std::list<ball>& balls, paddle& p);
+	void update(std::list<ball>& balls, paddle& p, Soundbank& soundbank);
 	void draw(Graphics& gfx);
 	void createBrick(brickInitInstruction initInstr);
 	brick* getLastCollidedBrickRef() const;

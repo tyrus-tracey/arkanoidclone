@@ -1,20 +1,5 @@
 #include "brick.h"
 
-//brick::brick()
-//	: loc(0,0), pos(0,0)
-//{
-//}
-//
-//brick::brick(const brick& b)
-//	: loc(b.loc), pos(b.pos)
-//{
-//}
-//
-//brick::brick(gridLocation _loc)
-//	: loc(_loc)
-//{
-//}
-
 redBrick::redBrick(gridLocation _loc)
 {
 	loc = _loc;
@@ -57,8 +42,6 @@ void brick::collideBall(ball& b)
 		b.reboundX();
 	}
 	b.pushOut(hitbox());
-	sndBrick.StopOne();
-	sndBrick.Play();
 	takeHit();
 }
 

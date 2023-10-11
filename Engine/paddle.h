@@ -3,7 +3,7 @@
 #include "Keyboard.h"
 #include "Graphics.h"
 #include "Vec2.h"
-#include "Sound.h"
+#include "Soundbank.h"
 #include "Colors.h"
 #include "rect.h"
 #include "ball.h"
@@ -14,7 +14,7 @@ class paddle
 public:
 	paddle();
 	paddle(const wall& lvlWalls);
-	void update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, float dt);
+	void update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, Soundbank& soundbank, float dt);
 	void draw(Graphics& gfx) const;
 	void reset(const wall& lvlWalls);
 	void addFuel(unsigned int amt);
@@ -40,6 +40,5 @@ private:
 	Color cCore = Colors::White;
 	Color cFuel = Colors::Yellow;
 	Color cWing = Colors::Red;
-	Sound sndPaddle = Sound(L"Sounds\\arkpad.wav");
 };
 

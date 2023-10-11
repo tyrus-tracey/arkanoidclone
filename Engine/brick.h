@@ -4,7 +4,6 @@
 #include "Vec2.h"
 #include "Colors.h"
 #include "Graphics.h"
-#include "Sound.h"
 #include "ball.h"
 #include "gridLocation.h"
 
@@ -38,8 +37,6 @@ private:
 	static constexpr float HEIGHT = 20.0f;
 	bool live = true;
 	unsigned int fuelAmt = 10;
-	Sound sndBrick = Sound(L"Sounds\\arkbrick.wav");
-
 };
 
 

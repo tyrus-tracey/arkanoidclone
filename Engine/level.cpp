@@ -23,9 +23,9 @@ level::level(Graphics& gfx, levelParams& params)
 	initBallSpawnPos();
 }
 
-void level::update(std::list<ball>& balls, paddle& p, const float dt)
+void level::update(std::list<ball>& balls, paddle& p, Soundbank& soundbank, const float dt)
 {
-	brickMan.update(balls, p);
+	brickMan.update(balls, p, soundbank);
 	lvlCore.update(balls, dt);
 }
 

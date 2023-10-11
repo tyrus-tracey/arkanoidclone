@@ -72,6 +72,6 @@ private:
 	int lives = 4;
 	std::list<ball> balls;
 	
-
+	Soundbank soundbank;
 	float speedslow = 25.0f;
 };

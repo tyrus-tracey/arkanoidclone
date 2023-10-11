@@ -10,13 +10,12 @@ paddle::paddle(const wall& lvlWalls)
 	resetPosition(lvlWalls);
 }
 
-void paddle::update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, float dt)
+void paddle::update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, Soundbank& soundbank, float dt)
 {
 	moveKbd(kbd, dt);
 	clamp(lvlWalls);
 	if (collisionBall(balls)) {
-		sndPaddle.StopOne();
-		sndPaddle.Play();
+		soundbank.paddleRebound();
 	}
 }
 

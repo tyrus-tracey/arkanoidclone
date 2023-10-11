@@ -8,8 +8,7 @@
 #include "enemyCore.h"
 #include "ball.h"
 #include "paddle.h"
-//#include "gridLocation.h"
-//#include "brick.h"
+#include "Soundbank.h"
 #include "levelParams.h"
 
 /// <summary>
@@ -21,7 +20,7 @@ class level
 public:
 	level(Graphics& gfx);
 	level(Graphics& gfx, levelParams& params);
-	void update(std::list<ball>& balls, paddle& p, const float dt);
+	void update(std::list<ball>& balls, paddle& p, Soundbank& soundbank, const float dt);
 	void draw(Graphics& gfx);
 	bool isGoalsDone() const;
 	bool isComplete() const;

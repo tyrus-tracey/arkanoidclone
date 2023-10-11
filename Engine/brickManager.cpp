@@ -40,7 +40,7 @@ void brickManager::initializeBricks()
 
 // Checks which bricks are in contact with ball. Of those bricks, finds 
 // the closest one and initiates a collision with it.
-void brickManager::update(std::list<ball>& balls, paddle& p)
+void brickManager::update(std::list<ball>& balls, paddle& p, Soundbank& soundbank)
 {
     for (ball& b : balls) {
         vector<vector<brick*>::iterator> overlappingBricks = runOverlapChecks(b);
@@ -52,6 +52,7 @@ void brickManager::update(std::list<ball>& balls, paddle& p)
                 if (!(*collidedBrick)->isLive()) { // If brick dead from colliding
                     delete *collidedBrick;
                     bricks.erase(collidedBrick);
+                    soundbank.brickHit();
                 }
             }
         }
