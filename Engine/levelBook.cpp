@@ -47,7 +47,7 @@ levelParams levelBook::genLv1()
 	out.coreLoc = { 3, 1 };
 
 	initBrickHori(out, 4, 0, 13, RED_BRICK);
-	initBrickHori(out, 5, 0, 13, BLUE_BRICK);
+	initBrickHori(out, 5, 0, 13, ROCK);
 	return out;
 }
 

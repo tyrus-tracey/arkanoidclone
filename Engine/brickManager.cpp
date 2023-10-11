@@ -123,6 +123,9 @@ brick* brickManager::allocateBrick(brickInitInstruction initInstr)
     case BLUE_BRICK:
         b = new blueBrick(initInstr.loc);
         break;
+    case ROCK:
+        b = new rock(initInstr.loc);
+        break;
     default:
         break;
     }

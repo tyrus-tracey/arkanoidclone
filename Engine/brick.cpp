@@ -1,6 +1,11 @@
 #include "brick.h"
 
-redBrick::redBrick(gridLocation _loc)
+rock::rock(const gridLocation _loc)
+{
+	loc = _loc;
+}
+
+
 redBrick::redBrick(const gridLocation _loc)
 {
 	loc = _loc;

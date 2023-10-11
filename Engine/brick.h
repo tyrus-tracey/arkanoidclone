@@ -40,6 +40,14 @@ private:
 };
 
 
+class rock : public brick
+{
+public:
+	rock(const gridLocation _loc);
+	void takeHit() { return; }
+	Color getColor() const { return Colors::Gray; }
+};
+
 
 class colorBrick : public brick
 {
