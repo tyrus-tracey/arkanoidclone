@@ -47,9 +47,9 @@ void brickManager::update(std::list<ball>& balls, paddle& p, Soundbank& soundban
         if (!overlappingBricks.empty()) {
             chooseCollidingBrick(overlappingBricks, b);
             if (collidedBrick != bricks.end()) {
-                p.addFuel((*collidedBrick)->getFuelAmt());
                 (*collidedBrick)->collideBall(b);
                 if (!(*collidedBrick)->isLive()) { // If brick dead from colliding
+                    p.addFuel((*collidedBrick)->getFuelAmt());
                     delete *collidedBrick;
                     bricks.erase(collidedBrick);
                     soundbank.brickHit();
