@@ -48,7 +48,7 @@ class colorBrick : public brick
 
 class redBrick : public colorBrick {
 public:
-	redBrick(gridLocation _loc);
+	redBrick(const gridLocation _loc);
 	redBrick(const redBrick& other);
 	Color getColor() const { return Colors::Red; }
 	
@@ -56,6 +56,6 @@ public:
 
 class blueBrick : public colorBrick {
 public:
-	blueBrick(gridLocation _loc);
+	blueBrick(const gridLocation _loc);
 	Color getColor() const { return Colors::Blue; }
 };

@@ -1,6 +1,7 @@
 #include "brick.h"
 
 redBrick::redBrick(gridLocation _loc)
+redBrick::redBrick(const gridLocation _loc)
 {
 	loc = _loc;
 }
@@ -10,7 +11,7 @@ redBrick::redBrick(const redBrick& other)
 	loc = other.loc;	
 }
 
-blueBrick::blueBrick(gridLocation _loc) 
+blueBrick::blueBrick(const gridLocation _loc) 
 {
 	loc = _loc;
 }
