@@ -44,7 +44,7 @@ private:
 	void move(const float dt);
 	void clamp(const wall& lvlWalls);
 	bool collisionWalls(const wall& lvlWalls);
-	void detonate();
+	void detonate(Soundbank& soundbank);
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();

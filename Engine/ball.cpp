@@ -73,7 +73,7 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, Soundbank& soundban
 	}
 	
 	if (armed && kbd.KeyIsPressed(VK_RETURN)) {
-		detonate();
+		detonate(soundbank);
 	}
 	
 	if (locked) { return; }
@@ -131,8 +131,9 @@ bool ball::collisionWalls(const wall& lvlWalls)
 	return rebounded;
 }
 
-void ball::detonate()
+void ball::detonate(Soundbank& soundbank)
 {
+	soundbank.ballExplosion();
 	tBallExplode.wake();
 }
 
