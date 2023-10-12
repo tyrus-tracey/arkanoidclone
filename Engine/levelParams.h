@@ -2,12 +2,7 @@
 #include <vector>
 #include "Vec2.h"
 #include "gridLocation.h"
-
-
-// Enum representing all concrete brick classes.
-enum brickTypeEnum {
-	RED_BRICK, BLUE_BRICK, ROCK
-};
+#include "brickType.h"
 
 enum wallSizeEnum {
 	MICRO, LIGHT, NORMAL, BIG

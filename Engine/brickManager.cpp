@@ -48,12 +48,15 @@ void brickManager::update(std::list<ball>& balls, paddle& p, Soundbank& soundban
             chooseCollidingBrick(overlappingBricks, b);
             if (collidedBrick != bricks.end()) {
                 (*collidedBrick)->collideBall(b);
+                
+                playBrickHit(soundbank, (*collidedBrick)->getType());
+
                 if (!(*collidedBrick)->isLive()) { // If brick dead from colliding
                     p.addFuel((*collidedBrick)->getFuelAmt());
                     delete *collidedBrick;
                     bricks.erase(collidedBrick);
-                    soundbank.brickHit();
                 }
+
             }
         }
     }
@@ -159,5 +162,23 @@ void brickManager::chooseCollidingBrick(vector<vector<brick*>::iterator> overlap
                 collidedBrick = *i;
             }
         }
+    }
+}
+
+
+void brickManager::playBrickHit(Soundbank& soundbank, brickTypeEnum bType) const
+{
+    switch (bType) {
+    case RED_BRICK:
+        soundbank.brickHit();
+        break;
+    case BLUE_BRICK:
+        soundbank.brickHit();
+        break;
+    case ROCK:
+        soundbank.rockHit();
+        break;
+    default:
+        return;
     }
 }

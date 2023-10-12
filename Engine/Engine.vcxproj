@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="ball.h" />
     <ClInclude Include="brick.h" />
+    <ClInclude Include="brickType.h" />
     <ClInclude Include="brickManager.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />

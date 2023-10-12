@@ -6,6 +6,7 @@
 #include "Graphics.h"
 #include "ball.h"
 #include "gridLocation.h"
+#include "brickType.h"
 
 
 class brick
@@ -20,10 +21,12 @@ public:
 	rect hitbox() const;
 	Vec2 getPos() const;
 	void setPos(const wall& walls);
+	virtual brickTypeEnum getType() const = 0;
 	static float getWidth();
 	static float getHeight();
 	unsigned int getFuelAmt() const;
 	void operator=(const brick& b);
+	
 
 protected:
 	gridLocation loc;
@@ -46,6 +49,7 @@ public:
 	rock(const gridLocation _loc);
 	void takeHit() { return; }
 	Color getColor() const { return Colors::Gray; }
+	brickTypeEnum getType() const { return ROCK; }
 };
 
 
@@ -59,6 +63,7 @@ public:
 	redBrick(const gridLocation _loc);
 	redBrick(const redBrick& other);
 	Color getColor() const { return Colors::Red; }
+	brickTypeEnum getType() const { return RED_BRICK; }
 	
 };
 
@@ -66,4 +71,5 @@ class blueBrick : public colorBrick {
 public:
 	blueBrick(const gridLocation _loc);
 	Color getColor() const { return Colors::Blue; }
+	brickTypeEnum getType() const { return BLUE_BRICK; }
 };
