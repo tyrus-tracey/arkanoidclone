@@ -26,7 +26,11 @@ level::level(Graphics& gfx, levelParams& params)
 void level::update(std::list<ball>& balls, paddle& p, Soundbank& soundbank, const float dt)
 {
 	brickMan.update(balls, p, soundbank);
-	lvlCore.update(balls, dt);
+	lvlCore.update(balls, soundbank, dt);
+	if (!lvlCore.isLive()) {
+		tLevelCompleteWait.wake();
+		tLevelCompleteWait.tick(dt);
+	}
 }
 
 void level::draw(Graphics& gfx)
@@ -38,12 +42,12 @@ void level::draw(Graphics& gfx)
 
 bool level::isGoalsDone() const
 {
-	return lvlCore.isExploding();
+	return lvlCore.isExploding() || tLevelCompleteWait.isActive() || isComplete();
 }
 
 bool level::isComplete() const
 {
-	return !lvlCore.isLive();
+	return tLevelCompleteWait.ended();
 }
 
 bool level::isCoreExploding() const

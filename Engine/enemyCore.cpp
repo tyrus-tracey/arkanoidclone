@@ -4,6 +4,7 @@ enemyCore::enemyCore(Vec2 corePos)
     : pos(corePos)
 {
     tDeathAnimTime.sleep();
+    tMiniExplosionTime.sleep();
 }
 
 rect enemyCore::hitbox() const
@@ -16,18 +17,28 @@ rect enemyCore::hitboxCore() const
     return hitbox().getResizeUniform(COREMARGIN);
 }
 
-void enemyCore::update(std::list<ball>& balls, const float dt)
+void enemyCore::update(std::list<ball>& balls, Soundbank& soundbank, const float dt)
 {
     if (!live) { return; }
     if (tDeathAnimTime.isActive()) {
         tDeathAnimTime.tick(dt);
-        if (tDeathAnimTime.ended()) { kill(); }
+        tMiniExplosionTime.tick(dt);
+
+        if (tDeathAnimTime.ended()) { explode(soundbank); }
+        
+        if (!tMiniExplosionTime.isActive()) {
+            soundbank.coreExplosionMini();
+            xdeviation = boomX(rng);
+            ydeviation = boomY(rng);
+            tMiniExplosionTime.restart();
+        }
+
         return;
     }
 
     if (hasBall()) { 
         if (heldBall->isExploding()) {
-            explode();
+            startExplode();
         }
         tBallHoldTime.tick(dt);
         if (!tBallHoldTime.isActive()) {
@@ -64,10 +75,16 @@ void enemyCore::eatBall()
     heldBall = nullptr;
 }
 
-void enemyCore::explode()
+void enemyCore::startExplode()
 {
     tDeathAnimTime.restart();
     eatBall();
+}
+
+void enemyCore::explode(Soundbank& soundbank)
+{
+    soundbank.coreExplosionFinal();
+    kill();
 }
 
 void enemyCore::kill()
@@ -98,15 +115,17 @@ ball* enemyCore::getBall() const
 void enemyCore::draw(Graphics& gfx)
 {
     if (!live) { return; }
+
+    int x, y;
+
     SpriteCodex::DrawCore(pos, gfx);
     if (tDeathAnimTime.isActive()) {
-        int left = int(hitbox().left);
-        int right = int(hitbox().right);
-        int top = int(hitbox().top);
-        int bot = int(hitbox().bottom);
-        xDist = std::uniform_int_distribution<int>(left, right);
-        yDist = std::uniform_int_distribution<int>(top, bot);
-        gfx.DrawRing(xDist(rng), yDist(rng), 10, Colors::Yellow, 3, false);
+        if (tMiniExplosionTime.isActive()) {
+            x = hitbox().left + xdeviation;
+            y = hitbox().top + ydeviation;
+
+            gfx.DrawRing(x, y, 10, Colors::Yellow, 3, false);
+        }
     }
 }
 

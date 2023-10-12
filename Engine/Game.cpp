@@ -70,7 +70,7 @@ void Game::UpdateModel()
 	dt = ft.Mark();
 	updateElements(dt);
 
-	if (balls.empty() && !lvl.isCoreExploding()) {
+	if (balls.empty() && !lvl.isGoalsDone()) {
 		respawn();
 	}
 }

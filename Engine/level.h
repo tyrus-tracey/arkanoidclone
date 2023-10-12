@@ -10,6 +10,7 @@
 #include "paddle.h"
 #include "Soundbank.h"
 #include "levelParams.h"
+#include "ticker.h"
 
 /// <summary>
 /// Store for level-related data, to be loaded in by game.cpp and such.
@@ -37,5 +38,6 @@ private:
 	wall lvlWalls;
 	enemyCore lvlCore;
 	brickManager brickMan;
+	ticker tLevelCompleteWait = ticker(3.0f);
 };
 
