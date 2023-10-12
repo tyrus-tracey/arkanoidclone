@@ -4,13 +4,14 @@
 #include "Colors.h"
 #include "HudFuelGauge.h"
 #include "SpriteNumbers.h"
+#include "Soundbank.h"
 
 class Hud
 {
 public:
 	Hud(Graphics& gfx);
 	void draw(Graphics& gfx) const;
-	void update(const float _playerFuel, const bool armedBallLocked, const float dt);
+	void update(const float _playerFuel, const bool armedBallLocked, Soundbank& soundbank, const float dt);
 
 
 private:

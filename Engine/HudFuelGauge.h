@@ -3,12 +3,13 @@
 #include "Colors.h"
 #include "rect.h"
 #include "oscillator.h"
+#include "Soundbank.h"
 
 class HudFuelGauge
 {
 public:
 	HudFuelGauge(Vec2 _pos, const float hudWidth);
-	void update(const float _playerFuel, const bool armedBallLocked, const float dt);
+	void update(const float _playerFuel, const bool armedBallLocked, Soundbank& soundbank, const float dt);
 	void draw(Graphics& gfx) const;
 
 	const float WIDTH;
@@ -23,6 +24,8 @@ private:
 
 	float playerFuel = 0.0f;
 	oscillator lightFlasher = oscillator(0.05f);
+	bool soundBeep = true;
+
 
 	void drawGauge(Graphics& gfx) const;
 	void drawFuel(Graphics& gfx, const float amount) const;
