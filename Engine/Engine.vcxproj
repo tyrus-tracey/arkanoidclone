@@ -170,6 +170,7 @@
     <ClInclude Include="ticker.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="wall.h" />
+    <ClInclude Include="wallType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ball.cpp" />
