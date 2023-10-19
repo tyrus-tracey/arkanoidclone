@@ -3,7 +3,7 @@
 #include "Keyboard.h"
 #include "Graphics.h"
 #include "Vec2.h"
-#include "Soundbank.h"
+#include "EventManager.h"
 #include "Colors.h"
 #include "rect.h"
 #include "ball.h"
@@ -14,7 +14,7 @@ class paddle
 public:
 	paddle();
 	paddle(const wall& lvlWalls);
-	void update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, Soundbank& soundbank, float dt);
+	void update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, EventManager& eventManager, float dt);
 	void draw(Graphics& gfx) const;
 	void reset(const wall& lvlWalls);
 	void addFuel(unsigned int amt);

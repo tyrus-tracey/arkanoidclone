@@ -23,13 +23,20 @@ level::level(Graphics& gfx, levelParams& params)
 	initBallSpawnPos();
 }
 
-void level::update(std::list<ball>& balls, paddle& p, Soundbank& soundbank, const float dt)
+void level::update(std::list<ball>& balls, paddle& p, EventManager& eventmanager, const float dt)
 {
-	brickMan.update(balls, p, soundbank);
-	lvlCore.update(balls, soundbank, dt);
+	brickMan.update(balls, p, eventmanager);
+	lvlCore.update(balls, eventmanager, dt);
+
 	if (!lvlCore.isLive()) {
+		eventmanager.flag_LevelGoalsComplete.raise();
 		tLevelCompleteWait.wake();
-		tLevelCompleteWait.tick(dt);
+	}
+	tLevelCompleteWait.tick(dt);
+	if (tLevelCompleteWait.ended()) {
+		eventmanager.flag_LevelOver.raise();
+		tLevelCompleteWait.resetTime();
+		tLevelCompleteWait.sleep();
 	}
 }
 
@@ -40,27 +47,9 @@ void level::draw(Graphics& gfx)
 	lvlCore.draw(gfx);
 }
 
-bool level::isGoalsDone() const
-{
-	return lvlCore.isExploding() || tLevelCompleteWait.isActive() || isComplete();
-}
-
 bool level::isComplete() const
 {
 	return tLevelCompleteWait.ended();
-}
-
-bool level::isCoreExploding() const
-{
-	return lvlCore.isExploding();
-}
-
-bool level::isCoreHoldingArmedBall() const
-{
-	if (lvlCore.hasBall()) {
-		return lvlCore.getBall()->isArmed();
-	} 
-	return false;
 }
 
 Vec2 level::getBallSpawnPos() const

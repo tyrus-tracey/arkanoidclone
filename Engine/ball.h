@@ -3,7 +3,7 @@
 #include "Vec2.h"
 #include "Graphics.h"
 #include "SpriteCodex.h"
-#include "Soundbank.h"
+#include "EventManager.h"
 #include "wall.h"
 #include "ticker.h"
 #include "Keyboard.h"
@@ -15,7 +15,7 @@ public:
 	ball(const ball& other);
 	ball(Vec2 spawnPos);
 	ball(Vec2 spawnPos, Vec2 velocity);
-	void update(const wall& lvlWalls, const Keyboard& kbd, Soundbank& soundbank, float dt);
+	void update(const wall& lvlWalls, const Keyboard& kbd, EventManager& eventmanager, float dt);
 	void reset();
 	void reboundX();
 	void reboundY();
@@ -44,7 +44,7 @@ private:
 	void move(const float dt);
 	void clamp(const wall& lvlWalls);
 	bool collisionWalls(const wall& lvlWalls);
-	void detonate(Soundbank& soundbank);
+	void detonate(EventManager& eventmanager);
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();

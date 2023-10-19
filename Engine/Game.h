@@ -36,6 +36,7 @@
 #include "scoreboard.h"
 #include <list>
 #include "Hud.h"
+#include "EventManager.h"
 
 class Game
 {
@@ -73,5 +74,7 @@ private:
 	std::list<ball> balls;
 	
 	Soundbank soundbank;
+	EventManager eventManager;
+	
 	float speedslow = 25.0f;
 };

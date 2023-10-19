@@ -40,7 +40,7 @@ void brickManager::initializeBricks()
 
 // Checks which bricks are in contact with ball. Of those bricks, finds 
 // the closest one and initiates a collision with it.
-void brickManager::update(std::list<ball>& balls, paddle& p, Soundbank& soundbank)
+void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& eventManager)
 {
     for (ball& b : balls) {
         vector<vector<brick*>::iterator> overlappingBricks = runOverlapChecks(b);
@@ -49,7 +49,7 @@ void brickManager::update(std::list<ball>& balls, paddle& p, Soundbank& soundban
             if (collidedBrick != bricks.end()) {
                 (*collidedBrick)->collideBall(b);
                 
-                playBrickHit(soundbank, (*collidedBrick)->getType());
+                eventManager.brickHit((*collidedBrick)->getType());
 
                 if (!(*collidedBrick)->isLive()) { // If brick dead from colliding
                     p.addFuel((*collidedBrick)->getFuelAmt());
@@ -162,23 +162,5 @@ void brickManager::chooseCollidingBrick(vector<vector<brick*>::iterator> overlap
                 collidedBrick = *i;
             }
         }
-    }
-}
-
-
-void brickManager::playBrickHit(Soundbank& soundbank, brickTypeEnum bType) const
-{
-    switch (bType) {
-    case RED_BRICK:
-        soundbank.brickHit();
-        break;
-    case BLUE_BRICK:
-        soundbank.brickHit();
-        break;
-    case ROCK:
-        soundbank.rockHit();
-        break;
-    default:
-        return;
     }
 }
