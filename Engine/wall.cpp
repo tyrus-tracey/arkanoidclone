@@ -1,8 +1,9 @@
 #include "wall.h"
 
 wall::wall(const Graphics& gfx, wallSizeEnum wallSize)
-	: bounds(rect(Vec2(MARGIN, MARGIN), wallType::getSize(wallSize)))
+	: bounds(rect({0,0}, wallType::getSize(wallSize)))
 {
+	bounds.move(Vec2(MARGIN, MARGIN));
 	ensureWallsWithinGfx(gfx);
 	rows = wallType::getGridDims(wallSize).x;
 	cols = wallType::getGridDims(wallSize).y;

@@ -37,8 +37,8 @@ void brickManager::initializeBricks()
     for (vector<brickInitInstruction>::const_iterator it = initInstructionList.begin(); it != initInstructionList.end(); it++) {
         int x = (*it).loc.x;
         int y = (*it).loc.y;
-        if (!occupied[x][y]) {
-            occupied[x][y] = createBrick(*it);
+        if (!occupied[y][x]) {
+            occupied[y][x] = createBrick(*it);
         }
     }
 }

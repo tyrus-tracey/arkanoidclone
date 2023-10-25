@@ -1,7 +1,7 @@
 #pragma once
 #include "Graphics.h"
 #include "rect.h"
-#include "levelParams.h"
+#include "wallType.h"
 
 class wall
 {

@@ -1,7 +1,8 @@
 #pragma once
 #include <utility>
 #include "Vec2.h"
-#include "brick.h"
+#include "gridLocation.h"
+#include "gameVals.h"
 
 /*
 MICRO:
@@ -21,16 +22,18 @@ enum wallSizeEnum {
 struct wallType {
 	static gridLocation getGridDims(const wallSizeEnum e) {
 		switch (e) {
-		case MICRO:		return gridLocation(7, 13);
-		case LIGHT:		return gridLocation(9, 20);
-		case NORMAL:	return gridLocation(11, 25);
-		case BIG:		return gridLocation(15, 30);
+		case MICRO:		return gridLocation(7, 30);
+		case LIGHT:		return gridLocation(9, 35);
+		case NORMAL:	return gridLocation(11, 40);
+		case BIG:		return gridLocation(15, 45);
 		default:		return gridLocation(0, 0);
 		}
 	};
 
 	static Vec2 getSize(const wallSizeEnum e) {
 		gridLocation grid = getGridDims(e);
-		return Vec2(grid.x * brick::getWidth(), grid.y * brick::getHeight());
+		float x = grid.x * BRICK_WIDTH;
+		float y = grid.y * BRICK_HEIGHT;
+		return Vec2(grid.x * BRICK_WIDTH, grid.y * BRICK_HEIGHT);
 	}
 };

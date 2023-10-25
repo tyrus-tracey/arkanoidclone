@@ -147,6 +147,7 @@
     <ClInclude Include="enemyCore.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="gameVals.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="gridLocation.h" />
     <ClInclude Include="Hud.h" />
