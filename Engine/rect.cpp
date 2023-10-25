@@ -51,6 +51,16 @@ rect& rect::resizeUniform(const float amt)
 	return *this = getResizeUniform(amt);
 }
 
+float rect::getWidth() const
+{
+	return right - left;
+}
+
+float rect::getHeight() const
+{
+	return bottom - top;
+}
+
 void rect::centerOnto(const rect& parent)
 {
 	float width = right - left;

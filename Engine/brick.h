@@ -7,6 +7,7 @@
 #include "ball.h"
 #include "gridLocation.h"
 #include "brickType.h"
+#include "gameVals.h"
 
 
 class brick
@@ -36,8 +37,6 @@ private:
 	virtual Color getColor() const = 0;
 	virtual void takeHit() = 0;
 	static constexpr float MARGIN = -1.0f;
-	static constexpr float WIDTH = 60.0f;
-	static constexpr float HEIGHT = 20.0f;
 	bool live = true;
 	unsigned int fuelAmt = 10;
 };

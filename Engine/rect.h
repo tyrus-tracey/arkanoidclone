@@ -11,6 +11,8 @@ public:
 	Vec2 getMidpoint() const;
 	rect getResizeUniform(const float amt) const;
 	rect& resizeUniform(const float amt);
+	float getWidth() const;
+	float getHeight() const;
 	void centerOnto(const rect& parent);
 	void move(const Vec2 vec);
 	bool isOverlapping(const rect& other) const;

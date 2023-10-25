@@ -53,7 +53,7 @@ void brick::collideBall(ball& b)
 
 rect brick::hitbox() const
 {
-	return rect(pos, WIDTH, HEIGHT);
+	return rect(pos, getWidth(), getHeight());
 }
 
 Vec2 brick::getPos() const
@@ -64,7 +64,7 @@ Vec2 brick::getPos() const
 // Calculates brick position from location value, relative to walls
 void brick::setPos(const wall& walls)
 {
-	pos = walls.getTopLeft() + Vec2(WIDTH * loc.x, HEIGHT * loc.y);
+	pos = walls.getTopLeft() + Vec2(getWidth() * loc.x, getHeight() * loc.y);
 }
 
 void brick::kill()
@@ -87,12 +87,12 @@ bool brick::isLive() const
 
 float brick::getWidth()
 {
-	return WIDTH;
+	return BRICK_WIDTH;
 }
 
 float brick::getHeight()
 {
-	return HEIGHT;
+	return BRICK_HEIGHT;
 }
 
 unsigned int brick::getFuelAmt() const

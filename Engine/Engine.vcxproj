@@ -147,6 +147,7 @@
     <ClInclude Include="enemyCore.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="gameVals.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="gridLocation.h" />
     <ClInclude Include="Hud.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="ticker.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="wall.h" />
+    <ClInclude Include="wallType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ball.cpp" />

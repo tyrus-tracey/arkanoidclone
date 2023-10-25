@@ -33,8 +33,13 @@ brickManager::~brickManager()
 void brickManager::initializeBricks()
 {
     deleteBricks();
-    for (auto it = initInstructionList.begin(); it != initInstructionList.end(); it++) {
-        createBrick(*it);
+    vector<vector<bool>> occupied(wallCache.getRows(), vector<bool>(wallCache.getCols()));
+    for (vector<brickInitInstruction>::const_iterator it = initInstructionList.begin(); it != initInstructionList.end(); it++) {
+        int x = (*it).loc.x;
+        int y = (*it).loc.y;
+        if (!occupied[y][x]) {
+            occupied[y][x] = createBrick(*it);
+        }
     }
 }
 
@@ -72,11 +77,11 @@ void brickManager::draw(Graphics& gfx)
 }
 
 // Allocates and adds a brick to brick vector.
-void brickManager::createBrick(brickInitInstruction initInstr)
+bool brickManager::createBrick(brickInitInstruction initInstr)
 {
     brick* b = allocateBrick(initInstr);
     if (b == nullptr) {
-        return;
+        return false;
     }
     b->setPos(wallCache);
     if (b->isLive() && b->hitbox().isWithin(wallCache.getBounds())) {
@@ -84,7 +89,9 @@ void brickManager::createBrick(brickInitInstruction initInstr)
     }
     else {
         delete b;
+        return false;
     }
+    return true;
 }
 
 // Returns null if none exists.

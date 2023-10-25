@@ -22,7 +22,7 @@ public:
 	void initializeBricks();
 	void update(std::list<ball>& balls, paddle& p, Soundbank& soundbank);
 	void draw(Graphics& gfx);
-	void createBrick(brickInitInstruction initInstr);
+	bool createBrick(brickInitInstruction initInstr);
 	brick* getLastCollidedBrickRef() const;
 	std::vector<brick*>& getBricks();
 	unsigned int getNbricks() const;

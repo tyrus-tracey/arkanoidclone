@@ -3,10 +3,7 @@
 #include "Vec2.h"
 #include "gridLocation.h"
 #include "brickType.h"
-
-enum wallSizeEnum {
-	MICRO, LIGHT, NORMAL, BIG
-};
+#include "wallType.h"
 
 /*
 	Struct is sent to level's brickManager, which then allocates
