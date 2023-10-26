@@ -45,6 +45,8 @@ private:
 	void clamp(const wall& lvlWalls);
 	bool collisionWalls(const wall& lvlWalls);
 	void detonate(EventManager& eventmanager);
+	void updateTrail();
+	void drawTrail(Graphics& gfx) const;
 
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();
@@ -54,6 +56,8 @@ private:
 	float rad = 7.0f;
 	bool live = true;
 	bool armed = false;
+	static const int NUM_TRAILS = 4;
+	Vec2 trail[NUM_TRAILS];
 
 	ticker tSpawnGrace = ticker(2.0f);
 	ticker tBallLockCooldown = ticker(0.25f);

@@ -60,6 +60,7 @@ void ball::reboundY()
 void ball::update(const wall& lvlWalls, const Keyboard& kbd, EventManager& eventmanager, float dt)
 {
 	if (!live) { return; }
+	updateTrail();
 	if (!tSpawnGrace.ended()) {
 		tSpawnGrace.wake();
 		tSpawnGrace.tick(dt);
@@ -135,6 +136,21 @@ void ball::detonate(EventManager& eventmanager)
 {
 	eventmanager.ballDetonate();
 	tBallExplode.wake();
+}
+
+void ball::updateTrail()
+{
+	for (int i = NUM_TRAILS-1; i > 0; i--) {
+		trail[i] = trail[i - 1];
+	}
+	trail[0] = this->hitbox().getMidpoint();
+}
+
+void ball::drawTrail(Graphics& gfx) const
+{
+	for (int i = 0; i < NUM_TRAILS; i++) {
+		gfx.DrawRing(trail[i].x, trail[i].y, 5, Colors::Yellow, 2, false);
+	}
 }
 
 rect ball::hitbox() const
@@ -227,6 +243,7 @@ void ball::draw(Graphics& gfx)
 	}
 	if (live) {
 		if (armed) {
+			drawTrail(gfx);
 			SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 20);
 		}
 		else {
