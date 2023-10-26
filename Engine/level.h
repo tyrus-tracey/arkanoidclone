@@ -8,7 +8,7 @@
 #include "enemyCore.h"
 #include "ball.h"
 #include "paddle.h"
-#include "Soundbank.h"
+#include "EventManager.h"
 #include "levelParams.h"
 #include "ticker.h"
 
@@ -21,12 +21,9 @@ class level
 public:
 	level(Graphics& gfx);
 	level(Graphics& gfx, levelParams& params);
-	void update(std::list<ball>& balls, paddle& p, Soundbank& soundbank, const float dt);
+	void update(std::list<ball>& balls, paddle& p, EventManager& eventmanager, const float dt);
 	void draw(Graphics& gfx);
-	bool isGoalsDone() const;
 	bool isComplete() const;
-	bool isCoreExploding() const;
-	bool isCoreHoldingArmedBall() const;
 	Vec2 getBallSpawnPos() const;
 	Vec2 getBallSpawnVel() const;
 	wall getWalls() const;

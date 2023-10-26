@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 #include "SpriteCodex.h"
-#include "Soundbank.h"
+#include "EventManager.h"
 #include "Vec2.h"
 #include "ball.h"
 #include "rect.h"
@@ -15,12 +15,11 @@ public:
 	enemyCore(Vec2 corePos);
 	rect hitbox() const;
 	rect hitboxCore() const;
-	void update(std::list<ball>& balls, Soundbank& soundbank, const float dt);
+	void update(std::list<ball>& balls, EventManager& eventmanager, const float dt);
 	void draw(Graphics& gfx);
 	void releaseBall();
-	void startExplode();
-	bool isLive() const;
-	bool isExploding() const;
+	void startExplode(EventManager& eventmanager);
+	bool isLive();
 	bool hasBall() const;
 	ball* getBall() const;
 	void operator=(enemyCore& other);
@@ -30,7 +29,7 @@ public:
 private:
 	void eatBall();
 	void lockBall(ball* b);
-	void explode(Soundbank& soundbank);
+	void explode(EventManager& eventManager);
 	void kill();
 	Vec2 getRandDiagonal();
 

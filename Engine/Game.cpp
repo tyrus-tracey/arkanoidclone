@@ -27,11 +27,11 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	hud(gfx),
 	lvl(gfx),
-	lvlBook(gfx)
+	lvlBook(gfx),
+	pad(lvl.getWalls()),
+	eventManager(soundbank)
 {
 	loadLevel(lvlBook.readLevelData());
-	balls.push_back(ball(lvl.getBallSpawnPos(), lvl.getBallSpawnVel()));
-	pad = paddle(lvl.getWalls());
 }
 
 void Game::Go()
@@ -51,12 +51,9 @@ void Game::UpdateModel()
 		return;
 	}
 
-	if (lvl.isComplete() || wnd.kbd.KeyIsPressed(VK_DELETE)) {
+	if (eventManager.flag_LevelOver.update() || wnd.kbd.KeyIsPressed(VK_DELETE)) {
 		if (lvlBook.advanceLevel()) {
 			loadLevel(lvlBook.readLevelData());
-			pad.reset(lvl.getWalls());
-			balls.clear();
-			spawnBall(lvl);
 		} else { // NO MORE LEVELS. END OF GAME
 			//gameRunning = false;
 			//return;
@@ -70,31 +67,35 @@ void Game::UpdateModel()
 	dt = ft.Mark();
 	updateElements(dt);
 
-	if (balls.empty() && !lvl.isGoalsDone()) {
+	if (balls.empty() && !eventManager.flag_ballHoldSpawn.isRaised()) {
 		respawn();
 	}
 }
 
 void Game::updateElements(const float dt)
 {
-	pad.update(wnd.kbd, lvl.getWalls(), balls, soundbank, dt);
-	lvl.update(balls, pad, soundbank, dt);
+	pad.update(wnd.kbd, lvl.getWalls(), balls, eventManager, dt);
+	lvl.update(balls, pad, eventManager, dt);
 
 	std::list<ball>::iterator bIt = balls.begin();
 	while (bIt != balls.end()) {
 		if ((*bIt).isLive()) {
-			(*bIt++).update(lvl.getWalls(), wnd.kbd, soundbank, dt);
+			(*bIt++).update(lvl.getWalls(), wnd.kbd, eventManager, dt);
 		}
 		else {
 			bIt = balls.erase(bIt);
 		}
 	}
-	hud.update(pad.getFuel(), lvl.isCoreHoldingArmedBall(), soundbank, dt);
+	hud.update(pad.getFuel(), eventManager, dt);
 }
 
 void Game::loadLevel(levelParams params)
 {
 	lvl = level(gfx, params);
+	pad.reset(lvl.getWalls());
+	balls.clear();
+	spawnBall(lvl);
+	eventManager.levelNewLoaded();
 }
 
 void Game::spawnBall(Vec2 spawnLoc, Vec2 velocity)

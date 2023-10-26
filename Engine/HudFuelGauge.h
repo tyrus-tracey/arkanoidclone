@@ -3,13 +3,13 @@
 #include "Colors.h"
 #include "rect.h"
 #include "oscillator.h"
-#include "Soundbank.h"
+#include "EventManager.h"
 
 class HudFuelGauge
 {
 public:
 	HudFuelGauge(Vec2 _pos, const float hudWidth);
-	void update(const float _playerFuel, const bool armedBallLocked, Soundbank& soundbank, const float dt);
+	void update(const float _playerFuel, EventManager& eventmanager, const float dt);
 	void draw(Graphics& gfx) const;
 
 	const float WIDTH;

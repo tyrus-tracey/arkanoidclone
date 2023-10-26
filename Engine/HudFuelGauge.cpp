@@ -8,16 +8,16 @@ HudFuelGauge::HudFuelGauge(Vec2 _pos, const float hudWidth)
 	rectDetonateLight.move({0, -100});
 }
 
-void HudFuelGauge::update(const float _playerFuel, const bool armedBallLocked, Soundbank& soundbank, const float dt)
+void HudFuelGauge::update(const float _playerFuel, EventManager& eventmanager, const float dt)
 {
 	playerFuel = _playerFuel;
 
-	if (armedBallLocked) {
+	if (eventmanager.flag_ArmedBallLocked.isRaised()) {
  		lightFlasher.wake();
 		lightFlasher.tick(dt);
 
 		if (soundBeep) {
-			soundbank.lockBeep();
+			eventmanager.ballLockBeep();
 			soundBeep = false;
 		}
 		if (!lightFlasher.isOn()) {

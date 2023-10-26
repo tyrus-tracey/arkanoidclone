@@ -17,17 +17,18 @@ rect enemyCore::hitboxCore() const
     return hitbox().getResizeUniform(COREMARGIN);
 }
 
-void enemyCore::update(std::list<ball>& balls, Soundbank& soundbank, const float dt)
+void enemyCore::update(std::list<ball>& balls, EventManager& eventmanager, const float dt)
 {
     if (!live) { return; }
+    
     if (tDeathAnimTime.isActive()) {
         tDeathAnimTime.tick(dt);
         tMiniExplosionTime.tick(dt);
 
-        if (tDeathAnimTime.ended()) { explode(soundbank); }
+        if (tDeathAnimTime.ended()) { explode(eventmanager); }
         
         if (!tMiniExplosionTime.isActive()) {
-            soundbank.coreExplosionMini();
+            eventmanager.coreExplodeMini();
             xdeviation = boomX(rng);
             ydeviation = boomY(rng);
             tMiniExplosionTime.restart();
@@ -37,11 +38,18 @@ void enemyCore::update(std::list<ball>& balls, Soundbank& soundbank, const float
     }
 
     if (hasBall()) { 
-        if (heldBall->isExploding()) {
-            startExplode();
+        if (heldBall->isArmed()) {
+            eventmanager.flag_ArmedBallLocked.raise();
         }
+
+        if (heldBall->isExploding()) {
+            eventmanager.flag_ArmedBallLocked.clear();
+            startExplode(eventmanager);
+        }
+              
         tBallHoldTime.tick(dt);
         if (!tBallHoldTime.isActive()) {
+            eventmanager.flag_ArmedBallLocked.clear();
             releaseBall();
         }
         return;
@@ -75,15 +83,16 @@ void enemyCore::eatBall()
     heldBall = nullptr;
 }
 
-void enemyCore::startExplode()
+void enemyCore::startExplode(EventManager& eventmanager)
 {
+    eventmanager.coreExplodeStart();
     tDeathAnimTime.restart();
     eatBall();
 }
 
-void enemyCore::explode(Soundbank& soundbank)
+void enemyCore::explode(EventManager& eventmanager)
 {
-    soundbank.coreExplosionFinal();
+    eventmanager.coreExplodeFinal();
     kill();
 }
 
@@ -92,14 +101,9 @@ void enemyCore::kill()
     live = false;
 }
 
-bool enemyCore::isLive() const
+bool enemyCore::isLive()   
 {
     return live;
-}
-
-bool enemyCore::isExploding() const
-{
-    return tDeathAnimTime.isActive();
 }
 
 bool enemyCore::hasBall() const

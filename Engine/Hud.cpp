@@ -15,9 +15,9 @@ void Hud::draw(Graphics& gfx) const
 	SpriteNumbers::drawNum(1616886, getWorldVec({ 0,0 }), Colors::Cyan, gfx);
 }
 
-void Hud::update(const float _playerFuel, const bool armedBallLocked, Soundbank& soundbank, const float dt)
+void Hud::update(const float _playerFuel, EventManager& eventmanager, const float dt)
 {
-	fuelGauge.update(_playerFuel, armedBallLocked, soundbank, dt);
+	fuelGauge.update(_playerFuel, eventmanager, dt);
 }
 
 Vec2 Hud::getWorldVec(const Vec2 localVec) const

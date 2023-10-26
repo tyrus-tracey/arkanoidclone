@@ -57,7 +57,7 @@ void ball::reboundY()
 	vel.y *= -1.0f;
 }
 
-void ball::update(const wall& lvlWalls, const Keyboard& kbd, Soundbank& soundbank, float dt)
+void ball::update(const wall& lvlWalls, const Keyboard& kbd, EventManager& eventmanager, float dt)
 {
 	if (!live) { return; }
 	if (!tSpawnGrace.ended()) {
@@ -73,7 +73,7 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, Soundbank& soundban
 	}
 	
 	if (armed && kbd.KeyIsPressed(VK_RETURN)) {
-		detonate(soundbank);
+		detonate(eventmanager);
 	}
 	
 	if (locked) { return; }
@@ -82,7 +82,7 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, Soundbank& soundban
 	move(dt);
 	clamp(lvlWalls);
 	if (collisionWalls(lvlWalls)) {
-		soundbank.wallRebound();
+		eventmanager.ballWallRebound();
 	}
 }
 
@@ -131,9 +131,9 @@ bool ball::collisionWalls(const wall& lvlWalls)
 	return rebounded;
 }
 
-void ball::detonate(Soundbank& soundbank)
+void ball::detonate(EventManager& eventmanager)
 {
-	soundbank.ballExplosion();
+	eventmanager.ballDetonate();
 	tBallExplode.wake();
 }
 

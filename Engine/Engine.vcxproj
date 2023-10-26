@@ -145,6 +145,8 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="enemyCore.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameVals.h" />
@@ -179,6 +181,8 @@
     <ClCompile Include="brickManager.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="enemyCore.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="Flag.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />

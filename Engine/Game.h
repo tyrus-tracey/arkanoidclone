@@ -36,6 +36,7 @@
 #include "scoreboard.h"
 #include <list>
 #include "Hud.h"
+#include "EventManager.h"
 
 class Game
 {
@@ -59,19 +60,22 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
-	Hud hud;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	Hud hud;
+	level lvl;
+	levelBook lvlBook;
+	paddle pad;
+	Soundbank soundbank;
+	EventManager eventManager;
+
 	bool gameRunning = true;
 	FrameTimer ft;
 	float dt;
-	paddle pad;
-	levelBook lvlBook;
-	level lvl;
 	int lives = 4;
 	std::list<ball> balls;
 	
-	Soundbank soundbank;
+	
 	float speedslow = 25.0f;
 };
