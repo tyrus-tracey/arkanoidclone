@@ -1,6 +1,7 @@
 #pragma once
 #include "Graphics.h"
 #include "Colors.h"
+#include "SpriteCodex.h"
 #include "rect.h"
 #include "oscillator.h"
 #include "EventManager.h"
@@ -29,6 +30,7 @@ private:
 
 	void drawGauge(Graphics& gfx) const;
 	void drawFuel(Graphics& gfx, const float amount) const;
+	
 
 	rect rectFuelBar = rect({ 0.0f,0.0f }, BAR_WIDTH, BAR_HEIGHT);
 	rect rectDetonateLight = rect({ 0.0f,0.0f }, 200.0f, 50.0f);

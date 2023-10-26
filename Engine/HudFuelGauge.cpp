@@ -4,6 +4,7 @@ HudFuelGauge::HudFuelGauge(Vec2 _pos, const float hudWidth)
 	: WIDTH(hudWidth), pos(_pos)
 {
 	rectFuelBar.centerOnto(rect(pos, WIDTH, HEIGHT));
+	rectFuelBar.move({0, 50 });
 	rectDetonateLight.centerOnto(rect(pos, WIDTH, HEIGHT));
 	rectDetonateLight.move({0, -100});
 }
@@ -36,12 +37,17 @@ void HudFuelGauge::draw(Graphics& gfx) const
 	gfx.DrawRectBorder(rect(pos, WIDTH, HEIGHT), cWindow, THICKNESS, true);
 	drawGauge(gfx);
 	if (lightFlasher.isOn()) {
-		gfx.DrawRect(rectDetonateLight, cDetonate, true);
+		Vec2 lightPos = pos;
+		lightPos.y += 50;
+		SpriteCodex::DrawEnterOn(lightPos, gfx);
 	}
 }
 
 void HudFuelGauge::drawGauge(Graphics& gfx) const
 {
+	Vec2 signPos = pos;
+	signPos.y += 225.0f;
+	SpriteCodex::DrawFuelSign(signPos, gfx);
 	gfx.DrawRectBorder(rectFuelBar, cGauge, THICKNESS, true);
 	drawFuel(gfx, playerFuel);
 }
