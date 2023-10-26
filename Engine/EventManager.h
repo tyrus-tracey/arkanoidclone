@@ -17,15 +17,17 @@ public:
 	void ballDetonate() const;
 	void ballLockBeep() const;
 
-	void coreExplodeStart() const;
+	void coreExplodeStart();
 	void coreExplodeMini() const;
 	void coreExplodeFinal() const;
 
-	void levelNewLoaded() const;
+	void levelNewLoaded();
 
 	Flag flag_LevelGoalsComplete{ false };
 	Flag flag_LevelOver{ false };
 	Flag flag_ArmedBallLocked{ false };
+
+	Flag flag_ballHoldSpawn{ false };
 
 private:
 	Soundbank& soundbank;

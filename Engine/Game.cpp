@@ -28,11 +28,10 @@ Game::Game(MainWindow& wnd)
 	hud(gfx),
 	lvl(gfx),
 	lvlBook(gfx),
+	pad(lvl.getWalls()),
 	eventManager(soundbank)
 {
 	loadLevel(lvlBook.readLevelData());
-	balls.push_back(ball(lvl.getBallSpawnPos(), lvl.getBallSpawnVel()));
-	pad = paddle(lvl.getWalls());
 }
 
 void Game::Go()
@@ -55,9 +54,6 @@ void Game::UpdateModel()
 	if (eventManager.flag_LevelOver.update() || wnd.kbd.KeyIsPressed(VK_DELETE)) {
 		if (lvlBook.advanceLevel()) {
 			loadLevel(lvlBook.readLevelData());
-			pad.reset(lvl.getWalls());
-			balls.clear();
-			spawnBall(lvl);
 		} else { // NO MORE LEVELS. END OF GAME
 			//gameRunning = false;
 			//return;
@@ -71,7 +67,7 @@ void Game::UpdateModel()
 	dt = ft.Mark();
 	updateElements(dt);
 
-	if (balls.empty() && !eventManager.flag_LevelGoalsComplete.isRaised()) {
+	if (balls.empty() && !eventManager.flag_ballHoldSpawn.isRaised()) {
 		respawn();
 	}
 }
@@ -96,6 +92,10 @@ void Game::updateElements(const float dt)
 void Game::loadLevel(levelParams params)
 {
 	lvl = level(gfx, params);
+	pad.reset(lvl.getWalls());
+	balls.clear();
+	spawnBall(lvl);
+	eventManager.levelNewLoaded();
 }
 
 void Game::spawnBall(Vec2 spawnLoc, Vec2 velocity)

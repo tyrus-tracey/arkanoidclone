@@ -59,8 +59,9 @@ void EventManager::ballLockBeep() const
     soundbank.lockBeep();
 }
 
-void EventManager::coreExplodeStart() const
+void EventManager::coreExplodeStart()
 {
+    flag_ballHoldSpawn.raise();
 }
 
 void EventManager::coreExplodeMini() const
@@ -71,4 +72,9 @@ void EventManager::coreExplodeMini() const
 void EventManager::coreExplodeFinal() const
 {
     soundbank.coreExplosionFinal();
+}
+
+void EventManager::levelNewLoaded()
+{
+    flag_ballHoldSpawn.clear();
 }
