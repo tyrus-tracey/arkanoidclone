@@ -23,7 +23,7 @@ public:
 	rect hitbox() const;
 
 private:
-	bool collisionBall(std::list<ball>& balls);
+	bool collisionBall(std::list<ball>& balls, EventManager& eventManager);
 	void resetPosition(const wall& lvlWalls);
 	void moveKbd(const Keyboard& kbd, float dt);
 	void clamp(const wall& lvlWalls);

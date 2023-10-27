@@ -17,6 +17,7 @@ public:
 	void ballWallRebound() const;
 	void ballDetonate() const;
 	void ballLockBeep() const;
+	void ballArmed() const;
 
 	void coreBallHold();
 	void coreBallRelease();

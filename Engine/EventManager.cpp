@@ -62,6 +62,11 @@ void EventManager::ballLockBeep() const
     soundbank.lockBeep();
 }
 
+void EventManager::ballArmed() const
+{
+    soundbank.pkeeuuun();
+}
+
 void EventManager::coreBallHold()
 {
 }

@@ -14,7 +14,7 @@ void paddle::update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& 
 {
 	moveKbd(kbd, dt);
 	clamp(lvlWalls);
-	if (collisionBall(balls)) {
+	if (collisionBall(balls, eventManager)) {
 		eventManager.paddleHit();
 	}
 }
@@ -55,7 +55,7 @@ rect paddle::hitbox() const
 	return rect(pos, width, height);
 }
 
-bool paddle::collisionBall(std::list<ball>& balls)
+bool paddle::collisionBall(std::list<ball>& balls, EventManager& eventManager)
 {
 	for (ball& b : balls) {
 		if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {
@@ -63,7 +63,7 @@ bool paddle::collisionBall(std::list<ball>& balls)
 			b.reboundY();
 			b.slap(impactVec); //consider also applying the current velocity of paddle
 			if (isFuelFull()) {
-				b.arm();
+				b.arm(eventManager);
 			}
 			return true;
 		}

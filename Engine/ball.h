@@ -32,7 +32,7 @@ public:
 	void unlock();
 	bool onLockCooldown() const;
 	void kill();
-	void arm();
+	void arm(EventManager& eventmanager);
 	void disarm();
 	bool isArmed() const;
 	bool isExploding() const;

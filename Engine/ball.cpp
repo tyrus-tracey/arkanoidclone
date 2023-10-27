@@ -202,8 +202,10 @@ void ball::kill()
 	vel = { 0,0 };
 }
 
-void ball::arm()
+void ball::arm(EventManager& eventmanager)
 {
+	if (armed) { return; }
+	eventmanager.ballArmed();
 	armed = true;
 }
 
