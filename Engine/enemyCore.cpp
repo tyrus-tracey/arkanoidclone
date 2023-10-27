@@ -125,8 +125,8 @@ void enemyCore::draw(Graphics& gfx)
     SpriteCodex::DrawCore(pos, gfx);
     if (tDeathAnimTime.isActive()) {
         if (tMiniExplosionTime.isActive()) {
-            x = hitbox().left + xdeviation;
-            y = hitbox().top + ydeviation;
+            x = int(hitbox().left) + xdeviation;
+            y = int(hitbox().top) + ydeviation;
 
             gfx.DrawRing(x, y, 10, Colors::Yellow, 3, false);
         }
