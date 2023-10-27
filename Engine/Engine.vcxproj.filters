@@ -90,7 +90,7 @@
     <ClInclude Include="levelBook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scoreboard.h">
+    <ClInclude Include="Scoreboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gridLocation.h">
@@ -127,6 +127,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Flag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameVals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -194,7 +197,7 @@
     <ClCompile Include="levelBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scoreboard.cpp">
+    <ClCompile Include="Scoreboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gridLocation.cpp">

@@ -17,7 +17,7 @@ public:
 	void update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, EventManager& eventManager, float dt);
 	void draw(Graphics& gfx) const;
 	void reset(const wall& lvlWalls);
-	void addFuel(unsigned int amt);
+	void addFuel(const float amt);
 	float getFuel() const;
 	bool isFuelFull() const;
 	rect hitbox() const;
@@ -34,8 +34,8 @@ private:
 	float wing = 10.0f;
 	float speed = 500.0f;
 
-	unsigned int fuel = 0;
-	unsigned int fuelMax = 100;
+	float fuel = 0.0f;
+	const float FUEL_MAX = 100.0f;
 
 	Color cCore = Colors::White;
 	Color cFuel = Colors::Yellow;

@@ -33,7 +33,7 @@ void paddle::reset(const wall& lvlWalls)
 	resetPosition(lvlWalls);
 }
 
-void paddle::addFuel(unsigned int amt)
+void paddle::addFuel(const float amt)
 {
 	if (!isFuelFull()) {
 		fuel += amt;
@@ -47,7 +47,7 @@ float paddle::getFuel() const
 
 bool paddle::isFuelFull() const
 {
-	return fuel >= fuelMax;
+	return fuel >= FUEL_MAX;
 }
 
 rect paddle::hitbox() const

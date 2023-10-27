@@ -12,6 +12,7 @@ public:
 	Hud(Graphics& gfx);
 	void draw(Graphics& gfx) const;
 	void update(const float _playerFuel, EventManager& eventmanager, const float dt);
+	Vec2 getPos() const;
 
 
 private:

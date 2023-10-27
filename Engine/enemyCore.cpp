@@ -50,30 +50,32 @@ void enemyCore::update(std::list<ball>& balls, EventManager& eventmanager, const
         tBallHoldTime.tick(dt);
         if (!tBallHoldTime.isActive()) {
             eventmanager.flag_ArmedBallLocked.clear();
-            releaseBall();
+            releaseBall(eventmanager);
         }
         return;
     }
     for (ball& b : balls) {
         if (hitbox().isOverlapping(b.hitbox()) && !b.onLockCooldown()) {
-            lockBall(&b);
+            lockBall(&b, eventmanager);
         }
     }
 }
 
-void enemyCore::lockBall(ball* b)
+void enemyCore::lockBall(ball* b, EventManager& eventmanager)
 {
     b->lock(hitbox().getMidpoint());
     heldBall = b;
     tBallHoldTime.restart();
+    eventmanager.coreBallHold();
 }
 
-void enemyCore::releaseBall()
+void enemyCore::releaseBall(EventManager& eventmanager)
 {
     if (!hasBall()) { return; }
     heldBall->setVelocity(getRandDiagonal());
     heldBall->unlock();
     heldBall = nullptr;
+    eventmanager.coreBallRelease();
 }
 
 void enemyCore::eatBall()

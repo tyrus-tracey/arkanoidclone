@@ -57,7 +57,7 @@ void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& event
                 eventManager.brickHit((*collidedBrick)->getType());
 
                 if (!(*collidedBrick)->isLive()) { // If brick dead from colliding
-                    p.addFuel((*collidedBrick)->getFuelAmt());
+                    p.addFuel(float((*collidedBrick)->getFuelAmt()));
                     delete *collidedBrick;
                     bricks.erase(collidedBrick);
                 }

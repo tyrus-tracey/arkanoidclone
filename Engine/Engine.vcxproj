@@ -164,7 +164,7 @@
     <ClInclude Include="paddle.h" />
     <ClInclude Include="rect.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="scoreboard.h" />
+    <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Soundbank.h" />
     <ClInclude Include="SoundEffect.h" />
@@ -198,7 +198,7 @@
     <ClCompile Include="oscillator.cpp" />
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="rect.cpp" />
-    <ClCompile Include="scoreboard.cpp" />
+    <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Soundbank.cpp" />
     <ClCompile Include="SpriteCodex.cpp" />

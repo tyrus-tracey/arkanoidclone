@@ -2,11 +2,12 @@
 #include "brickType.h"
 #include "Flag.h"
 #include "Soundbank.h"
+#include "Scoreboard.h"
 
 class EventManager
 {
 public:
-	EventManager(Soundbank& _soundbank);
+	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard);
 
 	void brickHit(brickTypeEnum bType) const;
 	void brickKill(brickTypeEnum bType) const;
@@ -17,6 +18,8 @@ public:
 	void ballDetonate() const;
 	void ballLockBeep() const;
 
+	void coreBallHold();
+	void coreBallRelease();
 	void coreExplodeStart();
 	void coreExplodeMini() const;
 	void coreExplodeFinal() const;
@@ -31,5 +34,6 @@ public:
 
 private:
 	Soundbank& soundbank;
+	Scoreboard& scoreboard;
 };
 

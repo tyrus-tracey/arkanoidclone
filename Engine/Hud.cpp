@@ -12,12 +12,16 @@ void Hud::draw(Graphics& gfx) const
 {
 	gfx.DrawRectBorder({ pos,WIDTH, HEIGHT }, c, THICKNESS, true);
 	fuelGauge.draw(gfx);
-	SpriteNumbers::drawNum(1616886, getWorldVec({ 0,0 }), Colors::Cyan, gfx);
 }
 
 void Hud::update(const float _playerFuel, EventManager& eventmanager, const float dt)
 {
 	fuelGauge.update(_playerFuel, eventmanager, dt);
+}
+
+Vec2 Hud::getPos() const
+{
+	return pos;
 }
 
 Vec2 Hud::getWorldVec(const Vec2 localVec) const

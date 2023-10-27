@@ -29,7 +29,7 @@ Game::Game(MainWindow& wnd)
 	lvl(gfx),
 	lvlBook(gfx),
 	pad(lvl.getWalls()),
-	eventManager(soundbank)
+	eventManager(soundbank, scoreboard)
 {
 	loadLevel(lvlBook.readLevelData());
 }
@@ -123,5 +123,5 @@ void Game::ComposeFrame()
 		b.draw(gfx);
 	}
 	hud.draw(gfx);
-	scoreboard::drawLives(gfx, lives);
+	scoreboard.draw(lives, hud.getPos(), gfx);
 }

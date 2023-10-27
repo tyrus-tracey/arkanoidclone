@@ -33,7 +33,7 @@
 #include "brick.h"
 #include "enemyCore.h"
 #include "levelBook.h"
-#include "scoreboard.h"
+#include "Scoreboard.h"
 #include <list>
 #include "Hud.h"
 #include "EventManager.h"
@@ -68,6 +68,7 @@ private:
 	levelBook lvlBook;
 	paddle pad;
 	Soundbank soundbank;
+	Scoreboard scoreboard;
 	EventManager eventManager;
 
 	bool gameRunning = true;
@@ -75,7 +76,6 @@ private:
 	float dt;
 	int lives = 4;
 	std::list<ball> balls;
-	
 	
 	float speedslow = 25.0f;
 };

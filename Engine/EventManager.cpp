@@ -1,12 +1,13 @@
 #include "EventManager.h"
 
-EventManager::EventManager(Soundbank& _soundbank)
-	: soundbank(_soundbank)
+EventManager::EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard)
+	: soundbank(_soundbank), scoreboard(_scoreboard)
 {
 }
 
 void EventManager::brickHit(brickTypeEnum bType) const
 {
+    scoreboard.scoreBrickHit(bType);
     switch (bType) {
     case RED_BRICK:
         soundbank.brickHit();
@@ -24,6 +25,7 @@ void EventManager::brickHit(brickTypeEnum bType) const
 
 void EventManager::brickKill(brickTypeEnum bType) const
 {
+    scoreboard.scoreBrickKill(bType);
     switch (bType) {
     case RED_BRICK:
         soundbank.brickHit();
@@ -41,6 +43,7 @@ void EventManager::brickKill(brickTypeEnum bType) const
 
 void EventManager::paddleHit() const
 {
+    scoreboard.scorePaddleHit();
     soundbank.paddleRebound();
 }
 
@@ -59,6 +62,14 @@ void EventManager::ballLockBeep() const
     soundbank.lockBeep();
 }
 
+void EventManager::coreBallHold()
+{
+}
+
+void EventManager::coreBallRelease()
+{
+}
+
 void EventManager::coreExplodeStart()
 {
     flag_ballHoldSpawn.raise();
@@ -66,11 +77,13 @@ void EventManager::coreExplodeStart()
 
 void EventManager::coreExplodeMini() const
 {
+    scoreboard.scoreCoreExplodeMini();
     soundbank.coreExplosionMini();
 }
 
 void EventManager::coreExplodeFinal() const
 {
+    scoreboard.scoreCoreKill();
     soundbank.coreExplosionFinal();
 }
 

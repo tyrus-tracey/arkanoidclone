@@ -17,7 +17,7 @@ public:
 	rect hitboxCore() const;
 	void update(std::list<ball>& balls, EventManager& eventmanager, const float dt);
 	void draw(Graphics& gfx);
-	void releaseBall();
+	void releaseBall(EventManager& eventmanager);
 	void startExplode(EventManager& eventmanager);
 	bool isLive();
 	bool hasBall() const;
@@ -28,7 +28,7 @@ public:
 
 private:
 	void eatBall();
-	void lockBall(ball* b);
+	void lockBall(ball* b, EventManager& eventmanager);
 	void explode(EventManager& eventManager);
 	void kill();
 	Vec2 getRandDiagonal();
