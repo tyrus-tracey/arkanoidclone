@@ -35,7 +35,10 @@ private:
 	std::vector<std::vector<brick*>::iterator> runOverlapChecks(ball& b);
 	void chooseCollidingBrick(std::vector<std::vector<brick*>::iterator> overlappingBricks, ball& b);
 
-	void playBrickHit(Soundbank& soundbank, brickTypeEnum bType) const;
+	void event_brickHit(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
+	void event_brickKill(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
+
+	void event_BrickSpawnBall(std::list<ball>& balls);
 
 	std::vector<brick*> bricks;
 	std::vector<brick*>::iterator collidedBrick;

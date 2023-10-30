@@ -53,15 +53,13 @@ void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& event
             chooseCollidingBrick(overlappingBricks, b);
             if (collidedBrick != bricks.end()) {
                 (*collidedBrick)->collideBall(b);
-                
-                eventManager.brickHit((*collidedBrick)->getType());
 
-                if (!(*collidedBrick)->isLive()) { // If brick dead from colliding
-                    p.addFuel(float((*collidedBrick)->getFuelAmt()));
-                    delete *collidedBrick;
-                    bricks.erase(collidedBrick);
+                if (!(*collidedBrick)->isLive()) {
+                    event_brickKill(balls, p, eventManager);
                 }
-
+                else {
+                    event_brickHit(balls, p, eventManager);
+                }
             }
         }
     }
@@ -170,4 +168,44 @@ void brickManager::chooseCollidingBrick(vector<vector<brick*>::iterator> overlap
             }
         }
     }
+}
+
+void brickManager::event_brickHit(std::list<ball>& balls, paddle& pad, EventManager& eventMan)
+{
+    if ((*collidedBrick) == nullptr) { return; }
+
+    switch ((*collidedBrick)->getType()) {
+    default: 
+        break;
+    }
+
+    eventMan.brickHit((*collidedBrick)->getType());
+}
+
+void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, EventManager& eventMan)
+{
+    if ((*collidedBrick) == nullptr) { return; }
+    brickTypeEnum bType = (*collidedBrick)->getType();
+
+    switch (bType) {
+    case BLUE_BRICK:
+        event_BrickSpawnBall(balls);
+    default:
+        break;
+    }
+
+    pad.addFuel(float((*collidedBrick)->getFuelAmt()));
+    eventMan.brickKill(bType);
+
+    delete* collidedBrick;
+    bricks.erase(collidedBrick);
+}
+
+void brickManager::event_BrickSpawnBall(std::list<ball>& balls)
+{
+    if ((*collidedBrick) == nullptr) { return; }
+    Vec2 spawnVector = { 0,1 };
+    float spawnTime = 1.0f;
+
+    balls.push_back(ball((*collidedBrick)->hitbox().getMidpoint(), spawnVector, spawnTime));
 }
