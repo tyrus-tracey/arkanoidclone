@@ -38,6 +38,11 @@ void ticker::tick(float dt)
 	if (time < 0.00001f) { sleep(); }
 }
 
+void ticker::forceEnd()
+{
+	time = -1.0f;
+}
+
 bool ticker::isActive() const
 {
 	return active;

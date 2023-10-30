@@ -14,6 +14,7 @@ public:
 	void wake();
 	void sleep();
 	void tick(float dt);
+	void forceEnd();
 	bool isActive() const;
 	bool ended() const;
 
