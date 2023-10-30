@@ -52,7 +52,7 @@ void Scoreboard::scoreCoreKill()
 
 void Scoreboard::drawLives(const int lives, Graphics& gfx) const
 {
-	Vec2 origin(7.0, 7.0);
+	Vec2 origin(0.0f, 0.0f);
 	const float ballSize = 14.0f;
 	for (int i = 0; i < lives; i++) {
 		SpriteCodex::DrawBall(origin, gfx, 0);

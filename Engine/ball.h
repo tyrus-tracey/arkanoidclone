@@ -13,8 +13,8 @@ class ball
 public:
 	ball();
 	ball(const ball& other);
-	ball(Vec2 spawnPos);
-	ball(Vec2 spawnPos, Vec2 velocity);
+	ball(const Vec2 spawnPos, const float spawnGracePeriod = 2.0f);
+	ball(const Vec2 spawnPos, const Vec2 velocity, const float spawnGracePeriod = 2.0f);
 	void update(const wall& lvlWalls, const Keyboard& kbd, EventManager& eventmanager, float dt);
 	void reset();
 	void reboundX();
@@ -48,18 +48,18 @@ private:
 	void updateTrail();
 	void drawTrail(Graphics& gfx) const;
 
+	float rad = 7.0f;
 	Vec2 pos; //top-left
 	Vec2 vel = Vec2(1, 1).Normalize();
 	bool locked = false;
 	const float SPEED_DEFAULT = 500.0f;
 	float speed = 500.0f;
-	float rad = 7.0f;
 	bool live = true;
 	bool armed = false;
 	static const int NUM_TRAILS = 4;
 	Vec2 trail[NUM_TRAILS];
 
-	ticker tSpawnGrace = ticker(2.0f);
+	ticker tSpawnGrace;
 	ticker tBallLockCooldown = ticker(0.25f);
 	ticker tBallExplode = ticker(1.0f);
 };

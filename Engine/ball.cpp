@@ -6,17 +6,21 @@ ball::ball()
 }
 
 ball::ball(const ball& other)
-	: ball(other.pos, other.vel)
+{
+	pos = other.pos;
+	vel = other.vel;
+	tSpawnGrace = other.tSpawnGrace;
+}
+
+ball::ball(const Vec2 spawnPos, const float spawnGracePeriod)
+	: ball(spawnPos, Vec2(1,1), spawnGracePeriod)
 {
 }
 
-ball::ball(Vec2 spawnPos)
-	: ball(spawnPos, Vec2(1,1))
-{
-}
-
-ball::ball(Vec2 spawnPos, Vec2 velocity)
-	: pos(spawnPos), vel(velocity.GetNormalized())
+ball::ball(const Vec2 spawnPos, const Vec2 velocity, const float spawnGracePeriod)
+	: pos(spawnPos - Vec2(rad, rad)), 
+		vel(velocity.GetNormalized()),
+		tSpawnGrace(spawnGracePeriod)
 {
 	tBallExplode.sleep();
 }
@@ -60,13 +64,13 @@ void ball::reboundY()
 void ball::update(const wall& lvlWalls, const Keyboard& kbd, EventManager& eventmanager, float dt)
 {
 	if (!live) { return; }
-	updateTrail();
 	if (!tSpawnGrace.ended()) {
 		tSpawnGrace.wake();
 		tSpawnGrace.tick(dt);
 		return;
 	}
 
+	updateTrail();
 	if (tBallExplode.isActive()) {
 		tBallExplode.tick(dt);
 		if (tBallExplode.ended()) { kill(); }
@@ -246,10 +250,10 @@ void ball::draw(Graphics& gfx)
 	if (live) {
 		if (armed) {
 			drawTrail(gfx);
-			SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 20);
+			SpriteCodex::DrawBall(pos, gfx, 20);
 		}
 		else {
-			SpriteCodex::DrawBall(pos + Vec2(rad, rad), gfx, 0);
+			SpriteCodex::DrawBall(pos, gfx, 0);
 		}
 	}
 }

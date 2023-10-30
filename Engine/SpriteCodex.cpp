@@ -2,9 +2,8 @@
 
 void SpriteCodex::DrawBall( const Vec2& topLeft,Graphics& gfx, int plusRed )
 {
-	const int x = int( topLeft.x ) - 7;
-	const int y = int( topLeft.y ) - 7;
-
+	int x = int(topLeft.x);
+	int y = int(topLeft.y);
 	gfx.PutPixel(5 + x, 0 + y,  plusRed+48, 48, 48, true);
 	gfx.PutPixel(6 + x, 0 + y,  plusRed+48, 48, 48, true);
 	gfx.PutPixel(7 + x, 0 + y,  plusRed+48, 48, 48, true);
@@ -1764,8 +1763,8 @@ void SpriteCodex::DrawCore(const Vec2& topLeft, Graphics& gfx)
 
 void SpriteCodex::DrawFuelSign(const Vec2& topLeft, Graphics& gfx)
 {
-	int x = topLeft.x;
-	int y = topLeft.y;
+	int x = int(topLeft.x);
+	int y = int(topLeft.y);
 
 	gfx.PutPixel(0 + x, 0 + y, 0, 0, 0, false);
 	gfx.PutPixel(1 + x, 0 + y, 0, 0, 0, false);
@@ -16772,8 +16771,8 @@ void SpriteCodex::DrawFuelSign(const Vec2& topLeft, Graphics& gfx)
 
 void SpriteCodex::DrawEnterOn(const Vec2& topLeft, Graphics& gfx)
 {
-	int x = topLeft.x;
-	int y = topLeft.y;
+	int x = int(topLeft.x);
+	int y = int(topLeft.y);
 
 	gfx.PutPixel(207 + x, 5 + y, 254, 0, 0, false);
 	gfx.PutPixel(208 + x, 5 + y, 254, 0, 0, false);
