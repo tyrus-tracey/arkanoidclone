@@ -64,6 +64,17 @@ void ball::reboundY()
 void ball::update(const wall& lvlWalls, const Keyboard& kbd, EventManager& eventmanager, float dt)
 {
 	if (!live) { return; }
+
+	if (!armed && eventmanager.flag_ClearAllBalls.isRaised()) {
+		dissipate(eventmanager);
+	}
+
+	if (tBallDissipate.isActive()) {
+		tBallDissipate.tick(dt);
+		if (tBallDissipate.ended()) { kill(); }
+		return;
+	}
+
 	if (!tSpawnGrace.ended()) {
 		tSpawnGrace.wake();
 		tSpawnGrace.tick(dt);
@@ -134,6 +145,12 @@ bool ball::collisionWalls(const wall& lvlWalls)
 		kill();
 	}
 	return rebounded;
+}
+
+void ball::dissipate(EventManager& eventmanager)
+{
+	eventmanager.ballDissipate();
+	tBallDissipate.wake();
 }
 
 void ball::detonate(EventManager& eventmanager)
@@ -244,9 +261,19 @@ void ball::operator=(const ball& other)
 void ball::draw(Graphics& gfx)
 {
 	if (tBallExplode.isActive() && locked == false) {
-		gfx.DrawRing(int(hitbox().getMidpoint().x), int(hitbox().getMidpoint().y), 20, Colors::Red, 3, false);
+		int x = int(hitbox().getMidpoint().x);
+		int y = int(hitbox().getMidpoint().y);
+		gfx.DrawRing(x, y, 20, Colors::Red, 3, false);
 		return;
 	}
+
+	if (tBallDissipate.isActive()) {
+		int x = int(hitbox().getMidpoint().x);
+		int y = int(hitbox().getMidpoint().y);
+		gfx.DrawCircle(x, y, int(rad), Colors::White, false);
+		return;
+	}
+
 	if (live) {
 		if (armed) {
 			drawTrail(gfx);

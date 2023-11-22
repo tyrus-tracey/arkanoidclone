@@ -78,6 +78,8 @@ void Game::updateElements(const float dt)
 	lvl.update(balls, pad, eventManager, dt);
 
 	std::list<ball>::iterator bIt = balls.begin();
+	
+
 	while (bIt != balls.end()) {
 		if ((*bIt).isLive()) {
 			(*bIt++).update(lvl.getWalls(), wnd.kbd, eventManager, dt);
@@ -86,6 +88,7 @@ void Game::updateElements(const float dt)
 			bIt = balls.erase(bIt);
 		}
 	}
+	eventManager.flag_ClearAllBalls.update();
 	hud.update(pad.getFuel(), eventManager, dt);
 }
 

@@ -15,6 +15,7 @@ public:
 	void paddleHit() const;
 
 	void ballWallRebound() const;
+	void ballDissipate() const;
 	void ballDetonate() const;
 	void ballLockBeep() const;
 	void ballArmed() const;
@@ -32,6 +33,7 @@ public:
 	Flag flag_ArmedBallLocked{ false };
 
 	Flag flag_ballHoldSpawn{ false };
+	Flag flag_ClearAllBalls{ false };
 
 private:
 	Soundbank& soundbank;

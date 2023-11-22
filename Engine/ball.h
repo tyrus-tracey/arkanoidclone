@@ -44,6 +44,7 @@ private:
 	void move(const float dt);
 	void clamp(const wall& lvlWalls);
 	bool collisionWalls(const wall& lvlWalls);
+	void dissipate(EventManager& eventmanager);
 	void detonate(EventManager& eventmanager);
 	void updateTrail();
 	void drawTrail(Graphics& gfx) const;
@@ -61,6 +62,7 @@ private:
 
 	ticker tSpawnGrace;
 	ticker tBallLockCooldown = ticker(0.25f);
+	ticker tBallDissipate = ticker(0.5f);
 	ticker tBallExplode = ticker(1.0f);
 };
 

@@ -52,6 +52,10 @@ void EventManager::ballWallRebound() const
     soundbank.wallRebound();
 }
 
+void EventManager::ballDissipate() const
+{
+}
+
 void EventManager::ballDetonate() const
 {
     soundbank.ballExplosion();
@@ -78,6 +82,7 @@ void EventManager::coreBallRelease()
 void EventManager::coreExplodeStart()
 {
     flag_ballHoldSpawn.raise();
+    flag_ClearAllBalls.raise();
 }
 
 void EventManager::coreExplodeMini() const
