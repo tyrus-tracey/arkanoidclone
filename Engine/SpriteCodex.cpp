@@ -1,9 +1,9 @@
 #include "SpriteCodex.h"
 
-void SpriteCodex::DrawBall( const Vec2& topLeft,Graphics& gfx, int plusRed )
+void SpriteCodex::DrawBall( const Vec2& midPoint,Graphics& gfx, int plusRed )
 {
-	int x = int(topLeft.x);
-	int y = int(topLeft.y);
+	int x = int(midPoint.x) - 7;
+	int y = int(midPoint.y) - 7;
 	gfx.PutPixel(5 + x, 0 + y,  plusRed+48, 48, 48, true);
 	gfx.PutPixel(6 + x, 0 + y,  plusRed+48, 48, 48, true);
 	gfx.PutPixel(7 + x, 0 + y,  plusRed+48, 48, 48, true);

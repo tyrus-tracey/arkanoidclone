@@ -18,7 +18,7 @@ ball::ball(const Vec2 spawnPos, const float spawnGracePeriod)
 }
 
 ball::ball(const Vec2 spawnPos, const Vec2 velocity, const float spawnGracePeriod)
-	: pos(spawnPos - Vec2(rad, rad)), 
+	: pos(spawnPos), 
 		vel(velocity.GetNormalized()),
 		tSpawnGrace(spawnGracePeriod)
 {
@@ -87,10 +87,10 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, EventManager& event
 		if (tBallExplode.ended()) { kill(); }
 		return;
 	}
-	
+
 	if (armed && kbd.KeyIsPressed(VK_RETURN)) {
 		detonate(eventmanager);
-	}
+	} 
 	
 	if (locked) { return; }
 
@@ -120,28 +120,28 @@ void ball::clamp(const wall& lvlWalls)
 {
 	rect walls = lvlWalls.getBounds();
 	if (hitbox().left < walls.left)
-		{ pos.x = walls.left; }
+		{ pos.x = walls.left	+ rad; }
 	if (hitbox().right > walls.right)
-		{ pos.x = walls.right - (rad * 2.0f); }
+		{ pos.x = walls.right	- rad; }
 	if (hitbox().top < walls.top)
-		{ pos.y = walls.top; }
+		{ pos.y = walls.top		+ rad; }
 	if (hitbox().bottom > walls.bottom) 
-		{ pos.y = walls.bottom - (rad * 2.0f);}
+		{ pos.y = walls.bottom	- rad;}
 }
 
 bool ball::collisionWalls(const wall& lvlWalls)
 {
 	bool rebounded = false;
 	rect walls = lvlWalls.getBounds();
-	if (pos.x <= walls.left || pos.x + (rad * 2.0f) >= walls.right) {
+	if (hitbox().left <= walls.left || hitbox().right >= walls.right) {
 		reboundX();
 		rebounded = true;
 	}
-	if (pos.y <= walls.top) {
+	if (hitbox().top <= walls.top) {
 		reboundY();
 		rebounded = true;
 	}
-	if (pos.y + (rad * 2.0f) >= walls.bottom) {
+	if (hitbox().bottom >= walls.bottom) {
 		kill();
 	}
 	return rebounded;
@@ -174,9 +174,10 @@ void ball::drawTrail(Graphics& gfx) const
 	}
 }
 
-rect ball::hitbox() const
+midRect ball::hitbox() const
 {
-	return rect(pos, rad * 2.0f, rad * 2.0f);
+	return midRect(pos, rad * 2.0f, rad * 2.0f);
+	//return rect(pos, rad * 2.0f, rad * 2.0f);
 }
 
 void ball::setVelocity(Vec2 newVel)
@@ -200,9 +201,8 @@ Vec2 ball::getPos() const
 void ball::lock(const Vec2 lockPos)
 {
 	if (locked) { return; }
+	pos = lockPos;
 	locked = true;
-	Vec2 centerOffset(lockPos.x - rad, lockPos.y - rad);
-	pos = centerOffset;
 }
 
 void ball::unlock()
@@ -261,16 +261,12 @@ void ball::operator=(const ball& other)
 void ball::draw(Graphics& gfx)
 {
 	if (tBallExplode.isActive() && locked == false) {
-		int x = int(hitbox().getMidpoint().x);
-		int y = int(hitbox().getMidpoint().y);
-		gfx.DrawRing(x, y, 20, Colors::Red, 3, false);
+		gfx.DrawRing(int(pos.x), int(pos.y), 20, Colors::Red, 3, false);
 		return;
 	}
 
 	if (tBallDissipate.isActive()) {
-		int x = int(hitbox().getMidpoint().x);
-		int y = int(hitbox().getMidpoint().y);
-		gfx.DrawCircle(x, y, int(rad), Colors::White, false);
+		gfx.DrawCircle(int(pos.x), int(pos.y), int(rad--), Colors::White, false);
 		return;
 	}
 

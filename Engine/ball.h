@@ -24,7 +24,7 @@ public:
 	void draw(Graphics& gfx);
 	void speedSet(float spd);
 	void speedReset();
-	rect hitbox() const;
+	midRect hitbox() const;
 	void setVelocity(Vec2 newVel);
 	Vec2 getVelocity() const;
 	Vec2 getPos() const;
@@ -50,7 +50,7 @@ private:
 	void drawTrail(Graphics& gfx) const;
 
 	float rad = 7.0f;
-	Vec2 pos; //top-left
+	Vec2 pos; //midpoint
 	Vec2 vel = Vec2(1, 1).Normalize();
 	bool locked = false;
 	const float SPEED_DEFAULT = 500.0f;
