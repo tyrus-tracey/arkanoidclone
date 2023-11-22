@@ -27,3 +27,10 @@ public:
 	float right;
 };
 
+class midRect : public rect {
+public:
+	midRect(const Vec2& _midPoint, const float width, const float height);
+	Vec2 getMidpoint() const;
+
+	Vec2 midPoint;
+};

@@ -136,3 +136,17 @@ rect& rect::fitTo(const rect& other, const float padding)
 {
 	return *this = getFittedRect(other, padding);
 }
+
+midRect::midRect(const Vec2& _midPoint, const float width, const float height)
+	: midPoint(_midPoint)
+{
+	top		= midPoint.y - (height / 2);
+	bottom	= midPoint.y + (height / 2);
+	left	= midPoint.x - (width / 2);
+	right	= midPoint.x + (width / 2);
+}
+
+Vec2 midRect::getMidpoint() const
+{
+	return midPoint;
+}
