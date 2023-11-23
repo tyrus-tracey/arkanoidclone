@@ -63,5 +63,10 @@ void HudFuelGauge::drawFuel(Graphics& gfx, const float amount) const
 	}
 	int fuelWidth = int(BAR_WIDTH * fuelPercentage);
 	rect fuelRect(drawPos, float(fuelWidth), BAR_HEIGHT);
-	gfx.DrawRect(fuelRect, cFuel, true);
+	if (fuelPercentage == 1.0f) {
+		gfx.DrawRect(fuelRect, cFuelMax, true);
+	}
+	else {
+		gfx.DrawRect(fuelRect, cFuel, true);
+	}
 }

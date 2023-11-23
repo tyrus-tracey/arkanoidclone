@@ -36,7 +36,8 @@ private:
 	rect rectDetonateLight = rect({ 0.0f,0.0f }, 200.0f, 50.0f);
 	Color cWindow = Colors::Red;
 	Color cDetonate = Colors::Red;
-	Color cGauge = Colors::Yellow;
+	Color cGauge = Colors::MakeRGB(255, 187, 17);
 	Color cFuel = Colors::White;
+	Color cFuelMax = Colors::Yellow;
 };
 
