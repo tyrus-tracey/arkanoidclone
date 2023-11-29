@@ -5,7 +5,7 @@
 #include "SpriteCodex.h"
 #include "EventManager.h"
 #include "wall.h"
-#include "ticker.h"
+#include "oscillator.h"
 #include "Keyboard.h"
 
 class ball
@@ -48,6 +48,7 @@ private:
 	void detonate(EventManager& eventmanager);
 	void updateTrail();
 	void drawTrail(Graphics& gfx) const;
+	void drawSpawnTimer(Graphics& gfx) const;
 
 	float rad = 7.0f;
 	Vec2 pos; //midpoint
@@ -61,6 +62,7 @@ private:
 	Vec2 trail[NUM_TRAILS];
 
 	ticker tSpawnGrace;
+	oscillator oSpawnFlash = oscillator(0.1f);
 	ticker tBallLockCooldown = ticker(0.25f);
 	ticker tBallDissipate = ticker(0.5f);
 	ticker tBallExplode = ticker(1.0f);

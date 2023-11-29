@@ -77,7 +77,9 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, EventManager& event
 
 	if (!tSpawnGrace.ended()) {
 		tSpawnGrace.wake();
+		oSpawnFlash.wake();
 		tSpawnGrace.tick(dt);
+		oSpawnFlash.tick(dt);
 		return;
 	}
 
@@ -172,6 +174,18 @@ void ball::drawTrail(Graphics& gfx) const
 	for (int i = 0; i < NUM_TRAILS; i++) {
 		gfx.DrawRing(int(trail[i].x), int(trail[i].y), 5, Colors::Yellow, 2, false);
 	}
+}
+
+void ball::drawSpawnTimer(Graphics& gfx) const
+{
+	Vec2 barPos(pos.x - rad, pos.y - rad);
+	barPos.y -= 4.0f;
+
+	float p = tSpawnGrace.getPercentageRemaining();
+	float timelineWidth = rad * 2.0f * p;
+	rect timeline(barPos, timelineWidth, 2);
+
+	gfx.DrawRect(timeline, Colors::White, false);
 }
 
 midRect ball::hitbox() const
@@ -276,7 +290,15 @@ void ball::draw(Graphics& gfx)
 			SpriteCodex::DrawBall(pos, gfx, 20);
 		}
 		else {
-			SpriteCodex::DrawBall(pos, gfx, 0);
+			if (!tSpawnGrace.ended()) {
+				drawSpawnTimer(gfx);
+				if (oSpawnFlash.isOn()) {
+					SpriteCodex::DrawBall(pos, gfx, 0);
+				}
+			}
+			else {
+				SpriteCodex::DrawBall(pos, gfx, 0);
+			}
 		}
 	}
 }

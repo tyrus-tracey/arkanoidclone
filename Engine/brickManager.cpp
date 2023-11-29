@@ -205,7 +205,7 @@ void brickManager::event_BrickSpawnBall(std::list<ball>& balls)
 {
     if ((*collidedBrick) == nullptr) { return; }
     Vec2 spawnVector = { 0,1 };
-    float spawnTime = 1.0f;
+    float spawnTime = 0.75f;
 
     balls.push_back(ball((*collidedBrick)->hitbox().getMidpoint(), spawnVector, spawnTime));
 }
