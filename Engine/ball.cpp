@@ -33,7 +33,7 @@ void ball::slap(const Vec2 force)
 
 void ball::pushOut(const rect& bounds)
 {
-	if (!hitbox().isOverlapping(bounds)) {
+	if (!hitbox().isOverlapping(bounds) || tBallExplode.isActive()) {
 		return;
 	}
 	Vec2 left(bounds.left - hitbox().right, 0.0f);
@@ -159,6 +159,7 @@ void ball::detonate(EventManager& eventmanager)
 {
 	eventmanager.ballDetonate();
 	tBallExplode.wake();
+	rad *= radBlastFactor;
 }
 
 void ball::updateTrail()
@@ -275,7 +276,7 @@ void ball::operator=(const ball& other)
 void ball::draw(Graphics& gfx)
 {
 	if (tBallExplode.isActive() && locked == false) {
-		gfx.DrawRing(int(pos.x), int(pos.y), 20, Colors::Red, 3, false);
+		gfx.DrawRing(int(pos.x), int(pos.y), rad, Colors::Red, 3, false);
 		return;
 	}
 
