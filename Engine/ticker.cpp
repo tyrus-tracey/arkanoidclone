@@ -52,3 +52,25 @@ bool ticker::ended() const
 {
 	return time < 0.00001f;
 }
+
+float ticker::getTimeRemaining() const
+{
+	return time;
+}
+
+float ticker::getTimeElapsed() const
+{
+	float out = START_TIME - getTimeRemaining();
+	if (out < 0.0f) { out = 0.0f; }
+	return out;
+}
+
+float ticker::getPercentageRemaining() const
+{
+	return 1.0f - getPercentageElapsed();
+}
+
+float ticker::getPercentageElapsed() const
+{
+	return getTimeElapsed() / START_TIME;
+}

@@ -17,6 +17,10 @@ public:
 	void forceEnd();
 	bool isActive() const;
 	bool ended() const;
+	float getTimeRemaining() const;
+	float getTimeElapsed() const;
+	float getPercentageRemaining() const;
+	float getPercentageElapsed() const;
 
 private:
 	bool active = false;
