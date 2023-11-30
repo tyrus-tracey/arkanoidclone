@@ -26,7 +26,8 @@ void EventManager::brickHit(brickTypeEnum bType) const
 void EventManager::brickKill(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const
 {
     scoreboard.scoreBrickKill(bType);
-    animManager.testCreateAnim(bPos, bCol);
+    
+    animManager.createAnimBrickCrush(bPos, bCol);
 
     switch (bType) {
     case RED_BRICK:

@@ -28,3 +28,15 @@ private:
 	const Vec2 GRAVITY = { 0, 50.0f };
 	const Color c;
 };
+
+class animBrickCrush : public Animation
+{
+public:
+	animBrickCrush(const Vec2 _pos, const Color _c);
+	void update(const float dt);
+	void draw(Graphics& gfx) const;
+private:
+	const Color c;
+	const float FORCE = 300.0f;
+	Vec2 chunks[4]; // [0] topLeft, [1] topRight, [2] botLeft, [3] botRight
+};

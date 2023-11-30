@@ -56,6 +56,12 @@ void AnimationManager::testCreateAnim(const Vec2 pos, const Color c)
 	animations.push_back(newAnim);
 }
 
+void AnimationManager::createAnimBrickCrush(const Vec2 pos, const Color c)
+{
+	animBrickCrush* newAnim = new animBrickCrush(pos, c);
+	animations.push_back(newAnim);
+}
+
 void AnimationManager::clearAnims()
 {
 	std::list<Animation*>::const_iterator aIt = animations.begin();

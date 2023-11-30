@@ -13,6 +13,7 @@ public:
 	void update(float dt);
 	void draw(Graphics& gfx) const;
 	void testCreateAnim(const Vec2 pos, const Color c);
+	void createAnimBrickCrush(const Vec2 pos, const Color c);
 
 private:
 	void clearAnims();
