@@ -195,7 +195,7 @@ void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, EventMan
     }
 
     pad.addFuel(float((*collidedBrick)->getFuelAmt()));
-    eventMan.brickKill(bType);
+    eventMan.brickKill(bType, (*collidedBrick)->getColor(), (*collidedBrick)->hitbox().getMidpoint());
 
     delete* collidedBrick;
     bricks.erase(collidedBrick);

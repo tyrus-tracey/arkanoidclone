@@ -1,7 +1,7 @@
 #include "EventManager.h"
 
-EventManager::EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard)
-	: soundbank(_soundbank), scoreboard(_scoreboard)
+EventManager::EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager)
+	: soundbank(_soundbank), scoreboard(_scoreboard), animManager(_animManager)
 {
 }
 
@@ -23,9 +23,11 @@ void EventManager::brickHit(brickTypeEnum bType) const
     }
 }
 
-void EventManager::brickKill(brickTypeEnum bType) const
+void EventManager::brickKill(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const
 {
     scoreboard.scoreBrickKill(bType);
+    animManager.testCreateAnim(bPos, bCol);
+
     switch (bType) {
     case RED_BRICK:
         soundbank.brickHit();

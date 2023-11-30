@@ -23154,3 +23154,11 @@ void SpriteCodex::DrawEnterOn(const Vec2& topLeft, Graphics& gfx)
 	gfx.PutPixel(26 + x, 43 + y, 254, 44, 44, false);
 	gfx.PutPixel(27 + x, 43 + y, 254, 166, 166, false);
 }
+
+void SpriteCodex::DrawBrickChunk(const Vec2& topLeft, const Color& c, Graphics& gfx)
+{
+	Vec2 size(10.0f, 10.0f);
+	rect chunk(topLeft, topLeft + size);
+
+	gfx.DrawRect(chunk, c, false);
+}

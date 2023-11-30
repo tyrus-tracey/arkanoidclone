@@ -3,14 +3,15 @@
 #include "Flag.h"
 #include "Soundbank.h"
 #include "Scoreboard.h"
+#include "AnimationManager.h"
 
 class EventManager
 {
 public:
-	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard);
+	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager);
 
 	void brickHit(brickTypeEnum bType) const;
-	void brickKill(brickTypeEnum bType) const;
+	void brickKill(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const;
 
 	void paddleHit() const;
 
@@ -38,5 +39,6 @@ public:
 private:
 	Soundbank& soundbank;
 	Scoreboard& scoreboard;
+	AnimationManager& animManager;
 };
 

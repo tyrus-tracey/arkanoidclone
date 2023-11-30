@@ -29,7 +29,7 @@ Game::Game(MainWindow& wnd)
 	lvl(gfx),
 	lvlBook(gfx),
 	pad(lvl.getWalls()),
-	eventManager(soundbank, scoreboard)
+	eventManager(soundbank, scoreboard, animManager)
 {
 	loadLevel(lvlBook.readLevelData());
 }
@@ -89,6 +89,7 @@ void Game::updateElements(const float dt)
 		}
 	}
 	eventManager.flag_ClearAllBalls.update();
+	animManager.update(dt);
 	hud.update(pad.getFuel(), eventManager, dt);
 }
 
@@ -125,6 +126,7 @@ void Game::ComposeFrame()
 	for (ball& b : balls) {
 		b.draw(gfx);
 	}
+	animManager.draw(gfx);
 	hud.draw(gfx);
 	scoreboard.draw(lives, hud.getPos(), gfx);
 }

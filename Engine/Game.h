@@ -37,6 +37,7 @@
 #include <list>
 #include "Hud.h"
 #include "EventManager.h"
+#include "AnimationManager.h"
 
 class Game
 {
@@ -70,6 +71,7 @@ private:
 	Soundbank soundbank;
 	Scoreboard scoreboard;
 	EventManager eventManager;
+	AnimationManager animManager;
 
 	bool gameRunning = true;
 	FrameTimer ft;
