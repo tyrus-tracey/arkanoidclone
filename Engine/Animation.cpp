@@ -1,9 +1,14 @@
 #include "Animation.h"
 
+Animation::Animation(const Vec2 _pos, const float _lifetime)
+	: pos(_pos), lifetime(_lifetime)
+{
+	lifetime.wake();
+}
+
 animBrickExplode::animBrickExplode(const Vec2 _pos, const Color _c, const float _lifetime)
 	: Animation(_pos, _lifetime), c(_c)
 {
-	lifetime.wake();
 }
 
 void animBrickExplode::update(const float dt)
