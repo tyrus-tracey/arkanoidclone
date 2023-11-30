@@ -11,5 +11,5 @@ public:
 	static void DrawCore(const Vec2& topLeft, Graphics& gfx);
 	static void DrawFuelSign(const Vec2& topLeft, Graphics& gfx);
 	static void DrawEnterOn(const Vec2& topLeft, Graphics& gfx);
-	static void DrawBrickChunk(const Vec2& topLeft, const Color& c, Graphics& gfx);
+	static void DrawBrickChunk(const Vec2& midPoint, const Color& c, Graphics& gfx);
 };
