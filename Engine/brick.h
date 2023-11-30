@@ -25,6 +25,7 @@ public:
 	virtual brickTypeEnum getType() const = 0;
 	static float getWidth();
 	static float getHeight();
+	virtual Color getColor() const = 0;
 	unsigned int getFuelAmt() const;
 	void operator=(const brick& b);
 	
@@ -34,7 +35,6 @@ protected:
 
 private:
 	Vec2 pos;
-	virtual Color getColor() const = 0;
 	virtual void takeHit() = 0;
 	static constexpr float MARGIN = -1.0f;
 	bool live = true;
