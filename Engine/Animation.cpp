@@ -7,8 +7,9 @@ Animation::Animation(const Vec2 _pos, const float _lifetime)
 }
 
 animBrickExplode::animBrickExplode(const Vec2 _pos, const Color _c)
-	: Animation(_pos, 1.0f), c(_c)
+	: Animation(_pos, LIFETIME), c(_c)
 {
+	flash.wake();
 	chunks[0] = _pos;
 	chunks[1] = _pos;
 	chunks[2] = _pos;
@@ -18,6 +19,7 @@ animBrickExplode::animBrickExplode(const Vec2 _pos, const Color _c)
 void animBrickExplode::update(const float dt)
 {
 	lifetime.tick(dt);
+	flash.tick(dt);
 
 	yVel += (GRAVITY * dt);
 	for (int i = 0; i < 4; i++) {
@@ -32,12 +34,15 @@ void animBrickExplode::update(const float dt)
 
 void animBrickExplode::draw(Graphics& gfx) const
 {
-	for (const Vec2 chunk : chunks) { SpriteCodex::DrawBrickChunk(chunk, c, gfx); }
+	if (flash.isOn()) {
+		for (const Vec2 chunk : chunks) { SpriteCodex::DrawBrickChunk(chunk, c, gfx); }
+	}
 }
 
 animBrickCrush::animBrickCrush(const Vec2 _pos, const Color _c)
-	: Animation(_pos, 0.25f), c(_c)
+	: Animation(_pos, LIFETIME), c(_c)
 {
+	flash.wake();
 	chunks[0] = _pos;
 	chunks[1] = _pos;
 	chunks[2] = _pos;
@@ -47,15 +52,18 @@ animBrickCrush::animBrickCrush(const Vec2 _pos, const Color _c)
 void animBrickCrush::update(const float dt)
 {
 	lifetime.tick(dt);
-	if (lifetime.getTimeRemaining() > 0.1f) {
+	flash.tick(dt);
+	if (lifetime.getTimeElapsed() < MOVETIME) {
 		chunks[0] += (Vec2(-FORCE, -FORCE) * dt);
 		chunks[1] += (Vec2(	FORCE, -FORCE) * dt);
 		chunks[2] += (Vec2(-FORCE,	FORCE) * dt);
 		chunks[3] += (Vec2(	FORCE,	FORCE) * dt);
-	}	
+	}
 }
 
 void animBrickCrush::draw(Graphics& gfx) const
 {
-	for (const Vec2& chunk : chunks) { SpriteCodex::DrawBrickChunk(chunk, c, gfx); }
+	if (lifetime.getTimeElapsed() < MOVETIME || flash.isOn()) {
+		for (const Vec2& chunk : chunks) { SpriteCodex::DrawBrickChunk(chunk, c, gfx); }
+	}
 }
