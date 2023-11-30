@@ -51,7 +51,7 @@ private:
 	void drawSpawnTimer(Graphics& gfx) const;
 
 	float rad = 7.0f;
-	float radBlastFactor = 6.0f;
+	float radBlastFactor = 10.0f;
 	Vec2 pos; //midpoint
 	Vec2 vel = Vec2(1, 1).Normalize();
 	bool locked = false;
