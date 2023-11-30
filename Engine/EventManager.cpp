@@ -26,8 +26,27 @@ void EventManager::brickHit(brickTypeEnum bType) const
 void EventManager::brickKill(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const
 {
     scoreboard.scoreBrickKill(bType);
-    
     animManager.createAnimBrickCrush(bPos, bCol);
+
+    switch (bType) {
+    case RED_BRICK:
+        soundbank.brickHit();
+        break;
+    case BLUE_BRICK:
+        soundbank.brickHit();
+        break;
+    case ROCK:
+        soundbank.rockHit();
+        break;
+    default:
+        return;
+    }
+}
+
+void EventManager::brickExplode(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const
+{
+    scoreboard.scoreBrickKill(bType);
+    animManager.createAnimBrickExplode(bPos, bCol);
 
     switch (bType) {
     case RED_BRICK:

@@ -20,13 +20,15 @@ protected:
 class animBrickExplode : public Animation
 {
 public:
-	animBrickExplode(const Vec2 _pos, const Color _c, const float _lifetime);
+	animBrickExplode(const Vec2 _pos, const Color _c);
 	void update(const float dt);
 	void draw(Graphics& gfx) const;
 private:
-	Vec2 vel{ 0.0f, -10.0f };
-	const Vec2 GRAVITY = { 0, 50.0f };
+	float yVel = -15.0f;
+	const float GRAVITY = 100.0f;
+	const float SIDEFORCE = 150.0f;
 	const Color c;
+	Vec2 chunks[4];
 };
 
 class animBrickCrush : public Animation

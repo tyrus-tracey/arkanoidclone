@@ -37,6 +37,7 @@ private:
 
 	void event_brickHit(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
 	void event_brickKill(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
+	void event_brickExplode(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
 
 	void event_BrickSpawnBall(std::list<ball>& balls);
 

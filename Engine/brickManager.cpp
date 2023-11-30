@@ -55,7 +55,12 @@ void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& event
                 (*collidedBrick)->collideBall(b);
 
                 if (!(*collidedBrick)->isLive()) {
-                    event_brickKill(balls, p, eventManager);
+                    if (b.isExploding()) {
+                        event_brickExplode(balls, p, eventManager);
+                    }
+                    else {
+                        event_brickKill(balls, p, eventManager);
+                    }   
                 }
                 else {
                     event_brickHit(balls, p, eventManager);
@@ -196,6 +201,25 @@ void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, EventMan
 
     pad.addFuel(float((*collidedBrick)->getFuelAmt()));
     eventMan.brickKill(bType, (*collidedBrick)->getColor(), (*collidedBrick)->hitbox().getMidpoint());
+
+    delete* collidedBrick;
+    bricks.erase(collidedBrick);
+}
+
+void brickManager::event_brickExplode(std::list<ball>& balls, paddle& pad, EventManager& eventMan)
+{
+    if ((*collidedBrick) == nullptr) { return; }
+    brickTypeEnum bType = (*collidedBrick)->getType();
+
+    switch (bType) {
+    case BLUE_BRICK:
+        event_BrickSpawnBall(balls);
+    default:
+        break;
+    }
+
+    pad.addFuel(float((*collidedBrick)->getFuelAmt()));
+    eventMan.brickExplode(bType, (*collidedBrick)->getColor(), (*collidedBrick)->hitbox().getMidpoint());
 
     delete* collidedBrick;
     bricks.erase(collidedBrick);

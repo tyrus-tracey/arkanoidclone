@@ -50,9 +50,9 @@ void AnimationManager::draw(Graphics& gfx) const
 	}
 }
 
-void AnimationManager::testCreateAnim(const Vec2 pos, const Color c)
+void AnimationManager::createAnimBrickExplode(const Vec2 pos, const Color c)
 {
-	animBrickExplode* newAnim = new animBrickExplode(pos, c, 5.0f);
+	animBrickExplode* newAnim = new animBrickExplode(pos, c);
 	animations.push_back(newAnim);
 }
 

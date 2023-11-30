@@ -12,6 +12,7 @@ public:
 
 	void brickHit(brickTypeEnum bType) const;
 	void brickKill(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const;
+	void brickExplode(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const;
 
 	void paddleHit() const;
 

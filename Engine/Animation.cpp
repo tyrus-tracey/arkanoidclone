@@ -6,21 +6,33 @@ Animation::Animation(const Vec2 _pos, const float _lifetime)
 	lifetime.wake();
 }
 
-animBrickExplode::animBrickExplode(const Vec2 _pos, const Color _c, const float _lifetime)
-	: Animation(_pos, _lifetime), c(_c)
+animBrickExplode::animBrickExplode(const Vec2 _pos, const Color _c)
+	: Animation(_pos, 1.0f), c(_c)
 {
+	chunks[0] = _pos;
+	chunks[1] = _pos;
+	chunks[2] = _pos;
+	chunks[3] = _pos;
 }
 
 void animBrickExplode::update(const float dt)
 {
 	lifetime.tick(dt);
-	vel += (GRAVITY * dt);
-	pos += vel;
+
+	yVel += (GRAVITY * dt);
+	for (int i = 0; i < 4; i++) {
+		chunks[i].y += yVel;
+	}
+
+	chunks[0].x += (-SIDEFORCE		* dt);
+	chunks[1].x += (-SIDEFORCE/2.0f * dt);
+	chunks[2].x += (SIDEFORCE/2.0f	* dt);
+	chunks[3].x += (SIDEFORCE		* dt);
 }
 
 void animBrickExplode::draw(Graphics& gfx) const
 {
-	SpriteCodex::DrawBrickChunk(pos, c, gfx);
+	for (const Vec2 chunk : chunks) { SpriteCodex::DrawBrickChunk(chunk, c, gfx); }
 }
 
 animBrickCrush::animBrickCrush(const Vec2 _pos, const Color _c)
