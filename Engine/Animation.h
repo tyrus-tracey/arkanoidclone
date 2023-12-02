@@ -26,7 +26,7 @@ public:
 private:
 	static constexpr float LIFETIME = 1.0f;
 	static constexpr float GRAVITY = 100.0f;
-	static constexpr float SIDEFORCE = 150.0f;
+	static constexpr float SIDEFORCE = 200.0f;
 	float yVel = -15.0f;
 	const Color c;
 	Vec2 chunks[4];
