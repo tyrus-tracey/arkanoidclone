@@ -28,8 +28,11 @@ void level::update(std::list<ball>& balls, paddle& p, EventManager& eventmanager
 	brickMan.update(balls, p, eventmanager);
 	lvlCore.update(balls, eventmanager, dt);
 
-	if (!lvlCore.isLive()) {
+	if (lvlCore.isExploding()) {
 		eventmanager.flag_LevelGoalsComplete.raise();
+	}
+
+	if (!lvlCore.isLive()) {
 		tLevelCompleteWait.wake();
 	}
 	tLevelCompleteWait.tick(dt);

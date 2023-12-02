@@ -31,6 +31,7 @@ public:
 	void lock(const Vec2 lockPos);
 	void unlock();
 	bool onLockCooldown() const;
+	bool isLockable() const;
 	void kill();
 	void arm(EventManager& eventmanager);
 	void disarm();

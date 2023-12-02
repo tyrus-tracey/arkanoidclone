@@ -194,7 +194,9 @@ void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, EventMan
 
     switch (bType) {
     case BLUE_BRICK:
-        event_BrickSpawnBall(balls);
+        if (!eventMan.flag_LevelGoalsComplete.isRaised()) {
+            event_BrickSpawnBall(balls);
+        }
     default:
         break;
     }
@@ -213,7 +215,9 @@ void brickManager::event_brickExplode(std::list<ball>& balls, paddle& pad, Event
 
     switch (bType) {
     case BLUE_BRICK:
-        event_BrickSpawnBall(balls);
+        if (!eventMan.flag_LevelGoalsComplete.isRaised()) {
+            event_BrickSpawnBall(balls);
+        }
     default:
         break;
     }
@@ -228,6 +232,7 @@ void brickManager::event_brickExplode(std::list<ball>& balls, paddle& pad, Event
 void brickManager::event_BrickSpawnBall(std::list<ball>& balls)
 {
     if ((*collidedBrick) == nullptr) { return; }
+
     Vec2 spawnVector = { 0,1 };
     float spawnTime = 0.75f;
 

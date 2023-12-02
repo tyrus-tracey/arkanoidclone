@@ -55,7 +55,7 @@ void enemyCore::update(std::list<ball>& balls, EventManager& eventmanager, const
         return;
     }
     for (ball& b : balls) {
-        if (hitbox().isOverlapping(b.hitbox()) && !b.onLockCooldown()) {
+        if (hitbox().isOverlapping(b.hitbox()) && b.isLockable()) {
             lockBall(&b, eventmanager);
         }
     }
@@ -103,9 +103,14 @@ void enemyCore::kill()
     live = false;
 }
 
-bool enemyCore::isLive()   
+bool enemyCore::isLive() const
 {
     return live;
+}
+
+bool enemyCore::isExploding() const
+{
+    return tDeathAnimTime.isActive();
 }
 
 bool enemyCore::hasBall() const

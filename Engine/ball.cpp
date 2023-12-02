@@ -159,7 +159,7 @@ void ball::detonate(EventManager& eventmanager)
 {
 	eventmanager.ballDetonate();
 	tBallExplode.wake();
-	rad *= radBlastFactor;
+	if (!locked) { rad *= radBlastFactor; }	
 }
 
 void ball::updateTrail()
@@ -230,6 +230,11 @@ void ball::unlock()
 bool ball::onLockCooldown() const
 {
 	return tBallLockCooldown.isActive();
+}
+
+bool ball::isLockable() const
+{
+	return !onLockCooldown() && !isExploding() && live;
 }
 
 void ball::kill()

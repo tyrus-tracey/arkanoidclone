@@ -19,7 +19,8 @@ public:
 	void draw(Graphics& gfx);
 	void releaseBall(EventManager& eventmanager);
 	void startExplode(EventManager& eventmanager);
-	bool isLive();
+	bool isLive() const;
+	bool isExploding() const;
 	bool hasBall() const;
 	ball* getBall() const;
 	void operator=(enemyCore& other);

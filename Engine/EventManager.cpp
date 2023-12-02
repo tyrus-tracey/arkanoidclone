@@ -122,4 +122,6 @@ void EventManager::coreExplodeFinal() const
 void EventManager::levelNewLoaded()
 {
     flag_ballHoldSpawn.clear();
+    flag_LevelGoalsComplete.clear();
+    flag_LevelOver.clear();
 }
