@@ -45,7 +45,7 @@ private:
 	static constexpr float FORCE = 300.0f;
 	const Color c;
 	Vec2 chunks[4]; // [0] topLeft, [1] topRight, [2] botLeft, [3] botRight
-	oscillator flash = oscillator(0.05f);
+	oscillator flash = oscillator(0.025f);
 };
 
 class animCoreExplode : public Animation
