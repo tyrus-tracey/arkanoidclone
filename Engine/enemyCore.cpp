@@ -1,10 +1,16 @@
 #include "enemyCore.h"
 
+enemyCore::enemyCore(const enemyCore& other)
+    : pos(other.pos), heldBall(other.heldBall), live(other.live), tIdleAnimInterval(other.tIdleAnimInterval)
+{
+}
+
 enemyCore::enemyCore(Vec2 corePos)
     : pos(corePos)
 {
     tDeathAnimTime.sleep();
     tMiniExplosionTime.sleep();
+    tIdleAnimInterval.wake();
 }
 
 rect enemyCore::hitbox() const
@@ -35,6 +41,18 @@ void enemyCore::update(std::list<ball>& balls, EventManager& eventmanager, const
         }
 
         return;
+    }
+
+    if (hasBall()) {
+        tIdleAnimInterval.tick(dt * 20.0f);
+    }
+    else {
+        tIdleAnimInterval.tick(dt);
+    }
+    
+    if (tIdleAnimInterval.ended()) {
+        incrementDiagonal();
+        tIdleAnimInterval.restart();
     }
 
     if (hasBall()) { 
@@ -142,7 +160,13 @@ void enemyCore::draw(Graphics& gfx)
         }
     }
     else {
-        SpriteCodex::DrawCore(pos, gfx);
+        switch (diagonal) {
+        case TL: SpriteCodex::DrawCoreTL(pos, gfx); return;
+        case TR: SpriteCodex::DrawCoreTR(pos, gfx); return;
+        case BR: SpriteCodex::DrawCoreBR(pos, gfx); return;
+        case BL: SpriteCodex::DrawCoreBL(pos, gfx); return;
+        default: SpriteCodex::DrawCore(pos, gfx); return;
+        }
     }
 }
 
@@ -151,6 +175,7 @@ void enemyCore::operator=(enemyCore& other)
     pos = other.pos;
     heldBall = other.heldBall;
     live = other.live;
+    tIdleAnimInterval = other.tIdleAnimInterval;
 }
 
 
@@ -169,11 +194,22 @@ Vec2 enemyCore::getRandDiagonal()
     float negDiag = -0.7071;
 
     switch (dir) {
-    case 0: out = { negDiag, negDiag }; break;  // North
-    case 1: out = { posDiag, negDiag }; break;  // East
-    case 2: out = { posDiag, posDiag }; break;  // South
-    case 3: out = { negDiag, posDiag }; break; // West
+    case 0: out = { negDiag, negDiag }; diagonal = TL; break;  // North
+    case 1: out = { posDiag, negDiag }; diagonal = TR; break;  // East
+    case 2: out = { posDiag, posDiag }; diagonal = BR; break;  // South
+    case 3: out = { negDiag, posDiag }; diagonal = BL; break; // West
     default: break;
     }
+    tIdleAnimInterval.restart();
     return out;
+}
+
+void enemyCore::incrementDiagonal()
+{
+    switch (diagonal) {
+    case TL: diagonal = TR; return;
+    case TR: diagonal = BR; return;
+    case BR: diagonal = BL; return;
+    case BL: diagonal = TL; return;
+    }
 }
