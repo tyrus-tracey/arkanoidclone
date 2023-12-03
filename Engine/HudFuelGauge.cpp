@@ -36,7 +36,7 @@ void HudFuelGauge::draw(Graphics& gfx) const
 {
 	gfx.DrawRectBorder(rect(pos, WIDTH, HEIGHT), cWindow, THICKNESS, true);
 	drawGauge(gfx);
-	if (lightFlasher.isOn()) {
+	if (lightFlasher.isActive() && lightFlasher.isOn()) {
 		Vec2 lightPos = pos;
 		lightPos.y += 50;
 		SpriteCodex::DrawEnterOn(lightPos, gfx);
