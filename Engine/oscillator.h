@@ -18,5 +18,6 @@ public:
 private:
     ticker tOn;
     ticker tOff;
+    bool on = true;
 };
 

@@ -13,19 +13,23 @@ oscillator::oscillator(const float timeOn, const float timeOff)
 void oscillator::tick(const float dt)
 {
 	if (!isActive()) { return; }
-	tOn.tick(dt);
-	if (tOn.ended()) {
-		tOff.tick(dt);
-		if (tOff.ended()) {
-			restart();
-		}
+
+	if (on) {
+		tOn.tick(dt);
+		if (tOn.ended()) { on = false; }
 	}
+	else {
+		tOff.tick(dt);
+		if (tOff.ended()) { restart(); }
+	}
+
 }
 
 void oscillator::restart()
 {
 	tOn.restart();
 	tOff.restart();
+	on = true;
 }
 
 void oscillator::resetInterval()
@@ -49,7 +53,7 @@ void oscillator::sleep()
 // If the "On" portion of the oscillator is currently active.
 bool oscillator::isOn() const
 {
-	return tOn.isActive();
+	return on;
 }
 
 // If the oscillator as a whole is active.
