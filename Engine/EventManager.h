@@ -26,7 +26,7 @@ public:
 	void coreBallRelease();
 	void coreExplodeStart();
 	void coreExplodeMini() const;
-	void coreExplodeFinal() const;
+	void coreExplodeFinal(const Vec2 pos) const;
 
 	void levelNewLoaded();
 

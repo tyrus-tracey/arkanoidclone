@@ -113,10 +113,11 @@ void EventManager::coreExplodeMini() const
     soundbank.coreExplosionMini();
 }
 
-void EventManager::coreExplodeFinal() const
+void EventManager::coreExplodeFinal(const Vec2 pos) const
 {
     scoreboard.scoreCoreKill();
     soundbank.coreExplosionFinal();
+    animManager.createAnimCoreExplode(pos, 75.0f);
 }
 
 void EventManager::levelNewLoaded()

@@ -67,3 +67,22 @@ void animBrickCrush::draw(Graphics& gfx) const
 		for (const Vec2& chunk : chunks) { SpriteCodex::DrawBrickChunk(chunk, c, gfx); }
 	}
 }
+
+animCoreExplode::animCoreExplode(const Vec2 _pos, const float _rad)
+	: Animation(_pos, LIFETIME), RAD_BIG(_rad), RAD_SMALL(RAD_BIG * 0.9f)
+{
+	pulse.wake();
+}
+
+void animCoreExplode::update(const float dt)
+{
+	lifetime.tick(dt);
+	pulse.tick(dt);
+}
+
+void animCoreExplode::draw(Graphics& gfx) const
+{
+	float drawRad = pulse.isOn() ? RAD_BIG : RAD_SMALL;
+	gfx.DrawCircle(pos.x, pos.y, drawRad, cInner, false);
+	gfx.DrawRing(pos.x, pos.y, drawRad, cOuter, INNER_MARGIN, false);
+}

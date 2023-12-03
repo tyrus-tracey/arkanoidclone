@@ -62,6 +62,12 @@ void AnimationManager::createAnimBrickCrush(const Vec2 pos, const Color c)
 	animations.push_back(newAnim);
 }
 
+void AnimationManager::createAnimCoreExplode(const Vec2 pos, const float rad)
+{
+	animCoreExplode* newAnim = new animCoreExplode(pos, rad);
+	animations.push_back(newAnim);
+}
+
 void AnimationManager::clearAnims()
 {
 	std::list<Animation*>::const_iterator aIt = animations.begin();

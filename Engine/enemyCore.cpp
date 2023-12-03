@@ -94,7 +94,7 @@ void enemyCore::startExplode(EventManager& eventmanager)
 
 void enemyCore::explode(EventManager& eventmanager)
 {
-    eventmanager.coreExplodeFinal();
+    eventmanager.coreExplodeFinal(hitbox().getMidpoint());
     kill();
 }
 

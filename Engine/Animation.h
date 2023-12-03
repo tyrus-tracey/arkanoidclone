@@ -47,3 +47,21 @@ private:
 	Vec2 chunks[4]; // [0] topLeft, [1] topRight, [2] botLeft, [3] botRight
 	oscillator flash = oscillator(0.05f);
 };
+
+class animCoreExplode : public Animation
+{
+public:
+	animCoreExplode(const Vec2 _pos, const float _rad);
+	void update(const float dt);
+	void draw(Graphics& gfx) const;
+private:
+	static constexpr float LIFETIME = 2.0f;
+	const int INNER_MARGIN = 5;
+
+	const float RAD_BIG;
+	const float RAD_SMALL;
+	
+	const Color cOuter = Colors::Red;
+	const Color cInner = Colors::Yellow;
+	oscillator pulse = oscillator(0.05f);
+};
