@@ -125,18 +125,24 @@ ball* enemyCore::getBall() const
 
 void enemyCore::draw(Graphics& gfx)
 {
-    if (!live) { return; }
+    if (!live) { 
+        SpriteCodex::DrawCoreHusk(pos, gfx);
+        return; 
+    }
 
     int x, y;
 
-    SpriteCodex::DrawCore(pos, gfx);
     if (tDeathAnimTime.isActive()) {
+        SpriteCodex::DrawCoreFaint(pos, gfx);
         if (tMiniExplosionTime.isActive()) {
             x = int(hitbox().left) + xdeviation;
             y = int(hitbox().top) + ydeviation;
 
             gfx.DrawRing(x, y, 10, Colors::Yellow, 3, false);
         }
+    }
+    else {
+        SpriteCodex::DrawCore(pos, gfx);
     }
 }
 
