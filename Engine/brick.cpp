@@ -30,11 +30,6 @@ ballBrick::ballBrick(const gridLocation _loc)
 	loc = _loc;
 }
 
-colorBrick::colorBrick(const gridLocation _loc)
-	: brick(_loc)
-{
-}
-
 bool brick::overlapCheck(ball& b) const
 {
 	return hitbox().isOverlapping(b.hitbox());
@@ -121,7 +116,7 @@ void brick::operator=(const brick& b)
 	live = b.live;
 }
 
-redBrick::redBrick(const gridLocation _loc)
-	: colorBrick(_loc)
+colorBrick::colorBrick(const gridLocation _loc, const Color _c)
+	: brick(_loc), c(_c)
 {
 }

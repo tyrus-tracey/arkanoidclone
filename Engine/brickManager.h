@@ -40,6 +40,8 @@ private:
 	void event_brickExplode(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
 
 	void event_BrickSpawnBall(std::list<ball>& balls);
+	
+	Color getColorVal(const brickTypeEnum colB);
 
 	std::vector<brick*> bricks;
 	std::vector<brick*>::iterator collidedBrick;

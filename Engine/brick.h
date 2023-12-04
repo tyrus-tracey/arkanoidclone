@@ -65,14 +65,11 @@ public:
 class colorBrick : public brick
 {
 public:
-	colorBrick(const gridLocation _loc);
+	colorBrick(const gridLocation _loc, const Color _c);
 	void takeHit(const ball& b) { kill(); }
-};
-
-class redBrick : public colorBrick {
-public:
-	redBrick(const gridLocation _loc);
-	Color getColor() const { return Colors::Red; }
-	brickTypeEnum getType() const { return RED; }
+	Color getColor() const { return c; }
+	brickTypeEnum getType() const { return COLOR; }
+private:
+	Color c;
 };
 

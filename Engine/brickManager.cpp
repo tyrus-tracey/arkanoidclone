@@ -130,9 +130,6 @@ brick* brickManager::allocateBrick(brickInitInstruction initInstr)
 {
     brick* b = nullptr;
     switch (initInstr.brickType) {
-    case RED:
-        b = new redBrick(initInstr.loc);
-        break;
     case BALL:
         b = new ballBrick(initInstr.loc);
         break;
@@ -140,6 +137,7 @@ brick* brickManager::allocateBrick(brickInitInstruction initInstr)
         b = new rock(initInstr.loc);
         break;
     default:
+        b = new colorBrick(initInstr.loc, getColorVal(initInstr.brickType));
         break;
     }
     return b;
@@ -237,4 +235,20 @@ void brickManager::event_BrickSpawnBall(std::list<ball>& balls)
     float spawnTime = 0.75f;
 
     balls.push_back(ball((*collidedBrick)->hitbox().getMidpoint(), spawnVector, spawnTime));
+}
+
+Color brickManager::getColorVal(const brickTypeEnum colB)
+{
+    switch (colB) {
+    case RED:
+        return Colors::Red;
+    case BLUE:
+        return Colors::Blue;
+    case YELLOW:
+        return Colors::Yellow;
+    case GREEN:
+        return Colors::Green;
+    default:
+        return Colors::White;
+    }
 }
