@@ -1,8 +1,23 @@
 #include "brick.h"
 
-rock::rock(const gridLocation _loc)
+brick::brick()
+	: loc({-1,-1})
 {
-	loc = _loc;
+}
+
+brick::brick(const gridLocation& _loc)
+	: loc(_loc)
+{
+}
+
+brick::brick(const brick& other)
+{
+	loc = other.loc;
+}
+
+rock::rock(const gridLocation _loc)
+	: brick(_loc)
+{
 }
 
 void rock::takeHit(const ball& b)
@@ -10,20 +25,14 @@ void rock::takeHit(const ball& b)
 	if (b.isExploding()) { kill(); }
 }
 
-
-redBrick::redBrick(const gridLocation _loc)
-{
-	loc = _loc;
-}
-
-redBrick::redBrick(const redBrick& other)
-{
-	loc = other.loc;	
-}
-
 ballBrick::ballBrick(const gridLocation _loc) 
 {
 	loc = _loc;
+}
+
+colorBrick::colorBrick(const gridLocation _loc)
+	: brick(_loc)
+{
 }
 
 bool brick::overlapCheck(ball& b) const
@@ -110,4 +119,9 @@ void brick::operator=(const brick& b)
 {
 	pos = b.pos;
 	live = b.live;
+}
+
+redBrick::redBrick(const gridLocation _loc)
+	: colorBrick(_loc)
+{
 }

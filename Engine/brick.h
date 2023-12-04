@@ -13,6 +13,9 @@
 class brick
 {
 public:
+	brick();
+	brick(const gridLocation& _loc);
+	brick(const brick& other);
 	bool overlapCheck(ball& b) const;
 	float getDistBall(ball& b) const;
 	void collideBall(ball& b);
@@ -28,7 +31,6 @@ public:
 	virtual Color getColor() const = 0;
 	unsigned int getFuelAmt() const;
 	void operator=(const brick& b);
-	
 
 protected:
 	gridLocation loc;
@@ -59,15 +61,17 @@ public:
 	brickTypeEnum getType() const { return BALL; }
 };
 
+
 class colorBrick : public brick
 {
+public:
+	colorBrick(const gridLocation _loc);
 	void takeHit(const ball& b) { kill(); }
 };
 
 class redBrick : public colorBrick {
 public:
 	redBrick(const gridLocation _loc);
-	redBrick(const redBrick& other);
 	Color getColor() const { return Colors::Red; }
 	brickTypeEnum getType() const { return RED_BRICK; }
 };
