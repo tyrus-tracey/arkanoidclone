@@ -51,6 +51,13 @@ public:
 	brickTypeEnum getType() const { return ROCK; }
 };
 
+class ballBrick : public brick {
+public:
+	ballBrick(const gridLocation _loc);
+	void takeHit(const ball& b) { kill(); }
+	Color getColor() const { return Colors::Blue; }
+	brickTypeEnum getType() const { return BALL; }
+};
 
 class colorBrick : public brick
 {
@@ -63,12 +70,5 @@ public:
 	redBrick(const redBrick& other);
 	Color getColor() const { return Colors::Red; }
 	brickTypeEnum getType() const { return RED_BRICK; }
-	
 };
 
-class blueBrick : public colorBrick {
-public:
-	blueBrick(const gridLocation _loc);
-	Color getColor() const { return Colors::Blue; }
-	brickTypeEnum getType() const { return BLUE_BRICK; }
-};

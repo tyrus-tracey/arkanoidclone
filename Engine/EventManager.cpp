@@ -12,7 +12,7 @@ void EventManager::brickHit(brickTypeEnum bType) const
     case RED_BRICK:
         soundbank.brickHit();
         break;
-    case BLUE_BRICK:
+    case BALL:
         soundbank.brickHit();
         break;
     case ROCK:
@@ -32,7 +32,7 @@ void EventManager::brickKill(const brickTypeEnum bType, const Color bCol, const 
     case RED_BRICK:
         soundbank.brickHit();
         break;
-    case BLUE_BRICK:
+    case BALL:
         soundbank.brickHit();
         break;
     case ROCK:
@@ -52,7 +52,7 @@ void EventManager::brickExplode(const brickTypeEnum bType, const Color bCol, con
     case RED_BRICK:
         soundbank.brickHit();
         break;
-    case BLUE_BRICK:
+    case BALL:
         soundbank.brickHit();
         break;
     case ROCK:

@@ -21,10 +21,11 @@ redBrick::redBrick(const redBrick& other)
 	loc = other.loc;	
 }
 
-blueBrick::blueBrick(const gridLocation _loc) 
+ballBrick::ballBrick(const gridLocation _loc) 
 {
 	loc = _loc;
 }
+
 bool brick::overlapCheck(ball& b) const
 {
 	return hitbox().isOverlapping(b.hitbox());

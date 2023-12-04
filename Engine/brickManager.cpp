@@ -133,8 +133,8 @@ brick* brickManager::allocateBrick(brickInitInstruction initInstr)
     case RED_BRICK:
         b = new redBrick(initInstr.loc);
         break;
-    case BLUE_BRICK:
-        b = new blueBrick(initInstr.loc);
+    case BALL:
+        b = new ballBrick(initInstr.loc);
         break;
     case ROCK:
         b = new rock(initInstr.loc);
@@ -193,7 +193,7 @@ void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, EventMan
     brickTypeEnum bType = (*collidedBrick)->getType();
 
     switch (bType) {
-    case BLUE_BRICK:
+    case BALL:
         if (!eventMan.flag_LevelGoalsComplete.isRaised()) {
             event_BrickSpawnBall(balls);
         }
@@ -214,7 +214,7 @@ void brickManager::event_brickExplode(std::list<ball>& balls, paddle& pad, Event
     brickTypeEnum bType = (*collidedBrick)->getType();
 
     switch (bType) {
-    case BLUE_BRICK:
+    case BALL:
         if (!eventMan.flag_LevelGoalsComplete.isRaised()) {
             event_BrickSpawnBall(balls);
         }

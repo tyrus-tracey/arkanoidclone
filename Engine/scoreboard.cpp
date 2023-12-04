@@ -12,7 +12,7 @@ void Scoreboard::scoreBrickHit(const brickTypeEnum bType)
 	case RED_BRICK:
 		addScore(100);
 		break;
-	case BLUE_BRICK:
+	case BALL:
 		addScore(100);
 		break;
 	case ROCK:
@@ -29,7 +29,7 @@ void Scoreboard::scoreBrickKill(const brickTypeEnum bType)
 	case RED_BRICK:
 		addScore(500);
 		break;
-	case BLUE_BRICK:
+	case BALL:
 		addScore(500);
 		break;
 	case ROCK:
