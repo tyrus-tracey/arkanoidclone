@@ -130,7 +130,7 @@ brick* brickManager::allocateBrick(brickInitInstruction initInstr)
 {
     brick* b = nullptr;
     switch (initInstr.brickType) {
-    case RED_BRICK:
+    case RED:
         b = new redBrick(initInstr.loc);
         break;
     case BALL:

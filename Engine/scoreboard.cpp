@@ -9,7 +9,7 @@ void Scoreboard::draw(const int lives, const Vec2 scorePos, Graphics& gfx) const
 void Scoreboard::scoreBrickHit(const brickTypeEnum bType)
 {
 	switch (bType) {
-	case RED_BRICK:
+	case RED:
 		addScore(100);
 		break;
 	case BALL:
@@ -26,7 +26,7 @@ void Scoreboard::scoreBrickHit(const brickTypeEnum bType)
 void Scoreboard::scoreBrickKill(const brickTypeEnum bType)
 {
 	switch (bType) {
-	case RED_BRICK:
+	case RED:
 		addScore(500);
 		break;
 	case BALL:

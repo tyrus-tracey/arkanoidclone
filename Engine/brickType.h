@@ -2,5 +2,5 @@
 
 // Enum representing all concrete brick classes.
 enum brickTypeEnum {
-	RED_BRICK, BALL, ROCK
+	RED, BALL, ROCK
 };

@@ -73,6 +73,6 @@ class redBrick : public colorBrick {
 public:
 	redBrick(const gridLocation _loc);
 	Color getColor() const { return Colors::Red; }
-	brickTypeEnum getType() const { return RED_BRICK; }
+	brickTypeEnum getType() const { return RED; }
 };
 

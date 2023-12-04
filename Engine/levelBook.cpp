@@ -46,7 +46,7 @@ levelParams levelBook::genLv1()
 	out.ballVel = { 0,1 };
 	out.coreLoc = { 3, 1 };
 
-	initBrickHori(out, 4, 0, 12, RED_BRICK);
+	initBrickHori(out, 4, 0, 12, RED);
 	initBrickHori(out, 5, 0, 12, BALL);
 	return out;
 }
@@ -75,9 +75,9 @@ levelParams levelBook::genLv3()
 	out.ballVel = { 0, 1 };
 	out.coreLoc = { 3, 1 };
 
-	initBrickHori(out, 4, 0, 19, RED_BRICK);
+	initBrickHori(out, 4, 0, 19, RED);
 	initBrickHori(out, 5, 0, 19, BALL);
-	initBrickHori(out, 6, 0, 29, RED_BRICK);
+	initBrickHori(out, 6, 0, 29, RED);
 
 	return out;
 }
