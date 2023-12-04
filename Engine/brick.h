@@ -35,7 +35,7 @@ protected:
 
 private:
 	Vec2 pos;
-	virtual void takeHit() = 0;
+	virtual void takeHit(const ball& b) = 0;
 	static constexpr float MARGIN = -1.0f;
 	bool live = true;
 	unsigned int fuelAmt = 10;
@@ -46,7 +46,7 @@ class rock : public brick
 {
 public:
 	rock(const gridLocation _loc);
-	void takeHit() { return; }
+	void takeHit(const ball& b);
 	Color getColor() const { return Colors::Gray; }
 	brickTypeEnum getType() const { return ROCK; }
 };
@@ -54,7 +54,7 @@ public:
 
 class colorBrick : public brick
 {
-	void takeHit() { kill(); }
+	void takeHit(const ball& b) { kill(); }
 };
 
 class redBrick : public colorBrick {

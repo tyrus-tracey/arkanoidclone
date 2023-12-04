@@ -5,6 +5,11 @@ rock::rock(const gridLocation _loc)
 	loc = _loc;
 }
 
+void rock::takeHit(const ball& b)
+{
+	if (b.isExploding()) { kill(); }
+}
+
 
 redBrick::redBrick(const gridLocation _loc)
 {
@@ -48,7 +53,7 @@ void brick::collideBall(ball& b)
 		b.reboundX();
 	}
 	b.pushOut(hitbox());
-	takeHit();
+	takeHit(b);
 }
 
 rect brick::hitbox() const
