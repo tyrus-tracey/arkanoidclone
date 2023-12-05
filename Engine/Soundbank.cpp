@@ -51,7 +51,7 @@ void Soundbank::glassPlonk()
 void Soundbank::glassBreak()
 {
 	sGlassBreak.StopAll();
-	sGlassBreak.Play();
+	sGlassBreak.Play(1.5f, 0.5f);
 }
 
 void Soundbank::lockBeep()
