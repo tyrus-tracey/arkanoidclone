@@ -20,7 +20,7 @@ public:
 	float getDistBall(ball& b) const;
 	void collideBall(ball& b);
 	void kill();
-	void draw(Graphics& gfx) const;
+	virtual void draw(Graphics& gfx) const;
 	bool isLive() const;
 	rect hitbox() const;
 	Vec2 getPos() const;
@@ -49,6 +49,7 @@ class rock : public brick
 public:
 	rock(const gridLocation _loc);
 	void takeHit(const ball& b);
+	void draw(Graphics& gfx) const;
 	Color getColor() const { return Colors::Gray; }
 	brickTypeEnum getType() const { return ROCK; }
 };
@@ -57,7 +58,8 @@ class ballBrick : public brick {
 public:
 	ballBrick(const gridLocation _loc);
 	void takeHit(const ball& b) { kill(); }
-	Color getColor() const { return Colors::Blue; }
+	void draw(Graphics& gfx) const;
+	Color getColor() const { return Colors::MakeRGB(165, 201, 255); }
 	brickTypeEnum getType() const { return BALL; }
 };
 

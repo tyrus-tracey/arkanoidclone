@@ -25,9 +25,19 @@ void rock::takeHit(const ball& b)
 	if (b.isExploding()) { kill(); }
 }
 
+void rock::draw(Graphics& gfx) const
+{
+	SpriteCodex::DrawBrickRock(getPos(), gfx);
+}
+
 ballBrick::ballBrick(const gridLocation _loc) 
 {
 	loc = _loc;
+}
+
+void ballBrick::draw(Graphics& gfx) const
+{
+	SpriteCodex::DrawBrickBall(getPos(), gfx);
 }
 
 bool brick::overlapCheck(ball& b) const
