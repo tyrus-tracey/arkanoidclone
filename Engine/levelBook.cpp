@@ -51,6 +51,7 @@ levelParams levelBook::genLv1()
 	initCol(out, 2, COLOR);
 	initCol(out, 4, COLOR);
 	initCol(out, 6, COLOR);
+	
 
 	return out;
 }
@@ -104,12 +105,19 @@ levelParams levelBook::genLv5()
 	return out;
 }
 
+void levelBook::initBrick(levelParams& params, const gridLocation loc, const brickTypeEnum brickType)
+{
+	if (withinBounds(params, loc)) {
+		params.brickInitList.push_back({ brickType, loc });
+	}
+}
+
 // Create initInstructions for a rectangle of bricks to a given brickInit vector.
 void levelBook::initRect(levelParams& params, const gridLocation topLeft, const gridLocation botRight, const brickTypeEnum brickType)
 {
 	for (int y = topLeft.y; y <= botRight.y; y++) {
 		for (int x = topLeft.x; x <= botRight.x; x++) {
-			params.brickInitList.push_back({brickType, {x,y} });
+			initBrick(params, { x,y }, brickType);
 		}
 	}
 }
@@ -137,6 +145,14 @@ void levelBook::initCol(levelParams& params, const int col, const brickTypeEnum 
 }
 
 
+bool levelBook::withinBounds(const levelParams& params, const gridLocation loc) const
+{
+	const int MAX_ROWS = getNumRows(params);
+	const int MAX_COLS = getNumCols(params);
+	return	loc.x >= 0 && loc.x <= MAX_COLS &&
+			loc.y >= 0 && loc.y <= MAX_ROWS;
+}
+
 int levelBook::getNumCols(const levelParams& params) const
 {
 	switch (params.wallSize) {
@@ -151,10 +167,10 @@ int levelBook::getNumCols(const levelParams& params) const
 int levelBook::getNumRows(const levelParams& params) const
 {
 	switch (params.wallSize) {
-	case MICRO:		return 13;
-	case LIGHT:		return 20;
-	case NORMAL:	return 25;
-	case BIG:		return 30;
+	case MICRO:		return 29;
+	case LIGHT:		return 34;
+	case NORMAL:	return 39;
+	case BIG:		return 44;
 	default:		return -1;
 	}
 }
