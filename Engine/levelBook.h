@@ -14,11 +14,18 @@ private:
 	levelParams genLv1();
 	levelParams genLv2();
 	levelParams genLv3();
+	levelParams genLv4();
+	levelParams genLv5();
 
+	int getNumCols(const levelParams& params) const;
+	int getNumRows(const levelParams& params) const;
 
-	void initBrickRect(levelParams& params, const gridLocation topLeft, const gridLocation botRight, const brickTypeEnum brickType);
-	void initBrickHori(levelParams& params, const int row, const int x1, const int x2, const brickTypeEnum brickType);
-	void initBrickVert(levelParams& params, const int col, const int y1, const int y2, const brickTypeEnum brickType);
+	void initRect(levelParams& params, const gridLocation topLeft, const gridLocation botRight, const brickTypeEnum brickType);
+	void initLineHori(levelParams& params, const int row, const int x1, const int x2, const brickTypeEnum brickType);
+	void initLineVert(levelParams& params, const int col, const int y1, const int y2, const brickTypeEnum brickType);
+	void initRow(levelParams& params, const int row, const brickTypeEnum brickType);
+	void initCol(levelParams& params, const int col, const brickTypeEnum brickType);
+
 
 	Graphics& gfx;
 	std::vector<levelParams> levels;

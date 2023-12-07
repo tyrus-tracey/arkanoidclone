@@ -33,12 +33,14 @@ brickManager::~brickManager()
 void brickManager::initializeBricks()
 {
     deleteBricks();
+    //vector<vector<bool>> occupied(wallCache.getRows(), vector<bool>(wallCache.getCols()));
+    //vector<vector<bool>> occupied(wallCache.getCols(), vector<bool>(wallCache.getRows()));
     vector<vector<bool>> occupied(wallCache.getRows(), vector<bool>(wallCache.getCols()));
     for (vector<brickInitInstruction>::const_iterator it = initInstructionList.begin(); it != initInstructionList.end(); it++) {
         int x = (*it).loc.x;
         int y = (*it).loc.y;
-        if (!occupied[y][x]) {
-            occupied[y][x] = createBrick(*it);
+        if (!occupied[x][y]) {
+            occupied[x][y] = createBrick(*it);
         }
     }
 }
