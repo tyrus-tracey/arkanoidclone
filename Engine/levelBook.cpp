@@ -112,6 +112,13 @@ void levelBook::initBrick(levelParams& params, const gridLocation loc, const bri
 	}
 }
 
+void levelBook::initBrick(levelParams& params, const gridLocation loc, const brickTypeEnum brickType)
+{
+	if (withinBounds(params, loc)) {
+		params.brickInitList.push_back({ brickType, loc });
+	}
+}
+
 // Create initInstructions for a rectangle of bricks to a given brickInit vector.
 void levelBook::initRect(levelParams& params, const gridLocation topLeft, const gridLocation botRight, const brickTypeEnum brickType)
 {
