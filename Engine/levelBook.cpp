@@ -51,7 +51,10 @@ levelParams levelBook::genLv1()
 	initCol(out, 2, COLOR);
 	initCol(out, 4, COLOR);
 	initCol(out, 6, COLOR);
-	
+	initBrick(out, { 0, 15 }, ROCK);
+	initBrick(out, { 2, 15 }, ROCK);
+	initBrick(out, { 4, 15 }, ROCK);
+	initBrick(out, { 6, 15 }, ROCK);
 
 	return out;
 }
@@ -112,13 +115,6 @@ void levelBook::initBrick(levelParams& params, const gridLocation loc, const bri
 	}
 }
 
-void levelBook::initBrick(levelParams& params, const gridLocation loc, const brickTypeEnum brickType)
-{
-	if (withinBounds(params, loc)) {
-		params.brickInitList.push_back({ brickType, loc });
-	}
-}
-
 // Create initInstructions for a rectangle of bricks to a given brickInit vector.
 void levelBook::initRect(levelParams& params, const gridLocation topLeft, const gridLocation botRight, const brickTypeEnum brickType)
 {
@@ -148,7 +144,7 @@ void levelBook::initRow(levelParams& params, const int row, const brickTypeEnum 
 
 void levelBook::initCol(levelParams& params, const int col, const brickTypeEnum brickType)
 {
-	initLineVert(params, col, 0, getNumRows(params), brickType);
+	initLineVert(params, col, 0, getNumRows(params) - COL_MARGIN, brickType);
 }
 
 

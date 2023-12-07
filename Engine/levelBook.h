@@ -29,6 +29,7 @@ private:
 	void initCol(levelParams& params, const int col, const brickTypeEnum brickType);
 
 
+	const int COL_MARGIN = 15;
 	Graphics& gfx;
 	std::vector<levelParams> levels;
 	std::vector<levelParams>::const_iterator lvIter;
