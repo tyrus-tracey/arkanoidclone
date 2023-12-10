@@ -24,7 +24,6 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "FrameTimer.h"
-#include "ball.h"
 #include "Vec2.h"
 #include "rect.h"
 #include "paddle.h"
@@ -54,10 +53,6 @@ private:
 	/*  User Functions              */
 	void updateElements(const float dt);
 	void loadLevel(levelParams params);
-	void spawnBall(Vec2 spawnLoc, Vec2 velocity);
-	void spawnBall(const level& lvl);
-	void respawn();
-	inline bool outOfLives() { return lives > 0; }
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -79,7 +74,6 @@ private:
 	FrameTimer ft;
 	float dt;
 	int lives = 4;
-	std::list<ball> balls;
 	
 	float speedslow = 25.0f;
 };

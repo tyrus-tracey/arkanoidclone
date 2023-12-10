@@ -9,6 +9,8 @@ class BallManager
 public:
 	void update(const level& lvl, EventManager& eventManager, const Keyboard& kbd, const float dt);
 	void draw(Graphics& gfx) const;
+	std::list<ball>& getBalls();
+	void clearBalls();
 	void spawnBall(const level& lvl);
 	void spawnBall(const Vec2& loc, const Vec2& vel);
 	void respawn(const level& lvl, int& lives);

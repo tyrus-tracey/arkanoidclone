@@ -61,33 +61,23 @@ void Game::UpdateModel()
 	}
 
 	if (wnd.kbd.KeyIsPressed(VK_TAB)) {
-		spawnBall(lvl);
+		ballManager.spawnBall(lvl);
 	}
 
 	dt = ft.Mark();
 	updateElements(dt);
 
-	if (balls.empty() && !eventManager.flag_ballHoldSpawn.isRaised()) {
-		respawn();
+	if (ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) {
+		ballManager.respawn(lvl, lives);
 	}
 }
 
 void Game::updateElements(const float dt)
 {
-	pad.update(wnd.kbd, lvl.getWalls(), balls, eventManager, dt);
-	lvl.update(balls, pad, eventManager, dt);
+	pad.update(wnd.kbd, lvl.getWalls(), ballManager.getBalls(), eventManager, dt);
+	lvl.update(ballManager.getBalls(), pad, eventManager, dt);
+	ballManager.update(lvl, eventManager, wnd.kbd, dt);
 
-	std::list<ball>::iterator bIt = balls.begin();
-	
-
-	while (bIt != balls.end()) {
-		if ((*bIt).isLive()) {
-			(*bIt++).update(lvl.getWalls(), wnd.kbd, eventManager, dt);
-		}
-		else {
-			bIt = balls.erase(bIt);
-		}
-	}
 	eventManager.flag_ClearAllBalls.update();
 	animManager.update(dt);
 	hud.update(pad.getFuel(), eventManager, dt);
@@ -97,35 +87,16 @@ void Game::loadLevel(levelParams params)
 {
 	lvl = level(gfx, params);
 	pad.reset(lvl.getWalls());
-	balls.clear();
-	spawnBall(lvl);
+	ballManager.clearBalls();
+	ballManager.spawnBall(lvl);
 	eventManager.levelNewLoaded();
-}
-
-void Game::spawnBall(Vec2 spawnLoc, Vec2 velocity)
-{
-	balls.push_back(ball(spawnLoc, velocity));
-}
-
-void Game::spawnBall(const level& lvl)
-{
-	spawnBall(lvl.getBallSpawnPos(), lvl.getBallSpawnVel());
-}
-
-void Game::respawn()
-{
-	if ( !outOfLives() ) { return; }
-	spawnBall(lvl);
-	lives--;
 }
 
 void Game::ComposeFrame()
 {
 	lvl.draw(gfx);
 	pad.draw(gfx);
-	for (ball& b : balls) {
-		b.draw(gfx);
-	}
+	ballManager.draw(gfx);
 	animManager.draw(gfx);
 	hud.draw(gfx);
 	scoreboard.draw(lives, hud.getPos(), gfx);

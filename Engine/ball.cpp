@@ -9,7 +9,20 @@ ball::ball(const ball& other)
 {
 	pos = other.pos;
 	vel = other.vel;
+	speed = other.speed;
+	live = other.live;
+	rad = other.rad;
+	armed = other.armed;
 	tSpawnGrace = other.tSpawnGrace;
+	tBallDissipate = other.tBallDissipate;
+	tBallExplode = other.tBallExplode;
+	oSpawnFlash = other.oSpawnFlash;
+	if (other.armed) {
+		armed = true;
+		for (int i = 0; i < NUM_TRAILS; i++) {
+			trail[i] = other.trail[i];
+		}
+	}
 }
 
 ball::ball(const Vec2 spawnPos, const float spawnGracePeriod)
@@ -23,6 +36,26 @@ ball::ball(const Vec2 spawnPos, const Vec2 velocity, const float spawnGracePerio
 		tSpawnGrace(spawnGracePeriod)
 {
 	tBallExplode.sleep();
+}
+
+
+void ball::operator=(const ball& other)
+{
+	pos = other.pos;
+	vel = other.vel;
+	speed = other.speed;
+	live = other.live;
+	rad = other.rad;
+	tSpawnGrace = other.tSpawnGrace;
+	tBallDissipate = other.tBallDissipate;
+	tBallExplode = other.tBallExplode;
+	oSpawnFlash = other.oSpawnFlash;
+	if (other.armed) {
+		armed = true;
+		for (int i = 0; i < NUM_TRAILS; i++) {
+			trail[i] = other.trail[i];
+		}
+	}
 }
 
 void ball::slap(const Vec2 force)
@@ -268,14 +301,6 @@ bool ball::isExploding() const
 bool ball::isLive() const
 {
 	return live;
-}
-
-void ball::operator=(const ball& other)
-{
-	pos = other.pos;
-	vel = other.vel;
-	speed = other.speed;
-	live = other.live;
 }
 
 void ball::draw(Graphics& gfx)

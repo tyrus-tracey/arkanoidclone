@@ -16,6 +16,17 @@ void BallManager::update(const level& lvl, EventManager& eventManager, const Key
 
 void BallManager::draw(Graphics& gfx) const
 {
+	for (ball b : balls) { b.draw(gfx); }
+}
+
+std::list<ball>& BallManager::getBalls()
+{
+	return balls;
+}
+
+void BallManager::clearBalls()
+{
+	balls.clear();
 }
 
 void BallManager::spawnBall(const level& lvl)
@@ -30,11 +41,11 @@ void BallManager::spawnBall(const Vec2& loc, const Vec2& vel)
 
 void BallManager::respawn(const level& lvl, int& lives)
 {
-	if (lives-- < 0) { return; }
+	if (lives-- <= 0) { return; }
 	spawnBall(lvl);
 }
 
 bool BallManager::noBalls() const
 {
-	return false;
+	return balls.empty();
 }
