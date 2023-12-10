@@ -138,6 +138,9 @@
     <ClInclude Include="Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BallManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -234,6 +237,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BallManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

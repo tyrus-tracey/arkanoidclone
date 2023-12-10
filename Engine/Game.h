@@ -38,6 +38,7 @@
 #include "Hud.h"
 #include "EventManager.h"
 #include "AnimationManager.h"
+#include "BallManager.h"
 
 class Game
 {
@@ -72,6 +73,7 @@ private:
 	Scoreboard scoreboard;
 	EventManager eventManager;
 	AnimationManager animManager;
+	BallManager ballManager;
 
 	bool gameRunning = true;
 	FrameTimer ft;

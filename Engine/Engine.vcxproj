@@ -139,6 +139,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="ball.h" />
+    <ClInclude Include="BallManager.h" />
     <ClInclude Include="brick.h" />
     <ClInclude Include="brickType.h" />
     <ClInclude Include="brickManager.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="ball.cpp" />
+    <ClCompile Include="BallManager.cpp" />
     <ClCompile Include="brick.cpp" />
     <ClCompile Include="brickManager.cpp" />
     <ClCompile Include="DXErr.cpp" />
