@@ -11,11 +11,8 @@ public:
 	bool advanceLevel();
 
 private:
-	levelParams genLv1();
-	levelParams genLv2();
-	levelParams genLv3();
-	levelParams genLv4();
-	levelParams genLv5();
+	levelParams lvl_Spires();
+	levelParams lvl_Babby();
 
 	bool withinBounds(const levelParams& params, const gridLocation loc) const;
 	int getNumCols(const levelParams& params) const;

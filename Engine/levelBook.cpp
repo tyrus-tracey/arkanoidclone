@@ -16,10 +16,8 @@ BIG:
 levelBook::levelBook(Graphics& _gfx)
 	: gfx(_gfx)
 {
-	levels.push_back(genLv1());
-	levels.push_back(genLv2());
-	levels.push_back(genLv3());
-	levels.push_back(genLv5());
+	levels.push_back(lvl_Spires());
+	levels.push_back(lvl_Babby());
 	lvIter = levels.begin();
 }
 
@@ -39,27 +37,37 @@ bool levelBook::advanceLevel()
 	return true;
 }
 
-levelParams levelBook::genLv1()
+levelParams levelBook::lvl_Spires()
 {
 	levelParams out;
-	out.wallSize = MICRO; //7x13
+	out.wallSize = MICRO;
 	out.ballPos = { -1,-1 };
 	out.ballVel = { 0,1 };
-	out.coreLoc = { 3, 1 };
+	out.coreLoc = { 3, 0 };
+
+	initLineVert(out, 2, 0, 2, ROCK);
+	initLineVert(out, 4, 0, 2, ROCK);
+	initBrick(out, { 3, 2 }, ROCK);
+
+	initBrick(out, { 0, 13 }, BALL);
+	initBrick(out, { 2, 13 }, BALL);
+	initBrick(out, { 4, 13 }, BALL);
+	initBrick(out, { 6, 13 }, BALL);
+
+	initBrick(out, { 0, 14 }, ROCK);
+	initBrick(out, { 2, 14 }, ROCK);
+	initBrick(out, { 4, 14 }, ROCK);
+	initBrick(out, { 6, 14 }, ROCK);
 
 	initCol(out, 0, COLOR);
 	initCol(out, 2, COLOR);
 	initCol(out, 4, COLOR);
 	initCol(out, 6, COLOR);
-	initBrick(out, { 0, 15 }, ROCK);
-	initBrick(out, { 2, 15 }, ROCK);
-	initBrick(out, { 4, 15 }, ROCK);
-	initBrick(out, { 6, 15 }, ROCK);
-
+	
 	return out;
 }
 
-levelParams levelBook::genLv2()
+levelParams levelBook::lvl_Babby()
 {
 	levelParams out;
 	out.wallSize = MICRO; //7x13
@@ -69,42 +77,6 @@ levelParams levelBook::genLv2()
 
 	initRow(out, 4, RED);
 	initRow(out, 5, BLUE);
-	return out;
-}
-
-levelParams levelBook::genLv3()
-{
-	levelParams out;
-	out.wallSize = NORMAL; // 11x25
-	out.ballPos = { -1, -1 };
-	out.ballVel = { 0, 1 };
-	out.coreLoc = { 5, 3 };
-
-	initLineHori(out, 0, 3, 7, BALL);
-	initLineHori(out, 10, 3, 7, BALL);
-	initLineVert(out, 3, 0, 10, BALL);
-	initLineVert(out, 7, 0, 10, BALL);
-
-	return out;
-}
-
-levelParams levelBook::genLv4()
-{
-	return levelParams();
-}
-
-levelParams levelBook::genLv5()
-{
-	levelParams out;
-	out.wallSize = BIG;
-	out.ballPos = { -1, -1 };
-	out.ballVel = { 0, 1 };
-	out.coreLoc = { 3, 1 };
-
-	initRow(out, 4, RED);
-	initRow(out, 5, BALL);
-	initRow(out, 6, RED);
-
 	return out;
 }
 
