@@ -23,10 +23,10 @@ level::level(Graphics& gfx, levelParams& params)
 	initBallSpawnPos();
 }
 
-void level::update(std::list<ball>& balls, paddle& p, EventManager& eventmanager, const float dt)
+void level::update(std::list<ball>& balls, paddle& p, ticker& tGameStale, EventManager& eventmanager, const float dt)
 {
-	brickMan.update(balls, p, eventmanager);
-	lvlCore.update(balls, eventmanager, dt);
+	brickMan.update(balls, p, tGameStale, eventmanager);
+	lvlCore.update(balls, tGameStale, eventmanager, dt);
 
 	if (lvlCore.isExploding()) {
 		eventmanager.flag_LevelGoalsComplete.raise();
@@ -74,7 +74,6 @@ Vec2 level::getTopLeft() const
 {
 	return getWalls().getTopLeft();
 }
-
 
 // Adjusts ballspawn Vec2 to be relative to lvlWalls.
 // If Vec2 not within walls, defaults to lvlWall midpoint.

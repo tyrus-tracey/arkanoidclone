@@ -21,7 +21,7 @@ class level
 public:
 	level(Graphics& gfx);
 	level(Graphics& gfx, levelParams& params);
-	void update(std::list<ball>& balls, paddle& p, EventManager& eventmanager, const float dt);
+	void update(std::list<ball>& balls, paddle& p, ticker& tGameStale, EventManager& eventmanager, const float dt);
 	void draw(Graphics& gfx);
 	bool isComplete() const;
 	Vec2 getBallSpawnPos() const;
