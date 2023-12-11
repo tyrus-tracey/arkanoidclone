@@ -53,6 +53,7 @@ private:
 	/*  User Functions              */
 	void updateElements(const float dt);
 	void loadLevel(levelParams params);
+	bool gameIsStale() const;
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -74,6 +75,7 @@ private:
 	FrameTimer ft;
 	float dt;
 	int lives = 4;
+	ticker tGameStale = ticker(3.0f);
 	
 	float speedslow = 25.0f;
 };

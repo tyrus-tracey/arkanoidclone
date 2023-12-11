@@ -23,7 +23,7 @@ rect enemyCore::hitboxCore() const
     return hitbox().getResizeUniform(COREMARGIN);
 }
 
-void enemyCore::update(std::list<ball>& balls, EventManager& eventmanager, const float dt)
+void enemyCore::update(std::list<ball>& balls, ticker& tGameStale, EventManager& eventmanager, const float dt)
 {
     if (!live) { return; }
     
@@ -75,6 +75,7 @@ void enemyCore::update(std::list<ball>& balls, EventManager& eventmanager, const
     for (ball& b : balls) {
         if (hitbox().isOverlapping(b.hitbox()) && b.isLockable()) {
             lockBall(&b, eventmanager);
+            tGameStale.restart();
         }
     }
 }
