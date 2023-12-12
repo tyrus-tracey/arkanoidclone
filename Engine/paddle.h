@@ -14,7 +14,7 @@ class paddle
 public:
 	paddle();
 	paddle(const wall& lvlWalls);
-	void update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, ticker& tGameStale, EventManager& eventManager, float dt);
+	void update(const Keyboard& kbd, const wall& lvlWalls, std::list<ball>& balls, EventManager& eventManager, float dt);
 	void draw(Graphics& gfx) const;
 	void reset(const wall& lvlWalls);
 	void addFuel(const float amt);

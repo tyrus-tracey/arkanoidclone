@@ -67,18 +67,15 @@ void Game::UpdateModel()
 	dt = ft.Mark();
 	updateElements(dt);
 
-	if ((ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) 
-		|| gameIsStale()) {
+	if (ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) {
 		ballManager.respawn(lvl, lives);
-		tGameStale.restart();
 	}
 }
 
 void Game::updateElements(const float dt)
 {
-	tGameStale.tick(dt);
-	pad.update(wnd.kbd, lvl.getWalls(), ballManager.getBalls(), tGameStale, eventManager, dt);
-	lvl.update(ballManager.getBalls(), pad, tGameStale, eventManager, dt);
+	pad.update(wnd.kbd, lvl.getWalls(), ballManager.getBalls(), eventManager, dt);
+	lvl.update(ballManager.getBalls(), pad, eventManager, dt);
 	ballManager.update(lvl, eventManager, wnd.kbd, dt);
 
 	eventManager.flag_ClearAllBalls.update();
@@ -93,14 +90,7 @@ void Game::loadLevel(levelParams params)
 	ballManager.clearBalls();
 	ballManager.spawnBall(lvl);
 	eventManager.levelNewLoaded();
-	tGameStale.restart();
 }
-
-bool Game::gameIsStale() const
-{
-	return !tGameStale.isActive();
-}
-
 
 void Game::ComposeFrame()
 {

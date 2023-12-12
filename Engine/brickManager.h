@@ -20,7 +20,7 @@ public:
 	brickManager& operator=(brickManager other);
 	~brickManager();
 	void initializeBricks();
-	void update(std::list<ball>& balls, paddle& p, ticker& tGameStale, EventManager& eventmanager);
+	void update(std::list<ball>& balls, paddle& p, EventManager& eventmanager);
 	void draw(Graphics& gfx);
 	bool createBrick(brickInitInstruction initInstr);
 	brick* getLastCollidedBrickRef() const;
@@ -35,9 +35,9 @@ private:
 	std::vector<std::vector<brick*>::iterator> runOverlapChecks(ball& b);
 	void chooseCollidingBrick(std::vector<std::vector<brick*>::iterator> overlappingBricks, ball& b);
 
-	void event_brickHit(std::list<ball>& balls, paddle& pad, ticker& tGameStale, EventManager& eventMan);
-	void event_brickKill(std::list<ball>& balls, paddle& pad, ticker& tGameStale, EventManager& eventMan);
-	void event_brickExplode(std::list<ball>& balls, paddle& pad, ticker& tGameStale, EventManager& eventMan);
+	void event_brickHit(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
+	void event_brickKill(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
+	void event_brickExplode(std::list<ball>& balls, paddle& pad, EventManager& eventMan);
 
 	void event_BrickSpawnBall(std::list<ball>& balls);
 	
