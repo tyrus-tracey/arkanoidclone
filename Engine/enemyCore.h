@@ -18,7 +18,7 @@ public:
 	enemyCore(Vec2 corePos);
 	rect hitbox() const;
 	rect hitboxCore() const;
-	void update(std::list<ball>& balls, ticker& tGameStale, EventManager& eventmanager, const float dt);
+	void update(std::list<ball>& balls, EventManager& eventmanager, const float dt);
 	void draw(Graphics& gfx);
 	void releaseBall(EventManager& eventmanager);
 	void startExplode(EventManager& eventmanager);
