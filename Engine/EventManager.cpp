@@ -1,10 +1,7 @@
 #include "EventManager.h"
 
-EventManager::EventManager(ticker& _tGameStale, Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager)
-	:   tGameStale(_tGameStale), 
-        soundbank(_soundbank), 
-        scoreboard(_scoreboard), 
-        animManager(_animManager)
+EventManager::EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager)
+	: soundbank(_soundbank), scoreboard(_scoreboard), animManager(_animManager)
 {
 }
 
@@ -14,17 +11,14 @@ void EventManager::brickHit(brickTypeEnum bType) const
     switch (bType) {
     case COLOR:
         soundbank.brickHit();
-        tGameStale.restart();
         break;
     case BALL:
         soundbank.glassBreak();
-        tGameStale.restart();
         break;
     case ROCK:
         soundbank.rockHit();
         break;
     default:
-        tGameStale.restart();
         return;
     }
 }
@@ -37,17 +31,14 @@ void EventManager::brickKill(const brickTypeEnum bType, const Color bCol, const 
     switch (bType) {
     case COLOR:
         soundbank.brickHit();
-        tGameStale.restart();
         break;
     case BALL:
         soundbank.glassBreak();
-        tGameStale.restart();
         break;
     case ROCK:
         soundbank.rockHit();
         break;
     default:
-        tGameStale.restart();
         return;
     }
 }
@@ -60,17 +51,14 @@ void EventManager::brickExplode(const brickTypeEnum bType, const Color bCol, con
     switch (bType) {
     case COLOR:
         soundbank.brickHit();
-        tGameStale.restart();
         break;
     case BALL:
         soundbank.glassBreak();
-        tGameStale.restart();
         break;
     case ROCK:
         soundbank.rockHit();
         break;
     default:
-        tGameStale.restart();
         return;
     }
 }
@@ -79,7 +67,6 @@ void EventManager::paddleHit() const
 {
     scoreboard.scorePaddleHit();
     soundbank.paddleRebound();
-    tGameStale.restart();
 }
 
 void EventManager::ballWallRebound() const
@@ -108,12 +95,10 @@ void EventManager::ballArmed() const
 
 void EventManager::coreBallHold()
 {
-    tGameStale.restart();
 }
 
 void EventManager::coreBallRelease()
 {
-    tGameStale.restart();
 }
 
 void EventManager::coreExplodeStart()
@@ -140,5 +125,4 @@ void EventManager::levelNewLoaded()
     flag_ballHoldSpawn.clear();
     flag_LevelGoalsComplete.clear();
     flag_LevelOver.clear();
-    tGameStale.restart();
 }

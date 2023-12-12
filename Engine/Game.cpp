@@ -29,7 +29,7 @@ Game::Game(MainWindow& wnd)
 	lvl(gfx),
 	lvlBook(gfx),
 	pad(lvl.getWalls()),
-	eventManager(tGameStale, soundbank, scoreboard, animManager)
+	eventManager(soundbank, scoreboard, animManager)
 {
 	loadLevel(lvlBook.readLevelData());
 }
@@ -77,8 +77,8 @@ void Game::UpdateModel()
 void Game::updateElements(const float dt)
 {
 	tGameStale.tick(dt);
-	pad.update(wnd.kbd, lvl.getWalls(), ballManager.getBalls(), eventManager, dt);
-	lvl.update(ballManager.getBalls(), pad, eventManager, dt);
+	pad.update(wnd.kbd, lvl.getWalls(), ballManager.getBalls(), tGameStale, eventManager, dt);
+	lvl.update(ballManager.getBalls(), pad, tGameStale, eventManager, dt);
 	ballManager.update(lvl, eventManager, wnd.kbd, dt);
 
 	eventManager.flag_ClearAllBalls.update();

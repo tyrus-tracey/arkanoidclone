@@ -47,7 +47,7 @@ void brickManager::initializeBricks()
 
 // Checks which bricks are in contact with ball. Of those bricks, finds 
 // the closest one and initiates a collision with it.
-void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& eventManager)
+void brickManager::update(std::list<ball>& balls, paddle& p, ticker& tGameStale, EventManager& eventManager)
 {
     for (ball& b : balls) {
         vector<vector<brick*>::iterator> overlappingBricks = runOverlapChecks(b);
@@ -58,14 +58,14 @@ void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& event
 
                 if (!(*collidedBrick)->isLive()) {
                     if (b.isExploding()) {
-                        event_brickExplode(balls, p, eventManager);
+                        event_brickExplode(balls, p, tGameStale, eventManager);
                     }
                     else {
-                        event_brickKill(balls, p, eventManager);
+                        event_brickKill(balls, p, tGameStale, eventManager);
                     }   
                 }
                 else {
-                    event_brickHit(balls, p, eventManager);
+                    event_brickHit(balls, p, tGameStale, eventManager);
                 }
             }
         }
@@ -175,7 +175,7 @@ void brickManager::chooseCollidingBrick(vector<vector<brick*>::iterator> overlap
     }
 }
 
-void brickManager::event_brickHit(std::list<ball>& balls, paddle& pad, EventManager& eventMan)
+void brickManager::event_brickHit(std::list<ball>& balls, paddle& pad, ticker& tGameStale, EventManager& eventMan)
 {
     if ((*collidedBrick) == nullptr) { return; }
     brickTypeEnum bType = (*collidedBrick)->getType();
@@ -186,9 +186,12 @@ void brickManager::event_brickHit(std::list<ball>& balls, paddle& pad, EventMana
     }
 
     eventMan.brickHit(bType);
+    if (bType != ROCK) {
+        tGameStale.restart();
+    }
 }
 
-void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, EventManager& eventMan)
+void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, ticker& tGameStale, EventManager& eventMan)
 {
     if ((*collidedBrick) == nullptr) { return; }
     brickTypeEnum bType = (*collidedBrick)->getType();
@@ -204,12 +207,15 @@ void brickManager::event_brickKill(std::list<ball>& balls, paddle& pad, EventMan
 
     pad.addFuel(float((*collidedBrick)->getFuelAmt()));
     eventMan.brickKill(bType, (*collidedBrick)->getColor(), (*collidedBrick)->hitbox().getMidpoint());
+    if (bType != ROCK) {
+        tGameStale.restart();
+    }
 
     delete* collidedBrick;
     bricks.erase(collidedBrick);
 }
 
-void brickManager::event_brickExplode(std::list<ball>& balls, paddle& pad, EventManager& eventMan)
+void brickManager::event_brickExplode(std::list<ball>& balls, paddle& pad, ticker& tGameStale, EventManager& eventMan)
 {
     if ((*collidedBrick) == nullptr) { return; }
     brickTypeEnum bType = (*collidedBrick)->getType();
@@ -225,6 +231,9 @@ void brickManager::event_brickExplode(std::list<ball>& balls, paddle& pad, Event
 
     pad.addFuel(float((*collidedBrick)->getFuelAmt()));
     eventMan.brickExplode(bType, (*collidedBrick)->getColor(), (*collidedBrick)->hitbox().getMidpoint());
+    if (bType != ROCK) {
+        tGameStale.restart();
+    }
 
     delete* collidedBrick;
     bricks.erase(collidedBrick);

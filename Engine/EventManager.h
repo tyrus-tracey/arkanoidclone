@@ -8,7 +8,7 @@
 class EventManager
 {
 public:
-	EventManager(ticker& _tGameStale, Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager);
+	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager);
 
 	void brickHit(brickTypeEnum bType) const;
 	void brickKill(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const;
@@ -38,7 +38,6 @@ public:
 	Flag flag_ClearAllBalls{ false };
 
 private:
-	ticker& tGameStale;
 	Soundbank& soundbank;
 	Scoreboard& scoreboard;
 	AnimationManager& animManager;
