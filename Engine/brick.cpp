@@ -22,12 +22,18 @@ rock::rock(const gridLocation _loc)
 
 void rock::takeHit(const ball& b)
 {
-	if (b.isExploding()) { kill(); }
+	if (b.isExploding() || hits-- <= 0) { kill(); }
 }
 
 void rock::draw(Graphics& gfx) const
 {
 	SpriteCodex::DrawBrickRock(getPos(), gfx);
+	if (hits <= 15) {
+		if (hits > 11)		{ SpriteCodex::DrawBrickCracks1(getPos(), gfx); }
+		else if (hits > 7)	{ SpriteCodex::DrawBrickCracks2(getPos(), gfx); }
+		else if (hits > 3)	{ SpriteCodex::DrawBrickCracks3(getPos(), gfx); }
+		else if (hits >= 0)	{ SpriteCodex::DrawBrickCracks4(getPos(), gfx); }
+	}	
 }
 
 ballBrick::ballBrick(const gridLocation _loc) 

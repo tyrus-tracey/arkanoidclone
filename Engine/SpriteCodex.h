@@ -20,4 +20,8 @@ public:
 	static void DrawBrickChunk(const Vec2& midPoint, const Color& c, Graphics& gfx);
 	static void DrawBrickBall(const Vec2& topLeft, Graphics& gfx);
 	static void DrawBrickRock(const Vec2& topLeft, Graphics& gfx);
+	static void DrawBrickCracks1(const Vec2& topLeft, Graphics& gfx);
+	static void DrawBrickCracks2(const Vec2& topLeft, Graphics& gfx);
+	static void DrawBrickCracks3(const Vec2& topLeft, Graphics& gfx);
+	static void DrawBrickCracks4(const Vec2& topLeft, Graphics& gfx);
 };

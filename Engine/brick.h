@@ -52,6 +52,8 @@ public:
 	void draw(Graphics& gfx) const;
 	Color getColor() const { return Colors::Gray; }
 	brickTypeEnum getType() const { return ROCK; }
+private:
+	int hits = 19;
 };
 
 class ballBrick : public brick {
