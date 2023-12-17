@@ -18,7 +18,7 @@ public:
 	void scorePaddleHit() { addScore(5); }
 	void scoreCoreExplodeMini();
 	void scoreCoreKill();
-
+	void reset();
 
 private:
 	void drawLives(const int lives, Graphics& gfx) const;

@@ -31,12 +31,12 @@ Game::Game(MainWindow& wnd)
 	pad(lvl.getWalls()),
 	eventManager(soundbank, scoreboard, animManager)
 {
-	loadLevel(lvlBook.readLevelData());
+	reset();
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	gfx.BeginFrame();
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
@@ -44,10 +44,9 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	/*if (!outOfLives()) {
-		GAME OVER
-	}*/
-	if (!gameRunning) {
+	if (lives < 0) { gameOver = true; }
+
+	if (gameOver) {
 		return;
 	}
 
@@ -55,20 +54,26 @@ void Game::UpdateModel()
 		if (lvlBook.advanceLevel()) {
 			loadLevel(lvlBook.readLevelData());
 		} else { // NO MORE LEVELS. END OF GAME
-			//gameRunning = false;
-			//return;
+			gameOver = true;
+			return;
 		}	
 	}
 
-	if (wnd.kbd.KeyIsPressed(VK_TAB)) {
-		ballManager.spawnBall(lvl);
-	}
+	
 
 	dt = ft.Mark();
-	updateElements(dt);
 
-	if (ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) {
-		ballManager.respawn(lvl, lives);
+	if (!titleScreen()) {
+		if (wnd.kbd.KeyIsPressed(VK_TAB)) {
+			//ballManager.spawnBall(lvl);
+			reset();
+		}
+
+		updateElements(dt);
+
+		if (ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) {
+			ballManager.respawn(lvl, lives);
+		}
 	}
 }
 
@@ -92,12 +97,39 @@ void Game::loadLevel(levelParams params)
 	eventManager.levelNewLoaded();
 }
 
+void Game::reset()
+{
+	showTitle = true;
+	gameOver = false;
+	lvlBook.reset();
+	lives = DEF_LIVES;
+	eventManager.clearFlags();
+	animManager.clearAnims();
+	scoreboard.reset();
+	loadLevel(lvlBook.readLevelData());
+}
+
+bool Game::titleScreen()
+{
+	if (showTitle == false) { return false; }
+	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+		showTitle = false;
+		//loadLevel(lvlBook.readLevelData());
+	}
+	return showTitle;
+}
+
 void Game::ComposeFrame()
 {
-	lvl.draw(gfx);
-	pad.draw(gfx);
-	ballManager.draw(gfx);
-	animManager.draw(gfx);
-	hud.draw(gfx);
-	scoreboard.draw(lives, hud.getPos(), gfx);
+	if (showTitle) {
+		gfx.DrawRect(0, 0, 500, 500, Colors::White, true);
+	}
+	else {
+		lvl.draw(gfx);
+		pad.draw(gfx);
+		ballManager.draw(gfx);
+		animManager.draw(gfx);
+		hud.draw(gfx);
+		scoreboard.draw(lives, hud.getPos(), gfx);
+	}
 }

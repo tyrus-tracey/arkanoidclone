@@ -29,6 +29,7 @@ public:
 	void operator=(enemyCore& other);
 	static constexpr float SPAN = 40.0f;
 	static constexpr float COREMARGIN = -1.0f;
+	void reset();
 
 private:
 	void eatBall();

@@ -50,6 +50,11 @@ void Scoreboard::scoreCoreKill()
 	addScore(2500);
 }
 
+void Scoreboard::reset()
+{
+	playerScore = 0;
+}
+
 void Scoreboard::drawLives(const int lives, Graphics& gfx) const
 {
 	const float ballSize = 14.0f;

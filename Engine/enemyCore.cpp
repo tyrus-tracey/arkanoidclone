@@ -1,16 +1,24 @@
 #include "enemyCore.h"
 
-enemyCore::enemyCore(const enemyCore& other)
-    : pos(other.pos), heldBall(other.heldBall), live(other.live), tIdleAnimInterval(other.tIdleAnimInterval)
-{
-}
-
 enemyCore::enemyCore(Vec2 corePos)
     : pos(corePos)
 {
-    tDeathAnimTime.sleep();
-    tMiniExplosionTime.sleep();
-    tIdleAnimInterval.wake();
+    reset();
+}
+
+enemyCore::enemyCore(const enemyCore& other)
+    : pos(other.pos), heldBall(other.heldBall), live(other.live), 
+        tIdleAnimInterval(other.tIdleAnimInterval), tDeathAnimTime(other.tDeathAnimTime)
+{
+}
+
+void enemyCore::operator=(enemyCore& other)
+{
+    pos = other.pos;
+    heldBall = other.heldBall;
+    live = other.live;
+    tIdleAnimInterval = other.tIdleAnimInterval;
+    tDeathAnimTime = other.tDeathAnimTime;
 }
 
 rect enemyCore::hitbox() const
@@ -170,12 +178,13 @@ void enemyCore::draw(Graphics& gfx)
     }
 }
 
-void enemyCore::operator=(enemyCore& other)
+void enemyCore::reset()
 {
-    pos = other.pos;
-    heldBall = other.heldBall;
-    live = other.live;
-    tIdleAnimInterval = other.tIdleAnimInterval;
+    heldBall = nullptr;
+    tDeathAnimTime.resetTime();
+    tDeathAnimTime.sleep();
+    tMiniExplosionTime.sleep();
+    tIdleAnimInterval.wake();
 }
 
 

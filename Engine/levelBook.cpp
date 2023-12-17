@@ -37,6 +37,11 @@ bool levelBook::advanceLevel()
 	return true;
 }
 
+void levelBook::reset()
+{
+	lvIter = levels.begin();
+}
+
 levelParams levelBook::lvl_Spires()
 {
 	levelParams out;

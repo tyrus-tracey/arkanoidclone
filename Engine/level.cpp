@@ -19,7 +19,7 @@ level::level(Graphics& gfx, levelParams& params)
 	if ( rect(corePos, enemyCore::SPAN, enemyCore::SPAN).isWithin(lvlWalls.getBounds()) ) {
 		lvlCore = enemyCore(corePos);
 	}
-
+	lvlCore.reset();
 	initBallSpawnPos();
 }
 

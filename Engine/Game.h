@@ -53,6 +53,8 @@ private:
 	/*  User Functions              */
 	void updateElements(const float dt);
 	void loadLevel(levelParams params);
+	void reset();
+	bool titleScreen();
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -70,10 +72,11 @@ private:
 	AnimationManager animManager;
 	BallManager ballManager;
 
-	bool gameRunning = true;
+	const int DEF_LIVES = 4;
+
+	bool showTitle = true;
+	bool gameOver = false;
 	FrameTimer ft;
 	float dt;
-	int lives = 4;
-	
-	float speedslow = 25.0f;
+	int lives = DEF_LIVES;
 };

@@ -5,6 +5,16 @@ EventManager::EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, Anima
 {
 }
 
+void EventManager::clearFlags()
+{
+    flag_LevelGoalsComplete.clear();
+    flag_LevelOver.clear();
+    flag_ArmedBallLocked.clear();
+    
+    flag_ballHoldSpawn.clear();
+    flag_ClearAllBalls.clear();
+}
+
 void EventManager::brickHit(brickTypeEnum bType) const
 {
     scoreboard.scoreBrickHit(bType);

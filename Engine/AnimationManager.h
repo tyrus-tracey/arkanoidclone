@@ -15,9 +15,9 @@ public:
 	void createAnimBrickExplode(const Vec2 pos, const Color c);
 	void createAnimBrickCrush(const Vec2 pos, const Color c);
 	void createAnimCoreExplode(const Vec2 pos, const float rad);
+	void clearAnims();
 
 private:
-	void clearAnims();
 	std::list<Animation*> animations;
 };
 

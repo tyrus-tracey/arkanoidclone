@@ -9,6 +9,7 @@ public:
 	levelBook(Graphics& _gfx);
 	levelParams readLevelData() const;
 	bool advanceLevel();
+	void reset();
 
 private:
 	levelParams lvl_Spires();
