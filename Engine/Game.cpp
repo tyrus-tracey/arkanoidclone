@@ -75,6 +75,9 @@ void Game::UpdateModel()
 			ballManager.respawn(lvl, lives);
 		}
 	}
+	else {
+		animManager.update(dt);
+	}
 }
 
 void Game::updateElements(const float dt)
@@ -107,14 +110,14 @@ void Game::reset()
 	animManager.clearAnims();
 	scoreboard.reset();
 	loadLevel(lvlBook.readLevelData());
+	animManager.createAnimTitleScreen();
 }
 
 bool Game::titleScreen()
 {
 	if (showTitle == false) { return false; }
-	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+	if (wnd.kbd.KeyIsPressed(VK_RETURN) || animManager.noAnimsRunning() ) {
 		showTitle = false;
-		//loadLevel(lvlBook.readLevelData());
 	}
 	return showTitle;
 }
@@ -122,7 +125,7 @@ bool Game::titleScreen()
 void Game::ComposeFrame()
 {
 	if (showTitle) {
-		gfx.DrawRect(0, 0, 500, 500, Colors::White, true);
+		animManager.draw(gfx);
 	}
 	else {
 		lvl.draw(gfx);

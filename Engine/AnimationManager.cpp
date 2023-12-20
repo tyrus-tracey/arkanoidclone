@@ -50,6 +50,12 @@ void AnimationManager::draw(Graphics& gfx) const
 	}
 }
 
+void AnimationManager::createAnimTitleScreen()
+{
+	animTitleScreen* newAnim = new animTitleScreen();
+	animations.push_back(newAnim);
+}
+
 void AnimationManager::createAnimBrickExplode(const Vec2 pos, const Color c)
 {
 	animBrickExplode* newAnim = new animBrickExplode(pos, c);
@@ -66,6 +72,11 @@ void AnimationManager::createAnimCoreExplode(const Vec2 pos, const float rad)
 {
 	animCoreExplode* newAnim = new animCoreExplode(pos, rad);
 	animations.push_back(newAnim);
+}
+
+bool AnimationManager::noAnimsRunning() const
+{
+	return animations.empty();
 }
 
 void AnimationManager::clearAnims()

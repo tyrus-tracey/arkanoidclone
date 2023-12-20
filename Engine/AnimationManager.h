@@ -12,9 +12,11 @@ public:
 	~AnimationManager();
 	void update(float dt);
 	void draw(Graphics& gfx) const;
+	void createAnimTitleScreen();
 	void createAnimBrickExplode(const Vec2 pos, const Color c);
 	void createAnimBrickCrush(const Vec2 pos, const Color c);
 	void createAnimCoreExplode(const Vec2 pos, const float rad);
+	bool noAnimsRunning() const;
 	void clearAnims();
 
 private:

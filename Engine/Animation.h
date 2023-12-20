@@ -17,6 +17,38 @@ protected:
 	ticker lifetime;
 };
 
+class animTitleScreen : public Animation
+{
+public:
+	animTitleScreen();
+	void update(const float dt);
+	void draw(Graphics& gfx) const;
+private:
+	void incrementShadow();
+
+	ticker tTitleFadeIn = ticker(1.0f);
+	ticker tTitleShadows = ticker(1.0f);
+	ticker tShadowInterval = ticker(0.1f);
+	ticker tTitleFlash = ticker(1.0f);
+	oscillator oTitleFlicker = oscillator(0.0125f);
+	oscillator oTitleFlash = oscillator(0.05f);
+
+	const float START_DIST = 300.0f;
+	const Vec2 SHADOW_OFFSET{ 5.0f, 5.0f };
+	const Vec2 POS_SHADOW_1;
+	const Vec2 POS_SHADOW_2;
+
+
+	const Color COL_MAIN		= Colors::MakeRGB(255, 216,   0);
+	const Color COL_DIM			= Colors::MakeRGB(216, 194,  82);
+	const Color COL_FLASH		= Colors::White;
+
+	const Color COL_SHADOW_1	= Colors::MakeRGB(255, 102, 170);
+	const Color COL_SHADOW_2	= Colors::MakeRGB( 25, 255,  48);
+
+	int indexColShadow = 0;
+};
+
 class animBrickExplode : public Animation
 {
 public:

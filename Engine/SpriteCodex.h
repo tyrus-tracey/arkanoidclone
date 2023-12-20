@@ -24,4 +24,5 @@ public:
 	static void DrawBrickCracks2(const Vec2& topLeft, Graphics& gfx);
 	static void DrawBrickCracks3(const Vec2& topLeft, Graphics& gfx);
 	static void DrawBrickCracks4(const Vec2& topLeft, Graphics& gfx);
+	static void DrawTitleMain(const Vec2& topLeft, const Color c, Graphics& gfx);
 };
