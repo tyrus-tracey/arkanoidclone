@@ -4,6 +4,7 @@
 class Soundbank
 {
 public:
+	void brickSpawn();
 	void brickHit();
 	void rockHit();
 	void wallRebound();

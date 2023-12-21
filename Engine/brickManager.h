@@ -45,5 +45,8 @@ private:
 
 	std::vector<brick*> bricks;
 	std::vector<brick*>::iterator collidedBrick;
+
+	bool brickAnimActive = true;
+	std::vector<brick*>::const_iterator itBrickAnim;
 };
 

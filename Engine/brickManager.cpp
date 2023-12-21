@@ -43,12 +43,25 @@ void brickManager::initializeBricks()
             occupied[x][y] = createBrick(*it);
         }
     }
+    itBrickAnim = bricks.begin();
+    brickAnimActive = true;
 }
 
 // Checks which bricks are in contact with ball. Of those bricks, finds 
 // the closest one and initiates a collision with it.
 void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& eventManager)
 {
+    if (brickAnimActive) {
+        itBrickAnim++;
+        if (itBrickAnim == bricks.end()) { 
+            brickAnimActive = false; 
+            eventManager.flag_ballHoldSpawn.clear();
+        }
+        else { 
+            eventManager.brickSpawn((*itBrickAnim)->getType()); 
+        }
+        return; 
+    }
     for (ball& b : balls) {
         vector<vector<brick*>::iterator> overlappingBricks = runOverlapChecks(b);
         if (!overlappingBricks.empty()) {
@@ -74,9 +87,18 @@ void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& event
 
 void brickManager::draw(Graphics& gfx)
 {
-    for (vector<brick*>::const_iterator i = bricks.begin(); i != bricks.end(); ++i) {
-        if ((*i) != nullptr) {
-            (*i)->draw(gfx);
+    if (brickAnimActive) {
+        for (auto it = bricks.begin(); it != itBrickAnim; it++) {
+            if ((*it) != nullptr) {
+                (*it)->draw(gfx);
+            }
+        }
+    }
+    else {
+        for (vector<brick*>::const_iterator i = bricks.begin(); i != bricks.end(); ++i) {
+            if ((*i) != nullptr) {
+                (*i)->draw(gfx);
+            }
         }
     }
 }

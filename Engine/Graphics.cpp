@@ -57,8 +57,8 @@ Graphics::Graphics( HWNDKey& key )
 	sd.OutputWindow = key.hWnd;
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
-	//sd.Windowed = TRUE;
-	sd.Windowed = FALSE;
+	sd.Windowed = TRUE;
+	//sd.Windowed = FALSE;
 	sd.BufferDesc.Scaling = DXGI_MODE_SCALING_STRETCHED;//DXGI_MODE_SCALING_CENTERED;
 
 	HRESULT				hr;

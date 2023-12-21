@@ -1,5 +1,11 @@
 #include "Soundbank.h"
 
+void Soundbank::brickSpawn()
+{
+	sGlassPlonk.StopAll();
+	sGlassPlonk.Play();
+}
+
 void Soundbank::brickHit()
 {
 	sBrickHit.StopAll();

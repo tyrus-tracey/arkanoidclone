@@ -16,8 +16,8 @@ BIG:
 levelBook::levelBook(Graphics& _gfx)
 	: gfx(_gfx)
 {
-	levels.push_back(lvl_Spires());
 	levels.push_back(lvl_Babby());
+	levels.push_back(lvl_Spires());
 	lvIter = levels.begin();
 }
 

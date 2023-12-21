@@ -15,6 +15,18 @@ void EventManager::clearFlags()
     flag_ClearAllBalls.clear();
 }
 
+void EventManager::brickSpawn(const brickTypeEnum bType) const
+{
+    switch (bType) {
+    case COLOR:
+        soundbank.lockBeep(); return;
+    case BALL:
+        soundbank.lockBeep(); return;
+    case ROCK:
+        soundbank.lockBeep(); return;
+    }
+}
+
 void EventManager::brickHit(brickTypeEnum bType) const
 {
     scoreboard.scoreBrickHit(bType);

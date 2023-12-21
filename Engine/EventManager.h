@@ -11,7 +11,7 @@ public:
 	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager);
 	void clearFlags();
 
-
+	void brickSpawn(const brickTypeEnum bType) const;
 	void brickHit(brickTypeEnum bType) const;
 	void brickKill(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const;
 	void brickExplode(const brickTypeEnum bType, const Color bCol, const Vec2 bPos) const;
