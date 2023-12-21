@@ -87,13 +87,15 @@ void animCoreExplode::draw(Graphics& gfx) const
 	gfx.DrawRing(pos.x, pos.y, drawRad, cOuter, INNER_MARGIN, false);
 }
 
-animTitleScreen::animTitleScreen()
-	: Animation({200, 200}, 10.0f), 
+animTitleScreen::animTitleScreen(const Graphics& gfx)
+	: Animation(Vec2(gfx.ScreenWidth/2.0, gfx.ScreenHeight/2.0) - Vec2(80.0f, 35.0f), 10.0f),
 		POS_SHADOW_1(pos + SHADOW_OFFSET),
-		POS_SHADOW_2(pos + (SHADOW_OFFSET * 2.0f))
+		POS_SHADOW_2(pos + (SHADOW_OFFSET * 2.0f)),
+		POS_ENTER(pos + Vec2(-15.0f, 100.0f))
 {
 	tTitleFadeIn.wake();
 	oTitleFlicker.wake();
+	oEnterPrompt.wake();
 }
 
 void animTitleScreen::update(const float dt)
@@ -122,6 +124,9 @@ void animTitleScreen::update(const float dt)
 	else if (tTitleFlash.isActive()) {
 		tTitleFlash.tick(dt);
 		oTitleFlash.tick(dt);
+	}
+	else {
+		oEnterPrompt.tick(dt);
 	}
 }
 
@@ -155,6 +160,9 @@ void animTitleScreen::draw(Graphics& gfx) const
 	}
 	else {
 		SpriteCodex::DrawTitleMain(pos, COL_MAIN, gfx);
+		if (oEnterPrompt.isOn()) {
+			SpriteCodex::DrawEnterPrompt(POS_ENTER, Colors::White, gfx);
+		}
 	}
 }
 

@@ -110,13 +110,14 @@ void Game::reset()
 	animManager.clearAnims();
 	scoreboard.reset();
 	loadLevel(lvlBook.readLevelData());
-	animManager.createAnimTitleScreen();
+	animManager.createAnimTitleScreen(gfx);
 }
 
 bool Game::titleScreen()
 {
 	if (showTitle == false) { return false; }
 	if (wnd.kbd.KeyIsPressed(VK_RETURN) || animManager.noAnimsRunning() ) {
+		animManager.clearAnims();
 		showTitle = false;
 	}
 	return showTitle;

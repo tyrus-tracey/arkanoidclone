@@ -50,9 +50,9 @@ void AnimationManager::draw(Graphics& gfx) const
 	}
 }
 
-void AnimationManager::createAnimTitleScreen()
+void AnimationManager::createAnimTitleScreen(const Graphics& gfx)
 {
-	animTitleScreen* newAnim = new animTitleScreen();
+	animTitleScreen* newAnim = new animTitleScreen(gfx);
 	animations.push_back(newAnim);
 }
 

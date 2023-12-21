@@ -20,7 +20,7 @@ protected:
 class animTitleScreen : public Animation
 {
 public:
-	animTitleScreen();
+	animTitleScreen(const Graphics& gfx);
 	void update(const float dt);
 	void draw(Graphics& gfx) const;
 private:
@@ -32,12 +32,13 @@ private:
 	ticker tTitleFlash = ticker(1.0f);
 	oscillator oTitleFlicker = oscillator(0.0125f);
 	oscillator oTitleFlash = oscillator(0.05f);
+	oscillator oEnterPrompt = oscillator(0.1f);
 
 	const float START_DIST = 300.0f;
 	const Vec2 SHADOW_OFFSET{ 5.0f, 5.0f };
 	const Vec2 POS_SHADOW_1;
 	const Vec2 POS_SHADOW_2;
-
+	const Vec2 POS_ENTER;
 
 	const Color COL_MAIN		= Colors::MakeRGB(255, 216,   0);
 	const Color COL_DIM			= Colors::MakeRGB(216, 194,  82);
