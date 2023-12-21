@@ -59,6 +59,7 @@ Graphics::Graphics( HWNDKey& key )
 	sd.SampleDesc.Quality = 0;
 	//sd.Windowed = TRUE;
 	sd.Windowed = FALSE;
+	sd.BufferDesc.Scaling = DXGI_MODE_SCALING_STRETCHED;//DXGI_MODE_SCALING_CENTERED;
 
 	HRESULT				hr;
 	UINT				createFlags = 0u;
