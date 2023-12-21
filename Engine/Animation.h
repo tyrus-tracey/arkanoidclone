@@ -26,15 +26,18 @@ public:
 private:
 	void incrementShadow();
 
-	ticker tTitleFadeIn = ticker(1.0f);
+	static constexpr float LIFETIME = 15.0f;
+
+	ticker tTitleFadeIn = ticker(1.5f);
 	ticker tTitleShadows = ticker(1.0f);
 	ticker tShadowInterval = ticker(0.1f);
 	ticker tTitleFlash = ticker(1.0f);
+	ticker tMusicPause = ticker(1.0f);
 	oscillator oTitleFlicker = oscillator(0.0125f);
-	oscillator oTitleFlash = oscillator(0.05f);
+	oscillator oTitleFlash = oscillator(0.025f);
 	oscillator oEnterPrompt = oscillator(0.1f);
 
-	const float START_DIST = 300.0f;
+	const float START_DIST = 500.0f;
 	const Vec2 SHADOW_OFFSET{ 5.0f, 5.0f };
 	const Vec2 POS_SHADOW_1;
 	const Vec2 POS_SHADOW_2;
