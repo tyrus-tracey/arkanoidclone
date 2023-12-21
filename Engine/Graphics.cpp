@@ -57,7 +57,8 @@ Graphics::Graphics( HWNDKey& key )
 	sd.OutputWindow = key.hWnd;
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
-	sd.Windowed = TRUE;
+	//sd.Windowed = TRUE;
+	sd.Windowed = FALSE;
 
 	HRESULT				hr;
 	UINT				createFlags = 0u;
