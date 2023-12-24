@@ -119,6 +119,7 @@ void Game::reset()
 	showTitle = true;
 	gameOver = false;
 	lvlBook.reset();
+	ballManager.clearBalls();
 	lives = DEF_LIVES;
 	eventManager.resetFlags();
 	animManager.clearAnims();
