@@ -55,7 +55,7 @@ void brickManager::update(std::list<ball>& balls, paddle& p, EventManager& event
         itBrickAnim++;
         if (itBrickAnim == bricks.end()) { 
             brickAnimActive = false; 
-            eventManager.flag_ballHoldSpawn.clear();
+            eventManager.levelReady();
         }
         else { 
             eventManager.brickSpawn((*itBrickAnim)->getType()); 

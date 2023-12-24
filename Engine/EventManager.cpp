@@ -5,13 +5,13 @@ EventManager::EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, Anima
 {
 }
 
-void EventManager::clearFlags()
+void EventManager::resetFlags()
 {
     flag_LevelGoalsComplete.clear();
     flag_LevelOver.clear();
     flag_ArmedBallLocked.clear();
     
-    flag_ballHoldSpawn.clear();
+    flag_ballHoldSpawn.raise();
     flag_ClearAllBalls.clear();
 }
 
@@ -144,7 +144,12 @@ void EventManager::coreExplodeFinal(const Vec2 pos) const
 
 void EventManager::levelNewLoaded()
 {
-    flag_ballHoldSpawn.clear();
     flag_LevelGoalsComplete.clear();
     flag_LevelOver.clear();
+}
+
+void EventManager::levelReady()
+{
+    flag_LevelSpawnBall.raise();
+    flag_ballHoldSpawn.clear();
 }
