@@ -18,6 +18,7 @@ public:
 
 	void paddleHit() const;
 
+	void ballLost();
 	void ballWallRebound() const;
 	void ballDissipate() const;
 	void ballDetonate() const;
@@ -38,6 +39,7 @@ public:
 	Flag flag_LevelSpawnBall{ false };
 	Flag flag_ArmedBallLocked{ false };
 
+	Flag flag_ballLost{ false };
 	Flag flag_ballHoldSpawn{ false };
 	Flag flag_ClearAllBalls{ false };
 

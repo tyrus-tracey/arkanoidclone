@@ -7,6 +7,7 @@
 class BallManager
 {
 public:
+	BallManager();
 	void update(const level& lvl, EventManager& eventManager, const Keyboard& kbd, const float dt);
 	void draw(Graphics& gfx) const;
 	std::list<ball>& getBalls();
@@ -18,5 +19,6 @@ public:
 
 private:
 	std::list<ball> balls;
+	ticker tRespawnWait = ticker(1.0f);
 };
 

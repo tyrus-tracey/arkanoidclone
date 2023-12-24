@@ -11,6 +11,7 @@ ball::ball(const ball& other)
 	vel = other.vel;
 	speed = other.speed;
 	live = other.live;
+	lost = other.lost;
 	rad = other.rad;
 	armed = other.armed;
 	tSpawnGrace = other.tSpawnGrace;
@@ -45,6 +46,7 @@ void ball::operator=(const ball& other)
 	vel = other.vel;
 	speed = other.speed;
 	live = other.live;
+	lost = other.lost;
 	rad = other.rad;
 	tSpawnGrace = other.tSpawnGrace;
 	tBallDissipate = other.tBallDissipate;
@@ -178,6 +180,7 @@ bool ball::collisionWalls(const wall& lvlWalls)
 	}
 	if (hitbox().bottom >= walls.bottom) {
 		kill();
+		lost = true;
 	}
 	return rebounded;
 }
@@ -301,6 +304,11 @@ bool ball::isExploding() const
 bool ball::isLive() const
 {
 	return live;
+}
+
+bool ball::isLost() const
+{
+	return lost;
 }
 
 void ball::draw(Graphics& gfx)

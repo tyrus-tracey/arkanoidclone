@@ -1,5 +1,10 @@
 #include "BallManager.h"
 
+BallManager::BallManager()
+{
+	tRespawnWait.sleep();
+}
+
 void BallManager::update(const level& lvl, EventManager& eventManager, const Keyboard& kbd, const float dt)
 {
 	std::list<ball>::iterator bIt = balls.begin();
@@ -9,8 +14,21 @@ void BallManager::update(const level& lvl, EventManager& eventManager, const Key
 			(*bIt++).update(lvl.getWalls(), kbd, eventManager, dt);
 		}
 		else {
+			if ((*bIt).isLost()) {
+				eventManager.ballLost();
+				tRespawnWait.restart();
+			}
+			else {
+				tRespawnWait.resetTime();
+				tRespawnWait.sleep();
+			}
 			bIt = balls.erase(bIt);
 		}
+	}
+	tRespawnWait.tick(dt);
+	if (tRespawnWait.ended()) {
+		eventManager.flag_ballHoldSpawn.clear();
+		tRespawnWait.sleep();
 	}
 }
 

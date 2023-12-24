@@ -11,6 +11,7 @@ void EventManager::resetFlags()
     flag_LevelOver.clear();
     flag_ArmedBallLocked.clear();
     
+    flag_ballLost.clear();
     flag_ballHoldSpawn.raise();
     flag_ClearAllBalls.clear();
 }
@@ -89,6 +90,12 @@ void EventManager::paddleHit() const
 {
     scoreboard.scorePaddleHit();
     soundbank.paddleRebound();
+}
+
+void EventManager::ballLost()
+{
+    soundbank.glassBreak();
+    flag_ballHoldSpawn.raise();
 }
 
 void EventManager::ballWallRebound() const

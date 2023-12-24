@@ -38,6 +38,7 @@ public:
 	bool isArmed() const;
 	bool isExploding() const;
 	bool isLive() const;
+	bool isLost() const;
 public:
 	void operator=(const ball& other);
 
@@ -59,6 +60,7 @@ private:
 	const float SPEED_DEFAULT = 500.0f;
 	float speed = 500.0f;
 	bool live = true;
+	bool lost = false;
 	bool armed = false;
 	static const int NUM_TRAILS = 4;
 	Vec2 trail[NUM_TRAILS];

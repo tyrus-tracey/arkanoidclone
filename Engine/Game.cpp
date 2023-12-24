@@ -47,7 +47,7 @@ void Game::UpdateModel()
 	if (lives < 0) { gameOver = true; }
 
 	if (gameOver) {
-		return;
+		//return;
 	}
 
 	if (eventManager.flag_LevelOver.update() || wnd.kbd.KeyIsPressed(VK_DELETE)) {
@@ -59,13 +59,15 @@ void Game::UpdateModel()
 		}	
 	}
 
+	//if (eventManager.flag_ballLost.update()) {
+	//	tRespawnWaitTime.restart();
+	//	eventManager.flag_ballHoldSpawn.raise();
+	//}
 	
 
 	dt = ft.Mark();
 
 	if (!titleScreen()) {
-		updateElements(dt);
-
 		if (eventManager.flag_LevelSpawnBall.update()) {
 			ballManager.spawnBall(lvl);
 		}
@@ -78,6 +80,8 @@ void Game::UpdateModel()
 		if (ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) {
 			ballManager.respawn(lvl, lives);
 		}
+
+		updateElements(dt);
 	}
 	else {
 		animManager.update(dt);
@@ -86,6 +90,13 @@ void Game::UpdateModel()
 
 void Game::updateElements(const float dt)
 {
+	/*if (tRespawnWaitTime.isActive()) {
+		tRespawnWaitTime.tick(dt);
+		if (tRespawnWaitTime.ended()) {
+			eventManager.flag_ballHoldSpawn.clear();
+		}
+	}*/
+	
 	pad.update(wnd.kbd, lvl.getWalls(), ballManager.getBalls(), eventManager, dt);
 	lvl.update(ballManager.getBalls(), pad, eventManager, dt);
 	ballManager.update(lvl, eventManager, wnd.kbd, dt);
