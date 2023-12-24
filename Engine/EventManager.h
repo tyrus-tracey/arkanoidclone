@@ -9,7 +9,7 @@ class EventManager
 {
 public:
 	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager);
-	void clearFlags();
+	void resetFlags();
 
 	void brickSpawn(const brickTypeEnum bType) const;
 	void brickHit(brickTypeEnum bType) const;
@@ -31,9 +31,11 @@ public:
 	void coreExplodeFinal(const Vec2 pos) const;
 
 	void levelNewLoaded();
+	void levelReady();
 
 	Flag flag_LevelGoalsComplete{ false };
 	Flag flag_LevelOver{ false };
+	Flag flag_LevelSpawnBall{ false };
 	Flag flag_ArmedBallLocked{ false };
 
 	Flag flag_ballHoldSpawn{ false };

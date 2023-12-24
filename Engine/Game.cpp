@@ -64,12 +64,17 @@ void Game::UpdateModel()
 	dt = ft.Mark();
 
 	if (!titleScreen()) {
+		updateElements(dt);
+
+		if (eventManager.flag_LevelSpawnBall.update()) {
+			ballManager.spawnBall(lvl);
+		}
+
 		if (wnd.kbd.KeyIsPressed(VK_TAB)) {
 			//ballManager.spawnBall(lvl);
 			reset();
 		}
 
-		updateElements(dt);
 
 		if (ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) {
 			ballManager.respawn(lvl, lives);
@@ -96,7 +101,6 @@ void Game::loadLevel(levelParams params)
 	lvl = level(gfx, params);
 	pad.reset(lvl.getWalls());
 	ballManager.clearBalls();
-	ballManager.spawnBall(lvl);
 	eventManager.levelNewLoaded();
 }
 
@@ -106,7 +110,7 @@ void Game::reset()
 	gameOver = false;
 	lvlBook.reset();
 	lives = DEF_LIVES;
-	eventManager.clearFlags();
+	eventManager.resetFlags();
 	animManager.clearAnims();
 	scoreboard.reset();
 	loadLevel(lvlBook.readLevelData());
