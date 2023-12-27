@@ -9,6 +9,7 @@ class EventManager
 {
 public:
 	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager);
+	void gameReset(Graphics& gfx);
 	void resetFlags();
 
 	void brickSpawn(const brickTypeEnum bType) const;

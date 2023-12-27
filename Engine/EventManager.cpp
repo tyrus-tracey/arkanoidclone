@@ -5,6 +5,14 @@ EventManager::EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, Anima
 {
 }
 
+void EventManager::gameReset(Graphics& gfx)
+{
+    resetFlags();
+    animManager.clearAnims();
+    scoreboard.reset();
+    animManager.createAnimTitleScreen(gfx);
+}
+
 void EventManager::resetFlags()
 {
     flag_LevelGoalsComplete.clear();

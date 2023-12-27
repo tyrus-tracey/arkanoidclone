@@ -115,11 +115,8 @@ void Game::reset()
 	lvlBook.reset();
 	ballManager.clearBalls();
 	lives = DEF_LIVES;
-	eventManager.resetFlags();
-	animManager.clearAnims();
-	scoreboard.reset();
+	eventManager.gameReset(gfx);
 	loadLevel(lvlBook.readLevelData());
-	animManager.createAnimTitleScreen(gfx);
 }
 
 bool Game::titleScreen()
