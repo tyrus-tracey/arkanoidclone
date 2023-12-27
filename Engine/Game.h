@@ -72,10 +72,12 @@ private:
 	EventManager eventManager;
 	BallManager ballManager;
 
+	ticker tGameOver = ticker(13.0f);
 	const int DEF_LIVES = 4;
 
 	bool showTitle = true;
 	bool gameOver = false;
+	bool gameWon = false;
 	FrameTimer ft;
 	float dt;
 	int lives = DEF_LIVES;

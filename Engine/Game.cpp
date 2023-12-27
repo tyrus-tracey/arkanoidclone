@@ -45,36 +45,34 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (lives < 0) { gameOver = true; }
-
-	if (gameOver) {
-		//return;
-	}
-
-	if (eventManager.flag_LevelOver.update() || wnd.kbd.KeyIsPressed(VK_DELETE)) {
-		if (lvlBook.advanceLevel()) {
-			loadLevel(lvlBook.readLevelData());
-		} else { // NO MORE LEVELS. END OF GAME
-			gameOver = true;
-			return;
-		}	
-	}
-
-	//if (eventManager.flag_ballLost.update()) {
-	//	tRespawnWaitTime.restart();
-	//	eventManager.flag_ballHoldSpawn.raise();
-	//}
-	
-
 	dt = ft.Mark();
 
+	if (gameOver || gameWon) {
+		tGameOver.tick(dt);
+		if (tGameOver.ended()) {
+			reset();
+		}
+		return;
+	}
+
 	if (!titleScreen()) {
+		if (eventManager.flag_LevelOver.update() || wnd.kbd.KeyIsPressed(VK_DELETE)) {
+			if (lvlBook.advanceLevel()) {
+				loadLevel(lvlBook.readLevelData());
+			}
+			else {
+				gameWon = true;
+				tGameOver.wake();
+				eventManager.gameOver();
+				return;
+			}
+		}
+
 		if (eventManager.flag_LevelSpawnBall.update()) {
 			ballManager.spawnBall(lvl);
 		}
 
 		if (wnd.kbd.KeyIsPressed(VK_TAB)) {
-			//ballManager.spawnBall(lvl);
 			reset();
 		}
 
@@ -84,6 +82,11 @@ void Game::UpdateModel()
 		}
 
 		updateElements(dt);
+		if (lives < 0) { 
+			gameOver = true; 
+			tGameOver.wake();
+			eventManager.gameOver(); 
+		}
 	}
 	else {
 		animManager.update(dt);
@@ -116,6 +119,7 @@ void Game::reset()
 {
 	showTitle = true;
 	gameOver = false;
+	gameWon = false;
 	lvlBook.reset();
 	ballManager.clearBalls();
 	lives = DEF_LIVES;
@@ -145,5 +149,11 @@ void Game::ComposeFrame()
 		animManager.draw(gfx);
 		hud.draw(gfx);
 		scoreboard.draw(lives, hud.getPos(), gfx);
+		if (gameOver) {
+			SpriteCodex::DrawGameOver(gfx);
+		}
+		else if (gameWon) {
+			SpriteCodex::DrawGameWon(gfx);
+		}
 	}
 }

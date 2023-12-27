@@ -11,6 +11,7 @@ public:
 	EventManager(Soundbank& _soundbank, Scoreboard& _scoreboard, AnimationManager& _animManager);
 	void gameReset(Graphics& gfx);
 	void gameStart();
+	void gameOver();
 	void resetFlags();
 
 	void brickSpawn(const brickTypeEnum bType) const;

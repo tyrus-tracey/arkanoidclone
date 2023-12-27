@@ -20,6 +20,11 @@ void EventManager::gameStart()
     soundbank.squelch();
 }
 
+void EventManager::gameOver()
+{
+    soundbank.gameOver();
+}
+
 void EventManager::resetFlags()
 {
     flag_LevelGoalsComplete.clear();
