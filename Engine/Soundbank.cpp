@@ -2,8 +2,8 @@
 
 void Soundbank::brickSpawn()
 {
-	sGlassPlonk.StopAll();
-	sGlassPlonk.Play();
+	//sBrickSpawn.StopAll();
+	sBrickSpawn.Play(1.25f, 0.25f);
 }
 
 void Soundbank::brickHit()
@@ -76,4 +76,34 @@ void Soundbank::pkeeuuun()
 {
 	sPkeeuuun.StopAll();
 	sPkeeuuun.Play();
+}
+
+void Soundbank::twinkle()
+{
+	sTwinkle.StopAll();
+	sTwinkle.Play();
+}
+
+void Soundbank::ballLost()
+{
+	sBallLost.StopAll();
+	sBallLost.Play();
+}
+
+void Soundbank::titleMusic()
+{
+	sTitleMusic.StopAll();
+	sTitleMusic.Play();
+}
+
+void Soundbank::levelStart()
+{
+	sLevelStart.StopAll();
+	sLevelStart.Play(1.0f, 0.75f);
+}
+
+void Soundbank::gameOver()
+{
+	sGameOver.StopAll();
+	sGameOver.Play();
 }

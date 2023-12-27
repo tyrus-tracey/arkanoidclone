@@ -4,34 +4,54 @@
 class Soundbank
 {
 public:
-	void brickSpawn();
 	void brickHit();
-	void rockHit();
 	void wallRebound();
 	void paddleRebound();
+
 	void ballExplosion();
-	void coreExplosionMini();
-	void coreExplosionFinal();
+	void ballLost();
+	void pkeeuuun();
+
+	void brickSpawn();
+	void rockHit();
 	void glassPlonk();
 	void glassBreak();
-	void lockBeep();
 	void metalHit();
-	void pkeeuuun();
+
+	void coreExplosionMini();
+	void coreExplosionFinal();
+
+	void lockBeep();
+	void twinkle();
+
+	void titleMusic();
+	void levelStart();
+	void gameOver();
 
 
 private:
-	Sound sBrickHit = Sound(L"Sounds\\arkbrick.wav");
-	Sound sRockHit = Sound(L"Sounds\\rockHit.wav");
-	Sound sWallRebound = Sound(L"Sounds\\arkbrick.wav");
-	Sound sPaddleRebound = Sound(L"Sounds\\arkpad.wav");
+	Sound sBrickHit = Sound(L"Sounds\\reboundA.wav");
+	Sound sWallRebound = Sound(L"Sounds\\reboundB.wav");
+	Sound sPaddleRebound = Sound(L"Sounds\\hit.wav");
+
 	Sound sBallExplosion = Sound(L"Sounds\\ballExplosion.wav");
+	Sound sBallLost = Sound(L"Sounds\\doof.wav");
 	Sound sBounce = Sound(L"Sounds\\bounce.wav");
-	Sound sCoreExplosionMini = Sound(L"Sounds\\coreExplosionMini.wav");
-	Sound sCoreExplosionFinal = Sound(L"Sounds\\coreExplosionFinal.wav");
-	Sound sGlassPlonk = Sound(L"Sounds\\glassPlonk.wav");
-	Sound sGlassBreak = Sound(L"Sounds\\glassBreak.wav");
-	Sound sLockBeep = Sound(L"Sounds\\lockBeep.wav");
-	Sound sMetalHit = Sound(L"Sounds\\metalHit.wav");
 	Sound sPkeeuuun = Sound(L"Sounds\\pkeeuuun.wav");
 
+	Sound sBrickSpawn = Sound(L"Sounds\\pit.wav");
+	Sound sRockHit = Sound(L"Sounds\\rockHit.wav");
+	Sound sGlassPlonk = Sound(L"Sounds\\glassPlonk.wav");
+	Sound sGlassBreak = Sound(L"Sounds\\glassBreak.wav");
+	Sound sMetalHit = Sound(L"Sounds\\metalHit.wav");
+
+	Sound sCoreExplosionMini = Sound(L"Sounds\\coreExplosionMini.wav");
+	Sound sCoreExplosionFinal = Sound(L"Sounds\\coreExplosionFinal.wav");
+
+	Sound sLockBeep = Sound(L"Sounds\\lockBeep.wav");
+	Sound sTwinkle = Sound(L"Sounds\\twinkle.wav");
+
+	Sound sTitleMusic = Sound(L"Sounds\\pumped.wav");
+	Sound sLevelStart = Sound(L"Sounds\\dundunduun.wav");
+	Sound sGameOver = Sound(L"Sounds\\robo.wav");
 };

@@ -14,18 +14,12 @@ void EventManager::resetFlags()
     flag_ballLost.clear();
     flag_ballHoldSpawn.raise();
     flag_ClearAllBalls.clear();
+    soundbank.twinkle();
 }
 
 void EventManager::brickSpawn(const brickTypeEnum bType) const
 {
-    switch (bType) {
-    case COLOR:
-        soundbank.lockBeep(); return;
-    case BALL:
-        soundbank.lockBeep(); return;
-    case ROCK:
-        soundbank.lockBeep(); return;
-    }
+    soundbank.brickSpawn();
 }
 
 void EventManager::brickHit(brickTypeEnum bType) const
@@ -94,7 +88,7 @@ void EventManager::paddleHit() const
 
 void EventManager::ballLost()
 {
-    soundbank.glassBreak();
+    soundbank.ballLost();
 }
 
 void EventManager::ballWallRebound() const
@@ -158,4 +152,5 @@ void EventManager::levelReady()
 {
     flag_LevelSpawnBall.raise();
     flag_ballHoldSpawn.clear();
+    soundbank.levelStart();
 }
