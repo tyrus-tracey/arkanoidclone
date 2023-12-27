@@ -10,7 +10,14 @@ void EventManager::gameReset(Graphics& gfx)
     resetFlags();
     animManager.clearAnims();
     scoreboard.reset();
+    soundbank.squelch();
     animManager.createAnimTitleScreen(gfx);
+}
+
+void EventManager::gameStart()
+{
+    animManager.clearAnims();
+    soundbank.squelch();
 }
 
 void EventManager::resetFlags()
@@ -22,7 +29,6 @@ void EventManager::resetFlags()
     flag_ballLost.clear();
     flag_ballHoldSpawn.raise();
     flag_ClearAllBalls.clear();
-    soundbank.twinkle();
 }
 
 void EventManager::brickSpawn(const brickTypeEnum bType) const

@@ -1,12 +1,13 @@
 #pragma once
 #include <list>
 #include "Animation.h"
+#include "Soundbank.h"
 
 
 class AnimationManager
 {
 public:
-	AnimationManager();
+	AnimationManager(Soundbank& _soundbank);
 	AnimationManager(const AnimationManager& other);
 	AnimationManager& operator=(const AnimationManager& other);
 	~AnimationManager();
@@ -21,5 +22,6 @@ public:
 
 private:
 	std::list<Animation*> animations;
+	Soundbank& soundbank;
 };
 

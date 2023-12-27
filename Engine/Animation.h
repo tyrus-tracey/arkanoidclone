@@ -3,16 +3,18 @@
 #include "SpriteCodex.h"
 #include "Vec2.h"
 #include "oscillator.h"
+#include "Soundbank.h"
 
 class Animation
 {
 public:
-	Animation(const Vec2 _pos, const float _lifetime);
+	Animation(Soundbank& _soundbank, const Vec2 _pos, const float _lifetime);
 	virtual void update(const float dt) = 0;
 	virtual void draw(Graphics& gfx) const = 0;
 	bool isLive() const { return !lifetime.ended(); }
 
 protected:
+	Soundbank& soundbank;
 	Vec2 pos;
 	ticker lifetime;
 };
@@ -20,15 +22,15 @@ protected:
 class animTitleScreen : public Animation
 {
 public:
-	animTitleScreen(const Graphics& gfx);
+	animTitleScreen(Soundbank& _soundbank, const Graphics& gfx);
 	void update(const float dt);
 	void draw(Graphics& gfx) const;
 private:
 	void incrementShadow();
 
-	static constexpr float LIFETIME = 15.0f;
+	static constexpr float LIFETIME = 21.0f;
 
-	ticker tTitleFadeIn = ticker(1.5f);
+	ticker tTitleFadeIn = ticker(2.0f);
 	ticker tTitleShadows = ticker(1.0f);
 	ticker tShadowInterval = ticker(0.1f);
 	ticker tTitleFlash = ticker(1.0f);
@@ -56,7 +58,7 @@ private:
 class animBrickExplode : public Animation
 {
 public:
-	animBrickExplode(const Vec2 _pos, const Color _c);
+	animBrickExplode(Soundbank& _soundbank, const Vec2 _pos, const Color _c);
 	void update(const float dt);
 	void draw(Graphics& gfx) const;
 private:
@@ -72,7 +74,7 @@ private:
 class animBrickCrush : public Animation
 {
 public:
-	animBrickCrush(const Vec2 _pos, const Color _c);
+	animBrickCrush(Soundbank& _soundbank, const Vec2 _pos, const Color _c);
 	void update(const float dt);
 	void draw(Graphics& gfx) const;
 private:
@@ -87,7 +89,7 @@ private:
 class animCoreExplode : public Animation
 {
 public:
-	animCoreExplode(const Vec2 _pos, const float _rad);
+	animCoreExplode(Soundbank& _soundbank, const Vec2 _pos, const float _rad);
 	void update(const float dt);
 	void draw(Graphics& gfx) const;
 private:

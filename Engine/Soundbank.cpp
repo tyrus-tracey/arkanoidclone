@@ -6,6 +6,14 @@ void Soundbank::brickSpawn()
 	sBrickSpawn.Play(1.25f, 0.25f);
 }
 
+void Soundbank::squelch()
+{
+	sTitleCreep.StopAll();
+	sTitleMusic.StopAll();
+	sLevelStart.StopAll();
+	sGameOver.StopAll();
+}
+
 void Soundbank::brickHit()
 {
 	sBrickHit.StopAll();
@@ -88,6 +96,18 @@ void Soundbank::ballLost()
 {
 	sBallLost.StopAll();
 	sBallLost.Play();
+}
+
+void Soundbank::thunder()
+{
+	sThunder.StopAll();
+	sThunder.Play();
+}
+
+void Soundbank::titleCreep()
+{
+	sTitleCreep.StopAll();
+	sTitleCreep.Play();
 }
 
 void Soundbank::titleMusic()

@@ -1,13 +1,13 @@
 #include "Animation.h"
 
-Animation::Animation(const Vec2 _pos, const float _lifetime)
-	: pos(_pos), lifetime(_lifetime)
+Animation::Animation(Soundbank& _soundbank, const Vec2 _pos, const float _lifetime)
+	: soundbank(_soundbank), pos(_pos), lifetime(_lifetime)
 {
 	lifetime.wake();
 }
 
-animBrickExplode::animBrickExplode(const Vec2 _pos, const Color _c)
-	: Animation(_pos, LIFETIME), c(_c)
+animBrickExplode::animBrickExplode(Soundbank& _soundbank, const Vec2 _pos, const Color _c)
+	: Animation(_soundbank, _pos, LIFETIME), c(_c)
 {
 	flash.wake();
 	chunks[0] = _pos;
@@ -39,8 +39,8 @@ void animBrickExplode::draw(Graphics& gfx) const
 	}
 }
 
-animBrickCrush::animBrickCrush(const Vec2 _pos, const Color _c)
-	: Animation(_pos, LIFETIME), c(_c)
+animBrickCrush::animBrickCrush(Soundbank& _soundbank, const Vec2 _pos, const Color _c)
+	: Animation(_soundbank, _pos, LIFETIME), c(_c)
 {
 	flash.wake();
 	chunks[0] = _pos;
@@ -68,8 +68,8 @@ void animBrickCrush::draw(Graphics& gfx) const
 	}
 }
 
-animCoreExplode::animCoreExplode(const Vec2 _pos, const float _rad)
-	: Animation(_pos, LIFETIME), RAD_BIG(_rad), RAD_SMALL(RAD_BIG * 0.9f)
+animCoreExplode::animCoreExplode(Soundbank& _soundbank, const Vec2 _pos, const float _rad)
+	: Animation(_soundbank, _pos, LIFETIME), RAD_BIG(_rad), RAD_SMALL(RAD_BIG * 0.9f)
 {
 	pulse.wake();
 }
@@ -87,14 +87,15 @@ void animCoreExplode::draw(Graphics& gfx) const
 	gfx.DrawRing(pos.x, pos.y, drawRad, cOuter, INNER_MARGIN, false);
 }
 
-animTitleScreen::animTitleScreen(const Graphics& gfx)
-	: Animation(Vec2(gfx.ScreenWidth/2.0, gfx.ScreenHeight/2.0) - Vec2(80.0f, 35.0f), LIFETIME),
+animTitleScreen::animTitleScreen(Soundbank& _soundbank, const Graphics& gfx)
+	: Animation(_soundbank, Vec2(gfx.ScreenWidth/2.0, gfx.ScreenHeight/2.0) - Vec2(80.0f, 35.0f), LIFETIME),
 		POS_SHADOW_1(pos + SHADOW_OFFSET),
 		POS_SHADOW_2(pos + (SHADOW_OFFSET * 2.0f)),
 		POS_ENTER(pos + Vec2(-15.0f, 100.0f))
 {
 	tTitleFadeIn.wake();
 	oTitleFlicker.wake();
+	soundbank.titleCreep();
 }
 
 void animTitleScreen::update(const float dt)
@@ -112,12 +113,16 @@ void animTitleScreen::update(const float dt)
 		tTitleShadows.tick(dt);
 		tShadowInterval.tick(dt);
 		if (tShadowInterval.ended()) {
+			if (indexColShadow == 0) {
+				soundbank.thunder();
+			}
 			incrementShadow();
 			tShadowInterval.restart();
 		}
 		if (tTitleShadows.ended()) {
 			tTitleFlash.wake();
 			oTitleFlash.wake();
+			soundbank.twinkle();
 		}
 	} 
 	else if (tTitleFlash.isActive()) {
@@ -131,6 +136,7 @@ void animTitleScreen::update(const float dt)
 		tMusicPause.tick(dt);
 		if (tMusicPause.ended()) {
 			oEnterPrompt.wake();
+			soundbank.titleMusic();
 		}
 	}
 	else {

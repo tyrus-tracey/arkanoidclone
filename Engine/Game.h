@@ -68,8 +68,8 @@ private:
 	paddle pad;
 	Soundbank soundbank;
 	Scoreboard scoreboard;
-	EventManager eventManager;
 	AnimationManager animManager;
+	EventManager eventManager;
 	BallManager ballManager;
 
 	const int DEF_LIVES = 4;

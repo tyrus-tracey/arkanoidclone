@@ -4,6 +4,8 @@
 class Soundbank
 {
 public:
+	void squelch();
+
 	void brickHit();
 	void wallRebound();
 	void paddleRebound();
@@ -24,6 +26,8 @@ public:
 	void lockBeep();
 	void twinkle();
 
+	void thunder();
+	void titleCreep();
 	void titleMusic();
 	void levelStart();
 	void gameOver();
@@ -51,6 +55,8 @@ private:
 	Sound sLockBeep = Sound(L"Sounds\\lockBeep.wav");
 	Sound sTwinkle = Sound(L"Sounds\\twinkle.wav");
 
+	Sound sTitleCreep = Sound(L"Sounds\\titlecreep.wav");
+	Sound sThunder = Sound(L"Sounds\\shadow.wav");
 	Sound sTitleMusic = Sound(L"Sounds\\pumped.wav");
 	Sound sLevelStart = Sound(L"Sounds\\dundunduun.wav");
 	Sound sGameOver = Sound(L"Sounds\\robo.wav");

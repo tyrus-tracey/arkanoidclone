@@ -29,6 +29,7 @@ Game::Game(MainWindow& wnd)
 	lvl(gfx),
 	lvlBook(gfx),
 	pad(lvl.getWalls()),
+	animManager(soundbank),
 	eventManager(soundbank, scoreboard, animManager)
 {
 	reset();
@@ -123,7 +124,7 @@ bool Game::titleScreen()
 {
 	if (showTitle == false) { return false; }
 	if (wnd.kbd.KeyIsPressed(VK_RETURN) || animManager.noAnimsRunning() ) {
-		animManager.clearAnims();
+		eventManager.gameStart();
 		showTitle = false;
 	}
 	return showTitle;
