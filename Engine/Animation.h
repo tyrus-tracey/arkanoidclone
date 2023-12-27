@@ -28,7 +28,7 @@ public:
 private:
 	void incrementShadow();
 
-	static constexpr float LIFETIME = 21.0f;
+	static constexpr float LIFETIME = 23.0f;
 
 	ticker tTitleFadeIn = ticker(2.0f);
 	ticker tTitleShadows = ticker(1.0f);

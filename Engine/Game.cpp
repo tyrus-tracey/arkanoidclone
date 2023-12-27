@@ -87,6 +87,9 @@ void Game::UpdateModel()
 	}
 	else {
 		animManager.update(dt);
+		if (animManager.noAnimsRunning()) {
+			reset();
+		}
 	}
 }
 
@@ -123,7 +126,7 @@ void Game::reset()
 bool Game::titleScreen()
 {
 	if (showTitle == false) { return false; }
-	if (wnd.kbd.KeyIsPressed(VK_RETURN) || animManager.noAnimsRunning() ) {
+	if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
 		eventManager.gameStart();
 		showTitle = false;
 	}

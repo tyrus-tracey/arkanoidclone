@@ -173,9 +173,22 @@ void animTitleScreen::draw(Graphics& gfx) const
 		}
 	}
 	else {
-		SpriteCodex::DrawTitleMain(pos, COL_MAIN, gfx);
-		if (oEnterPrompt.isActive() && oEnterPrompt.isOn()) {
-			SpriteCodex::DrawEnterPrompt(POS_ENTER, Colors::White, gfx);
+		if (lifetime.getTimeRemaining() < 3.0f) {
+			return;
+		}
+		else if (lifetime.getTimeRemaining() < 4.0f) {
+			SpriteCodex::DrawTitleMain(pos, Colors::Gray, gfx);
+			SpriteCodex::DrawEnterPrompt(POS_ENTER, Colors::Gray, gfx);
+		}
+		else if (lifetime.getTimeRemaining() < 5.0f) {
+			SpriteCodex::DrawTitleMain(pos, COL_DIM, gfx);
+			SpriteCodex::DrawEnterPrompt(POS_ENTER, Colors::LightGray, gfx);
+		}
+		else {
+			SpriteCodex::DrawTitleMain(pos, COL_MAIN, gfx);
+			if (oEnterPrompt.isActive() && oEnterPrompt.isOn()) {
+				SpriteCodex::DrawEnterPrompt(POS_ENTER, Colors::White, gfx);
+			}
 		}
 	}
 }
