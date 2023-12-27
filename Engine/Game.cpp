@@ -77,7 +77,8 @@ void Game::UpdateModel()
 			reset();
 		}
 
-		if (ballManager.noBalls() && !eventManager.flag_ballHoldSpawn.isRaised()) {
+		if (!eventManager.flag_ballHoldSpawn.isRaised() &&
+			ballManager.awaitingRespawn()) {
 			ballManager.respawn(lvl, lives);
 		}
 
@@ -89,14 +90,7 @@ void Game::UpdateModel()
 }
 
 void Game::updateElements(const float dt)
-{
-	/*if (tRespawnWaitTime.isActive()) {
-		tRespawnWaitTime.tick(dt);
-		if (tRespawnWaitTime.ended()) {
-			eventManager.flag_ballHoldSpawn.clear();
-		}
-	}*/
-	
+{	
 	pad.update(wnd.kbd, lvl.getWalls(), ballManager.getBalls(), eventManager, dt);
 	lvl.update(ballManager.getBalls(), pad, eventManager, dt);
 	ballManager.update(lvl, eventManager, wnd.kbd, dt);

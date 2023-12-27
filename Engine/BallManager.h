@@ -15,10 +15,12 @@ public:
 	void spawnBall(const level& lvl);
 	void spawnBall(const Vec2& loc, const Vec2& vel);
 	void respawn(const level& lvl, int& lives);
+	bool awaitingRespawn() const;
 	bool noBalls() const;
 
 private:
 	std::list<ball> balls;
+	bool respawnReady = false;
 	ticker tRespawnWait = ticker(1.0f);
 };
 

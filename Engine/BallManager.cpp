@@ -16,18 +16,21 @@ void BallManager::update(const level& lvl, EventManager& eventManager, const Key
 		else {
 			if ((*bIt).isLost()) {
 				eventManager.ballLost();
+				respawnReady = false;
 				tRespawnWait.restart();
 			}
 			else {
 				tRespawnWait.resetTime();
 				tRespawnWait.sleep();
+				respawnReady = true;
 			}
 			bIt = balls.erase(bIt);
 		}
 	}
 	tRespawnWait.tick(dt);
 	if (tRespawnWait.ended()) {
-		eventManager.flag_ballHoldSpawn.clear();
+		respawnReady = true;
+		tRespawnWait.resetTime();
 		tRespawnWait.sleep();
 	}
 }
@@ -61,6 +64,12 @@ void BallManager::respawn(const level& lvl, int& lives)
 {
 	if (lives-- <= 0) { return; }
 	spawnBall(lvl);
+	respawnReady = false;
+}
+
+bool BallManager::awaitingRespawn() const
+{
+	return noBalls() && respawnReady;
 }
 
 bool BallManager::noBalls() const

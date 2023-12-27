@@ -74,8 +74,6 @@ private:
 
 	const int DEF_LIVES = 4;
 
-	//ticker tRespawnWaitTime = ticker(1.0f);
-
 	bool showTitle = true;
 	bool gameOver = false;
 	FrameTimer ft;

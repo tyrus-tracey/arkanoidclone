@@ -95,7 +95,6 @@ void EventManager::paddleHit() const
 void EventManager::ballLost()
 {
     soundbank.glassBreak();
-    flag_ballHoldSpawn.raise();
 }
 
 void EventManager::ballWallRebound() const
