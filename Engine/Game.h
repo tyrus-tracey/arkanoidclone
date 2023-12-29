@@ -25,7 +25,7 @@
 #include "Graphics.h"
 #include "FrameTimer.h"
 #include "Vec2.h"
-#include "rect.h"
+#include "Shape.h"
 #include "paddle.h"
 #include "wall.h"
 #include "level.h"

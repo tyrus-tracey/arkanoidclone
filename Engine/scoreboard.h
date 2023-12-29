@@ -5,7 +5,7 @@
 #include "Graphics.h"
 #include "SpriteCodex.h"
 #include "SpriteNumbers.h"
-#include "rect.h"
+#include "Shape.h"
 #include "Vec2.h"
 #include "brickType.h"
 

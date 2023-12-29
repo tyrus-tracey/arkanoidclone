@@ -23,7 +23,7 @@
 #include <wrl.h>
 #include "ChiliException.h"
 #include "Colors.h"
-#include "rect.h"
+#include "Shape.h"
 
 class Graphics
 {

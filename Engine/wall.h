@@ -1,6 +1,6 @@
 #pragma once
 #include "Graphics.h"
-#include "rect.h"
+#include "Shape.h"
 #include "wallType.h"
 
 class wall

@@ -1,6 +1,6 @@
 #pragma once
 #include <assert.h>
-#include "rect.h"
+#include "Shape.h"
 #include "Vec2.h"
 #include "Colors.h"
 #include "Graphics.h"

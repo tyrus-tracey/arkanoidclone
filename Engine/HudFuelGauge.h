@@ -2,7 +2,7 @@
 #include "Graphics.h"
 #include "Colors.h"
 #include "SpriteCodex.h"
-#include "rect.h"
+#include "Shape.h"
 #include "oscillator.h"
 #include "EventManager.h"
 

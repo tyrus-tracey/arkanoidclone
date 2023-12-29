@@ -5,7 +5,7 @@
 #include "Vec2.h"
 #include "EventManager.h"
 #include "Colors.h"
-#include "rect.h"
+#include "Shape.h"
 #include "ball.h"
 #include "wall.h"
 

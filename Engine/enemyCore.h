@@ -4,7 +4,7 @@
 #include "EventManager.h"
 #include "Vec2.h"
 #include "ball.h"
-#include "rect.h"
+#include "Shape.h"
 #include "ticker.h"
 #include <random>
 
