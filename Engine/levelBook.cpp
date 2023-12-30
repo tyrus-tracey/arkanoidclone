@@ -77,7 +77,7 @@ levelParams levelBook::lvl_Babby()
 	levelParams out;
 	out.wallSize = MICRO; //7x13
 	out.ballPos = { -1,-1 };
-	out.ballVel = { 0,1 };
+	out.ballVel = { 0, 1 };
 	out.coreLoc = { 3, 1 };
 
 	initRow(out, 4, RED);

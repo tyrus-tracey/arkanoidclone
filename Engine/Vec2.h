@@ -17,7 +17,9 @@ public:
 	Vec2& Normalize();
 	Vec2 GetNormalized() const;
 	Vec2 GetAbsolute() const;
+	Vec2 GetProjectionOnto(const Vec2& other) const;
 	float GetDotProduct(const Vec2& other) const;
+	float getDistance(const Vec2& other) const;
 public:
 	float x;
 	float y;

@@ -1,5 +1,7 @@
 #pragma once
 #include "Vec2.h"
+#include <limits>
+#include <vector>
 
 class rect
 {
@@ -33,4 +35,21 @@ public:
 	Vec2 getMidpoint() const;
 
 	Vec2 midPoint;
+};
+
+class circle {
+public:
+	circle() = default;
+	circle(const Vec2 _point, const float _radius);
+	Vec2 getPoint() const;
+	float getRadius() const;
+	void move(const Vec2 vec);
+	void scale(const float amt);
+	bool isOverlapping(const rect& other) const;
+	float clamp(const float f, float _min, float _max) const;
+
+
+private:
+	Vec2 point;
+	float radius;
 };

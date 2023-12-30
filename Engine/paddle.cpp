@@ -58,8 +58,8 @@ rect paddle::hitbox() const
 bool paddle::collisionBall(std::list<ball>& balls, EventManager& eventManager)
 {
 	for (ball& b : balls) {
-		if (hitbox().isOverlapping(b.hitbox()) && b.getVelocity().y > 0) {
-			Vec2 impactVec = (b.hitbox().getMidpoint() - hitbox().getMidpoint()).Normalize();
+		if (b.hitbox().isOverlapping(this->hitbox()) && b.getVelocity().y > 0) {
+			Vec2 impactVec = (b.getPos() - hitbox().getMidpoint()).Normalize();
 			b.reboundY();
 			b.slap(impactVec); //consider also applying the current velocity of paddle
 			if (isFuelFull()) {

@@ -203,8 +203,8 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="oscillator.cpp" />
     <ClCompile Include="paddle.cpp" />
-    <ClCompile Include="rect.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Soundbank.cpp" />
     <ClCompile Include="SpriteCodex.cpp" />

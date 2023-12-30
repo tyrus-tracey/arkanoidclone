@@ -24,7 +24,7 @@ public:
 	void draw(Graphics& gfx);
 	void speedSet(float spd);
 	void speedReset();
-	midRect hitbox() const;
+	circle hitbox() const;
 	void setVelocity(Vec2 newVel);
 	Vec2 getVelocity() const;
 	Vec2 getPos() const;

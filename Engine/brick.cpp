@@ -48,20 +48,20 @@ void ballBrick::draw(Graphics& gfx) const
 
 bool brick::overlapCheck(ball& b) const
 {
-	return hitbox().isOverlapping(b.hitbox());
+	return b.hitbox().isOverlapping(hitbox());
 }
 
 //NOTE: returns squared length to save calcs
 float brick::getDistBall(ball& b) const
 {
-	Vec2 impactVec = hitbox().getMidpoint() - b.hitbox().getMidpoint();
+	Vec2 impactVec = hitbox().getMidpoint() - b.getPos();
 	return impactVec.GetLengthSq();
 }
 
 void brick::collideBall(ball& b)
 {
-	assert(hitbox().isOverlapping(b.hitbox()));
-	Vec2 ballMid = b.hitbox().getMidpoint();
+	assert(b.hitbox().isOverlapping(this->hitbox()));
+	Vec2 ballMid = b.getPos();
 	Vec2 impactVec = ballMid - hitbox().getMidpoint();
 
 	if (std::signbit(b.getVelocity().x) == std::signbit(impactVec.x)) {

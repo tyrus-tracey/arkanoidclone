@@ -68,7 +68,19 @@ Vec2 Vec2::GetAbsolute() const
 	return Vec2(abs(x), abs(y));
 }
 
+Vec2 Vec2::GetProjectionOnto(const Vec2& other) const
+{
+	return other * (this->GetDotProduct(other) / other.GetLength());
+}
+
 float Vec2::GetDotProduct(const Vec2& other) const
 {	
 	return (x * other.x) + (y * other.y);
+}
+
+float Vec2::getDistance(const Vec2& other) const
+{
+	Vec2 dist = *this - other;
+	dist = dist.GetAbsolute();
+	return dist.GetLength();
 }

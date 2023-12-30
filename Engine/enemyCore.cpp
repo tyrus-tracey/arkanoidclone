@@ -81,7 +81,7 @@ void enemyCore::update(std::list<ball>& balls, EventManager& eventmanager, const
         return;
     }
     for (ball& b : balls) {
-        if (hitbox().isOverlapping(b.hitbox()) && b.isLockable()) {
+        if (b.hitbox().isOverlapping(this->hitbox()) && b.isLockable()) {
             lockBall(&b, eventmanager);
         }
     }

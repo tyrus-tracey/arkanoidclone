@@ -71,10 +71,10 @@ void ball::pushOut(const rect& bounds)
 	if (!hitbox().isOverlapping(bounds) || tBallExplode.isActive()) {
 		return;
 	}
-	Vec2 left(bounds.left - hitbox().right, 0.0f);
-	Vec2 right(bounds.right - hitbox().left, 0.0f);
-	Vec2 up(0.0f, bounds.top - hitbox().bottom);
-	Vec2 down(0.0f, bounds.bottom - hitbox().top);
+	Vec2 left(bounds.left - pos.x + rad, 0.0f);
+	Vec2 right(bounds.right - pos.x - rad, 0.0f);
+	Vec2 up(0.0f, bounds.top - pos.y + rad);
+	Vec2 down(0.0f, bounds.bottom - pos.y - rad);
 	Vec2 minPush = left;
 	Vec2 dirs[4] = { left, right, up, down };
 
@@ -156,13 +156,13 @@ void ball::move(const float dt)
 void ball::clamp(const wall& lvlWalls)
 {
 	rect walls = lvlWalls.getBounds();
-	if (hitbox().left < walls.left)
+	if (pos.x - rad < walls.left)
 		{ pos.x = walls.left	+ rad; }
-	if (hitbox().right > walls.right)
+	if (pos.x + rad > walls.right)
 		{ pos.x = walls.right	- rad; }
-	if (hitbox().top < walls.top)
+	if (pos.y - rad < walls.top)
 		{ pos.y = walls.top		+ rad; }
-	if (hitbox().bottom > walls.bottom) 
+	if (pos.y + rad > walls.bottom) 
 		{ pos.y = walls.bottom	- rad;}
 }
 
@@ -170,15 +170,15 @@ bool ball::collisionWalls(const wall& lvlWalls)
 {
 	bool rebounded = false;
 	rect walls = lvlWalls.getBounds();
-	if (hitbox().left <= walls.left || hitbox().right >= walls.right) {
+	if (pos.x - rad <= walls.left || pos.x + rad >= walls.right) {
 		reboundX();
 		rebounded = true;
 	}
-	if (hitbox().top <= walls.top) {
+	if (pos.y - rad <= walls.top) {
 		reboundY();
 		rebounded = true;
 	}
-	if (hitbox().bottom >= walls.bottom) {
+	if (pos.y + rad >= walls.bottom) {
 		kill();
 		lost = true;
 	}
@@ -203,7 +203,7 @@ void ball::updateTrail()
 	for (int i = NUM_TRAILS-1; i > 0; i--) {
 		trail[i] = trail[i - 1];
 	}
-	trail[0] = this->hitbox().getMidpoint();
+	trail[0] = pos;
 }
 
 void ball::drawTrail(Graphics& gfx) const
@@ -225,10 +225,9 @@ void ball::drawSpawnTimer(Graphics& gfx) const
 	gfx.DrawRect(timeline, Colors::White, false);
 }
 
-midRect ball::hitbox() const
+circle ball::hitbox() const
 {
-	return midRect(pos, rad * 2.0f, rad * 2.0f);
-	//return rect(pos, rad * 2.0f, rad * 2.0f);
+	return circle(pos, rad);
 }
 
 void ball::setVelocity(Vec2 newVel)
