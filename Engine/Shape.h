@@ -1,5 +1,6 @@
 #pragma once
 #include "Vec2.h"
+#include "Helpy.h"
 #include <limits>
 #include <vector>
 
@@ -22,6 +23,7 @@ public:
 	bool isWithin(const rect& other) const;
 	rect getFittedRect(const rect& other, const float padding) const;
 	rect& fitTo(const rect& other, const float padding);
+	Vec2 getClosestVecTo(const Vec2 other) const;
 
 	float top;
 	float left;
@@ -46,8 +48,6 @@ public:
 	void move(const Vec2 vec);
 	void scale(const float amt);
 	bool isOverlapping(const rect& other) const;
-	float clamp(const float f, float _min, float _max) const;
-
 
 private:
 	Vec2 point;

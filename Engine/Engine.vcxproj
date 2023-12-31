@@ -155,6 +155,7 @@
     <ClInclude Include="gameVals.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="gridLocation.h" />
+    <ClInclude Include="Helpy.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="HudFuelGauge.h" />
     <ClInclude Include="Keyboard.h" />

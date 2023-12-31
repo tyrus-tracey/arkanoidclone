@@ -46,6 +46,9 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	dt = ft.Mark();
+	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
+		dt /= 4.0f;
+	}
 
 	if (gameOver || gameWon) {
 		tGameOver.tick(dt);

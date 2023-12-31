@@ -138,6 +138,15 @@ rect& rect::fitTo(const rect& other, const float padding)
 	return *this = getFittedRect(other, padding);
 }
 
+// Returns Vec2 within the rect that is closest to the supplied point.
+Vec2 rect::getClosestVecTo(const Vec2 other) const
+{
+	Vec2 closest;
+	closest.x = Helpy::clamp<float>(other.x, left, right);
+	closest.y = Helpy::clamp<float>(other.y, top, bottom);
+	return closest;
+}
+
 midRect::midRect(const Vec2& _midPoint, const float width, const float height)
 	: midPoint(_midPoint)
 {
@@ -194,11 +203,9 @@ bool circle::isOverlapping(const rect& other) const
 	const Vec2 V_MIDPOINTS = OTHER_MIDPOINT - point;
 	const float DIST_MIDPOINTS = V_MIDPOINTS.GetLength();
 
-	Vec2 closestPoint;
-	closestPoint.x = clamp(point.x, other.left, other.right);
-	closestPoint.y = clamp(point.y, other.top, other.bottom);
+	Vec2 closestVec = other.getClosestVecTo(point);
 
-	const float DIST_CLOSEST_FROM_RECT = closestPoint.getDistance(other.getMidpoint());
+	const float DIST_CLOSEST_FROM_RECT = closestVec.getDistance(other.getMidpoint());
 
 	if (DIST_MIDPOINTS - radius <= DIST_CLOSEST_FROM_RECT) {
 		return true;
@@ -206,12 +213,3 @@ bool circle::isOverlapping(const rect& other) const
 	return false;
 }
 
-float circle::clamp(const float f, float _min, float _max) const 
-{
-	if (_min > _max) {
-		std::swap(_min, _max);
-	}
-	if (f < _min) { return _min; }
-	else if (f > _max) { return _max; }
-	else return f;
-}
