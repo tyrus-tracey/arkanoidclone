@@ -57,6 +57,8 @@ rect paddle::hitbox() const
 
 bool paddle::collisionBall(std::list<ball>& balls, EventManager& eventManager)
 {
+	Vec2 relative = pos;
+	bool collided = false;
 	for (ball& b : balls) {
 		if (b.hitbox().isOverlapping(this->hitbox()) && b.getVelocity().y > 0) {
 			Vec2 impactVec = (b.getPos() - hitbox().getMidpoint()).Normalize();
@@ -65,10 +67,10 @@ bool paddle::collisionBall(std::list<ball>& balls, EventManager& eventManager)
 			if (isFuelFull()) {
 				b.arm(eventManager);
 			}
-			return true;
+			collided = true;
 		}
 	}
-	return false;
+	return collided;
 }
 
 void paddle::resetPosition(const wall& lvlWalls)

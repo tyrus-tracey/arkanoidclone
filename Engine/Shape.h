@@ -24,6 +24,7 @@ public:
 	rect getFittedRect(const rect& other, const float padding) const;
 	rect& fitTo(const rect& other, const float padding);
 	Vec2 getClosestVecTo(const Vec2 other) const;
+	Vec2 getClosestCornerTo(const Vec2 other) const;
 
 	float top;
 	float left;

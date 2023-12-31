@@ -147,6 +147,24 @@ Vec2 rect::getClosestVecTo(const Vec2 other) const
 	return closest;
 }
 
+Vec2 rect::getClosestCornerTo(const Vec2 other) const
+{
+	constexpr float FLOAT_MAX = std::numeric_limits<float>::max();
+	Vec2 closest = { FLOAT_MAX, FLOAT_MAX };
+	const Vec2 TL  = Vec2{left, top};
+	const Vec2 TR  = Vec2{right,top};
+	const Vec2 BL  = Vec2{left,	bottom};
+	const Vec2 BR  = Vec2{right, bottom};
+	
+	const std::vector<Vec2> corners = { TL, TR, BL, BR };
+	for (auto corner = corners.begin(); corner != corners.end(); corner++) {
+		if (other.getDistance(*corner) < other.getDistance(closest)) {
+			closest = *corner;
+		}
+	}
+	return closest;
+}
+
 midRect::midRect(const Vec2& _midPoint, const float width, const float height)
 	: midPoint(_midPoint)
 {
@@ -199,17 +217,7 @@ void circle::scale(const float amt)
 
 bool circle::isOverlapping(const rect& other) const
 {
-	const Vec2 OTHER_MIDPOINT = other.getMidpoint();
-	const Vec2 V_MIDPOINTS = OTHER_MIDPOINT - point;
-	const float DIST_MIDPOINTS = V_MIDPOINTS.GetLength();
-
-	Vec2 closestVec = other.getClosestVecTo(point);
-
-	const float DIST_CLOSEST_FROM_RECT = closestVec.getDistance(other.getMidpoint());
-
-	if (DIST_MIDPOINTS - radius <= DIST_CLOSEST_FROM_RECT) {
-		return true;
-	}
-	return false;
+	Vec2 closestPointInRect = other.getClosestVecTo(point);
+	return point.getDistance(closestPointInRect) < radius;
 }
 
