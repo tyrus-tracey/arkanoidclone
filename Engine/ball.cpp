@@ -71,19 +71,11 @@ void ball::pushOut(const rect& bounds)
 	if (!hitbox().isOverlapping(bounds) || tBallExplode.isActive()) {
 		return;
 	}
-	Vec2 left(bounds.left - pos.x + rad, 0.0f);
-	Vec2 right(bounds.right - pos.x - rad, 0.0f);
-	Vec2 up(0.0f, bounds.top - pos.y + rad);
-	Vec2 down(0.0f, bounds.bottom - pos.y - rad);
-	Vec2 minPush = left;
-	Vec2 dirs[4] = { left, right, up, down };
-
-	for (int i = 1; i < 4; i++) {
-		if (dirs[i].GetLengthSq() < minPush.GetLengthSq()) {
-			minPush = dirs[i];
-		}
-	}
-	pos += minPush;
+	Vec2 pushVec = pos - bounds.getClosestVecTo(pos);
+	float diff = rad - pushVec.GetLength();
+	pushVec.Normalize();
+	pushVec *= diff;
+	pos += pushVec;
 }
 
 void ball::reboundX()
