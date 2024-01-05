@@ -38,6 +38,16 @@ Vec2& Vec2::operator-=( const Vec2& rhs )
 	return *this = *this - rhs;
 }
 
+bool Vec2::operator==(const Vec2& rhs) const
+{
+	return x == rhs.x && y == rhs.y;
+}
+
+bool Vec2::operator!=(const Vec2& rhs) const
+{
+	return !(*this == rhs);
+}
+
 float Vec2::GetLength() const
 {
 	return std::sqrt( GetLengthSq() );
@@ -84,3 +94,9 @@ float Vec2::getDistance(const Vec2& other) const
 	dist = dist.GetAbsolute();
 	return dist.GetLength();
 }
+
+Vec2 Vec2::getReverse() const
+{
+	return Vec2(-x, -y);
+}
+

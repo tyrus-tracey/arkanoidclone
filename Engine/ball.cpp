@@ -71,11 +71,13 @@ void ball::pushOut(const rect& bounds)
 	if (!hitbox().isOverlapping(bounds) || tBallExplode.isActive()) {
 		return;
 	}
+
 	Vec2 pushVec = pos - bounds.getClosestVecTo(pos);
 	float diff = rad - pushVec.GetLength();
 	pushVec.Normalize();
 	pushVec *= diff;
 	pos += pushVec;
+	return;
 }
 
 void ball::reboundX()

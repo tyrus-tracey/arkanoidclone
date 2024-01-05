@@ -38,18 +38,18 @@ Game::Game(MainWindow& wnd)
 void Game::Go()
 {
 	gfx.BeginFrame();
-	UpdateModel();
+	float elapsed = ft.Mark();
+	while (elapsed > 0.0f) {
+		const float dt = std::min(0.0025f, elapsed);
+		UpdateModel(dt);
+		elapsed -= dt;
+	}
 	ComposeFrame();
 	gfx.EndFrame();
 }
 
-void Game::UpdateModel()
+void Game::UpdateModel(const float dt)
 {
-	dt = ft.Mark();
-	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
-		dt /= 4.0f;
-	}
-
 	if (gameOver || gameWon) {
 		tGameOver.tick(dt);
 		if (tGameOver.ended()) {
