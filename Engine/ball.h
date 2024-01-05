@@ -48,7 +48,7 @@ private:
 	bool collisionWalls(const wall& lvlWalls);
 	void dissipate(EventManager& eventmanager);
 	void detonate(EventManager& eventmanager);
-	void updateTrail();
+	void updateTrail(const float dt);
 	void drawTrail(Graphics& gfx) const;
 	void drawSpawnTimer(Graphics& gfx) const;
 
@@ -63,6 +63,7 @@ private:
 	bool lost = false;
 	bool armed = false;
 	static const int NUM_TRAILS = 4;
+	float trailUpdateInterval = 0.0f;
 	Vec2 trail[NUM_TRAILS];
 
 	ticker tSpawnGrace;

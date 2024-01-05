@@ -48,8 +48,13 @@ void Game::Go()
 	gfx.EndFrame();
 }
 
-void Game::UpdateModel(const float dt)
+void Game::UpdateModel(const float _dt)
 {
+	float dt = _dt;
+	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
+		dt /= 4.0f;
+	}
+
 	if (gameOver || gameWon) {
 		tGameOver.tick(dt);
 		if (tGameOver.ended()) {
@@ -128,6 +133,8 @@ void Game::reset()
 	lives = DEF_LIVES;
 	eventManager.gameReset(gfx);
 	loadLevel(lvlBook.readLevelData());
+
+	pad.addFuel(100);
 }
 
 bool Game::titleScreen()

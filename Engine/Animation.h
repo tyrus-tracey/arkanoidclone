@@ -1,4 +1,5 @@
 #pragma once
+#include <random>
 #include "Graphics.h"
 #include "SpriteCodex.h"
 #include "Vec2.h"
@@ -62,10 +63,15 @@ public:
 	void update(const float dt);
 	void draw(Graphics& gfx) const;
 private:
+	std::random_device rd;
+	std::mt19937 rng{ rd() };
+	std::uniform_real_distribution<float> sideDist = std::uniform_real_distribution<float>(-200.0f, 200.0f);
+
 	static constexpr float LIFETIME = 1.0f;
-	static constexpr float GRAVITY = 100.0f;
+	static constexpr float GRAVITY = 18.0f;
 	static constexpr float SIDEFORCE = 200.0f;
-	float yVel = -15.0f;
+	const float SIDE_RAND;
+	float yVel = -2.5f;
 	const Color c;
 	Vec2 chunks[4];
 	oscillator flash = oscillator(0.05f);

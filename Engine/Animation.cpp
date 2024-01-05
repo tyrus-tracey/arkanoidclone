@@ -7,7 +7,8 @@ Animation::Animation(Soundbank& _soundbank, const Vec2 _pos, const float _lifeti
 }
 
 animBrickExplode::animBrickExplode(Soundbank& _soundbank, const Vec2 _pos, const Color _c)
-	: Animation(_soundbank, _pos, LIFETIME), c(_c)
+	: Animation(_soundbank, _pos, LIFETIME), c(_c),
+		SIDE_RAND(sideDist(rng))
 {
 	flash.wake();
 	chunks[0] = _pos;
@@ -26,10 +27,11 @@ void animBrickExplode::update(const float dt)
 		chunks[i].y += yVel;
 	}
 
-	chunks[0].x += (-SIDEFORCE		* dt);
-	chunks[1].x += (-SIDEFORCE/2.0f * dt);
-	chunks[2].x += (SIDEFORCE/2.0f	* dt);
-	chunks[3].x += (SIDEFORCE		* dt);
+	float sideforceRand = SIDEFORCE + SIDE_RAND;
+	chunks[0].x += (-sideforceRand			* dt);
+	chunks[1].x += (-sideforceRand /2.0f	* dt);
+	chunks[2].x += ( sideforceRand /2.0f	* dt);
+	chunks[3].x += ( sideforceRand			* dt);
 }
 
 void animBrickExplode::draw(Graphics& gfx) const

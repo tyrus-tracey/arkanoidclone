@@ -112,7 +112,7 @@ void ball::update(const wall& lvlWalls, const Keyboard& kbd, EventManager& event
 		return;
 	}
 
-	updateTrail();
+	updateTrail(dt);
 	if (tBallExplode.isActive()) {
 		tBallExplode.tick(dt);
 		if (tBallExplode.ended()) { kill(); }
@@ -192,12 +192,17 @@ void ball::detonate(EventManager& eventmanager)
 	if (!locked) { rad *= radBlastFactor; }	
 }
 
-void ball::updateTrail()
+void ball::updateTrail(const float dt)
 {
+	if (trailUpdateInterval < 0.015f) {
+		trailUpdateInterval += dt; 
+		return;
+	}
 	for (int i = NUM_TRAILS-1; i > 0; i--) {
 		trail[i] = trail[i - 1];
 	}
 	trail[0] = pos;
+	trailUpdateInterval = 0.0f;
 }
 
 void ball::drawTrail(Graphics& gfx) const
